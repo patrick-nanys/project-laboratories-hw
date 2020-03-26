@@ -1,7 +1,7 @@
 # Project Laboratories Homework
 
 # Created by:
-Bálega Szonja, 
+Szonja Bálega, 
 Patrik Ángyán, 
 Endre Forgács, 
 Máté Zergi, 
