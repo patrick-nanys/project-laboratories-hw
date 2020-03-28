@@ -29,8 +29,8 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	public IceBlock() {
 		sea = new Sea();
-		neighbours = new ArrayList<IceBlock>();
-		players = new ArrayList<Player>();
+		neighbours = new ArrayList<>();
+		players = new ArrayList<>();
 		snowLayers=0;
 		capacity=6;
 		hasIglu=false;
@@ -108,6 +108,14 @@ public class IceBlock implements PlayerContainerI {
 	}
 
 	/**
+	 * Visszaadja a tabla koruli tengert
+	 * @return sea, a tenger
+	 */
+	public Sea getSea() {
+		return sea;
+	}
+
+	/**
 	 * Hozzaadja az adott iranyban talalhato szomszedot
 	 * @param d az irany, ahova szeretnenk szomszedot hozzaadni
 	 * @param ib a jegtabla, ami szomszedos lesz az adott "d" iranyban
@@ -156,10 +164,10 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
-		FunctionLogger.log_call("PlayerContainerI pc.addPlayer(p)");
+		FunctionLogger.log_call("PlayerContainerI pc.addPlayer(Player p)");
 		pc.addPlayer(p);
 		FunctionLogger.log_return("");
-		FunctionLogger.log_call("IceBlock this.removePlayer(p)");
+		FunctionLogger.log_call("IceBlock this.removePlayer(Player p)");
 		this.removePlayer(p);
 		FunctionLogger.log_return("");
 	}
@@ -171,7 +179,7 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, DirectionE d) {
-		FunctionLogger.log_call("IceBlock this.getNeighbour(d)");
+		FunctionLogger.log_call("IceBlock this.getNeighbour(DirectionE d)");
 		IceBlock neighbour=this.getNeighbour(d);
 		FunctionLogger.log_return("neighbour");
 		FunctionLogger.log_call("IceBlock this.movePlayer(Player p, IceBlock neighbour)");
