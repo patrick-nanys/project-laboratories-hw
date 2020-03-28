@@ -54,27 +54,31 @@ public class IceBlock implements PlayerContainerI {
 
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
-		System.out.println("IceBlock.movePlayer(Player p, PlayerContainerI pc)\n\t");
+		FunctionLogger.log_call("PlayerContainerI pc.addPlayer(p)");
 		pc.addPlayer(p);
+		FunctionLogger.log_return("");
+		FunctionLogger.log_call("IceBlock this.removePlayer(p)");
 		this.removePlayer(p);
+		FunctionLogger.log_return("");
 	}
 
 	@Override
 	public void movePlayer(Player p, DirectionE d) {
-		System.out.println("IceBlock.movePlayer(Player p, DirectionE d)\n\t");
+		FunctionLogger.log_call("IceBlock this.getNeighbour(d)");
 		IceBlock neighbour=this.getNeighbour(d);
+		FunctionLogger.log_return("IceBlock neighbour");
+		FunctionLogger.log_call("IceBlock this.movePlayer(Player p, IceBlock neighbour)");
 		movePlayer(p, neighbour);
+		FunctionLogger.log_return("");
 	}
 
 	@Override
 	public void removePlayer(Player p) {
-		System.out.println("IceBlock.removePlayer(Player p)\n\t");
 		players.remove(p);
 	}
 
 	@Override
 	public void addPlayer(Player p) {
-		System.out.println("IceBlock.addPlayer(Player p)\n\t");
 		players.add(p);
 	}
 }
