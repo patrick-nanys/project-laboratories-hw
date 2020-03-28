@@ -1,3 +1,4 @@
+import java.util.List;
 public class IceBlock implements PlayerContainerI {
 	private int snowLayers;
 	private boolean hasIglu;
@@ -5,6 +6,7 @@ public class IceBlock implements PlayerContainerI {
 	private IceBlock neighbours;
 	protected Sea sea;
 	private Item item;
+	protected List <Player> players;
 	public void modifyLayers(int d) {
 	}
 	
@@ -40,25 +42,27 @@ public class IceBlock implements PlayerContainerI {
 
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
-		System.out.println("\tIceBlock.movePlayer(Player p, PlayerContainerI pc)\n\t");
+		System.out.println("IceBlock.movePlayer(Player p, PlayerContainerI pc)\n\t");
 		pc.addPlayer(p);
 		this.removePlayer(p);
 	}
 
 	@Override
 	public void movePlayer(Player p, DirectionE d) {
-		System.out.println("\tIceBlock.movePlayer(Player p, DirectionE d)\n\t");
+		System.out.println("IceBlock.movePlayer(Player p, DirectionE d)\n\t");
 		IceBlock neighbour=this.getNeighbour(d);
 		movePlayer(p, neighbour);
 	}
 
 	@Override
 	public void removePlayer(Player p) {
-		super.removePlayer(p);
+		System.out.println("IceBlock.removePlayer(Player p)\n\t");
+		players.remove(p);
 	}
 
 	@Override
 	public void addPlayer(Player p) {
-		super.addPlayer(p);
+		System.out.println("IceBlock.addPlayer(Player p)\n\t");
+		players.add(p);
 	}
 }
