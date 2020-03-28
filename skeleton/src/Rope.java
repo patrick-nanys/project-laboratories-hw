@@ -6,7 +6,7 @@ public class Rope extends Item {
 	 * @param player
 	 */
 	public void use(Player player) {
-		if(player.inSea() && !this.player.inSea()){
+		if(player.getInSea()){
 			FunctionLogger.log_call("Player player.getLocation()");
 			Sea from = (Sea) player.getLocation();
 			FunctionLogger.log_return("from");

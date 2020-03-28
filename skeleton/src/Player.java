@@ -10,8 +10,13 @@ public abstract class Player {
 	
 	public boolean hasItem(Item item) {
 	}
-	
-	public boolean inSea() {
+
+	public void checkPlayerStatus() {
+
+	}
+
+	public boolean getInSea() {
+
 	}
 	
 	public void loseHealth() {

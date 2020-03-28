@@ -4,17 +4,8 @@ import java.util.Stack;
  *  A fuggvenyhivasok naplozasanak a konnyiteset vegzi.
  */
 public class FunctionLogger {
-    /**
-     * Aktualisan irando tabulatorok szama.
-     */
     public static int depth = 0;
-    /**
-     * Hivott fugvenyek verme.
-     */
     public static Stack<String> call_stack;
-    /**
-     * Elore megadott visszateresi ertekek verme.
-     */
     public static Stack<String> return_stack;
 
     /**
@@ -37,11 +28,11 @@ public class FunctionLogger {
      * @param returned_value csak a visszateresi ertek
      */
     public static void log_return(String returned_value) {
+        depth--;
         for (int i = 0; i < depth; i++)
             System.out.print("\t");
         if (!returned_value.equals(""))
             System.out.println(call_stack.pop() + "returned: " + returned_value);
-        depth--;
     }
 
     /**
