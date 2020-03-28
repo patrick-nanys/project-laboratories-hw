@@ -48,6 +48,10 @@ public class FunctionLogger {
         return_stack.push(return_value);
     }
 
+    public static String get_return() {
+        return return_stack.peek();
+    }
+
     public static void log_predefined_return() {
         for (int i = 0; i < depth; i++)
             System.out.print("\t");
