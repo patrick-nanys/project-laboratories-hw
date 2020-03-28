@@ -8,8 +8,9 @@ public class Food extends Item {
 	 * @param p a játékos, aki felvette az élelmet
 	 */
 	public void pickedUpBy(Player p) {
-		System.out.print(".pickedUpBy(Player player) \n\t");
+		FunctionLogger.log_call("Player p.eat()");
 		p.eat();
+		FunctionLogger.log_return("");
 	}
 
 	/**
@@ -18,7 +19,6 @@ public class Food extends Item {
 	 * @return Azzal tér vissza, hogy sikeresen hozzáadódott-e az inventoryhoz, tehát mindig false-szal tér vissza.
 	 */
 	public boolean addToInventory(Inventory inventory) {
-		System.out.print(".addToInventory(Inventory inventory) return: false");
 		return false;
 	}
 
@@ -28,8 +28,6 @@ public class Food extends Item {
 	 * @return Ha élelem, akkor igaz, ha nem, akkor hamis.
 	 */
 	public boolean equals(Item item) {
-		boolean isfood = item instanceof Food;
-		System.out.print(".equals(Item item) return:" + isfood);
-		return isfood;
+		return item instanceof Food;
 	}
 }
