@@ -5,10 +5,7 @@
 //
 //
 
-
-
-
 public class Eskimo extends Player {
-	public void buildIglu(Iceblock ib) {
+	public void buildIglu(IceBlock ib) {
 	}
 }
