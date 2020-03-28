@@ -1,15 +1,27 @@
 import java.util.List;
+
+/**
+ * IceBlock osztaly
+ * @param snowLayers az IceBlockon talalhato horetegek
+ * @param hasIglu az IceBlockon talalhato-e iglu
+ * @param capacity az IceBlockon egyszerre tartozkodhato jatekosok
+ * @param neighbours az IceBlock szomszedai
+ * @param sea az IceBlockhoz kapcsolodo sea
+ * @param item az IceBlockba fagyott item
+ * @param players az IceBlockon talalhato jatekosok
+ */
 public class IceBlock implements PlayerContainerI {
-	private int snowLayers;
-	private boolean hasIglu;
-	private int capacity;
-	private IceBlock neighbours;
+	protected int snowLayers;
+	protected boolean hasIglu;
+	protected int capacity;
+	protected List <IceBlock> neighbours;
 	protected Sea sea;
-	private Item item;
+	protected Item item;
 	protected List <Player> players;
+
 	public void modifyLayers(int d) {
 	}
-	
+
 	public int getLayer() {
 	}
 	
