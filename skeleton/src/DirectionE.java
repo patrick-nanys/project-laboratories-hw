@@ -1,6 +1,6 @@
 public enum DirectionE {
     NORTH,
-    EAST,
     WEST,
-    SOUTH
+    SOUTH,
+    EAST
 }
