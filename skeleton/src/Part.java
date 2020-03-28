@@ -1,13 +1,3 @@
-//  @ Project : Untitled
-//  @ File Name : Part.java
-//  @ Date : 28/03/2020
-//  @ Author : 
-//
-//
-
-
-
-
 public class Part extends Item {
 	private Level level;
 	private Player player;

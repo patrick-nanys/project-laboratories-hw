@@ -1,13 +1,3 @@
-//  @ Project : Untitled
-//  @ File Name : Player.java
-//  @ Date : 28/03/2020
-//  @ Author : 
-//
-//
-
-
-
-
 public abstract class Player {
 	private boolean inSea;
 	private int health;

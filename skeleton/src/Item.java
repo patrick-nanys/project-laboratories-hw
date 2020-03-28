@@ -1,13 +1,3 @@
-//  @ Project : Untitled
-//  @ File Name : Item.java
-//  @ Date : 28/03/2020
-//  @ Author : 
-//
-//
-
-
-
-
 public abstract class Item {
 	public void use(Player player) {
 	}

@@ -1,13 +1,3 @@
-//  @ Project : Untitled
-//  @ File Name : IceBlock.java
-//  @ Date : 28/03/2020
-//  @ Author : 
-//
-//
-
-
-
-
 public class IceBlock implements PlayerContainerI {
 	private int snowLayers;
 	private boolean hasIglu;
