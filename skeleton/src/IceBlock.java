@@ -37,4 +37,26 @@ public class IceBlock implements PlayerContainerI {
 	
 	public IceBlock getNeighbour(DirectionE d) {
 	}
+
+	@Override
+	public void movePlayer(Player p, PlayerContainerI pc) {
+		System.out.println("\tIceBlock.movePlayer(Player p, PlayerContainerI pc)\n\t");
+		pc.addPlayer(p);
+		this.removePlayer(p);
+	}
+
+	@Override
+	public void movePlayer(Player p, DirectionE d) {
+		super.movePlayer(p, d);
+	}
+
+	@Override
+	public void removePlayer(Player p) {
+		super.removePlayer(p);
+	}
+
+	@Override
+	public void addPlayer(Player p) {
+		super.addPlayer(p);
+	}
 }
