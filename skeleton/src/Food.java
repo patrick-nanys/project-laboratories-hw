@@ -1,5 +1,5 @@
 /**
- *Ez az osztály reprezentál egy élelem entitást.
+ * Ez az osztály reprezentál egy élelem entitást.
  * Ha egy Player kiássa az adott IceBlockból, akkor a Playerhez kerül,
  * aki egyből el is fogyasztja, eggyel növelve az életét.
  */
