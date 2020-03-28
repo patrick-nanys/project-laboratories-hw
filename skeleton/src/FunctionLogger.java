@@ -12,6 +12,10 @@ public class FunctionLogger {
      * Hivott fugvenyek verme.
      */
     public static Stack<String> call_stack;
+    /**
+     * Elore megadott visszateresi ertekek verme.
+     */
+    public static Stack<String> return_stack;
 
     /**
      * Dokumental egy string-ben megadott fuggvenyhivast.
@@ -37,6 +41,33 @@ public class FunctionLogger {
             System.out.print("\t");
         if (!returned_value.equals(""))
             System.out.println(call_stack.pop() + "returned: " + returned_value);
+        depth--;
+    }
+
+    /**
+     * Beallitja a visszateresi erteket egy kesobbi fuggveny szamara.
+     * @param return_value a megadott visszateresi ertek
+     */
+    public static void set_return(String return_value) {
+        return_stack.push(return_value);
+    }
+
+    /**
+     * Megadja, hogy milyen erteket allitottak be a visszateresi erteknek.
+     * @return elore megadott visszateresi ertek
+     */
+    public static String get_return() {
+        return return_stack.peek();
+    }
+
+    /**
+     * Dokumentalja egy mar hivott fuggvenynek a visszatereset egy
+     * elore megadott visszateresi ertekkel.
+     */
+    public static void log_predefined_return() {
+        for (int i = 0; i < depth; i++)
+            System.out.print("\t");
+        System.out.println(call_stack.pop() + "returned: " + return_stack.pop());
         depth--;
     }
 
