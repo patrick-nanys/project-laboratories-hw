@@ -1,9 +1,4 @@
 public class Skeleton {
-
-    public void testDigOutItem() {
-
-    }
-
     /**
      * Returns an Image object that can then be painted on the screen.
      * The url argument must specify an absolute {@link URL}. The name
@@ -26,4 +21,37 @@ public class Skeleton {
             return null;
         }
     }*/
+
+    //test1
+    public void testBuildIglu(){
+        Eskimo e = new Eskimo();
+        IceBlock ib = new IceBlock();
+        ib.addPlayer(e);
+
+        e.buildIglu();
+    }
+
+    //test5
+    public void testDigOutItem(){
+        Eskimo e = new Eskimo();
+        IceBlock ib = new IceBlock();
+        Shovel s = new Shovel();
+
+        ib.addPlayer(e);
+        ib.addItem(s);
+
+        e.digOutItem();
+    }
+
+    //test6
+    public void testEat(){
+        Eskimo e = new Eskimo();
+        Food f = new Food();
+        IceBlock ib = new IceBlock();
+
+        ib.addPlayer(e);
+        ib.addItem(f);
+
+        f.pickedUpBy(e);
+    }
 }
