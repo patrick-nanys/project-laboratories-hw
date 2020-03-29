@@ -78,7 +78,7 @@ public class Skeleton {
         FunctionLogger.log_call("Level l.blizzard()");
         l.blizzard();
         FunctionLogger.log_return("");
-        System.out.println("testDieInStorm finished.");
+        System.out.println("Die in Storm test finished.");
     }
 
     //test4
