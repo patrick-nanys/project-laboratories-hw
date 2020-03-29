@@ -8,13 +8,18 @@ public class Researcher extends Player {
 		super(level);
 	}
 
-	Researcher(Level level, Inventory inventory) { super(level, inventory); }
+	Researcher(Level level, Inventory inventory) {
+		super(level, inventory);
+	}
 
 	/**
 	 * Megnezi, hogy a parameterkent kapott jegtable egyszerre hany jatekost bir el.
 	 * @param ib a megnezendo jegtabla
 	 */
 	public int checkStability(IceBlock ib) {
-		return ib.getCapacity();
+		FunctionLogger.log_call("IceBlock ib.getCapacity()");
+		int capacity = ib.getCapacity();
+		FunctionLogger.log_return("capacity");
+		return capacity;
 	}
 }

@@ -5,9 +5,10 @@ public class Skeleton {
 
     public void testSaveWithRope() {
         // setup
-        Eskimo e = new Eskimo();
+        Level level = new Level();
         Inventory inv = new Inventory();
-        Eskimo player = new Eskimo();
+        Eskimo e = new Eskimo(level,inv);
+        Eskimo player = new Eskimo(level);
         Rope r = new Rope();
         Sea from = new Sea();
         IceBlock to = new IceBlock();
@@ -24,10 +25,12 @@ public class Skeleton {
 
     public void testStepInHole() {
         // setup
-        Eskimo e = new Eskimo();
+        Level level = new Level();
+        Eskimo e = new Eskimo(level);
         Sea s = new Sea();
-        UnstableIceBlock unstable = new UnstableIceBlock();
+        UnstableIceBlock unstable = new UnstableIceBlock(2);
         IceBlock ib = new IceBlock();
+        level.addIceBlock(ib);
         ib.addPlayer(e);
         ib.addNeighbour(DirectionE.EAST, unstable);
         unstable.addNeighbour(DirectionE.WEST, ib);

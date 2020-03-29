@@ -7,11 +7,18 @@ public class Eskimo extends Player {
 		super(level);
 	}
 
-	Eskimo(Level level, Inventory inventory) { super(level, inventory); }
+	Eskimo(Level level, Inventory inventory) {
+		super(level, inventory);
+	}
 
 	/**
 	 * Epit egy iglut az aktualis jegtablan.
 	 */
 	public void buildIglu() {
+		if (!getInSea()) {
+			FunctionLogger.log_call("IceBlock ib.setIglu(true)");
+			((IceBlock) container).setIglu(true);
+			FunctionLogger.log_return("");
+		}
 	}
 }
