@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Skeleton {
 
+
     public void testSaveWithRope() {
         // setup
         Eskimo e = new Eskimo();

@@ -18,6 +18,11 @@ public abstract class Player {
 		this.level = level;
 	}
 
+	Player(Level level, Inventory inventory) {
+		this.level = level;
+		this.inventory = inventory;
+	}
+
 	/**
 	 * A jatekos lep egyet az adott iranyba.
 	 * @param d a megadott irany amibe leptetni akarjuk
@@ -100,6 +105,7 @@ public abstract class Player {
 		if (!getInSea()) {
 			FunctionLogger.log_call(String.format("Inventory inventory.use(%s, %s)", p.get(0), name));
 			inventory.use(item, this);
+			FunctionLogger.log_return("");
 		}
 	}
 
