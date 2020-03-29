@@ -7,17 +7,8 @@ import java.util.regex.Pattern;
  */
 public class FunctionLogger {
     public static int depth = 0;
-    public static boolean on;
     public static Stack<String> call_stack = new Stack<>();
     public static Stack<String> return_stack = new Stack<>();
-
-    public static void turn_off() {
-        on = false;
-    }
-
-    public static void turn_on() {
-        on = true;
-    }
 
     /**
      * Dokumental egy string-ben megadott fuggvenyhivast.
