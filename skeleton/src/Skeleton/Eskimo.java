@@ -1,3 +1,5 @@
+package Skeleton;
+
 /**
  * Egy eskimo jatekost reprezental, aki tud iglut epiteni.
  */

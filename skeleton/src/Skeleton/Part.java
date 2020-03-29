@@ -1,3 +1,5 @@
+package Skeleton;
+
 /**
  * Ez az osztály reprezentál egy vészjelző pisztoly alkatrészt.
  * Mivel a győzelmi feltétel elengedhetetlen része, így fontos
@@ -14,7 +16,7 @@ public class Part extends Item {
 	 *               alkatrészt.
 	 */
 	public void use(Player player) {
-		FunctionLogger.log_call("Level level.checkParts()");
+		FunctionLogger.log_call("Skeleton.Level level.checkParts()");
 		level.checkParts();
 		FunctionLogger.log_return("");
 	}
@@ -35,7 +37,7 @@ public class Part extends Item {
 	 * @return Azzal a hellyel tér vissza, amin a
 	 */
 	public PlayerContainerI getLocation() {
-		FunctionLogger.log_call("Player player.getLocation()");
+		FunctionLogger.log_call("Skeleton.Player player.getLocation()");
 		PlayerContainerI location = player.getLocation();
 		FunctionLogger.log_return("location");
 		return location;
@@ -52,6 +54,6 @@ public class Part extends Item {
 		return item instanceof Part;
 	}
 	public String toString(){
-		return "Part";
+		return "Skeleton.Part";
 	}
 }
