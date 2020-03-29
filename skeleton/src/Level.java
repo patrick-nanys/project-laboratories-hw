@@ -58,7 +58,7 @@ public class Level {
 
 	public void addPart(Part p) {
 		ArrayList<String> param =  FunctionLogger.get_parameters();
-		FunctionLogger.log_call("Part parts.add(" + param.get(0) + ")");
+		FunctionLogger.log_call(String.format("Part parts.add(%s)",param.get(0)));
 		parts.add(p);
 		FunctionLogger.log_return("");
 	}
@@ -69,7 +69,7 @@ public class Level {
 
 	public void addIceBlock(IceBlock ib) {
 		ArrayList<String> param =  FunctionLogger.get_parameters();
-		FunctionLogger.log_call("IceBlock iceblocks.add(" + param.get(0) + ")");
+		FunctionLogger.log_call(String.format("IceBlock iceblocks.add(%s",param.get(0)));
 		iceblocks.add(ib);
 		FunctionLogger.log_return("");
 	}
