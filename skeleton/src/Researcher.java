@@ -15,5 +15,6 @@ public class Researcher extends Player {
 	 * @param ib a megnezendo jegtabla
 	 */
 	public int checkStability(IceBlock ib) {
+		return ib.getCapacity();
 	}
 }
