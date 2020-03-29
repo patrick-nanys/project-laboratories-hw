@@ -3,27 +3,18 @@ import java.util.Random;
 import java.util.Vector;
 
 public class Level {
-	private IceBlock[] iceblocks;
-	private Part[] parts;
+	private ArrayList<IceBlock> iceblocks;
+	private ArrayList<Part> parts;
 	private GameStateE gameState;
 	private int numberOfTiles, numberOfItems, numberOfPlayers;
 
 	public Level() {
-		parts = new Part[3];
-		iceblocks = new IceBlock[numberOfTiles];
+		parts = new ArrayList<>(3);
+		iceblocks = new ArrayList<>();
 	}
 
-	public void checkParts() {
-		if (parts[0].getLocation() == parts[1].getLocation() && parts[0].getLocation() == parts[2].getLocation()) {
-
-		}
-	}
-	
-	public void addIceBlock(IceBlock ib) {
-
-	}
-	
 	public void init() {
+		/*
 		for (int i = 0; i < numberOfTiles; i++) {
 			addIceBlock();
 		}
@@ -55,7 +46,25 @@ public class Level {
 		}
 
 
+*/
+	}
 
+	public void checkParts() {
+		if (parts.get(0).getLocation() == parts.get(1).getLocation() && parts.get(0).getLocation() == parts.get(2).getLocation()) {
+			levelWon();
+		}
+	}
+
+	public void addPart(Part p) {
+		parts.add(p);
+	}
+
+	public IceBlock getIceBlock(int index) {
+		return iceblocks.get(index);
+	}
+
+	public void addIceBlock(IceBlock ib) {
+		iceblocks.add(ib);
 	}
 	
 	public void levelWon() {
@@ -72,9 +81,10 @@ public class Level {
 		int i = 0;
 		while (i < blizzardIceBlocks) {
 			int nextib = r.nextInt(numberOfTiles);
-			if (!iceblocks[nextib].getIglu()) {
-				int layer = iceblocks[nextib].getLayer();
-				iceblocks[nextib].modifyLayers(layer +1);
+			if (!iceblocks.get(nextib).getIglu()) {
+				iceblocks.get(nextib).modifyLayers(+1);
+				for (Player p : iceblocks.get(nextib).getPlayers())
+					p.loseHealth();
 				i++;
 			}
 		}

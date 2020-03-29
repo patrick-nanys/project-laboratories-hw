@@ -90,4 +90,64 @@ public class Skeleton {
         FunctionLogger.log_return("");
 
     }
+
+    //test 15
+    public void testUsePistol() {
+        Level level = new Level();
+        IceBlock ib = new IceBlock();
+        Eskimo eskimo = new Eskimo();
+        Part part1 = new Part();
+        Part part2 = new Part();
+        Part part3 = new Part();
+
+        ib.addPlayer(eskimo);
+        level.addIceBlock(ib);
+        level.addPart(part1);
+        level.addPart(part2);
+        level.addPart(part3);
+
+        FunctionLogger.log_call("Eskimo eskimo.useItem(part1)");
+            eskimo.useItem(part1);
+        FunctionLogger.log_return("");
+    }
+
+    //test 16
+    public void testUseShovel() {
+        IceBlock ib = new IceBlock();
+        Researcher r = new Researcher();
+        Shovel sh = new Shovel();
+
+        ib.addPlayer(r);
+        sh.pickedUpBy(r);
+
+        FunctionLogger.log_call("Shovel sh.use(r)");
+        sh.use(r);
+        FunctionLogger.log_return("");
+    }
+
+    //test17
+    public void testStormAddsSnowLayer() {
+        Level l = new Level();
+        IceBlock ib = new IceBlock();
+
+        l.addIceBlock(ib);
+
+        FunctionLogger.log_call("Level l.blizzard()");
+        l.blizzard();
+        FunctionLogger.log_return("");
+    }
+
+    //test 18
+    public void testPlayerSurvivesInDivingSuit() {
+        DivingSuit ds = new DivingSuit();
+        Eskimo e = new Eskimo();
+        Inventory inv = new Inventory();
+
+        inv.addItem(ds);
+        //e.addInventory(inv);
+
+        FunctionLogger.log_call("Eskimo e.checkPlayerStatus()");
+        e.checkPlayerStatus();
+        FunctionLogger.log_return("");
+    }
 }
