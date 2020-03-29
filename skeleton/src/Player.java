@@ -130,7 +130,7 @@ public abstract class Player {
 				String itemType = item.toString();
 				String itemName = String.valueOf(itemType.toLowerCase().charAt(0));
 				FunctionLogger.log_return(itemName);
-				FunctionLogger.log_call(String.format("%s %s.addToInventory(inventory)"));
+				FunctionLogger.log_call(String.format("%s %s.addToInventory(inventory)", itemType, itemName));
 				boolean success = item.addToInventory(inventory);
 				FunctionLogger.log_boolean_return(success);
 				if (success) {
