@@ -164,10 +164,13 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
-		FunctionLogger.log_call("PlayerContainerI pc.addPlayer(Player p)");
+		String name = FunctionLogger.get_obj_name();
+		String blocktype = pc.toString();
+		String playertype = p.toString();
+		FunctionLogger.log_call(String.format("%s pc.addPlayer(%s p)", blocktype, playertype));
 		pc.addPlayer(p);
 		FunctionLogger.log_return("");
-		FunctionLogger.log_call("IceBlock this.removePlayer(Player p)");
+		FunctionLogger.log_call(String.format("IceBlock %s.removePlayer(%s p)", name, playertype));
 		this.removePlayer(p);
 		FunctionLogger.log_return("");
 	}
@@ -203,5 +206,10 @@ public class IceBlock implements PlayerContainerI {
 	@Override
 	public void addPlayer(Player p) {
 		players.add(p);
+	}
+
+	@Override
+	public String toString() {
+		return "IceBlock";
 	}
 }
