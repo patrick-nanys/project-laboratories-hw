@@ -180,8 +180,9 @@ public class Skeleton {
         Level level = new Level();
         Eskimo eskimo = new Eskimo(level);
         Researcher researcher = new Researcher(level);
-
         IceBlock ib = new IceBlock();
+
+
         level.addIceBlock(ib);
         ib.setIglu(true);
         ib.addPlayer(eskimo);
