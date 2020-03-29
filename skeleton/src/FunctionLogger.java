@@ -35,15 +35,15 @@ public class FunctionLogger {
         String call = call_stack.peek();
         Pattern p = Pattern.compile(".*\\((.*)\\)");
         Matcher m = p.matcher(call);
-        String parametersString = "";
+        String parametersString;
         if (m.matches()) {
             parametersString = m.group(1);
         } else {
             System.out.println("******There was a problem with matching!******");
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
         List<String> paramList = Arrays.asList(parametersString.split(", "));
-        return new ArrayList<String>(paramList);
+        return new ArrayList<>(paramList);
     }
 
     /**
