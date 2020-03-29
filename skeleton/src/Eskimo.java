@@ -2,10 +2,14 @@
  * Egy eskimo jatekost reprezental, aki tud iglut epiteni.
  */
 public class Eskimo extends Player {
+
+	Eskimo(Level level) {
+		super(level);
+	}
+
 	/**
-	 * Epit egy iglut a megadott blokkra.
-	 * @param ib a megadott blokk
+	 * Epit egy iglut az aktualis jegtablan.
 	 */
-	public void buildIglu(IceBlock ib) {
+	public void buildIglu() {
 	}
 }
