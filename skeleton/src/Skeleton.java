@@ -147,9 +147,17 @@ public class Skeleton {
         IceBlock to = new IceBlock();
         IceBlock iceblock = new IceBlock();
 
+        FunctionLogger.log_call("IceBlock iceblock.addPlayer(e)");
         iceblock.addPlayer(e);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("IceBlock to.addNeighbour(DirectionE.EAST, iceblock)");
         to.addNeighbour(DirectionE.EAST, iceblock);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("IceBlock iceblock.addNeighbour(DirectionE.WEST, to)");
         iceblock.addNeighbour(DirectionE.WEST, to);
+        FunctionLogger.log_return("");
 
         // run
         FunctionLogger.log_call("Eskimo e.step(WEST)");
@@ -165,9 +173,17 @@ public class Skeleton {
         Researcher r = new Researcher(level);
         Eskimo e     = new Eskimo(level);
 
+        FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("IceBlock ib.addPlayer(r)");
         ib.addPlayer(r);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("Level level.addIceBlock(ib)");
         level.addIceBlock(ib);
+        FunctionLogger.log_return("");
 
         // run
         FunctionLogger.log_call("Level level.blizzard()");
