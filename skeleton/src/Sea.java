@@ -69,6 +69,7 @@ public class Sea implements PlayerContainerI {
 	@Override
 	public void addPlayer(Player p) {
 		players.add(p);
+		p.setContainer(this);
 	}
 	@Override
 	public String toString() {

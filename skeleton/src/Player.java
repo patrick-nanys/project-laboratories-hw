@@ -171,6 +171,13 @@ public abstract class Player {
 	}
 
 	/**
+	 * Beallitja, hogy a jatekos melyik containeren all.
+	 * @param cr a kontener, amin all
+	 */
+	public void setContainer(PlayerContainerI cr) {
+		container = cr;
+	}
+	/**
 	 * Ertesiti a szintet, hogy vege a jateknak.
 	 */
 	public void die() {
