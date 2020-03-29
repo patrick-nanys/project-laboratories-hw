@@ -71,4 +71,23 @@ public class Skeleton {
         f.pickedUpBy(e);
         FunctionLogger.log_return("");
     }
+
+    //test11
+    public void testStormHitsPlayerInIglu(){
+        Level level = new Level();
+        level.addIceBlock();
+
+        Eskimo eskimo = new Eskimo();
+        Researcher researcher = new Researcher();
+
+        IceBlock ib = new IceBlock();
+        ib.setIglu(true);
+        ib.addPlayer(eskimo);
+        ib.addPlayer(researcher);
+
+        FunctionLogger.log_call("Level level.blizzard()");
+        level.blizzard();
+        FunctionLogger.log_return("");
+
+    }
 }
