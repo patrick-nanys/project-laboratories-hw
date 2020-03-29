@@ -1,3 +1,5 @@
+package Skeleton;
+
 /**
  * Az alapvető irányokat reprezentálja a játékban
  */

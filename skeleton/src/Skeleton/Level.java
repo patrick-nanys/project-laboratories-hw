@@ -1,7 +1,7 @@
+package Skeleton;
+
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Vector;
-import java.util.function.Function;
 
 public class Level {
 	private ArrayList<IceBlock> iceblocks;
@@ -24,7 +24,7 @@ public class Level {
 
 		}
 
-		for (IceBlock ib : iceblocks) {
+		for (Skeleton.IceBlock ib : iceblocks) {
 
 		}
 
@@ -37,9 +37,9 @@ public class Level {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			Random r = new Random();
 			if (r.nextInt(2) == 0)
-				Eskimo p = new Eskimo();
+				Skeleton.Eskimo p = new Skeleton.Eskimo();
 			else
-				Researcher p = new Researcher();
+				Skeleton.Researcher p = new Skeleton.Researcher();
 
 			int index = r.nextInt(numberOfTiles);
 			// mindenki külön blokkon kell, hogy legyen??
@@ -58,7 +58,7 @@ public class Level {
 
 	public void addPart(Part p) {
 		ArrayList<String> param =  FunctionLogger.get_parameters();
-		FunctionLogger.log_call("Part parts.add(" + param.get(0) + ")");
+		FunctionLogger.log_call("Skeleton.Part parts.add(" + param.get(0) + ")");
 		parts.add(p);
 		FunctionLogger.log_return("");
 	}
@@ -69,7 +69,7 @@ public class Level {
 
 	public void addIceBlock(IceBlock ib) {
 		ArrayList<String> param =  FunctionLogger.get_parameters();
-		FunctionLogger.log_call("IceBlock iceblocks.add(" + param.get(0) + ")");
+		FunctionLogger.log_call("Skeleton.IceBlock iceblocks.add(" + param.get(0) + ")");
 		iceblocks.add(ib);
 		FunctionLogger.log_return("");
 	}

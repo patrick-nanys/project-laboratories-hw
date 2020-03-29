@@ -1,3 +1,7 @@
+package Skeleton;
+
+import java.util.ArrayList;
+
 public class Skeleton {
 
 
@@ -62,11 +66,11 @@ public class Skeleton {
         Eskimo e = new Eskimo();
         IceBlock ib = new IceBlock();
 
-        FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
+        FunctionLogger.log_call("Skeleton.IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
         FunctionLogger.log_return("");
 
-        FunctionLogger.log_call("Eskimo e.buildIglu()");
+        FunctionLogger.log_call("Skeleton.Eskimo e.buildIglu()");
         e.buildIglu();
         FunctionLogger.log_return("");
     }
@@ -77,14 +81,14 @@ public class Skeleton {
         IceBlock ib = new IceBlock();
         Shovel s = new Shovel();
 
-        FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
+        FunctionLogger.log_call("Skeleton.IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
         FunctionLogger.log_return("");
-        FunctionLogger.log_call("IceBlock ib.addItem(s)");
+        FunctionLogger.log_call("Skeleton.IceBlock ib.addItem(s)");
         ib.addItem(s);
         FunctionLogger.log_return("");
 
-        FunctionLogger.log_call("Eskimo e.digOutItem()");
+        FunctionLogger.log_call("Skeleton.Eskimo e.digOutItem()");
         e.digOutItem();
         FunctionLogger.log_return("");
     }
@@ -95,14 +99,14 @@ public class Skeleton {
         Food f = new Food();
         IceBlock ib = new IceBlock();
 
-        FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
+        FunctionLogger.log_call("Skeleton.IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
         FunctionLogger.log_return("");
-        FunctionLogger.log_call("IceBlock ib.addItem(f)");
+        FunctionLogger.log_call("Skeleton.IceBlock ib.addItem(f)");
         ib.addItem(f);
         FunctionLogger.log_return("");
 
-        FunctionLogger.log_call("Food f.pickedUpBy(e)");
+        FunctionLogger.log_call("Skeleton.Food f.pickedUpBy(e)");
         f.pickedUpBy(e);
         FunctionLogger.log_return("");
     }
@@ -120,7 +124,7 @@ public class Skeleton {
         ib.addPlayer(eskimo);
         ib.addPlayer(researcher);
 
-        FunctionLogger.log_call("Level level.blizzard()");
+        FunctionLogger.log_call("Skeleton.Level level.blizzard()");
         level.blizzard();
         FunctionLogger.log_return("");
 
@@ -132,7 +136,7 @@ public class Skeleton {
         IceBlock ib = new IceBlock();
         ib.addPlayer(r);
 
-        FunctionLogger.log_call("Researcher r.swipeWithHand()");
+        FunctionLogger.log_call("Skeleton.Researcher r.swipeWithHand()");
         r.swipeWithHand();
         FunctionLogger.log_return("");
     }
@@ -149,7 +153,7 @@ public class Skeleton {
         ib.addPlayer(e);
 
         ArrayList<String> p = FunctionLogger.get_parameters();
-        FunctionLogger.log_call("Eskimo e.step(" + p.get(0) + ")");
+        FunctionLogger.log_call("Skeleton.Eskimo e.step(" + p.get(0) + ")");
         e.step(DirectionE.EAST);
         FunctionLogger.log_return("");
     }
@@ -165,7 +169,7 @@ public class Skeleton {
         ib.addPlayer(r);
 
         ArrayList<String> p = FunctionLogger.get_parameters();
-        FunctionLogger.log_call("Researcher r.step(" + p.get(0) ")");
+        FunctionLogger.log_call("Skeleton.Researcher r.step(" + p.get(0) + ")");
         r.step(DirectionE.NORTH);
         FunctionLogger.log_return("");
     }
@@ -185,7 +189,7 @@ public class Skeleton {
         level.addPart(part2);
         level.addPart(part3);
 
-        FunctionLogger.log_call("Eskimo eskimo.useItem(part1)");
+        FunctionLogger.log_call("Skeleton.Eskimo eskimo.useItem(part1)");
             eskimo.useItem(part1);
         FunctionLogger.log_return("");
     }
@@ -199,7 +203,7 @@ public class Skeleton {
         ib.addPlayer(r);
         sh.pickedUpBy(r);
 
-        FunctionLogger.log_call("Shovel sh.use(r)");
+        FunctionLogger.log_call("Skeleton.Shovel sh.use(r)");
         sh.use(r);
         FunctionLogger.log_return("");
     }
@@ -211,7 +215,7 @@ public class Skeleton {
 
         l.addIceBlock(ib);
 
-        FunctionLogger.log_call("Level l.blizzard()");
+        FunctionLogger.log_call("Skeleton.Level l.blizzard()");
         l.blizzard();
         FunctionLogger.log_return("");
     }
@@ -226,7 +230,7 @@ public class Skeleton {
         inv.addItem(ds);
         //e.addInventory(inv);
 
-        FunctionLogger.log_call("Eskimo e.checkPlayerStatus()");
+        FunctionLogger.log_call("Skeleton.Eskimo e.checkPlayerStatus()");
         e.checkPlayerStatus();
         FunctionLogger.log_return("");
     }

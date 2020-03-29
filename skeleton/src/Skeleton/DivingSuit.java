@@ -1,6 +1,8 @@
+package Skeleton;
+
 /**
  * Ez az osztály reprezentál egy búvárruhát.
- * Ha egy Player kiássa az adott IceBlockból, akkor a Playerhez kerül,
+ * Ha egy Skeleton.Player kiássa az adott IceBlockból, akkor a Playerhez kerül,
  * aki egyből fel is veszi, így nem halhat meg, ha vízbe esik.
  */
 public class DivingSuit extends Item {
@@ -14,6 +16,6 @@ public class DivingSuit extends Item {
 	}
 
 	public String toString(){
-		return "DivingSuit";
+		return "Skeleton.DivingSuit";
 	}
 }

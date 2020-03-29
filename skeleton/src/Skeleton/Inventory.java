@@ -1,12 +1,14 @@
+package Skeleton;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Inventory osztaly. Egy jatekos egy inventoryval rendelkezik.
+ * Skeleton.Inventory osztaly. Egy jatekos egy inventoryval rendelkezik.
  * Az inventory szamon tartja, hogy milyen itemeket vett fel a jatekos,
  * figyeli, hogy egy itembol max 1 db lehet a jatekosnal.
  *
- * List<Item> items: A felvett itemek listaja.
+ * List<Skeleton.Item> items: A felvett itemek listaja.
  */
 public class Inventory {
 	private List<Item> items = new ArrayList<Item>();
@@ -18,7 +20,7 @@ public class Inventory {
 	 * @return Ha volt ilyen iteme false, ha nem true.
 	 */
 	public boolean addItem(Item i) {
-		FunctionLogger.log_call("Inventory this.contains(i)");
+		FunctionLogger.log_call("Skeleton.Inventory this.contains(i)");
 		FunctionLogger.set_return(FunctionLogger.get_return());
 		boolean contains = contains(i);
 		FunctionLogger.log_predefined_return();
@@ -40,7 +42,7 @@ public class Inventory {
 		for(int i = 0; i < items.size(); i++){
 		    Item itemInInventory = items.get(i);
 
-			FunctionLogger.log_call("Item itemInInventory.equals(item)");
+			FunctionLogger.log_call("Skeleton.Item itemInInventory.equals(item)");
 			FunctionLogger.set_return(FunctionLogger.get_return());
 			boolean equals = itemInInventory.equals(item);
 			FunctionLogger.log_predefined_return();
@@ -57,13 +59,13 @@ public class Inventory {
 	 * @param p Akin hasznalni akarja az itemet a jatekos.
 	 */
 	public void use(Item item, Player p) {
-		FunctionLogger.log_call("Inventory this.contains(item)");
+		FunctionLogger.log_call("Skeleton.Inventory this.contains(item)");
 		FunctionLogger.set_return(FunctionLogger.get_return());
 		boolean contains = contains(item);
 		FunctionLogger.log_predefined_return();
 
 		if(contains){
-			FunctionLogger.log_call("Item item.use(p)");
+			FunctionLogger.log_call("Skeleton.Item item.use(p)");
 			item.use(p);
 			FunctionLogger.log_return("");
 		}

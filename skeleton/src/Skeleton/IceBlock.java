@@ -1,13 +1,15 @@
+package Skeleton;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * IceBlock osztaly
+ * Skeleton.IceBlock osztaly
  * Reprezental egy jegtablat a jatekban. Nem tud felfordulni.
  *  snowLayers az IceBlockon talalhato horetegek
  *  hasIglu az IceBlockon talalhato-e iglu
  *  capacity az IceBlockon egyszerre tartozkodhato jatekosok
- *  neighbours az IceBlock szomszedai
+ *  neighbours az Skeleton.IceBlock szomszedai
  *  sea az IceBlockhoz kapcsolodo sea
  *  item az IceBlockba fagyott item
  *  players az IceBlockon talalhato jatekosok
@@ -22,7 +24,7 @@ public class IceBlock implements PlayerContainerI {
 	protected List <Player> players;
 
 	/**
-	 * IceBlock konstruktor
+	 * Skeleton.IceBlock konstruktor
 	 * Hozzarendelunk egy tengert, letrehozzuk a listakat, nincs rajta alaphelyzetben ho.
 	 * Kapacitas 6, mivel maximum 5 jatekos lehet, így nem fog soha felfordulni.
 	 * Alaphelyzetben nincs rajta sem iglu, es nincs benne item sem.
@@ -140,7 +142,7 @@ public class IceBlock implements PlayerContainerI {
 	/**
 	 * Visszaadja az adott iranyban szomszedos jegtablat
 	 * @param d az adott irany, amire kivancsiak vagyunk
-	 * @return IceBlock, az adott iranyban szomszedos tabla
+	 * @return Skeleton.IceBlock, az adott iranyban szomszedos tabla
 	 */
 	public IceBlock getNeighbour(DirectionE d) {
 		switch(d) {
@@ -164,10 +166,10 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
-		FunctionLogger.log_call("PlayerContainerI pc.addPlayer(Player p)");
+		FunctionLogger.log_call("Skeleton.PlayerContainerI pc.addPlayer(Skeleton.Player p)");
 		pc.addPlayer(p);
 		FunctionLogger.log_return("");
-		FunctionLogger.log_call("IceBlock this.removePlayer(Player p)");
+		FunctionLogger.log_call("Skeleton.IceBlock this.removePlayer(Skeleton.Player p)");
 		this.removePlayer(p);
 		FunctionLogger.log_return("");
 	}
@@ -179,10 +181,10 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, DirectionE d) {
-		FunctionLogger.log_call("IceBlock this.getNeighbour(DirectionE d)");
+		FunctionLogger.log_call("Skeleton.IceBlock this.getNeighbour(Skeleton.DirectionE d)");
 		IceBlock neighbour=this.getNeighbour(d);
 		FunctionLogger.log_return("neighbour");
-		FunctionLogger.log_call("IceBlock this.movePlayer(Player p, IceBlock neighbour)");
+		FunctionLogger.log_call("Skeleton.IceBlock this.movePlayer(Skeleton.Player p, Skeleton.IceBlock neighbour)");
 		movePlayer(p, neighbour);
 		FunctionLogger.log_return("");
 	}
