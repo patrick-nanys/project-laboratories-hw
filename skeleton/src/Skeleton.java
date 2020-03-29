@@ -6,7 +6,7 @@ public class Skeleton {
     //test1
     public void testBuildIglu(){
         FunctionLogger.log_call("<<create>> Level level");
-        Level level = new Level(1,0,1);
+        Level level = new Level();
         FunctionLogger.log_return("");
 
         FunctionLogger.log_call("<<create>> Eskimo e");
@@ -30,7 +30,7 @@ public class Skeleton {
     public void testCheckCapacity() {
             System.out.println("Check Capacity Test running: ");
             FunctionLogger.log_call("<<create>> Level l");
-        Level l = new Level(2,0,1);
+        Level l = new Level();
             FunctionLogger.log_return("");
             FunctionLogger.log_call("<<create>> Researcher r");
         Researcher r = new Researcher(l);
@@ -60,7 +60,7 @@ public class Skeleton {
     public void testDieInStorm(){
         System.out.println("Die in Storm test running: ");
         FunctionLogger.log_call("<<create>> Level l");
-        Level l = new Level(1,0,1);
+        Level l = new Level();
         FunctionLogger.log_return("");
         FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
@@ -85,7 +85,7 @@ public class Skeleton {
     public void testDieInWater(){
             System.out.println("Die in Water test running: ");
             FunctionLogger.log_call("<<create>> Level l");
-        Level l = new Level(1,0,1);
+        Level l = new Level();
             FunctionLogger.log_return("");
             FunctionLogger.log_call("<<create>> Eskimo e");
         Eskimo e = new Eskimo(l);
@@ -104,7 +104,7 @@ public class Skeleton {
     //test5
     public void testDigOutItem(){
         FunctionLogger.log_call("<<create>> Level level");
-        Level level = new Level(1,1,1);
+        Level level = new Level();
         FunctionLogger.log_return("");
 
         FunctionLogger.log_call("<<create>> Eskimo e");
@@ -134,7 +134,7 @@ public class Skeleton {
     //test6
     public void testEat(){
         FunctionLogger.log_call("<<create>> Level level");
-        Level level = new Level(1,1,1);
+        Level level = new Level();
         FunctionLogger.log_return("");
 
         FunctionLogger.log_call("<<create>> Eskimo e");
@@ -165,7 +165,7 @@ public class Skeleton {
     public void testSaveWithRope() {
         // setup
             FunctionLogger.log_call("<<create>> Iceblock ib");
-        Level level = new Level(1,2,1);
+        Level level = new Level();
             FunctionLogger.log_return("");
             FunctionLogger.log_call("<<create>> Inventory inv");
         Inventory inv = new Inventory();
@@ -179,7 +179,9 @@ public class Skeleton {
             FunctionLogger.log_call("<<create>> Rope r");
         Rope r = new Rope();
             FunctionLogger.log_return("");
-
+            FunctionLogger.log_call("<<create>> Sea from");
+        Sea from = new Sea();
+            FunctionLogger.log_return("");
             FunctionLogger.log_call("<<create>> IceBlock to");
         IceBlock to = new IceBlock();
             FunctionLogger.log_return("");
@@ -188,7 +190,7 @@ public class Skeleton {
             FunctionLogger.log_return("");
 
             FunctionLogger.log_call("Sea from.addPlayer(player)");
-        fromIB.getSea().addPlayer(player);
+        from.addPlayer(player);
             FunctionLogger.log_return("");
             FunctionLogger.log_call("IceBlock to.addPlayer(e)");
         to.addPlayer(e);
@@ -213,14 +215,16 @@ public class Skeleton {
     public void testStepInHole() {
         // setup
             FunctionLogger.log_call("<<create>> Level level");
-        Level level = new Level(2,0,1);
+        Level level = new Level();
             FunctionLogger.log_return("");
             FunctionLogger.log_call("<<create>> Eskimo e");
         Eskimo e = new Eskimo(level);
             FunctionLogger.log_return("");
-
+            FunctionLogger.log_call("<<create>> Sea s");
+        Sea s = new Sea();
+            FunctionLogger.log_return("");
             FunctionLogger.log_call("<<create>> UnstableIceBlock unstable");
-        UnstableIceBlock unstable = new UnstableIceBlock(0);
+        UnstableIceBlock unstable = new UnstableIceBlock(2);
             FunctionLogger.log_return("");
             FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
@@ -249,36 +253,55 @@ public class Skeleton {
     //test9
     public void testStepOnIceBlock() {
         // setup
-        Level level = new Level(2,0,1);
+            FunctionLogger.log_call("<<create>> Level level");
+        Level level = new Level();
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> Eskimo e");
         Eskimo e = new Eskimo(level);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> IceBlock to");
         IceBlock to = new IceBlock();
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> IceBlock iceblock");
         IceBlock iceblock = new IceBlock();
+            FunctionLogger.log_return("");
 
-        FunctionLogger.log_call("IceBlock iceblock.addPlayer(e)");
+            FunctionLogger.log_call("IceBlock iceblock.addPlayer(e)");
         iceblock.addPlayer(e);
-        FunctionLogger.log_return("");
+            FunctionLogger.log_return("");
 
-        FunctionLogger.log_call("IceBlock to.addNeighbour(DirectionE.EAST, iceblock)");
+            FunctionLogger.log_call("IceBlock to.addNeighbour(DirectionE.EAST, iceblock)");
         to.addNeighbour(DirectionE.EAST, iceblock);
-        FunctionLogger.log_return("");
+            FunctionLogger.log_return("");
 
-        FunctionLogger.log_call("IceBlock iceblock.addNeighbour(DirectionE.WEST, to)");
+            FunctionLogger.log_call("IceBlock iceblock.addNeighbour(DirectionE.WEST, to)");
         iceblock.addNeighbour(DirectionE.WEST, to);
-        FunctionLogger.log_return("");
+            FunctionLogger.log_return("");
 
         // run
-        FunctionLogger.log_call("Eskimo e.step(WEST)");
+            FunctionLogger.log_call("Eskimo e.step(WEST)");
         e.step(DirectionE.WEST);
-        FunctionLogger.log_return("");
+            FunctionLogger.log_return("");
     }
 
     //test10
     public void testStormDamagesPlayer() {
         // setup
-        Level level  = new Level(1,0,2);
-        IceBlock ib  = new IceBlock();
+        FunctionLogger.log_call("<<create>> Level level");
+        Level level = new Level(1,0,2);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> IceBlock ib");
+        IceBlock ib = new IceBlock();
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Eskimo eskimo");
+        Eskimo e = new Eskimo(level);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Researcher researcher");
         Researcher r = new Researcher(level);
-        Eskimo e     = new Eskimo(level);
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
@@ -300,10 +323,22 @@ public class Skeleton {
 
     //test11
     public void testStormHitsPlayerInIglu(){
-        Level level = new Level();
+
+        FunctionLogger.log_call("<<create>> Level level");
+        Level level = new Level(1,0,2);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Eskimo eskimo");
         Eskimo eskimo = new Eskimo(level);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Researcher researcher");
         Researcher researcher = new Researcher(level);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("Level level.addIceBlock(ib)");
         level.addIceBlock(ib);
@@ -329,9 +364,19 @@ public class Skeleton {
 
     //test12
     public void testSwipeWithHand(){
-        Level level = new Level();
+
+        FunctionLogger.log_call("<<create>> Level level");
+        Level level = new Level(1,0,1);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Researcher r");
         Researcher r = new Researcher(level);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
+        FunctionLogger.log_return("");
+
 
         FunctionLogger.log_call("Level level.addIceBlock(ib)");
         level.addIceBlock(ib);
@@ -348,11 +393,26 @@ public class Skeleton {
 
     //test13
     public void testUnstableFlips(){
-        Level level = new Level();
+
+        FunctionLogger.log_call("<<create>> Level level");
+        Level level = new Level(2,0,1);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Sea s");
         Sea s = new Sea();
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Eskimo e");
         Eskimo e = new Eskimo(level);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> UnstableIceBlock ui");
         UnstableIceBlock ui = new UnstableIceBlock(0);
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("Level level.addIceBlock(ib)");
         level.addIceBlock(ib);
@@ -382,7 +442,7 @@ public class Skeleton {
     //test14
     public void testUnstableNoFlip(){
         FunctionLogger.log_call("<<create>> Level level");
-        Level level = new Level();
+        Level level = new Level(2,0,1);
         FunctionLogger.log_return("");
 
         FunctionLogger.log_call("<<create>> Researcher r");
