@@ -52,7 +52,7 @@ public class Skeleton {
         FunctionLogger.log_call("Researcher r.checkStability(IceBlock ib1)");
         int cap = r.checkStability(ib1);
         FunctionLogger.log_return(Integer.toString(cap));
-        System.out.println("Check capacity test done");
+        System.out.println("Check capacity test finished.");
 
     }
 
