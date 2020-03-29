@@ -175,7 +175,7 @@ public class Skeleton {
         ib.addPlayer(e);
 
         ArrayList<String> p = FunctionLogger.get_parameters();
-        FunctionLogger.log_call("Eskimo e.step(" + p.get(0) + ")");
+        FunctionLogger.log_call("Eskimo e.step(EAST)");
         e.step(DirectionE.EAST);
         FunctionLogger.log_return("");
     }
@@ -194,7 +194,7 @@ public class Skeleton {
         ib.addPlayer(r);
 
         ArrayList<String> p = FunctionLogger.get_parameters();
-        FunctionLogger.log_call("Researcher r.step(" + p.get(0) + ")");
+        FunctionLogger.log_call("Researcher r.step(NORTH)");
         r.step(DirectionE.NORTH);
         FunctionLogger.log_return("");
     }
