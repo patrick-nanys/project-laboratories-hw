@@ -1,9 +1,7 @@
-package Skeleton;
-
 /**
- * Skeleton.Sea osztaly, egy Skeleton.IceBlock-ot korulvevo tengert reprezental. Egy IceBlockon tartozkodo jatekos
+ * Sea osztaly, egy IceBlock-ot korulvevo tengert reprezental. Egy IceBlockon tartozkodo jatekos
  * 		inSea booleanje hatarozza meg, hogy a jatekos tengerben van, vagy az IceBlockon
- * 	 Skeleton.IceBlock position: Az Skeleton.IceBlock, amihez tartozik
+ * 	 IceBlock position: Az IceBlock, amihez tartozik
  */
 public class Sea implements PlayerContainerI {
 	private IceBlock position;
@@ -11,13 +9,13 @@ public class Sea implements PlayerContainerI {
 	/**
 	 * Elkeri az adott iranyban szomszedos tengert
  	 * @param d az irany amire kivancsiak vagyunk
-	 * @return visszater az adott iranyban szomszedos Skeleton.Sea-vel
+	 * @return visszater az adott iranyban szomszedos Sea-vel
 	 */
 	public Sea getNeighbour(DirectionE d) {
-		FunctionLogger.log_call("Skeleton.IceBlock position.getNeighbour(Skeleton.DirectionE d)");
+		FunctionLogger.log_call("IceBlock position.getNeighbour(DirectionE d)");
 		IceBlock b = position.getNeighbour(d);
 		FunctionLogger.log_return("b");
-		FunctionLogger.log_call("Skeleton.Sea s.getSea()");
+		FunctionLogger.log_call("Sea s.getSea()");
 		Sea s = b.getSea();
 		FunctionLogger.log_return("s");
 		return s;
@@ -30,10 +28,10 @@ public class Sea implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
-			FunctionLogger.log_call("Skeleton.PlayerContainerI pc.addPlayer(Skeleton.Player p)");
+			FunctionLogger.log_call("PlayerContainerI pc.addPlayer(Player p)");
 			pc.addPlayer(p);
 			FunctionLogger.log_return("");
-			FunctionLogger.log_call("Skeleton.Sea this.removePlayer(Skeleton.Player p)");
+			FunctionLogger.log_call("Sea this.removePlayer(Player p)");
 			this.removePlayer(p);
 			FunctionLogger.log_return("");
 	}
@@ -45,7 +43,7 @@ public class Sea implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, DirectionE d) {
-		FunctionLogger.log_call("Skeleton.IceBlock position.movePlayer(Skeleton.Player p, Skeleton.DirectionE d)");
+		FunctionLogger.log_call("IceBlock position.movePlayer(Player p, DirectionE d)");
 		position.movePlayer(p,d);
 	}
 
@@ -60,7 +58,7 @@ public class Sea implements PlayerContainerI {
 
 	/**
 	 * Hozzaad egy jatekost a tengerhez, ugy, hogy hozzaadja a tablahoz, majd true-ra allitja az inSea-t.
-	 * Majd ha kesz a Skeleton.Player osztaly
+	 * Majd ha kesz a Player osztaly
 	 * @param p a hozzadni kivant jatekos
 	 */
 	@Override

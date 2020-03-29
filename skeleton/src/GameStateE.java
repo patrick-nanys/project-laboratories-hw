@@ -1,5 +1,3 @@
-package Skeleton;
-
 /**
  * A játék állapotait reprezentálja.
  */

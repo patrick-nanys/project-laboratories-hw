@@ -1,5 +1,3 @@
-package Skeleton;
-
 /**
  * Egy sarkkutato jatekost reprezental,
  * aki meg tudja mondani, hogy hany jatekost birnak el az egyes jegtablak.

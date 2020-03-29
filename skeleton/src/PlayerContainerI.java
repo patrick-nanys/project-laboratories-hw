@@ -1,5 +1,3 @@
-package Skeleton;
-
 public interface PlayerContainerI {
 
 	void movePlayer(Player p, PlayerContainerI pc);
