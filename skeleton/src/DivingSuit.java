@@ -12,4 +12,8 @@ public class DivingSuit extends Item {
 	public boolean equals(Item item) {
 		return item instanceof DivingSuit;
 	}
+
+	public String toString(){
+		return "DivingSuit";
+	}
 }

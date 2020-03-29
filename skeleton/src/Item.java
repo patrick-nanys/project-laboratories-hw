@@ -36,4 +36,6 @@ public abstract class Item {
 	 * @param p Az ot felvevo jatekos.
 	 */
 	public void pickedUpBy(Player p) {}
+
+	public abstract String toString();
 }
