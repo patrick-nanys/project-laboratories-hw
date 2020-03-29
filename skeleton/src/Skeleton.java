@@ -5,9 +5,17 @@ public class Skeleton {
 
     //test1
     public void testBuildIglu(){
+        FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level();
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Eskimo e");
         Eskimo e = new Eskimo(level);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
@@ -95,10 +103,21 @@ public class Skeleton {
 
     //test5
     public void testDigOutItem(){
+        FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level();
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Eskimo e");
         Eskimo e = new Eskimo(level);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Shovel s");
         Shovel s = new Shovel();
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
@@ -114,10 +133,21 @@ public class Skeleton {
 
     //test6
     public void testEat(){
+        FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level();
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Eskimo e");
         Eskimo e = new Eskimo(level);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Food f");
         Food f = new Food();
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
