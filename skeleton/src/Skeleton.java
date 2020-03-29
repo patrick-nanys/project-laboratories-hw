@@ -279,10 +279,21 @@ public class Skeleton {
     //test10
     public void testStormDamagesPlayer() {
         // setup
-        Level level  = new Level();
-        IceBlock ib  = new IceBlock();
+        FunctionLogger.log_call("<<create>> Level level");
+        Level level = new Level(1,0,2);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> IceBlock ib");
+        IceBlock ib = new IceBlock();
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Eskimo eskimo");
+        Eskimo e = new Eskimo(level);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Researcher researcher");
         Researcher r = new Researcher(level);
-        Eskimo e     = new Eskimo(level);
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
@@ -306,7 +317,7 @@ public class Skeleton {
     public void testStormHitsPlayerInIglu(){
 
         FunctionLogger.log_call("<<create>> Level level");
-        Level level = new Level();
+        Level level = new Level(1,0,2);
         FunctionLogger.log_return("");
 
         FunctionLogger.log_call("<<create>> Eskimo eskimo");
@@ -347,7 +358,7 @@ public class Skeleton {
     public void testSwipeWithHand(){
 
         FunctionLogger.log_call("<<create>> Level level");
-        Level level = new Level();
+        Level level = new Level(1,0,1);
         FunctionLogger.log_return("");
 
         FunctionLogger.log_call("<<create>> Researcher r");
@@ -376,7 +387,7 @@ public class Skeleton {
     public void testUnstableFlips(){
 
         FunctionLogger.log_call("<<create>> Level level");
-        Level level = new Level();
+        Level level = new Level(2,0,1);
         FunctionLogger.log_return("");
 
         FunctionLogger.log_call("<<create>> Sea s");
@@ -423,7 +434,7 @@ public class Skeleton {
     //test14
     public void testUnstableNoFlip(){
         FunctionLogger.log_call("<<create>> Level level");
-        Level level = new Level();
+        Level level = new Level(2,0,1);
         FunctionLogger.log_return("");
 
         FunctionLogger.log_call("<<create>> Researcher r");
