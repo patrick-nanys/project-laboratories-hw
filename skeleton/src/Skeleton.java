@@ -365,10 +365,21 @@ public class Skeleton {
 
     //test14
     public void testUnstableNoFlip(){
+        FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level();
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> Researcher r");
         Researcher r = new Researcher(level);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> UnstableIceBlock ui");
         UnstableIceBlock ui = new UnstableIceBlock(1);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("Level level.addIceBlock(ib)");
         level.addIceBlock(ib);
