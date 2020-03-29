@@ -1,6 +1,5 @@
 public class Skeleton {
 
-
     public void testSaveWithRope() {
         // setup
         Eskimo e = new Eskimo();
@@ -59,7 +58,8 @@ public class Skeleton {
 
     //test1
     public void testBuildIglu(){
-        Eskimo e = new Eskimo();
+        Level level = new Level();
+        Eskimo e = new Eskimo(level);
         IceBlock ib = new IceBlock();
 
         FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
@@ -73,7 +73,8 @@ public class Skeleton {
 
     //test5
     public void testDigOutItem(){
-        Eskimo e = new Eskimo();
+        Level level = new Level();
+        Eskimo e = new Eskimo(level);
         IceBlock ib = new IceBlock();
         Shovel s = new Shovel();
 
@@ -91,7 +92,8 @@ public class Skeleton {
 
     //test6
     public void testEat(){
-        Eskimo e = new Eskimo();
+        Level level = new Level();
+        Eskimo e = new Eskimo(level);
         Food f = new Food();
         IceBlock ib = new IceBlock();
 
