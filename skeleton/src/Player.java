@@ -25,6 +25,10 @@ public abstract class Player {
 		inSea = false;
 		this.inventory = inventory;
 	}
+	public void addItem(Item i) {
+		inventory.addItem(i);
+		i.pickedUpBy(this);
+	}
 
 	/**
 	 * A jatekos lep egyet az adott iranyba.
@@ -78,6 +82,13 @@ public abstract class Player {
 		return FunctionLogger.ask_question("Tengerben van a jatekos?");
 	}
 
+	/**
+	 * Visszaadja a leltarat
+	 * @return A jatekos inventoryja.
+	 */
+	public Inventory getInventory() {
+		return inventory;
+	}
 	/**
 	 * A jatekos eletero potjat eggyel csokkenti.
 	 */

@@ -52,7 +52,7 @@ public class Skeleton {
         FunctionLogger.log_call("Researcher r.checkStability(IceBlock ib1)");
         int cap = r.checkStability(ib1);
         FunctionLogger.log_return(Integer.toString(cap));
-        System.out.println("Check capacity test done");
+        System.out.println("Check capacity test finished.");
 
     }
 
@@ -78,7 +78,7 @@ public class Skeleton {
         FunctionLogger.log_call("Level l.blizzard()");
         l.blizzard();
         FunctionLogger.log_return("");
-        System.out.println("testDieInStorm finished.");
+        System.out.println("Die in Storm test finished.");
     }
 
     //testDieInWater
@@ -193,8 +193,8 @@ public class Skeleton {
             FunctionLogger.log_call("IceBlock to.addPlayer(e)");
         to.addPlayer(e);
             FunctionLogger.log_return("");
-            FunctionLogger.log_call("Inventory inv.addItem(r)");
-        inv.addItem(r);
+            FunctionLogger.log_call("Inventory e.addItem(r)");
+        e.addItem(r);
             FunctionLogger.log_return("");
             FunctionLogger.log_call("IceBlock fromIB.addNeighbour(EAST, to)");
         fromIB.addNeighbour(DirectionE.EAST, to);
@@ -282,6 +282,7 @@ public class Skeleton {
 
     //testStormDamagesPlayer
     public void test10() {
+        System.out.println("Storm Damages Player test running: ");
         // setup
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(1,0,2);
@@ -315,11 +316,12 @@ public class Skeleton {
         FunctionLogger.log_call("Level level.blizzard()");
         level.blizzard();
         FunctionLogger.log_return("");
+        System.out.println("Storm Damages Player test finished");
     }
 
     //testStormHitsPlayerInIglu
     public void test11(){
-
+        System.out.println("Storm Hits Player in Iglu test running: ");
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(1,0,2);
         FunctionLogger.log_return("");
@@ -356,10 +358,12 @@ public class Skeleton {
         level.blizzard();
         FunctionLogger.log_return("");
 
+        System.out.println("Storm Hits Player in Iglu test finished");
     }
 
     //testSwipeWithHand
     public void test12(){
+        System.out.println("Swipe with Hands test running: ");
 
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(1,0,1);
@@ -385,10 +389,13 @@ public class Skeleton {
         FunctionLogger.log_call("Researcher r.swipeWithHand()");
         r.swipeWithHand();
         FunctionLogger.log_return("");
+
+        System.out.println("Swipe with Hands test finished");
     }
 
     //testUnstableFlips
     public void test13(){
+        System.out.println("Player Steps on Unstable IceBlock and it Flips test running: ");
 
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(2,0,1);
@@ -433,10 +440,14 @@ public class Skeleton {
         FunctionLogger.log_call("Eskimo e.step(EAST)");
         e.step(DirectionE.EAST);
         FunctionLogger.log_return("");
+
+        System.out.println("Player Steps on Unstable IceBlock and it Flips test finished");
     }
 
     //testUnstableNoFlip
     public void test14(){
+        System.out.println("Step on Unstable IceBlock and it Does Not Flip test running: ");
+
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(2,0,1);
         FunctionLogger.log_return("");
@@ -476,6 +487,8 @@ public class Skeleton {
         FunctionLogger.log_call("Researcher r.step(NORTH)");
         r.step(DirectionE.NORTH);
         FunctionLogger.log_return("");
+
+        System.out.println("Step on Unstable IceBlock and it Does Not Flip test finished");
     }
 
     //testUsePistol

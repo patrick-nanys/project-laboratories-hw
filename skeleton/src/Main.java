@@ -6,6 +6,7 @@ public class Main {
         Menu m = new Menu();
         m.run();
 
+        //ske.testUnstableFlips();
         //ske.testSaveWithRope();
         //ske.testCheckCapacity();
         //ske.testDieInStorm();
