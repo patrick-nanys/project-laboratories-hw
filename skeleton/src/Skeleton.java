@@ -26,9 +26,14 @@ public class Skeleton {
     public void testBuildIglu(){
         Eskimo e = new Eskimo();
         IceBlock ib = new IceBlock();
-        ib.addPlayer(e);
 
+        FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
+        ib.addPlayer(e);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("Eskimo e.buildIglu()");
         e.buildIglu();
+        FunctionLogger.log_return("");
     }
 
     //test5
@@ -37,10 +42,16 @@ public class Skeleton {
         IceBlock ib = new IceBlock();
         Shovel s = new Shovel();
 
+        FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("IceBlock ib.addItem(s)");
         ib.addItem(s);
+        FunctionLogger.log_return("");
 
+        FunctionLogger.log_call("Eskimo e.digOutItem()");
         e.digOutItem();
+        FunctionLogger.log_return("");
     }
 
     //test6
@@ -49,9 +60,15 @@ public class Skeleton {
         Food f = new Food();
         IceBlock ib = new IceBlock();
 
+        FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("IceBlock ib.addItem(f)");
         ib.addItem(f);
+        FunctionLogger.log_return("");
 
+        FunctionLogger.log_call("Food f.pickedUpBy(e)");
         f.pickedUpBy(e);
+        FunctionLogger.log_return("");
     }
 }
