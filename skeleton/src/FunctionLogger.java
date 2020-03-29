@@ -28,6 +28,24 @@ public class FunctionLogger {
     }
 
     /**
+     * Visszater azon objektum nevevel amin a veremben az elozo fuggveny meg lett hivva.
+     * @return objektum neve
+     */
+    public static String get_obj_name() {
+        String call = call_stack.peek();
+        Pattern p = Pattern.compile(".* (.*)\\..*");
+        Matcher m = p.matcher(call);
+        String obj_name;
+        if (m.matches()) {
+            obj_name = m.group(1);
+        } else {
+            System.out.println("******There was a problem with obj_name matching!******");
+            return "";
+        }
+        return obj_name;
+    }
+
+    /**
      * Visszater azon parameterekkel amikkel a veremben az elozo fuggveny meg lett hivva.
      * @return parameterek string listaja
      */
@@ -39,7 +57,7 @@ public class FunctionLogger {
         if (m.matches()) {
             parametersString = m.group(1);
         } else {
-            System.out.println("******There was a problem with matching!******");
+            System.out.println("******There was a problem with parameters matching!******");
             return new ArrayList<>();
         }
         List<String> paramList = Arrays.asList(parametersString.split(", "));
