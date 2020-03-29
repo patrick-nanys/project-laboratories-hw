@@ -4,5 +4,6 @@ public class Main {
         Skeleton ske = new Skeleton();
         ske.testBuildIglu();
         ske.testDigOutItem();
+        ske.testCheckCapacity();
     }
 }

@@ -30,6 +30,9 @@ public class IceBlock implements PlayerContainerI {
 	public IceBlock() {
 		sea = new Sea();
 		neighbours = new ArrayList<>();
+		for(int i=0;i<4;i++) {
+			neighbours.add(i, null);
+		}
 		players = new ArrayList<>();
 		snowLayers=0;
 		capacity=6;
