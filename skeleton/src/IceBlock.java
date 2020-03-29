@@ -88,7 +88,10 @@ public class IceBlock implements PlayerContainerI {
 	 * @return hasIglu, a boolean ami tarolja, hogy van-e iglu a tablan
 	 */
 	public boolean getIglu() {
-		return hasIglu;
+		if (FunctionLogger.ask_question("Van a tablan iglu?")){
+			return true;
+		}
+		else return false;
 	}
 
 	/**
@@ -166,11 +169,10 @@ public class IceBlock implements PlayerContainerI {
 	public void movePlayer(Player p, PlayerContainerI pc) {
 		String name = FunctionLogger.get_obj_name();
 		String blocktype = pc.toString();
-		String playertype = p.toString();
-		FunctionLogger.log_call(String.format("%s pc.addPlayer(%s p)", blocktype, playertype));
+		FunctionLogger.log_call(String.format("%s pc.addPlayer(p)", blocktype));
 		pc.addPlayer(p);
 		FunctionLogger.log_return("");
-		FunctionLogger.log_call(String.format("IceBlock %s.removePlayer(%s p)", name, playertype));
+		FunctionLogger.log_call(String.format("IceBlock %s.removePlayer(p)", name));
 		this.removePlayer(p);
 		FunctionLogger.log_return("");
 	}
@@ -182,10 +184,11 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, DirectionE d) {
-		FunctionLogger.log_call("IceBlock this.getNeighbour(DirectionE d)");
+		String name = FunctionLogger.get_obj_name();
+		FunctionLogger.log_call(String.format("IceBlock %s.getNeighbour(d)", name));
 		IceBlock neighbour=this.getNeighbour(d);
 		FunctionLogger.log_return("neighbour");
-		FunctionLogger.log_call("IceBlock this.movePlayer(Player p, IceBlock neighbour)");
+		FunctionLogger.log_call(String.format("IceBlock %s.movePlayer(p, neighbour)"));
 		movePlayer(p, neighbour);
 		FunctionLogger.log_return("");
 	}

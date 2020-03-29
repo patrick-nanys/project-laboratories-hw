@@ -15,7 +15,7 @@ public class Sea implements PlayerContainerI {
 	 * @return visszater az adott iranyban szomszedos Sea-vel
 	 */
 	public Sea getNeighbour(DirectionE d) {
-		FunctionLogger.log_call("IceBlock position.getNeighbour(DirectionE d)");
+		FunctionLogger.log_call("IceBlock position.getNeighbour(d)");
 		IceBlock b = position.getNeighbour(d);
 		FunctionLogger.log_return("b");
 		FunctionLogger.log_call("Sea s.getSea()");
@@ -31,12 +31,14 @@ public class Sea implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
-			FunctionLogger.log_call("PlayerContainerI pc.addPlayer(Player p)");
-			pc.addPlayer(p);
-			FunctionLogger.log_return("");
-			FunctionLogger.log_call("Sea this.removePlayer(Player p)");
-			this.removePlayer(p);
-			FunctionLogger.log_return("");
+		String name = FunctionLogger.get_obj_name();
+		String blocktype = pc.toString();
+		FunctionLogger.log_call(String.format("%s pc.addPlayer(p)",blocktype));
+		pc.addPlayer(p);
+		FunctionLogger.log_return("");
+		FunctionLogger.log_call(String.format("Sea %s.removePlayer(p)",name));
+		this.removePlayer(p);
+		FunctionLogger.log_return("");
 	}
 
 	/**
@@ -46,7 +48,7 @@ public class Sea implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, DirectionE d) {
-		FunctionLogger.log_call("IceBlock position.movePlayer(Player p, DirectionE d)");
+		FunctionLogger.log_call("IceBlock position.movePlayer(p, d)");
 		position.movePlayer(p,d);
 	}
 
@@ -56,7 +58,7 @@ public class Sea implements PlayerContainerI {
 	 */
 	@Override
 	public void removePlayer(Player p) {
-		position.removePlayer(p);
+		players.remove(p);
 	}
 
 	/**
@@ -66,13 +68,7 @@ public class Sea implements PlayerContainerI {
 	 */
 	@Override
 	public void addPlayer(Player p) {
-		if(position.players.contains(p)) {
-			p.setInSea(true);
-		}
-		else {
-			position.addPlayer(p);
-			p.setInSea(true);
-		}
+		players.add(p);
 	}
 	@Override
 	public String toString() {

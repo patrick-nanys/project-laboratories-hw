@@ -36,29 +36,6 @@ public class Skeleton {
         e.step(DirectionE.EAST);
     }
 
-    /**
-     * Returns an Image object that can then be painted on the screen.
-     * The url argument must specify an absolute {@link URL}. The name
-     * argument is a specifier that is relative to the url argument.
-     * <p>
-     * This method always returns immediately, whether or not the
-     * image exists. When this applet attempts to draw the image on
-     * the screen, the data will be loaded. The graphics primitives
-     * that draw the image will incrementally paint on the screen.
-     *
-     * @param  url  an absolute URL giving the base location of the image
-     * @param  name the location of the image, relative to the url argument
-     * @return      the image at the specified URL
-     * @see         Image
-     */
-    /*public Image getImage(URL url, String name) {
-        try {
-            return getImage(new URL(url, name));
-        } catch (MalformedURLException e) {
-            return null;
-        }
-    }*/
-
     //test1
     public void testBuildIglu(){
         Level level = new Level();
@@ -186,16 +163,17 @@ public class Skeleton {
     public void testUsePistol() {
         Level level = new Level();
         IceBlock ib = new IceBlock();
-        Eskimo eskimo = new Eskimo(level);
         Part part1 = new Part();
         Part part2 = new Part();
         Part part3 = new Part();
 
-        ib.addPlayer(eskimo);
         level.addIceBlock(ib);
         level.addPart(part1);
         level.addPart(part2);
         level.addPart(part3);
+
+        Eskimo eskimo = new Eskimo(level);
+        ib.addPlayer(eskimo);
 
         FunctionLogger.log_call("Eskimo eskimo.useItem(part1)");
             eskimo.useItem(part1);
@@ -204,8 +182,9 @@ public class Skeleton {
 
     //test 16
     public void testUseShovel() {
+        Level level = new Level();
         IceBlock ib = new IceBlock();
-        Researcher r = new Researcher();
+        Researcher r = new Researcher(level);
         Shovel sh = new Shovel();
 
         ib.addPlayer(r);
@@ -232,11 +211,10 @@ public class Skeleton {
     public void testPlayerSurvivesInDivingSuit() {
         Level level = new Level();
         DivingSuit ds = new DivingSuit();
-        Eskimo e = new Eskimo(level);
         Inventory inv = new Inventory();
-
         inv.addItem(ds);
-        //e.addInventory(inv);
+
+        Eskimo e = new Eskimo(level,inv);
 
         FunctionLogger.log_call("Eskimo e.checkPlayerStatus()");
         e.checkPlayerStatus();
