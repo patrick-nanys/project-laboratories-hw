@@ -15,8 +15,9 @@ public class UnstableIceBlock extends IceBlock {
 	 * Felboritja az instabil jegtablat, beledobva az osszes rajta allo jatekost a tengerbe.
 	 */
 	public void flip() {
+		String name = FunctionLogger.get_obj_name();
 		for(int i=0;i<players.size();i++) {
-			String name = FunctionLogger.get_obj_name();
+
 			FunctionLogger.log_call(String.format("UnstableIceBlock %s.movePlayer(players.get(i), Sea %s.sea)", name, name));
 			movePlayer(players.get(i), this.sea);
 			FunctionLogger.log_return("");
