@@ -473,19 +473,42 @@ public class Skeleton {
 
     //test 15
     public void testUsePistol() {
-        Level level = new Level();
+            FunctionLogger.log_call("<<create>> Level level");
+        Level level = new Level(1, 3, 1);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("<<create>> Part part1");
         Part part1 = new Part();
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("<<create>> Part part2");
         Part part2 = new Part();
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("<<create>> Part part3");
         Part part3 = new Part();
+        FunctionLogger.log_return("");
 
+        FunctionLogger.log_call("Level level.addIceBlock(ib)");
         level.addIceBlock(ib);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("Level level.addPart(part1)");
         level.addPart(part1);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("Level level.addPart(part2)");
         level.addPart(part2);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("Level level.addPart(part3)");
         level.addPart(part3);
+        FunctionLogger.log_return("");
 
+        FunctionLogger.log_call("<<create>> Eskimo eskimo");
         Eskimo eskimo = new Eskimo(level);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("IceBlock ib.addPlayer(eskimo)");
         ib.addPlayer(eskimo);
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("Eskimo eskimo.useItem(part1)");
         eskimo.useItem(part1);
@@ -494,42 +517,72 @@ public class Skeleton {
 
     //test 16
     public void testUseShovel() {
-        Level level = new Level();
+            FunctionLogger.log_call("<<create>> Level level");
+        Level level = new Level(1, 1, 1);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> Researcher r");
         Researcher r = new Researcher(level);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> Shovel sh");
         Shovel sh = new Shovel();
+            FunctionLogger.log_return("");
 
+            FunctionLogger.log_call("IceBlock ib.addPlayer(r)");
         ib.addPlayer(r);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("Shovel sh.pickedUpBy(r)");
         sh.pickedUpBy(r);
+            FunctionLogger.log_return("");
 
-        FunctionLogger.log_call("Shovel sh.use(r)");
+
+            FunctionLogger.log_call("Shovel sh.use(r)");
         sh.use(r);
-        FunctionLogger.log_return("");
+            FunctionLogger.log_return("");
     }
 
     //test17
     public void testStormAddsSnowLayer() {
-        Level l = new Level();
+            FunctionLogger.log_call("<<create>> Level l");
+        Level l = new Level(1, 0, 0);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
+            FunctionLogger.log_return("");
 
+            FunctionLogger.log_call("Level l.addIceBlock(ib)");
         l.addIceBlock(ib);
+            FunctionLogger.log_return("");
 
-        FunctionLogger.log_call("Level l.blizzard()");
+            FunctionLogger.log_call("Level l.blizzard()");
         l.blizzard();
-        FunctionLogger.log_return("");
+            FunctionLogger.log_return("");
     }
 
     //test 18
     public void testPlayerSurvivesInDivingSuit() {
-        Level level = new Level();
+            FunctionLogger.log_call("<<create>> Level level");
+        Level level = new Level(0, 1, 1);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> DivingSuit ds");
         DivingSuit ds = new DivingSuit();
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> Inventory inv");
         Inventory inv = new Inventory();
+            FunctionLogger.log_return("");
+
+            FunctionLogger.log_call("Inventory inv.addItem(ds)");
         inv.addItem(ds);
+            FunctionLogger.log_return("");
 
+            FunctionLogger.log_call("<<create>> Eskimo e");
         Eskimo e = new Eskimo(level,inv);
+            FunctionLogger.log_return("");
 
-        FunctionLogger.log_call("Eskimo e.checkPlayerStatus()");
+            FunctionLogger.log_call("Eskimo e.checkPlayerStatus()");
         e.checkPlayerStatus();
-        FunctionLogger.log_return("");
+            FunctionLogger.log_return("");
     }
 }
