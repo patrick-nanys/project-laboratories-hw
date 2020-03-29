@@ -88,7 +88,10 @@ public class IceBlock implements PlayerContainerI {
 	 * @return hasIglu, a boolean ami tarolja, hogy van-e iglu a tablan
 	 */
 	public boolean getIglu() {
-		return hasIglu;
+		if (FunctionLogger.ask_question("Van a tablan iglu?")){
+			return true;
+		}
+		else return false;
 	}
 
 	/**
@@ -185,7 +188,7 @@ public class IceBlock implements PlayerContainerI {
 		FunctionLogger.log_call(String.format("IceBlock %s.getNeighbour(d)", name));
 		IceBlock neighbour=this.getNeighbour(d);
 		FunctionLogger.log_return("neighbour");
-		FunctionLogger.log_call(String.format("IceBlock %s.movePlayer(p, neighbour)", name));
+		FunctionLogger.log_call(String.format("IceBlock %s.movePlayer(p, neighbour)"));
 		movePlayer(p, neighbour);
 		FunctionLogger.log_return("");
 	}
