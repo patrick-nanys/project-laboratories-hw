@@ -19,7 +19,8 @@ public class Skeleton {
     }
     //test2
     public void testCheckCapacity() {
-        Researcher r = new Researcher();
+        Level l = new Level();
+        Researcher r = new Researcher(l);
         IceBlock ib1 = new IceBlock();
         IceBlock ib2 = new IceBlock();
         ib1.addNeighbour(DirectionE.WEST, ib2);
@@ -35,7 +36,7 @@ public class Skeleton {
     public void testDieInStorm(){
         Level l = new Level();
         IceBlock ib = new IceBlock();
-        Eskimo e = new Eskimo();
+        Eskimo e = new Eskimo(l);
 
         l.addIceBlock(ib);
         ib.addPlayer(e);
@@ -46,7 +47,7 @@ public class Skeleton {
     //test4
     public void testDieInWater(){
         Level l = new Level();
-        Eskimo e = new Eskimo();
+        Eskimo e = new Eskimo(l);
         IceBlock ib = new IceBlock();
 
         ib.getSea().addPlayer(e);
