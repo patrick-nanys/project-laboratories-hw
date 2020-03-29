@@ -78,7 +78,7 @@ public class Skeleton {
         FunctionLogger.log_call("Level l.blizzard()");
         l.blizzard();
         FunctionLogger.log_return("");
-        System.out.println("testDieInStorm finished.");
+        System.out.println("Die in Storm test finished.");
     }
 
     //test4
@@ -194,7 +194,7 @@ public class Skeleton {
         to.addPlayer(e);
         FunctionLogger.log_return("");
         FunctionLogger.log_call("Inventory inv.addItem(r)");
-        inv.addItem(r);
+        e.addItem(r);
         FunctionLogger.log_return("");
         FunctionLogger.log_call("IceBlock fromIB.addNeighbour(EAST, to)");
         fromIB.addNeighbour(DirectionE.EAST, to);
