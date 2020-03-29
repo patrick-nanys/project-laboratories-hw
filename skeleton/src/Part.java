@@ -51,4 +51,7 @@ public class Part extends Item {
 	public boolean equals(Item item) {
 		return item instanceof Part;
 	}
+	public String toString(){
+		return "Part";
+	}
 }

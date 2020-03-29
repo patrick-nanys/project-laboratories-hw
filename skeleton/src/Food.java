@@ -32,4 +32,7 @@ public class Food extends Item {
 	public boolean equals(Item item) {
 		return item instanceof Food;
 	}
+	public String toString(){
+		return "Food";
+	}
 }
