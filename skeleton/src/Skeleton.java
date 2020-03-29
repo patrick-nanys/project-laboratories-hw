@@ -316,6 +316,7 @@ public class Skeleton {
         FunctionLogger.log_call("Level level.blizzard()");
         level.blizzard();
         FunctionLogger.log_return("");
+        System.out.println("Storm Damages Player test finished");
     }
 
     //test11
@@ -357,6 +358,7 @@ public class Skeleton {
         level.blizzard();
         FunctionLogger.log_return("");
 
+        System.out.println("Storm Hits Player in Iglu test finished");
     }
 
     //test12
@@ -387,6 +389,8 @@ public class Skeleton {
         FunctionLogger.log_call("Researcher r.swipeWithHand()");
         r.swipeWithHand();
         FunctionLogger.log_return("");
+
+        System.out.println("Swipe with Hands test finished");
     }
 
     //test13
@@ -436,6 +440,8 @@ public class Skeleton {
         FunctionLogger.log_call("Eskimo e.step(EAST)");
         e.step(DirectionE.EAST);
         FunctionLogger.log_return("");
+
+        System.out.println("Player Steps on Unstable IceBlock and it Flips test finished");
     }
 
     //test14
@@ -481,6 +487,8 @@ public class Skeleton {
         FunctionLogger.log_call("Researcher r.step(NORTH)");
         r.step(DirectionE.NORTH);
         FunctionLogger.log_return("");
+
+        System.out.println("Step on Unstable IceBlock and it Does Not Flip test finished");
     }
 
     //test 15
