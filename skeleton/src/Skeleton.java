@@ -134,24 +134,51 @@ public class Skeleton {
     //test7
     public void testSaveWithRope() {
         // setup
+            FunctionLogger.log_call("<<create>> Iceblock ib");
         Level level = new Level();
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> Inventory inv");
         Inventory inv = new Inventory();
-        Eskimo e = new Eskimo(level,inv);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> Eskimo e");
+        Eskimo e = new Eskimo(level, inv);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> Eskimo player");
         Eskimo player = new Eskimo(level);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> Rope r");
         Rope r = new Rope();
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> Sea from");
         Sea from = new Sea();
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> IceBlock to");
         IceBlock to = new IceBlock();
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> IceBlock fromIB");
         IceBlock fromIB = new IceBlock();
+            FunctionLogger.log_return("");
+
+            FunctionLogger.log_call("Sea from.addPlayer(player)");
         from.addPlayer(player);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("IceBlock to.addPlayer(e)");
         to.addPlayer(e);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("Inventory inv.addItem(r)");
         inv.addItem(r);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("IceBlock fromIB.addNeighbour(EAST, to)");
         fromIB.addNeighbour(DirectionE.EAST, to);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("IceBlock to.addNeighbour(WEST, fromIB)");
         to.addNeighbour(DirectionE.WEST, fromIB);
+            FunctionLogger.log_return("");
 
         // run
-        FunctionLogger.log_call("Eskimo e.useItemOnPlayer(r, player)");
+            FunctionLogger.log_call("Eskimo e.useItemOnPlayer(r, player)");
         e.useItemOnPlayer(r, player);
-        FunctionLogger.log_return("");
+            FunctionLogger.log_return("");
     }
 
     //test8
