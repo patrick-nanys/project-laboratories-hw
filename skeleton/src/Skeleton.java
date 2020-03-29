@@ -182,21 +182,11 @@ public class Skeleton {
         Researcher researcher = new Researcher(level);
         IceBlock ib = new IceBlock();
 
-        FunctionLogger.log_call("Level level.addIceBlock(ib)");
+
         level.addIceBlock(ib);
-        FunctionLogger.log_return("");
-
-        FunctionLogger.log_call("IceBlock ib.setIglu(true)");
         ib.setIglu(true);
-        FunctionLogger.log_return("");
-
-        FunctionLogger.log_call("IceBlock ib.addPlayer(eskimo)");
         ib.addPlayer(eskimo);
-        FunctionLogger.log_return("");
-
-        FunctionLogger.log_call("IceBlock ib.addPlayer(researcher)");
         ib.addPlayer(researcher);
-        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("Level level.blizzard()");
         level.blizzard();
@@ -209,14 +199,8 @@ public class Skeleton {
         Level level = new Level();
         Researcher r = new Researcher(level);
         IceBlock ib = new IceBlock();
-
-        FunctionLogger.log_call("Level level.addIceBlock(ib)");
         level.addIceBlock(ib);
-        FunctionLogger.log_return("");
-
-        FunctionLogger.log_call("IceBlock ib.addPlayer(r)");
         ib.addPlayer(r);
-        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("Researcher r.swipeWithHand()");
         r.swipeWithHand();
@@ -230,30 +214,12 @@ public class Skeleton {
         Eskimo e = new Eskimo(level);
         IceBlock ib = new IceBlock();
         UnstableIceBlock ui = new UnstableIceBlock(0);
-
-        FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
-        ib.addPlayer(e);
-        FunctionLogger.log_return("");
-
-        FunctionLogger.log_call("Level level.addIceBlock(ib)");
         level.addIceBlock(ib);
-        FunctionLogger.log_return("");
-
-        FunctionLogger.log_call("Level level.addIceBlock(ui)");
         level.addIceBlock(ui);
-        FunctionLogger.log_return("");
 
-        FunctionLogger.log_call("UnstableIceBlock ui.addNeighbour(WEST, ib)");
         ui.addNeighbour(DirectionE.WEST, ib);
-        FunctionLogger.log_return("");
-
-        FunctionLogger.log_call("IceBlock ib.addNeighbour(EAST, ui)");
         ib.addNeighbour(DirectionE.EAST, ui);
-        FunctionLogger.log_return("");
-
-        FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
-        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("Eskimo e.step(EAST)");
         e.step(DirectionE.EAST);
@@ -266,7 +232,6 @@ public class Skeleton {
         Researcher r = new Researcher(level);
         UnstableIceBlock ui = new UnstableIceBlock(1);
         IceBlock ib = new IceBlock();
-
         level.addIceBlock(ib);
         level.addIceBlock(ui);
 
