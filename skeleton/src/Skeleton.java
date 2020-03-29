@@ -163,16 +163,17 @@ public class Skeleton {
     public void testUsePistol() {
         Level level = new Level();
         IceBlock ib = new IceBlock();
-        Eskimo eskimo = new Eskimo(level);
         Part part1 = new Part();
         Part part2 = new Part();
         Part part3 = new Part();
 
-        ib.addPlayer(eskimo);
         level.addIceBlock(ib);
         level.addPart(part1);
         level.addPart(part2);
         level.addPart(part3);
+
+        Eskimo eskimo = new Eskimo(level);
+        ib.addPlayer(eskimo);
 
         FunctionLogger.log_call("Eskimo eskimo.useItem(part1)");
             eskimo.useItem(part1);
@@ -214,7 +215,6 @@ public class Skeleton {
         inv.addItem(ds);
 
         Eskimo e = new Eskimo(level,inv);
-        //e.addInventory(inv);
 
         FunctionLogger.log_call("Eskimo e.checkPlayerStatus()");
         e.checkPlayerStatus();
