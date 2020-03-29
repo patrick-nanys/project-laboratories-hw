@@ -16,7 +16,8 @@ public class UnstableIceBlock extends IceBlock {
 	 */
 	public void flip() {
 		for(int i=0;i<players.size();i++) {
-			FunctionLogger.log_call("UnstableIceBlock this.movePlayer(Player players.get(i), Sea this.sea)");
+			String name = FunctionLogger.get_obj_name();
+			FunctionLogger.log_call(String.format("UnstableIceBlock %s.movePlayer(players.get(i), Sea %s.sea)", name, name));
 			movePlayer(players.get(i), this.sea);
 			FunctionLogger.log_return("");
 		}
@@ -29,7 +30,8 @@ public class UnstableIceBlock extends IceBlock {
 	public void addPlayer(Player p) {
 		players.add(p);
 		if(players.size()>capacity) {
-			FunctionLogger.log_call("UnstableIceBlock this.flip()");
+			String name = FunctionLogger.get_obj_name();
+			FunctionLogger.log_call(String.format("UnstableIceBlock %s.flip()",name));
 			flip();
 			FunctionLogger.log_return("");
 		}
