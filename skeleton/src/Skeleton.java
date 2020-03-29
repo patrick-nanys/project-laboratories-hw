@@ -30,7 +30,43 @@ public class Skeleton {
 
         e.buildIglu();
     }
+    //test2
+    public void testCheckCapacity() {
+        Researcher r = new Researcher();
+        IceBlock ib1 = new IceBlock();
+        IceBlock ib2 = new IceBlock();
+        ib1.addNeighbour(DirectionE.WEST, ib2);
+        ib2.addNeighbour(DirectionE.EAST,ib1);
+        ib2.addPlayer(r);
+        FunctionLogger.log_call("Researcher r.checkStability(IceBlock ib1)");
+        int cap = r.checkStability(ib1);
+        String s = "r.checkStability returned: "+cap;
+        FunctionLogger.log_return(s);
 
+    }
+    //test3
+    public void testDieInStorm(){
+        Level l = new Level();
+        IceBlock ib = new IceBlock();
+        Eskimo e = new Eskimo();
+
+        l.addIceBlock(ib);
+        ib.addPlayer(e);
+        FunctionLogger.log_call("Level l.blizzard()");
+        l.blizzard();
+        FunctionLogger.log_return("");
+    }
+    //test4
+    public void testDieInWater(){
+        Level l = new Level();
+        Eskimo e = new Eskimo();
+        IceBlock ib = new IceBlock();
+
+        ib.getSea().addPlayer(e);
+        FunctionLogger.log_call("Eskimo e.checkPlayerStatus()");
+        e.checkPlayerStatus();
+        FunctionLogger.log_return("");
+    }
     //test5
     public void testDigOutItem(){
         Eskimo e = new Eskimo();
