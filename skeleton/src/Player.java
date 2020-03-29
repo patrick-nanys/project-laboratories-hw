@@ -17,6 +17,7 @@ public abstract class Player {
 	Player(Level level) {
 		this.level = level;
 		inSea = false;
+		inventory = new Inventory();
 	}
 
 	Player(Level level, Inventory inventory) {
