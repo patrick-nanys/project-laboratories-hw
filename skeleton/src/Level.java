@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
+import java.util.function.Function;
 
 public class Level {
 	private ArrayList<IceBlock> iceblocks;
@@ -50,7 +51,7 @@ public class Level {
 	}
 
 	public void checkParts() {
-		if (parts.get(0).getLocation() == parts.get(1).getLocation() && parts.get(0).getLocation() == parts.get(2).getLocation()) {
+		if (FunctionLogger.ask_question("Egy mezon vannak a jatekosok az alkatreszekkel?")) {
 			levelWon();
 		}
 	}

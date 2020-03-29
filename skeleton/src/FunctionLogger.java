@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,8 +7,8 @@ import java.util.regex.Pattern;
  */
 public class FunctionLogger {
     public static int depth = 0;
-    public static Stack<String> call_stack;
-    public static Stack<String> return_stack;
+    public static Stack<String> call_stack = new Stack<>();
+    public static Stack<String> return_stack = new Stack<>();
 
     /**
      * Dokumental egy string-ben megadott fuggvenyhivast.
@@ -28,21 +25,38 @@ public class FunctionLogger {
     }
 
     /**
+     * Visszater az elso olyan csoporttal az elozo fuggvenyhivasbol amire igaz a megadott regex.
+     * @param regex regularis kifezes, benne egy csoporttal amit vissza szeretnenk kapni
+     * @return az elso szoveg csoport amire igaz volt a megadott regex
+     */
+    static String matchFunctionCall(String regex) {
+        String call = call_stack.peek();
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(call);
+        String matchedString;
+        if (m.matches()) {
+            matchedString = m.group(1);
+        } else {
+            System.out.println("******There was a problem with matching!******");
+            return "";
+        }
+        return matchedString;
+    }
+
+    /**
+     * Visszater azon objektum tipusaval amin a veremben az elozo fuggveny meg lett hivva.
+     * @return objektum tipusa
+     */
+    public static String get_obj_type() {
+        return matchFunctionCall("(.*) .*\\..*");
+    }
+
+    /**
      * Visszater azon objektum nevevel amin a veremben az elozo fuggveny meg lett hivva.
      * @return objektum neve
      */
     public static String get_obj_name() {
-        String call = call_stack.peek();
-        Pattern p = Pattern.compile(".* (.*)\\..*");
-        Matcher m = p.matcher(call);
-        String obj_name;
-        if (m.matches()) {
-            obj_name = m.group(1);
-        } else {
-            System.out.println("******There was a problem with obj_name matching!******");
-            return "";
-        }
-        return obj_name;
+        return matchFunctionCall(".* (.*)\\..*");
     }
 
     /**
@@ -50,16 +64,7 @@ public class FunctionLogger {
      * @return parameterek string listaja
      */
     public static ArrayList<String> get_parameters() {
-        String call = call_stack.peek();
-        Pattern p = Pattern.compile(".*\\((.*)\\)");
-        Matcher m = p.matcher(call);
-        String parametersString;
-        if (m.matches()) {
-            parametersString = m.group(1);
-        } else {
-            System.out.println("******There was a problem with parameters matching!******");
-            return new ArrayList<>();
-        }
+        String parametersString = matchFunctionCall(".*\\((.*)\\)");
         List<String> paramList = Arrays.asList(parametersString.split(", "));
         return new ArrayList<>(paramList);
     }
@@ -120,4 +125,16 @@ public class FunctionLogger {
         depth--;
     }
 
+    /**
+     * Megkerdez egy kerdest a felhasznalotol amire igen/nem-el lehet valaszolni
+     * es visszater a valasszal.
+     * @param question a megadott igen/nem-el megvalaszolhato kerdes
+     * @return a felhasznalotol a valaszra adott valasz
+     */
+    public static boolean ask_question(String question) {
+        System.out.print(question + " (I/N)  ");
+        Scanner in = new Scanner(System.in);
+        char c = in.next().charAt(0);
+        return c == 'I' || c == 'i';
+    }
 }
