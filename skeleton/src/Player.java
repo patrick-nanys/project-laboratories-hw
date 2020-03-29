@@ -18,7 +18,7 @@ public abstract class Player {
 
 	/**
 	 * A jatekos lep egyet az adott iranyba.
-	 * @param d a megadott irany amibe keptetni akarjuk
+	 * @param d a megadott irany amibe leptetni akarjuk
 	 */
 	public void step(DirectionE d) {
 		if (!inSea) {

@@ -19,7 +19,7 @@ public class Level {
 		}
 	}
 	
-	public void addIceBlock() {
+	public void addIceBlock(IceBlock ib) {
 
 	}
 	
@@ -67,5 +67,16 @@ public class Level {
 	}
 	
 	public void blizzard() {
+		Random r = new Random();
+		int blizzardIceBlocks = r.nextInt(numberOfTiles);
+		int i = 0;
+		while (i < blizzardIceBlocks) {
+			int nextib = r.nextInt(numberOfTiles);
+			if (!iceblocks[nextib].getIglu()) {
+				int layer = iceblocks[nextib].getLayer();
+				iceblocks[nextib].modifyLayers(layer +1);
+				i++;
+			}
+		}
 	}
 }

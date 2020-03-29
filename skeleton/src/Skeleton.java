@@ -59,4 +59,115 @@ public class Skeleton {
             return null;
         }
     }*/
+
+    //test1
+    public void testBuildIglu(){
+        Eskimo e = new Eskimo();
+        IceBlock ib = new IceBlock();
+
+        FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
+        ib.addPlayer(e);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("Eskimo e.buildIglu()");
+        e.buildIglu();
+        FunctionLogger.log_return("");
+    }
+
+    //test5
+    public void testDigOutItem(){
+        Eskimo e = new Eskimo();
+        IceBlock ib = new IceBlock();
+        Shovel s = new Shovel();
+
+        FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
+        ib.addPlayer(e);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("IceBlock ib.addItem(s)");
+        ib.addItem(s);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("Eskimo e.digOutItem()");
+        e.digOutItem();
+        FunctionLogger.log_return("");
+    }
+
+    //test6
+    public void testEat(){
+        Eskimo e = new Eskimo();
+        Food f = new Food();
+        IceBlock ib = new IceBlock();
+
+        FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
+        ib.addPlayer(e);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("IceBlock ib.addItem(f)");
+        ib.addItem(f);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("Food f.pickedUpBy(e)");
+        f.pickedUpBy(e);
+        FunctionLogger.log_return("");
+    }
+
+    //test11
+    public void testStormHitsPlayerInIglu(){
+        Level level = new Level();
+        level.addIceBlock();
+
+        Eskimo eskimo = new Eskimo();
+        Researcher researcher = new Researcher();
+
+        IceBlock ib = new IceBlock();
+        ib.setIglu(true);
+        ib.addPlayer(eskimo);
+        ib.addPlayer(researcher);
+
+        FunctionLogger.log_call("Level level.blizzard()");
+        level.blizzard();
+        FunctionLogger.log_return("");
+
+    }
+
+    //test12
+    public void testSwipeWithHand(){
+        Researcher r = new Researcher();
+        IceBlock ib = new IceBlock();
+        ib.addPlayer(r);
+
+        FunctionLogger.log_call("Researcher r.swipeWithHand()");
+        r.swipeWithHand();
+        FunctionLogger.log_return("");
+    }
+
+    //test13
+    public void testUnstableFlips(){
+        Sea s = new Sea();
+        Eskimo e = new Eskimo();
+        IceBlock ib = new IceBlock();
+        UnstableIceBlock ui = new UnstableIceBlock();
+
+        ui.addNeighbour(DirectionE.WEST, ib);
+        ib.addNeighbour(DirectionE.EAST, ui);
+        ib.addPlayer(e);
+
+        FunctionLogger.log_call("Eskimo e.step(DirectionE.EAST)");
+        e.step(DirectionE.EAST);
+        FunctionLogger.log_return("");
+    }
+
+    //test14
+    public void testUnstableNoFlip(){
+        Researcher r = new Researcher();
+        UnstableIceBlock ui = new UnstableIceBlock();
+        IceBlock ib = new IceBlock();
+
+        ui.addNeighbour(DirectionE.SOUTH, ib);
+        ib.addNeighbour(DirectionE.NORTH, ui);
+        ib.addPlayer(r);
+
+        FunctionLogger.log_call("Researcher r.step(DirectionE.NORTH)");
+        r.step(DirectionE.NORTH);
+        FunctionLogger.log_return("");
+    }
 }

@@ -63,6 +63,12 @@ public class Sea implements PlayerContainerI {
 	 */
 	@Override
 	public void addPlayer(Player p) {
-		position.addPlayer(p);
+		if(position.players.contains(p)) {
+			p.setInSea(true);
+		}
+		else {
+			position.addPlayer(p);
+			p.setInSea(true);
+		}
 	}
 }
