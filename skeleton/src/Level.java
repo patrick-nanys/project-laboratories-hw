@@ -69,7 +69,7 @@ public class Level {
 
 	public void addIceBlock(IceBlock ib) {
 		ArrayList<String> param =  FunctionLogger.get_parameters();
-		FunctionLogger.log_call(String.format("IceBlock iceblocks.add(%s",param.get(0)));
+		FunctionLogger.log_call(String.format("IceBlock iceblocks.add(%s)",param.get(0)));
 		iceblocks.add(ib);
 		FunctionLogger.log_return("");
 	}
