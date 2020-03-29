@@ -111,6 +111,15 @@ public abstract class Player {
 		}
 	}
 
+	public void useItemOnPlayer(Item item, Player player) {
+		ArrayList<String> p = FunctionLogger.get_parameters();
+		if (!getInSea()) {
+			FunctionLogger.log_call(String.format("Inventory inventory.use(%s, %s)", p.get(0), p.get(1)));
+			inventory.use(item, player);
+			FunctionLogger.log_return("");
+		}
+	}
+
 	/**
 	 * A jatekos lesopor egy egysegnyi havat a jegtablarol.
 	 */

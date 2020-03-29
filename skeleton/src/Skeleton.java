@@ -1,43 +1,7 @@
 import java.util.ArrayList;
+import java.util.function.Function;
 
 public class Skeleton {
-
-
-    public void testSaveWithRope() {
-        // setup
-        Level level = new Level();
-        Inventory inv = new Inventory();
-        Eskimo e = new Eskimo(level,inv);
-        Eskimo player = new Eskimo(level);
-        Rope r = new Rope();
-        Sea from = new Sea();
-        IceBlock to = new IceBlock();
-        IceBlock fromIB = new IceBlock();
-        from.addPlayer(player);
-        to.addPlayer(e);
-        inv.addItem(r);
-        fromIB.addNeighbour(DirectionE.EAST, to);
-        to.addNeighbour(DirectionE.WEST, fromIB);
-
-        // run
-        //e.useItem(r); -> szekvenciat atirni
-    }
-
-    public void testStepInHole() {
-        // setup
-        Level level = new Level();
-        Eskimo e = new Eskimo(level);
-        Sea s = new Sea();
-        UnstableIceBlock unstable = new UnstableIceBlock(2);
-        IceBlock ib = new IceBlock();
-        level.addIceBlock(ib);
-        ib.addPlayer(e);
-        ib.addNeighbour(DirectionE.EAST, unstable);
-        unstable.addNeighbour(DirectionE.WEST, ib);
-
-        // run
-        e.step(DirectionE.EAST);
-    }
 
     //test1
     public void testBuildIglu(){
@@ -126,6 +90,84 @@ public class Skeleton {
 
         FunctionLogger.log_call("Food f.pickedUpBy(e)");
         f.pickedUpBy(e);
+        FunctionLogger.log_return("");
+    }
+
+    //test7
+    public void testSaveWithRope() {
+        // setup
+        Level level = new Level();
+        Inventory inv = new Inventory();
+        Eskimo e = new Eskimo(level,inv);
+        Eskimo player = new Eskimo(level);
+        Rope r = new Rope();
+        Sea from = new Sea();
+        IceBlock to = new IceBlock();
+        IceBlock fromIB = new IceBlock();
+        from.addPlayer(player);
+        to.addPlayer(e);
+        inv.addItem(r);
+        fromIB.addNeighbour(DirectionE.EAST, to);
+        to.addNeighbour(DirectionE.WEST, fromIB);
+
+        // run
+        FunctionLogger.log_call("Eskimo e.useItemOnPlayer(r, player)");
+        e.useItemOnPlayer(r, player);
+        FunctionLogger.log_return("");
+    }
+
+    //test8
+    public void testStepInHole() {
+        // setup
+        Level level = new Level();
+        Eskimo e = new Eskimo(level);
+        Sea s = new Sea();
+        UnstableIceBlock unstable = new UnstableIceBlock(2);
+        IceBlock ib = new IceBlock();
+        level.addIceBlock(ib);
+        ib.addPlayer(e);
+        ib.addNeighbour(DirectionE.EAST, unstable);
+        unstable.addNeighbour(DirectionE.WEST, ib);
+
+        // run
+        FunctionLogger.log_call("Eskimo e.step(EAST)");
+        e.step(DirectionE.EAST);
+        FunctionLogger.log_return("");
+    }
+
+    //test9
+    public void testStepOnIceBlock() {
+        // setup
+        Level level = new Level();
+        Eskimo e = new Eskimo(level);
+        IceBlock to = new IceBlock();
+        IceBlock iceblock = new IceBlock();
+
+        iceblock.addPlayer(e);
+        to.addNeighbour(DirectionE.EAST, iceblock);
+        iceblock.addNeighbour(DirectionE.WEST, to);
+
+        // run
+        FunctionLogger.log_call("Eskimo e.step(WEST)");
+        e.step(DirectionE.WEST);
+        FunctionLogger.log_return("");
+    }
+
+    //test10
+    public void testStormDamagesPlayer() {
+        // setup
+        Level level  = new Level();
+        IceBlock ib  = new IceBlock();
+        Researcher r = new Researcher(level);
+        Eskimo e     = new Eskimo(level);
+
+        ib.addPlayer(e);
+        ib.addPlayer(r);
+        level.addIceBlock(ib);
+
+        // run
+        FunctionLogger.log_call("Level level.blizzard()");
+        level.blizzard();
         FunctionLogger.log_return("");
     }
 
