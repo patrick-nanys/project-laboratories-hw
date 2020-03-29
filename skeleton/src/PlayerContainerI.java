@@ -7,4 +7,6 @@ public interface PlayerContainerI {
 	void removePlayer(Player p);
 	
 	void addPlayer(Player p);
+
+	String toString ();
 }
