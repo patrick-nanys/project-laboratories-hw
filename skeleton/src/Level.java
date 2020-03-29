@@ -9,9 +9,13 @@ public class Level {
 	private GameStateE gameState;
 	private int numberOfTiles, numberOfItems, numberOfPlayers;
 
-	public Level() {
+	public Level(int tiles, int items, int players) {
 		parts = new ArrayList<>(3);
 		iceblocks = new ArrayList<>();
+		gameState = GameStateE.IN_PROGRESS;
+		numberOfTiles = tiles;
+		numberOfItems = items;
+		numberOfPlayers = players;
 	}
 
 	public void init() {
