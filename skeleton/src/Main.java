@@ -5,5 +5,6 @@ public class Main {
         //ske.testSaveWithRope();
         ske.testBuildIglu();
         ske.testDigOutItem();
+        ske.testCheckCapacity();
     }
 }
