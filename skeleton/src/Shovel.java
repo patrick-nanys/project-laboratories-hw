@@ -24,4 +24,6 @@ public class Shovel extends Item {
 	public boolean equals(Item item) {
 		return item instanceof Shovel;
 	}
+
+	public String toString() { return "Shovel"; }
 }
