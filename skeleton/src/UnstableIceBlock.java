@@ -34,4 +34,8 @@ public class UnstableIceBlock extends IceBlock {
 			FunctionLogger.log_return("");
 		}
 	}
+	@Override
+	public String toString(){
+		return "UnstableIceBlock";
+	}
 }

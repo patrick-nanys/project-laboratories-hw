@@ -112,12 +112,11 @@ public class Skeleton {
     //test11
     public void testStormHitsPlayerInIglu(){
         Level level = new Level();
-        level.addIceBlock();
-
-        Eskimo eskimo = new Eskimo();
-        Researcher researcher = new Researcher();
+        Eskimo eskimo = new Eskimo(level);
+        Researcher researcher = new Researcher(level);
 
         IceBlock ib = new IceBlock();
+        level.addIceBlock(ib);
         ib.setIglu(true);
         ib.addPlayer(eskimo);
         ib.addPlayer(researcher);
@@ -130,8 +129,10 @@ public class Skeleton {
 
     //test12
     public void testSwipeWithHand(){
-        Researcher r = new Researcher();
+        Level level = new Level();
+        Researcher r = new Researcher(level);
         IceBlock ib = new IceBlock();
+        level.addIceBlock(ib);
         ib.addPlayer(r);
 
         FunctionLogger.log_call("Researcher r.swipeWithHand()");
@@ -141,10 +142,13 @@ public class Skeleton {
 
     //test13
     public void testUnstableFlips(){
+        Level level = new Level();
         Sea s = new Sea();
-        Eskimo e = new Eskimo();
+        Eskimo e = new Eskimo(level);
         IceBlock ib = new IceBlock();
-        UnstableIceBlock ui = new UnstableIceBlock();
+        UnstableIceBlock ui = new UnstableIceBlock(0);
+        level.addIceBlock(ib);
+        level.addIceBlock(ui);
 
         ui.addNeighbour(DirectionE.WEST, ib);
         ib.addNeighbour(DirectionE.EAST, ui);
@@ -158,16 +162,19 @@ public class Skeleton {
 
     //test14
     public void testUnstableNoFlip(){
-        Researcher r = new Researcher();
-        UnstableIceBlock ui = new UnstableIceBlock();
+        Level level = new Level();
+        Researcher r = new Researcher(level);
+        UnstableIceBlock ui = new UnstableIceBlock(1);
         IceBlock ib = new IceBlock();
+        level.addIceBlock(ib);
+        level.addIceBlock(ui);
 
         ui.addNeighbour(DirectionE.SOUTH, ib);
         ib.addNeighbour(DirectionE.NORTH, ui);
         ib.addPlayer(r);
 
         ArrayList<String> p = FunctionLogger.get_parameters();
-        FunctionLogger.log_call("Researcher r.step(" + p.get(0) ")");
+        FunctionLogger.log_call("Researcher r.step(" + p.get(0) + ")");
         r.step(DirectionE.NORTH);
         FunctionLogger.log_return("");
     }
