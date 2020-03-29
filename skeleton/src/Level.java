@@ -19,7 +19,7 @@ public class Level {
 		}
 	}
 	
-	public void addIceBlock() {
+	public void addIceBlock(IceBlock ib) {
 
 	}
 	
