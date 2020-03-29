@@ -174,7 +174,6 @@ public class Skeleton {
         ib.addNeighbour(DirectionE.EAST, ui);
         ib.addPlayer(e);
 
-        ArrayList<String> p = FunctionLogger.get_parameters();
         FunctionLogger.log_call("Eskimo e.step(EAST)");
         e.step(DirectionE.EAST);
         FunctionLogger.log_return("");
@@ -193,7 +192,6 @@ public class Skeleton {
         ib.addNeighbour(DirectionE.NORTH, ui);
         ib.addPlayer(r);
 
-        ArrayList<String> p = FunctionLogger.get_parameters();
         FunctionLogger.log_call("Researcher r.step(NORTH)");
         r.step(DirectionE.NORTH);
         FunctionLogger.log_return("");
