@@ -232,12 +232,26 @@ public class Skeleton {
         Researcher r = new Researcher(level);
         UnstableIceBlock ui = new UnstableIceBlock(1);
         IceBlock ib = new IceBlock();
-        level.addIceBlock(ib);
-        level.addIceBlock(ui);
 
+        FunctionLogger.log_call("Level level.addIceBlock(ib)");
+        level.addIceBlock(ib);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("Level level.addIceBlock(ui)");
+        level.addIceBlock(ui);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("IceBlock ui.addNeighbour(DirectionE.SOUTH, ib)");
         ui.addNeighbour(DirectionE.SOUTH, ib);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("IceBlock ib.addNeighbour(DirectionE.NORTH, ui)");
         ib.addNeighbour(DirectionE.NORTH, ui);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("IceBlock ib.addPlayer(r)");
         ib.addPlayer(r);
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("Researcher r.step(NORTH)");
         r.step(DirectionE.NORTH);
