@@ -191,7 +191,7 @@ public class IceBlock implements PlayerContainerI {
 		FunctionLogger.log_call(String.format("IceBlock %s.getNeighbour(d)", name));
 		IceBlock neighbour=this.getNeighbour(d);
 		FunctionLogger.log_return("neighbour");
-		FunctionLogger.log_call(String.format("IceBlock %s.movePlayer(p, neighbour)"));
+		FunctionLogger.log_call(String.format("IceBlock %s.movePlayer(p, neighbour)", name));
 		movePlayer(p, neighbour);
 		FunctionLogger.log_return("");
 	}
