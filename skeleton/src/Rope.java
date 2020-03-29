@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Rope osztaly. Az Item leszarmazottja.
  * Segitsegevel ki lehet menteni egy vizbeesett jatekost.
@@ -12,16 +14,19 @@ public class Rope extends Item {
 	 * @param player Az a jatekos, amelyiket kimentjuk a vizbol.
 	 */
 	public void use(Player player) {
+		String name = FunctionLogger.get_obj_name();
+		ArrayList<String> p = FunctionLogger.get_parameters();
+
 		if(player.getInSea()){
 			FunctionLogger.log_call("Player player.getLocation()");
 			Sea from = (Sea) player.getLocation();
 			FunctionLogger.log_return("from");
 
-			FunctionLogger.log_call("Player this.player.getLocation()");
+			FunctionLogger.log_call(String.format("Player %s.player.getLocation()", name));
 			IceBlock to = (IceBlock) this.player.getLocation();
 			FunctionLogger.log_return("to");
 
-			FunctionLogger.log_call("IceBlock from.movePlayer(player, to)");
+			FunctionLogger.log_call(String.format("IceBlock from.movePlayer(%s, to)", p.get(0)));
 			from.movePlayer(player, to);
 			FunctionLogger.log_return("");
 		}
@@ -33,6 +38,11 @@ public class Rope extends Item {
 	 */
 	public void pickedUpBy(Player p) {
 		player = p;
+	}
+
+	@Override
+	public String toString() {
+		return "Rope";
 	}
 
 	/**

@@ -25,5 +25,8 @@ public class Shovel extends Item {
 		return item instanceof Shovel;
 	}
 
-	public String toString() { return "Shovel"; }
+	@Override
+	public String toString() {
+		return "Shovel";
+	}
 }
