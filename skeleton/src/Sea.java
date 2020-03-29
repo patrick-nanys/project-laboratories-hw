@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Sea osztaly, egy IceBlock-ot korulvevo tengert reprezental. Egy IceBlockon tartozkodo jatekos
  * 		inSea booleanje hatarozza meg, hogy a jatekos tengerben van, vagy az IceBlockon
@@ -5,6 +7,7 @@
  */
 public class Sea implements PlayerContainerI {
 	private IceBlock position;
+	private List<Player> players;
 
 	/**
 	 * Elkeri az adott iranyban szomszedos tengert
@@ -70,5 +73,9 @@ public class Sea implements PlayerContainerI {
 			position.addPlayer(p);
 			p.setInSea(true);
 		}
+	}
+	@Override
+	public String toString() {
+		return "Sea";
 	}
 }
