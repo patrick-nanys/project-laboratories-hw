@@ -194,7 +194,7 @@ public class Skeleton {
         to.addPlayer(e);
         FunctionLogger.log_return("");
         FunctionLogger.log_call("Inventory inv.addItem(r)");
-        inv.addItem(r);
+        e.addItem(r);
         FunctionLogger.log_return("");
         FunctionLogger.log_call("IceBlock fromIB.addNeighbour(EAST, to)");
         fromIB.addNeighbour(DirectionE.EAST, to);
