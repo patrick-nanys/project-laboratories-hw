@@ -31,12 +31,14 @@ public class Sea implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
-			FunctionLogger.log_call("PlayerContainerI pc.addPlayer(p)");
-			pc.addPlayer(p);
-			FunctionLogger.log_return("");
-			FunctionLogger.log_call("Sea this.removePlayer(p)");
-			this.removePlayer(p);
-			FunctionLogger.log_return("");
+		String name = FunctionLogger.get_obj_name();
+		String blocktype = pc.toString();
+		FunctionLogger.log_call(String.format("%s pc.addPlayer(p)",blocktype));
+		pc.addPlayer(p);
+		FunctionLogger.log_return("");
+		FunctionLogger.log_call(String.format("Sea %s.removePlayer(p)",name));
+		this.removePlayer(p);
+		FunctionLogger.log_return("");
 	}
 
 	/**
