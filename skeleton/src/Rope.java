@@ -53,6 +53,4 @@ public class Rope extends Item {
 	public boolean equals(Item item) {
 		return item instanceof Rope;
 	}
-
-	public String toString() { return "Rope"; }
 }

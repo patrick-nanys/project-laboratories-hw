@@ -8,6 +8,8 @@ public class Researcher extends Player {
 		super(level);
 	}
 
+	Researcher(Level level, Inventory inventory) { super(level, inventory); }
+
 	/**
 	 * Megnezi, hogy a parameterkent kapott jegtable egyszerre hany jatekost bir el.
 	 * @param ib a megnezendo jegtabla

@@ -7,6 +7,8 @@ public class Eskimo extends Player {
 		super(level);
 	}
 
+	Eskimo(Level level, Inventory inventory) { super(level, inventory); }
+
 	/**
 	 * Epit egy iglut az aktualis jegtablan.
 	 */
