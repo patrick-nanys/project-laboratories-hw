@@ -164,6 +164,7 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
+		String name = FunctionLogger.get_obj_name();
 		FunctionLogger.log_call("PlayerContainerI pc.addPlayer(Player p)");
 		pc.addPlayer(p);
 		FunctionLogger.log_return("");
@@ -179,6 +180,7 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, DirectionE d) {
+
 		FunctionLogger.log_call("IceBlock this.getNeighbour(DirectionE d)");
 		IceBlock neighbour=this.getNeighbour(d);
 		FunctionLogger.log_return("neighbour");
