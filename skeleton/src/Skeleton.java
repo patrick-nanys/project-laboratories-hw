@@ -17,6 +17,7 @@ public class Skeleton {
         e.buildIglu();
         FunctionLogger.log_return("");
     }
+
     //test2
     public void testCheckCapacity() {
         Level l = new Level();
@@ -32,6 +33,7 @@ public class Skeleton {
         FunctionLogger.log_return(s);
 
     }
+
     //test3
     public void testDieInStorm(){
         Level l = new Level();
@@ -44,6 +46,7 @@ public class Skeleton {
         l.blizzard();
         FunctionLogger.log_return("");
     }
+
     //test4
     public void testDieInWater(){
         Level l = new Level();
@@ -55,6 +58,7 @@ public class Skeleton {
         e.checkPlayerStatus();
         FunctionLogger.log_return("");
     }
+
     //test5
     public void testDigOutItem(){
         Level level = new Level();

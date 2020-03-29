@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +8,11 @@ import java.util.List;
  */
 public class Sea implements PlayerContainerI {
 	private IceBlock position;
-	private List<Player> players;
+	private ArrayList<Player> players;
+
+	Sea() {
+		players = new ArrayList<Player>();
+	}
 
 	/**
 	 * Elkeri az adott iranyban szomszedos tengert
