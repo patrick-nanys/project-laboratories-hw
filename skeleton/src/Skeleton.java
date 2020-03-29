@@ -247,19 +247,41 @@ public class Skeleton {
 
     //test 15
     public void testUsePistol() {
+        FunctionLogger.log_call("Level level create");
         Level level = new Level();
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("IceBlock ib create");
         IceBlock ib = new IceBlock();
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("Part part1 create");
         Part part1 = new Part();
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("Part part2 create");
         Part part2 = new Part();
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("Part part3 create");
         Part part3 = new Part();
+        FunctionLogger.log_return("");
 
+        FunctionLogger.log_call("Level level.addIceBlock(ib)");
         level.addIceBlock(ib);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("Level level.addPart(part1)");
         level.addPart(part1);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("Level level.addPart(part2)");
         level.addPart(part2);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("Level level.addPart(part3");
         level.addPart(part3);
+        FunctionLogger.log_return("");
 
+        FunctionLogger.log_call("Eskimo eskimo create");
         Eskimo eskimo = new Eskimo(level);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("IceBlock ib.addPlayer(eskimo)");
         ib.addPlayer(eskimo);
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("Eskimo eskimo.useItem(part1)");
             eskimo.useItem(part1);
