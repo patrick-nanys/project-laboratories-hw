@@ -17,6 +17,7 @@ public abstract class Player {
 	Player(Level level) {
 		this.level = level;
 		inSea = false;
+		inventory = new Inventory();
 	}
 
 	Player(Level level, Inventory inventory) {
@@ -170,6 +171,13 @@ public abstract class Player {
 		return container;
 	}
 
+	/**
+	 * Beallitja, hogy a jatekos melyik containeren all.
+	 * @param cr a kontener, amin all
+	 */
+	public void setContainer(PlayerContainerI cr) {
+		container = cr;
+	}
 	/**
 	 * Ertesiti a szintet, hogy vege a jateknak.
 	 */

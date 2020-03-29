@@ -209,6 +209,7 @@ public class IceBlock implements PlayerContainerI {
 	@Override
 	public void addPlayer(Player p) {
 		players.add(p);
+		p.setContainer(this);
 	}
 
 	@Override

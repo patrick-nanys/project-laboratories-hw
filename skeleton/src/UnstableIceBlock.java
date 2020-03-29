@@ -30,6 +30,7 @@ public class UnstableIceBlock extends IceBlock {
 	 */
 	public void addPlayer(Player p) {
 		players.add(p);
+		p.setContainer(this);
 		if(players.size()>capacity) {
 			String name = FunctionLogger.get_obj_name();
 			FunctionLogger.log_call(String.format("UnstableIceBlock %s.flip()",name));
