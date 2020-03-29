@@ -37,7 +37,7 @@ public class Part extends Item {
 	public PlayerContainerI getLocation() {
 		FunctionLogger.log_call("Player player.getLocation()");
 		PlayerContainerI location = player.getLocation();
-		FunctionLogger.log_return("location of part");
+		FunctionLogger.log_return("location");
 		return location;
 	}
 
