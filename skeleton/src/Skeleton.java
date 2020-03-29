@@ -282,6 +282,7 @@ public class Skeleton {
 
     //test10
     public void testStormDamagesPlayer() {
+        System.out.println("Storm Damages Player test running: ");
         // setup
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(1,0,2);
@@ -319,7 +320,7 @@ public class Skeleton {
 
     //test11
     public void testStormHitsPlayerInIglu(){
-
+        System.out.println("Storm Hits Player in Iglu test running: ");
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(1,0,2);
         FunctionLogger.log_return("");
@@ -360,6 +361,7 @@ public class Skeleton {
 
     //test12
     public void testSwipeWithHand(){
+        System.out.println("Swipe with Hands test running: ");
 
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(1,0,1);
@@ -389,6 +391,7 @@ public class Skeleton {
 
     //test13
     public void testUnstableFlips(){
+        System.out.println("Player Steps on Unstable IceBlock and it Flips test running: ");
 
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(2,0,1);
@@ -437,6 +440,8 @@ public class Skeleton {
 
     //test14
     public void testUnstableNoFlip(){
+        System.out.println("Step on Unstable IceBlock and it Does Not Flip test running: ");
+
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(2,0,1);
         FunctionLogger.log_return("");
