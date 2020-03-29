@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.function.Function;
 
 /**
@@ -21,8 +23,10 @@ public abstract class Player {
 	 * @param d a megadott irany amibe leptetni akarjuk
 	 */
 	public void step(DirectionE d) {
+		String name = FunctionLogger.get_obj_name();
+		ArrayList<String> p = FunctionLogger.get_parameters();
 		if (!inSea) {
-			FunctionLogger.log_call("PlayerContainerI container.movePlayer(this, d)");
+			FunctionLogger.log_call("PlayerContainerI container.movePlayer(" + name + p.get(0) + ")");
 			container.movePlayer(this, d);
 			FunctionLogger.log_return("");
 		}
@@ -34,8 +38,8 @@ public abstract class Player {
 	 * @return jatekosnal van-e a targy
 	 */
 	public boolean hasItem(Item item) {
-		ArrayList<String> parameters = FunctionLogger.get_parameters();
-		FunctionLogger.log_call("Inventory inventory.contains(" + parameters.get(0) + ")");
+		ArrayList<String> p = FunctionLogger.get_parameters();
+		FunctionLogger.log_call("Inventory inventory.contains(" + p.get(0) + ")");
 		boolean ret = inventory.contains(item);
 		FunctionLogger.log_boolean_return(ret);
 		return ret;
@@ -46,12 +50,12 @@ public abstract class Player {
 	 * és ha nincsen rajta buvarruha, akkor a jatekos meghal.
 	 */
 	public void checkPlayerStatus() {
-		FunctionLogger.log_call("Inventory inventory.contains(new DivingSuit())");
+		String name = FunctionLogger.get_obj_name();
+		FunctionLogger.log_call("Inventory inventory.contains(divingSuit)");
 		boolean hasDivingSuit = inventory.contains(new DivingSuit());
-		//hasDivingSuit = FunctionLogger.get_return(); ?????????????
-		FunctionLogger.log_predefined_return();
+		FunctionLogger.log_boolean_return(hasDivingSuit);
 		if (inSea && !hasDivingSuit) {
-			FunctionLogger.log_call("Player this.die()");
+			FunctionLogger.log_call("Player " + name + ".die()");
 			die();
 			FunctionLogger.log_return("");
 		}
@@ -62,21 +66,18 @@ public abstract class Player {
 	 * @return tengerben van-e a jatekos
 	 */
 	public boolean getInSea() {
-
-	}
-
-	/**
-	 * Setter az inSea valtozora.
-	 * @param b a megadott ertek amire allitjuk az inSea-t
-	 */
-	public void setInSea(boolean b) {
-
+		return FunctionLogger.ask_question("Vizben van a jatekos?");
 	}
 
 	/**
 	 * A jatekos eletero potjat eggyel csokkenti.
 	 */
 	public void loseHealth() {
+		String name = FunctionLogger.get_obj_name();
+		if (FunctionLogger.ask_question("Kevesebb mint nulla a jatekos elete?")) {
+			FunctionLogger.log_call("Player");
+			die();
+		}
 		// kerdes: kevesebb-e mint nulla az elete
 	}
 
