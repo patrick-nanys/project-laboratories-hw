@@ -1,8 +1,5 @@
 public class Skeleton {
 
-    public void testDigOutItem() {
-
-    }
 
     public void testSaveWithRope() {
         // setup
@@ -175,7 +172,7 @@ public class Skeleton {
     public void testUsePistol() {
         Level level = new Level();
         IceBlock ib = new IceBlock();
-        Eskimo eskimo = new Eskimo();
+        Eskimo eskimo = new Eskimo(level);
         Part part1 = new Part();
         Part part2 = new Part();
         Part part3 = new Part();
@@ -219,8 +216,9 @@ public class Skeleton {
 
     //test 18
     public void testPlayerSurvivesInDivingSuit() {
+        Level level = new Level();
         DivingSuit ds = new DivingSuit();
-        Eskimo e = new Eskimo();
+        Eskimo e = new Eskimo(level);
         Inventory inv = new Inventory();
 
         inv.addItem(ds);
