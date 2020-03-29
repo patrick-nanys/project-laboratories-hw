@@ -7,19 +7,21 @@ import java.util.function.Function;
  * Jatekosokat reprezentalo absztrakt osztály.
  */
 public abstract class Player {
-	private boolean inSea;
-	private int health;
-	private int turnCounter;
-	private Inventory inventory;
-	private Level level;
-	private PlayerContainerI container;
+	protected boolean inSea;
+	protected int health;
+	protected int turnCounter;
+	protected Inventory inventory;
+	protected Level level;
+	protected PlayerContainerI container;
 
 	Player(Level level) {
 		this.level = level;
+		inSea = false;
 	}
 
 	Player(Level level, Inventory inventory) {
 		this.level = level;
+		inSea = false;
 		this.inventory = inventory;
 	}
 
@@ -30,7 +32,7 @@ public abstract class Player {
 	public void step(DirectionE d) {
 		String name = FunctionLogger.get_obj_name();
 		ArrayList<String> p = FunctionLogger.get_parameters();
-		if (!inSea) {
+		if (!getInSea()) {
 			FunctionLogger.log_call(String.format("PlayerContainerI container.movePlayer(%s, %s)", name, p.get(0)));
 			container.movePlayer(this, d);
 			FunctionLogger.log_return("");
@@ -60,7 +62,7 @@ public abstract class Player {
 		FunctionLogger.log_call("Inventory inventory.contains(divingSuit)");
 		boolean hasDivingSuit = inventory.contains(new DivingSuit());
 		FunctionLogger.log_boolean_return(hasDivingSuit);
-		if (inSea && !hasDivingSuit) {
+		if (getInSea() && !hasDivingSuit) {
 			FunctionLogger.log_call(String.format("%s %s.die()", type, name));
 			die();
 			FunctionLogger.log_return("");
