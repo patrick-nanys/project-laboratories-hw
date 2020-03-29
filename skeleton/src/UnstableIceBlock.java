@@ -1,7 +1,5 @@
-package Skeleton;
-
 /**
- * Skeleton.UnstableIceBlock osztaly, reprezental egy instabil jegtablat a jatekban.
+ * UnstableIceBlock osztaly, reprezental egy instabil jegtablat a jatekban.
  * Ha tobb jatekos tartozkodik rajta, mint amennyit elbir, felborul
  */
 public class UnstableIceBlock extends IceBlock {
@@ -18,7 +16,7 @@ public class UnstableIceBlock extends IceBlock {
 	 */
 	public void flip() {
 		for(int i=0;i<players.size();i++) {
-			FunctionLogger.log_call("Skeleton.UnstableIceBlock this.movePlayer(Skeleton.Player players.get(i), Skeleton.Sea this.sea)");
+			FunctionLogger.log_call("UnstableIceBlock this.movePlayer(Player players.get(i), Sea this.sea)");
 			movePlayer(players.get(i), this.sea);
 			FunctionLogger.log_return("");
 		}
@@ -31,7 +29,7 @@ public class UnstableIceBlock extends IceBlock {
 	public void addPlayer(Player p) {
 		players.add(p);
 		if(players.size()>capacity) {
-			FunctionLogger.log_call("Skeleton.UnstableIceBlock this.flip()");
+			FunctionLogger.log_call("UnstableIceBlock this.flip()");
 			flip();
 			FunctionLogger.log_return("");
 		}

@@ -1,7 +1,5 @@
-package Skeleton;
-
 /**
- * Skeleton.Item osztaly. A kulonbozo itemek ososztalya.
+ * Item osztaly. A kulonbozo itemek ososztalya.
  */
 public abstract class Item {
 	/**
@@ -16,7 +14,7 @@ public abstract class Item {
 	 * @return Ha hozzaadta true, ha nem false.
 	 */
 	public boolean addToInventory(Inventory inventory) {
-		FunctionLogger.log_call("Skeleton.Inventory inventory.addItem(this)");
+		FunctionLogger.log_call("Inventory inventory.addItem(this)");
 		FunctionLogger.set_return(FunctionLogger.get_return());
 		boolean ret = inventory.addItem(this);
 		FunctionLogger.log_predefined_return();
