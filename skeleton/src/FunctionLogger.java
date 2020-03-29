@@ -27,6 +27,10 @@ public class FunctionLogger {
         depth++;
     }
 
+    /**
+     * Visszater azon parameterekkel amikkel a veremben az elozo fuggveny meg lett hivva.
+     * @return parameterek string listaja
+     */
     public static ArrayList<String> get_parameters() {
         String call = call_stack.peek();
         Pattern p = Pattern.compile(".*\\((.*)\\)");
@@ -55,10 +59,18 @@ public class FunctionLogger {
             System.out.println(call_stack.pop() + "returned: " + returned_value);
     }
 
+    /**
+     * Dokumentalja egy mar hivott fuggvenynek a visszatereset egy megadott boolean ertekkel.
+     * @param b megadott boolean visszateresi ertek
+     */
     public static void log_boolean_return(boolean b) {
         log_return(b ? "true" : "false");
     }
 
+    /**
+     * Dokumentalja egy mar hivott fuggvenynek a visszatereset egy megadott int ertekkel.
+     * @param i megadott int visszateresi ertek
+     */
     public static void log_int_return(int i) {
         log_return(Integer.toString(i));
     }
