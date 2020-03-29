@@ -1,4 +1,9 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *  A fuggvenyhivasok naplozasanak a konnyiteset vegzi.
@@ -22,6 +27,21 @@ public class FunctionLogger {
         depth++;
     }
 
+    public static ArrayList<String> get_parameters() {
+        String call = call_stack.peek();
+        Pattern p = Pattern.compile(".*\\((.*)\\)");
+        Matcher m = p.matcher(call);
+        String parametersString = "";
+        if (m.matches()) {
+            parametersString = m.group(1);
+        } else {
+            System.out.println("******There was a problem with matching!******");
+            return new ArrayList<String>();
+        }
+        List<String> paramList = Arrays.asList(parametersString.split(", "));
+        return new ArrayList<String>(paramList);
+    }
+
     /**
      * Dokumentalja egy mar hivott fuggvenynek a visszatereset.
      * Ha nem ter vissza semmivel sem, akkor a returned_value erteke "".
@@ -33,6 +53,14 @@ public class FunctionLogger {
             System.out.print("\t");
         if (!returned_value.equals(""))
             System.out.println(call_stack.pop() + "returned: " + returned_value);
+    }
+
+    public static void log_boolean_return(boolean b) {
+        log_return(b ? "true" : "false");
+    }
+
+    public static void log_int_return(int i) {
+        log_return(Integer.toString(i));
     }
 
     /**

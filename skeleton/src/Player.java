@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.function.Function;
 
 /**
@@ -10,6 +11,10 @@ public abstract class Player {
 	private Inventory inventory;
 	private Level level;
 	private PlayerContainerI container;
+
+	Player(Level level) {
+		this.level = level;
+	}
 
 	/**
 	 * A jatekos lep egyet az adott iranyba.
@@ -29,10 +34,10 @@ public abstract class Player {
 	 * @return jatekosnal van-e a targy
 	 */
 	public boolean hasItem(Item item) {
-		FunctionLogger.log_call("Inventory inventory.contains(item)");
-		FunctionLogger.set_return(FunctionLogger.get_return());
+		ArrayList<String> parameters = FunctionLogger.get_parameters();
+		FunctionLogger.log_call("Inventory inventory.contains(" + parameters.get(0) + ")");
 		boolean ret = inventory.contains(item);
-		FunctionLogger.log_predefined_return();
+		FunctionLogger.log_boolean_return(ret);
 		return ret;
 	}
 
@@ -72,6 +77,7 @@ public abstract class Player {
 	 * A jatekos eletero potjat eggyel csokkenti.
 	 */
 	public void loseHealth() {
+		// kerdes: kevesebb-e mint nulla az elete
 	}
 
 	/**

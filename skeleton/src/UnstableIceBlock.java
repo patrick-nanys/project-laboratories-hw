@@ -4,6 +4,14 @@
  */
 public class UnstableIceBlock extends IceBlock {
 	/**
+	 * Konstruktor
+	 * @param cap a kapacitas
+	 */
+	public UnstableIceBlock (int cap) {
+		super();
+		capacity=cap;
+	}
+	/**
 	 * Felboritja az instabil jegtablat, beledobva az osszes rajta allo jatekost a tengerbe.
 	 */
 	public void flip() {
