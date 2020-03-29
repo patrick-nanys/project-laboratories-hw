@@ -18,7 +18,6 @@ public class Inventory {
 	 * @return Ha volt ilyen iteme false, ha nem true.
 	 */
 	public boolean addItem(Item i) {
-
 		FunctionLogger.log_call("Inventory this.contains(i)");
 		FunctionLogger.set_return(FunctionLogger.get_return());
 		boolean contains = contains(i);
@@ -39,9 +38,11 @@ public class Inventory {
 	 */
 	public boolean contains(Item item) {
 		for(int i = 0; i < items.size(); i++){
-			FunctionLogger.log_call("Item items.get(i).equals(item)");
+		    Item itemInInventory = items.get(i);
+
+			FunctionLogger.log_call("Item itemInInventory.equals(item)");
 			FunctionLogger.set_return(FunctionLogger.get_return());
-			boolean equals = items.get(i).equals(item);
+			boolean equals = itemInInventory.equals(item);
 			FunctionLogger.log_predefined_return();
 
 			if(equals)
