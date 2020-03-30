@@ -26,6 +26,9 @@ public class Level {
 		numberOfPlayers = players;
 	}
 
+	/**
+	 * Inicializalja a Levelt. Egyenlore tesztelesnel ures, mert kezzel inicializalunk.
+	 */
 	public void init() {
 		/*
 		for (int i = 0; i < numberOfTiles; i++) {
@@ -62,12 +65,20 @@ public class Level {
 */
 	}
 
+	/**
+	 * Ellenorzi, hogy az osszes jatekos es az osszes alkatresz egy mezon van-e. Ha igen, akkor atallitja a
+	 * szint gameState-jet WON-ra.
+	 */
 	public void checkParts() {
 		if (FunctionLogger.ask_question("Egy mezon vannak a jatekosok az alkatreszekkel?")) {
 			levelWon();
 		}
 	}
 
+	/**
+	 * Hozzaad egy alkatreszt a szinthez.
+	 * @param p a hozzaadni kivant alkatresz.
+	 */
 	public void addPart(Part p) {
 		ArrayList<String> param =  FunctionLogger.get_parameters();
 		FunctionLogger.log_call(String.format("Part parts.add(%s)",param.get(0)));
@@ -75,25 +86,48 @@ public class Level {
 		FunctionLogger.log_return("");
 	}
 
+	/**
+	 * Lekerdezi az adott indexen levo jegtablat.
+	 * @param index a jegtabla indexe, amire kivancsiak vagyunk
+	 * @return az adott indexen levo IceBlock
+	 */
 	public IceBlock getIceBlock(int index) {
 		return iceblocks.get(index);
 	}
 
+	/**
+	 * Hozzaad egy adott IceBlock-ot a levelhez.
+	 * @param ib a hozzaadni kivant IceBlock.
+	 */
 	public void addIceBlock(IceBlock ib) {
 		ArrayList<String> param =  FunctionLogger.get_parameters();
 		FunctionLogger.log_call(String.format("IceBlock iceblocks.add(%s)",param.get(0)));
 		iceblocks.add(ib);
 		FunctionLogger.log_return("");
 	}
-	
+
+	/**
+	 * A jatekosok nyertek.
+	 * Beallitja a gameState-et WON-ra.
+	 */
 	public void levelWon() {
 		gameState = GameStateE.WON;
 	}
-	
+
+	/**
+	 * A jatekosok vesztettek.
+	 * Beallitja a gameState-et LOST-ra.
+	 */
 	public void levelLost() {
 		gameState = GameStateE.LOST;
 	}
-	
+
+	/**
+	 * Reprezental egy hovihart.
+	 * Random IceBlock-oknak noveli a horeteget,
+	 * es sebzi a rajta levo jatekosokat, ha
+	 * nincs rajta iglu.
+	 */
 	public void blizzard() {
 		Random r = new Random();
 		int blizzardIceBlocks = r.nextInt(numberOfTiles);
