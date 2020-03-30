@@ -27,6 +27,7 @@ public class Part extends Item {
 	 */
 	public void pickedUpBy(Player p) {
 		player = p;
+		level = p.getLevel();
 	}
 
 	/**
@@ -35,7 +36,11 @@ public class Part extends Item {
 	 * @return Azzal a hellyel tér vissza, amin a
 	 */
 	public PlayerContainerI getLocation() {
-		FunctionLogger.log_call("Player player.getLocation()");
+		String playertype = player.toString();
+		String playername;
+		if(playertype.equals("Researcher")) playername = "r";
+		else playername = "e";
+		FunctionLogger.log_call(String.format("%s %s.getLocation()", playertype, playername));
 		PlayerContainerI location = player.getLocation();
 		FunctionLogger.log_return("location");
 		return location;

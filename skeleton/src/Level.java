@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 import java.util.function.Function;
@@ -137,8 +138,11 @@ public class Level {
 			FunctionLogger.log_call("IceBlock ib.getIglu()");
 			if (!iceblocks.get(0).getIglu()) {
 				FunctionLogger.log_return("");
-				for(int n =0;n<iceblocks.get(0).getPlayers().size();n++) {
-					String playertype = iceblocks.get(0).getPlayers().get(n).toString();
+				FunctionLogger.log_call("IceBlock ib.getPlayers()");
+				List<Player> blockPlayers = iceblocks.get(0).getPlayers();
+				FunctionLogger.log_return("players");
+				for(int n =0;n<blockPlayers.size();n++) {
+					String playertype = blockPlayers.get(n).toString();
 					String playername;
 					if(playertype.equals("Researcher")) playername = "r";
 					else playername = "e";
@@ -156,13 +160,16 @@ public class Level {
 				FunctionLogger.log_call("IceBlock ib.getIglu()");
 				if (!iceblocks.get(i).getIglu()) {
 					FunctionLogger.log_return("");
-					for(int n=0;n<iceblocks.get(i).getPlayers().size();n++) {
-						String playertype = iceblocks.get(i).getPlayers().get(n).toString();
+					FunctionLogger.log_call("IceBlock ib.getPlayers()");
+					List<Player> blockPlayers = iceblocks.get(i).getPlayers();
+					FunctionLogger.log_return("players");
+					for(int n=0;n<blockPlayers.size();n++) {
+						String playertype = blockPlayers.get(n).toString();
 						String playername;
 						if(playertype.equals("Researcher")) playername = "r";
 						else playername = "e";
 						FunctionLogger.log_call(String.format("%s %s.loseHealth()",playertype, playername));
-						iceblocks.get(i).getPlayers().get(n).loseHealth();
+						blockPlayers.get(n).loseHealth();
 						FunctionLogger.log_return("");
 					}
 				}
