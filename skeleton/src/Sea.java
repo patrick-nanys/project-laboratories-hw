@@ -76,6 +76,10 @@ public class Sea implements PlayerContainerI {
 		players.add(p);
 		p.setContainer(this);
 	}
+	/**
+	 * Teszteleshez, visszaadja az osztaly nevet.
+	 * @return az osztaly neve.
+	 */
 	@Override
 	public String toString() {
 		return "Sea";

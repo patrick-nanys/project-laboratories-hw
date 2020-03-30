@@ -24,7 +24,10 @@ public class Shovel extends Item {
 	public boolean equals(Item item) {
 		return item instanceof Shovel;
 	}
-
+	/**
+	 * Teszteleshez, visszaadja az osztaly nevet.
+	 * @return az osztaly neve.
+	 */
 	@Override
 	public String toString() {
 		return "Shovel";

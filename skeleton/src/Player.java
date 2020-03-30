@@ -197,6 +197,11 @@ public abstract class Player {
 		level.levelLost();
 		FunctionLogger.log_return("");
 	}
+
+	/**
+	 * Teszteleshez, visszaadja az osztaly nevet.
+	 * @return az osztaly neve.
+	 */
 	@Override
 	public abstract String toString();
 }

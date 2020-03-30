@@ -40,6 +40,10 @@ public class Rope extends Item {
 		player = p;
 	}
 
+	/**
+	 * Teszteleshez, visszaadja az osztaly nevet.
+	 * @return az osztaly neve.
+	 */
 	@Override
 	public String toString() {
 		return "Rope";
