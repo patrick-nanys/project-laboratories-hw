@@ -5,6 +5,7 @@ public class Skeleton {
 
     //testBuildIglu
     public void test1(){
+        System.out.println("Build Iglu Test running: ");
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(1,0,1);
         FunctionLogger.log_return("");
@@ -24,6 +25,7 @@ public class Skeleton {
         FunctionLogger.log_call("Eskimo e.buildIglu()");
         e.buildIglu();
         FunctionLogger.log_return("");
+        System.out.println("Build Iglu Test finished.")
     }
 
     //testCheckCapacity

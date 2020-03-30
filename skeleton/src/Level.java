@@ -3,6 +3,14 @@ import java.util.Random;
 import java.util.Vector;
 import java.util.function.Function;
 
+/**
+ * Level osztaly, reprezental egy szintet a jatekban.
+ * iceblocks, a palyan levo jegtablak
+ * parts, a palyan levo, a jatek megnyeresehez szukseges alkatreszek
+ * gamestate, a jatek allasa
+ * numberOfTiles, numberOfItems, numberOfPlayers, a jatekban talalhato
+ * jegtablak, targyak, jatekosok mennyisege.
+ */
 public class Level {
 	private ArrayList<IceBlock> iceblocks;
 	private ArrayList<Part> parts;
