@@ -93,8 +93,9 @@ public class Skeleton {
         FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
         FunctionLogger.log_return("");
-        FunctionLogger.log_call("");
+        FunctionLogger.log_call("IceBlock ib.getSea().addPlayer(e)");
         ib.getSea().addPlayer(e);
+        FunctionLogger.log_return("");
         FunctionLogger.log_call("Eskimo e.checkPlayerStatus()");
         e.checkPlayerStatus();
         FunctionLogger.log_return("");
