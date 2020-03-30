@@ -9,7 +9,9 @@ public class Shovel extends Item {
 	 */
 	public void use(Player player) {
 		if(!player.getInSea()) {
+			FunctionLogger.log_call("player.getLocation()");
 			IceBlock ib = (IceBlock) player.getLocation();
+			FunctionLogger.log_return("ib");
 			FunctionLogger.log_call("IceBlock ib.modifyLayers(-2)");
 			ib.modifyLayers(-2);
 			FunctionLogger.log_return("");
