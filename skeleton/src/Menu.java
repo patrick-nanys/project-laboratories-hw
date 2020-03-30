@@ -42,11 +42,11 @@ public class Menu {
         options.put(10, "Storm damages player test");
         options.put(11, "Storm hits player in iglu test");
         options.put(12, "Swipe with hand test");
-        options.put(13, "Step on unstable iceblock and it flips test");
-        options.put(14, "Step on unstable iceblock and it does not flip test");
+        options.put(13, "Unstable iceblock flips test");
+        options.put(14, "Unstable iceblock not flip test");
         options.put(15, "Use pistol test");
         options.put(16, "Use shovel test");
-        options.put(17, "Storm adds snow layer to iceblock test");
+        options.put(17, "Storm adds snow layer test");
         options.put(18, "Player survives in diving suit test");
     }
 
