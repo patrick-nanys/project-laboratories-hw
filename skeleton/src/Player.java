@@ -37,8 +37,9 @@ public abstract class Player {
 	public void step(DirectionE d) {
 		String name = FunctionLogger.get_obj_name();
 		ArrayList<String> p = FunctionLogger.get_parameters();
+		String containertype = container.toString();
 		if (!getInSea()) {
-			FunctionLogger.log_call(String.format("PlayerContainerI container.movePlayer(%s, %s)", name, p.get(0)));
+			FunctionLogger.log_call(String.format("%s container.movePlayer(%s, %s)",containertype, name, p.get(0)));
 			container.movePlayer(this, d);
 			FunctionLogger.log_return("");
 		}
