@@ -67,6 +67,7 @@ public class Menu {
                 run = false;
             else
                 tests.get(id).run();
+            run = FunctionLogger.ask_question("Szeretne meg tesztet futtatni?");
         }
     }
 }
