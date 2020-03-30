@@ -153,6 +153,5 @@ public class Level {
 			}
 			FunctionLogger.log_return("");
 		}
-		}
 	}
 }
