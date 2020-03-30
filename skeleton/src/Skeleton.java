@@ -49,6 +49,7 @@ public class Skeleton {
      */
     public void test2() {
         System.out.println("Check Capacity Test running: ");
+
         FunctionLogger.log_call("<<create>> Level l");
         Level l = new Level(2,0,1);
         FunctionLogger.log_return("");
@@ -97,12 +98,15 @@ public class Skeleton {
      */
     public void test3(){
         System.out.println("Die in Storm test running: ");
+
         FunctionLogger.log_call("<<create>> Level l");
         Level l = new Level(1,0,1);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("<<create>> Eskimo e");
         Eskimo e = new Eskimo(l);
         FunctionLogger.log_return("");
@@ -110,12 +114,15 @@ public class Skeleton {
         FunctionLogger.log_call("Level l.addIceBlock(ib)");
         l.addIceBlock(ib);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("Level l.blizzard()");
         l.blizzard();
         FunctionLogger.log_return("");
+
         System.out.println("Die in Storm test finished.");
     }
 
