@@ -66,10 +66,13 @@ public class Menu {
             show();
             Scanner in = new Scanner(System.in);
             int id = in.nextInt();
-            if (id == 0)
+            if (id == 0) {
                 run = false;
-            else
+            } else {
                 tests.get(id).run();
+                System.out.print("\n\n");
+                run = FunctionLogger.ask_question("Szeretne meg tesztet futtatni?");
+            }
         }
     }
 }
