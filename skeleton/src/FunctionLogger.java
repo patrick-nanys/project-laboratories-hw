@@ -132,8 +132,7 @@ public class FunctionLogger {
      */
     public static boolean ask_question(String question) {
         System.out.print(question + " (I/N)  ");
-        Scanner in = new Scanner(System.in);
-        char c = in.next().charAt(0);
+        char c = StaticScanner.scanChar();
         return c == 'I' || c == 'i';
     }
 }

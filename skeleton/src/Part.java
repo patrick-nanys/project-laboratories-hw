@@ -31,7 +31,7 @@ public class Part extends Item {
 
 	/**
 	 * Visszaadja azt a helyet, amin az a játékos, akinél az adott
-	 *alkatrész van, éppen elhelyezkedik.
+	 * alkatrész van, éppen elhelyezkedik.
 	 * @return Azzal a hellyel tér vissza, amin a
 	 */
 	public PlayerContainerI getLocation() {

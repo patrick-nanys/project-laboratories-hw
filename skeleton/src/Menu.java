@@ -71,11 +71,11 @@ public class Menu {
      * Futtatja a menut.
      */
     void run() {
+        StaticScanner.open();
         boolean run = true;
         while (run) {
             show();
-            Scanner in = new Scanner(System.in);
-            int id = in.nextInt();
+            int id = StaticScanner.scanInt();
             if (id == 0) {
                 run = false;
             } else {
@@ -84,5 +84,6 @@ public class Menu {
                 run = FunctionLogger.ask_question("Szeretne meg tesztet futtatni?");
             }
         }
+        StaticScanner.close();
     }
 }
