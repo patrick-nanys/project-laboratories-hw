@@ -25,7 +25,7 @@ public class Skeleton {
         FunctionLogger.log_call("Eskimo e.buildIglu()");
         e.buildIglu();
         FunctionLogger.log_return("");
-        System.out.println("Build Iglu Test finished.")
+        System.out.println("Build Iglu Test finished.");
     }
 
     //testCheckCapacity
@@ -576,6 +576,7 @@ public class Skeleton {
 
     //testStormAddsSnowLayer
     public void test17() {
+        System.out.println("Test Storm Adds Snow Layer test running: ");
             FunctionLogger.log_call("<<create>> Level l");
         Level l = new Level(1, 0, 0);
             FunctionLogger.log_return("");
@@ -590,10 +591,12 @@ public class Skeleton {
             FunctionLogger.log_call("Level l.blizzard()");
         l.blizzard();
             FunctionLogger.log_return("");
+            System.out.println("Test Storm Adds Snow Layer test finished.");
     }
 
     //testPlayerSurvivesInDivingSuit
     public void test18() {
+        System.out.println("Test Player Survives In Diving Suit running: ");
             FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(0, 1, 1);
             FunctionLogger.log_return("");
@@ -615,5 +618,6 @@ public class Skeleton {
             FunctionLogger.log_call("Eskimo e.checkPlayerStatus()");
         e.checkPlayerStatus();
             FunctionLogger.log_return("");
+            System.out.println("Test Player Survives In Diving Suit finished.");
     }
 }
