@@ -197,4 +197,6 @@ public abstract class Player {
 		level.levelLost();
 		FunctionLogger.log_return("");
 	}
+	@Override
+	public abstract String toString();
 }

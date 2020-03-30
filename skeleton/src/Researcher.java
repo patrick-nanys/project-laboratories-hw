@@ -22,4 +22,8 @@ public class Researcher extends Player {
 		FunctionLogger.log_return("capacity");
 		return capacity;
 	}
+	@Override
+	public String toString() {
+		return "Researcher";
+	}
 }

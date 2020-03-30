@@ -2,6 +2,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Menu osztaly teszteleshez.
+ */
 public class Menu {
     private HashMap<Integer, String> options;
     private HashMap<Integer, Runnable> tests;
