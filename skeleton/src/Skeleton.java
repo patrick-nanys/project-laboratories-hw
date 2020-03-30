@@ -670,7 +670,7 @@ public class Skeleton {
      * 1.b Nincs az osszes alkatresz egy helyen, a jatek megy tovabb.
      */
     public void test15() {
-        System.out.println("Test user pistol running:");
+        System.out.println("Test use pistol running:");
 
             FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(1, 3, 1);
@@ -713,7 +713,7 @@ public class Skeleton {
         eskimo.useItem(part1);
             FunctionLogger.log_return("");
 
-        System.out.println("Test user pistol finished.");
+        System.out.println("Test use pistol finished.");
     }
     /**
      * Nev:
