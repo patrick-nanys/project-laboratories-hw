@@ -283,7 +283,18 @@ public class Skeleton {
         FunctionLogger.log_return("");
     }
 
-    //testStormDamagesPlayer
+    /**
+     * Nev:
+     * testStormDamagesPlayer
+     * Leiras:
+     * A hovihar sebez egy tablan allo jatekosokat.
+     * Aktorok: Player
+     * Forgatokonyv:
+     * 1. Erkezik egy hovihar, egy eszkimo es egy kutato egy adott tablan all.
+     * 2. A hovihar erinti az adott tablat.
+     * 3. A jatekosok sebzodnek.
+     */
+
     public void test10() {
         System.out.println("Storm Damages Player test running: ");
         // setup
@@ -322,7 +333,19 @@ public class Skeleton {
         System.out.println("Storm Damages Player test finished");
     }
 
-    //testStormHitsPlayerInIglu
+    /**
+     * Nev:
+     * testStormHitsPlayerInIglu
+     * Leiras:
+     * A hovihar megprobal sebezni igluban levo jatekosokat.
+     * Aktorok:
+     * Player
+     * Forgatokonyv:
+     * 1. Erkezik egy hovihar, egy eszkimo es egy kutato egy adott
+     * igluval rendelkezo tablan all.
+     * 2. A hovihar erinti az adott tablat.
+     * 3. A jatekosok nem sebzodnek.
+     */
     public void test11(){
         System.out.println("Storm Hits Player in Iglu test running: ");
         FunctionLogger.log_call("<<create>> Level level");
@@ -364,9 +387,20 @@ public class Skeleton {
         System.out.println("Storm Hits Player in Iglu test finished");
     }
 
-    //testSwipeWithHand
+    /**
+     * Nev:
+     * testSwipeWithHand
+     * Leiras:
+     * A jatekos a kezevel eltavolit egy reteg havat a jegtablarol.
+     * Aktorok:
+     * Player
+     * Forgatokonyv:
+     * 1. A jatekos eggyel csokkenti a jegtablan levo horeteget.
+     * 1.b A jatekos olyan jegtablat probal tisztitani, amin nincs ho, ilyenkor nem tortenik semmi.
+     *
+     */
     public void test12(){
-        System.out.println("Swipe with Hands test running: ");
+        System.out.println("Swipe with Hand test running: ");
 
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(1,0,1);
@@ -393,10 +427,20 @@ public class Skeleton {
         r.swipeWithHand();
         FunctionLogger.log_return("");
 
-        System.out.println("Swipe with Hands test finished");
+        System.out.println("Swipe with Hand test finished");
     }
-
-    //testUnstableFlips
+    /**
+     * Nev:
+     * testUnstableFlips
+     * Leiras:
+     * Egy jatekos ralep egy instabil jegtablara, ami felborul.
+     * Aktorok:
+     * Player
+     * Forgatokonyv:
+     * 1. A jatekos ralep egy instabil jegtablara.
+     * 2. A jegtabla tullepi a kapacitasat, a jatekos beleesik a tengerbe.
+     *
+     */
     public void test13(){
         System.out.println("Player Steps on Unstable IceBlock and it Flips test running: ");
 
