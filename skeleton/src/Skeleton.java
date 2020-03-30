@@ -69,6 +69,7 @@ public class Skeleton {
         FunctionLogger.log_return("");
         FunctionLogger.log_call("IceBlock ib2.addPlayer(r)");
         ib2.addPlayer(r);
+        FunctionLogger.log_return("");
         FunctionLogger.log_call("Researcher r.checkStability(IceBlock ib1)");
         int cap = r.checkStability(ib1);
         FunctionLogger.log_return(Integer.toString(cap));
