@@ -65,6 +65,12 @@ public class Skeleton {
         FunctionLogger.log_call("<<create>> IceBlock ib2");
         IceBlock ib2 = new IceBlock();
         FunctionLogger.log_return("");
+        FunctionLogger.log_call("Level l.addIceBlock(ib1)");
+        l.addIceBlock(ib1);
+        FunctionLogger.log_return("");
+        FunctionLogger.log_call("Level l.addIceBlock(ib2)");
+        l.addIceBlock(ib2);
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("IceBlock ib1.addNeighbour(WEST, ib2)");
         ib1.addNeighbour(DirectionE.WEST, ib2);
