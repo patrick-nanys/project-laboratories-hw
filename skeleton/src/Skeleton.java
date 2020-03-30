@@ -341,6 +341,9 @@ public class Skeleton {
         IceBlock ib = new IceBlock();
         FunctionLogger.log_return("");
 
+        FunctionLogger.log_call("Level level.addIceBlock(uib)");
+        level.addIceBlock(unstable);
+        FunctionLogger.log_return("");
 
         FunctionLogger.log_call("Level level.addIceBlock(ib)");
         level.addIceBlock(ib);
