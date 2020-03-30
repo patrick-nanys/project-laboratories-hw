@@ -238,6 +238,7 @@ public class Skeleton {
         FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("IceBlock ib.addItem(f)");
         ib.addItem(f);
         FunctionLogger.log_return("");
@@ -327,6 +328,7 @@ public class Skeleton {
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(2,0,1);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("<<create>> Eskimo e");
         Eskimo e = new Eskimo(level);
         FunctionLogger.log_return("");
@@ -334,6 +336,7 @@ public class Skeleton {
         FunctionLogger.log_call("<<create>> UnstableIceBlock unstable");
         UnstableIceBlock unstable = new UnstableIceBlock(0);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
         FunctionLogger.log_return("");
@@ -342,12 +345,15 @@ public class Skeleton {
         FunctionLogger.log_call("Level level.addIceBlock(ib)");
         level.addIceBlock(ib);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("IceBlock ib.addNeighbour(EAST, unstable)");
         ib.addNeighbour(DirectionE.EAST, unstable);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("UnstableIceBlock unstable.addNeighbour(WEST, ib)");
         unstable.addNeighbour(DirectionE.WEST, ib);
         FunctionLogger.log_return("");
@@ -376,12 +382,15 @@ public class Skeleton {
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(2,0,1);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("<<create>> Eskimo e");
         Eskimo e = new Eskimo(level);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("<<create>> IceBlock to");
         IceBlock to = new IceBlock();
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("<<create>> IceBlock iceblock");
         IceBlock iceblock = new IceBlock();
         FunctionLogger.log_return("");
