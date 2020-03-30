@@ -71,7 +71,9 @@ public class Level {
 	 * szint gameState-jet WON-ra.
 	 */
 	public void checkParts() {
+		String name = FunctionLogger.get_obj_name();
 		if (FunctionLogger.ask_question("Egy mezon vannak a jatekosok az alkatreszekkel?")) {
+			FunctionLogger.log_call(String.format("%s.levelWon()",name));
 			levelWon();
 		}
 	}
