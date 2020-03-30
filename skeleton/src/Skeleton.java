@@ -3,7 +3,16 @@ import java.util.function.Function;
 
 public class Skeleton {
 
-    //testBuildIglu
+    /**
+     * Nev:
+     * testBuildIglu
+     * Leiras:
+     * Egy eszkimo felepit egy iglut.
+     * Aktorok: Player
+     * Forgatokonyv:
+     * 1. Az eszkimo hasznalja a kepesseget.
+     * 2. A tablan letrejon egy iglu.
+     */
     public void test1(){
         System.out.println("Build Iglu Test running: ");
         FunctionLogger.log_call("<<create>> Level level");
@@ -28,7 +37,16 @@ public class Skeleton {
         System.out.println("Build Iglu Test finished.");
     }
 
-    //testCheckCapacity
+    /**
+     * Nev:
+     * testCheckCapacity
+     * Leiras:
+     * Egy kutato megnezi egy szomszedos jegtabla kapacitasat.
+     * Aktorok: Player
+     * Forgatokonyv:
+     * 1. Az kutato hasznalja a kepesseget egy adott tablara.
+     * 2. A kutato megtudja az adott tabla kapacitasat.
+     */
     public void test2() {
         System.out.println("Check Capacity Test running: ");
         FunctionLogger.log_call("<<create>> Level l");
@@ -58,7 +76,17 @@ public class Skeleton {
 
     }
 
-    //testDieInStorm
+    /**
+     * Nev:
+     * testDieInStorm
+     * Leiras:
+     * Egy jatekos meghal a hovihar kovetkezteben.
+     * Aktorok: Player
+     * Forgatokonyv:
+     * 1. A jatekosnak egy elete van.
+     * 2. A jatekos hovihar altal sebzodik.
+     * 3. A jatekosnak nem maradt elete, meghal.
+     */
     public void test3(){
         System.out.println("Die in Storm test running: ");
         FunctionLogger.log_call("<<create>> Level l");
@@ -83,7 +111,17 @@ public class Skeleton {
         System.out.println("Die in Storm test finished.");
     }
 
-    //testDieInWater
+    /**
+     * Nev:
+     * testDieInWater
+     * Leiras:
+     * Egy jatekos meghal a vizben.
+     * Aktorok: Player
+     * Forgatokonyv:
+     * 1. A jatekos tengerben van.
+     * 2. Eltelik egy kor.
+     * 3. A jatekos meg mindig a tengerben van, meghal.
+     */
     public void test4(){
         System.out.println("Die in Water test running: ");
         FunctionLogger.log_call("<<create>> Level l");
@@ -104,7 +142,16 @@ public class Skeleton {
         System.out.println("Die in Water test finished.");
     }
 
-    //testDigOutItem
+    /**
+     * Nev:
+     * testDigOutItem
+     * Leiras:
+     * A jatekos felvesz egy targyat.
+     * Aktorok: Player
+     * Forgatokonyv:
+     * 1. A jatekos leltaraba kerul a targy a jegtombbol.
+     * 2. A jatekos leltaraban mar van ilyen targy, igy a targy a jegtombben marad.
+     */
     public void test5(){
         System.out.println("Dig Out Item test running: ");
 
@@ -311,7 +358,6 @@ public class Skeleton {
      * 2. A hovihar erinti az adott tablat.
      * 3. A jatekosok sebzodnek.
      */
-
     public void test10() {
         System.out.println("Storm Damages Player test running: ");
         // setup
