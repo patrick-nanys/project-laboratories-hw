@@ -436,6 +436,10 @@ public class Skeleton {
         level.addIceBlock(ib);
         FunctionLogger.log_return("");
 
+        FunctionLogger.log_call("IceBlock ib.modifyLayers");
+        ib.modifyLayers(2);
+        FunctionLogger.log_return("");
+
         FunctionLogger.log_call("IceBlock ib.addPlayer(r)");
         ib.addPlayer(r);
         FunctionLogger.log_return("");
