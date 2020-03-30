@@ -96,7 +96,7 @@ public abstract class Player {
 	public void loseHealth() {
 		String type = FunctionLogger.get_obj_type();
 		String name = FunctionLogger.get_obj_name();
-		if (FunctionLogger.ask_question("Kevesebb mint nulla a jatekos elete?")) {
+		if (FunctionLogger.ask_question("Kevesebb mint egy a jatekos elete?")) {
 			FunctionLogger.log_call(String.format("%s %s.die()", type, name));
 			die();
 			FunctionLogger.log_return("");

@@ -446,7 +446,7 @@ public class Skeleton {
      * 2. A hovihar erinti az adott tablat.
      * 3. A jatekosok nem sebzodnek.
      */
-    public void test11(){
+    public void test11() {
         System.out.println("Storm Hits Player in Iglu test running: ");
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(1,0,2);
@@ -595,7 +595,7 @@ public class Skeleton {
     }
     /**
      * Nev:
-     * testUnstableNoFlup
+     * testUnstableNoFlip
      * Leiras:
      * Egy jatekos ralep egy instabil jegtablara, ami nem borul fel.
      * Aktorok:
@@ -727,6 +727,9 @@ public class Skeleton {
             FunctionLogger.log_return("");
             FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("Level level.addIceBlock(ib)");
+        level.addIceBlock(ib);
             FunctionLogger.log_return("");
             FunctionLogger.log_call("<<create>> Researcher r");
         Researcher r = new Researcher(level);
