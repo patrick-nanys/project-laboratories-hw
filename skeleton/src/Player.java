@@ -200,6 +200,13 @@ public abstract class Player {
 	}
 
 	/**
+	 * Level getter
+	 * @return a jatekos eppen melyik szinten jatszik
+	 */
+	public Level getLevel() {
+		return level;
+	}
+	/**
 	 * Teszteleshez, visszaadja az osztaly nevet.
 	 * @return az osztaly neve.
 	 */

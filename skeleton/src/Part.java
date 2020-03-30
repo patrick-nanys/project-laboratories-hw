@@ -27,6 +27,7 @@ public class Part extends Item {
 	 */
 	public void pickedUpBy(Player p) {
 		player = p;
+		level = p.getLevel();
 	}
 
 	/**
