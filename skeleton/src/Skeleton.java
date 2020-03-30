@@ -137,8 +137,16 @@ public class Skeleton {
 
         System.out.println("Dig Out Item test finished.");
     }
-
-    //testEat
+    /**
+     * Nev:
+     * testEat
+     * Leiras:
+     * A jatekos felvesz egy etelt.
+     * Aktorok:
+     * Player
+     * Forgatokonyv:
+     * 1. A jatekos felvesz egy etelt es eggyel no az elete.
+     */
     public void test6(){
         System.out.println("Eat test running: ");
 
@@ -171,8 +179,18 @@ public class Skeleton {
 
         System.out.println("Eat test finished.");
     }
-
-    //testSaveWithRope
+    /**
+     * Nev:
+     * testSaveWithRope
+     * Leiras:
+     * Egy jatekos megment egy masik, tengerben levo jatekost, egy kotel hasznalataval.
+     * Aktorok:
+     * Player
+     * Forgatokonyv:
+     * 1. Erkezik egy hovihar, egy eszkimo es egy kutato egy adott
+     * igluval rendelkezo tablan all.
+     * 2. A masik jatekos a kotelet hasznalo tablajara kerul.
+     */
     public void test7() {
         System.out.println("Save With Rope test running: ");
         // setup
@@ -222,8 +240,18 @@ public class Skeleton {
 
         System.out.println("Save With Rope test finished.");
     }
-
-    //testStepInHole
+    /**
+     * Nev:
+     * testStepInHole
+     * Leiras:
+     * Egy jatekos belelep egy lyukba.
+     * Aktorok:
+     * Player
+     * Forgatokonyv:
+     * 1. A jtaekos lep az adott tablara.
+     * 2. Az adott tabla lyukas.
+     * 3. A jatekos beleesik a tengerbe.
+     */
     public void test8() {
         System.out.println("Step in Hole test running: ");
         // setup
@@ -262,8 +290,17 @@ public class Skeleton {
 
         System.out.println("Step in Hole test finished.");
     }
-
-    //testStepOnIceBlock
+    /**
+     * Nev:
+     * testStepOnIceBlock
+     * Leiras:
+     * Egy jatekos atlep egy masik jegtablara.
+     * Aktorok:
+     * Player
+     * Forgatokonyv:
+     * 1. A jatekos lep az adott tablara.
+     * 2. A jatekos lekerul az eddigi tablarol, atkerul arra, amire lepett.
+     */
     public void test9() {
         System.out.println("Step on IceBlock test running: ");
         // setup
@@ -311,7 +348,6 @@ public class Skeleton {
      * 2. A hovihar erinti az adott tablat.
      * 3. A jatekosok sebzodnek.
      */
-
     public void test10() {
         System.out.println("Storm Damages Player test running: ");
         // setup
