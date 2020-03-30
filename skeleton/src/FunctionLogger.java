@@ -78,7 +78,7 @@ public class FunctionLogger {
         depth--;
         for (int i = 0; i < depth; i++)
             System.out.print("\t");
-        System.out.println(call_stack.pop() + "returned: " + returned_value);
+        System.out.println(call_stack.pop() + " returned: " + returned_value);
     }
 
     /**
