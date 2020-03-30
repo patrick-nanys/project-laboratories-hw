@@ -10,7 +10,11 @@ public class Food extends Item {
 	 * @param p a játékos, aki felvette az élelmet
 	 */
 	public void pickedUpBy(Player p) {
-		FunctionLogger.log_call("Player p.eat()");
+		String playertype = p.toString();
+		String playername;
+		if(playertype.equals("Researcher")) playername = "r";
+		else playername = "e";
+		FunctionLogger.log_call(String.format("Player %s.eat()", playername));
 		p.eat();
 		FunctionLogger.log_return("");
 	}
