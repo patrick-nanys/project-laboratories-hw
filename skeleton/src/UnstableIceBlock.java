@@ -37,6 +37,10 @@ public class UnstableIceBlock extends IceBlock {
 			FunctionLogger.log_return("");
 		}
 	}
+	/**
+	 * Teszteleshez, visszaadja az osztaly nevet.
+	 * @return az osztaly neve.
+	 */
 	@Override
 	public String toString(){
 		return "UnstableIceBlock";

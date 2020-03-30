@@ -21,4 +21,13 @@ public class Eskimo extends Player {
 			FunctionLogger.log_return("");
 		}
 	}
+
+	/**
+	 * Teszteleshez
+	 * @return az osztaly neve
+	 */
+	@Override
+	public String toString() {
+		return "Eskimo";
+	}
 }

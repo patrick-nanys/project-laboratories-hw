@@ -32,6 +32,11 @@ public class Food extends Item {
 	public boolean equals(Item item) {
 		return item instanceof Food;
 	}
+
+	/**
+	 * Teszteleshez, visszaadja az osztaly nevet.
+	 * @return az osztaly neve.
+	 */
 	public String toString(){
 		return "Food";
 	}

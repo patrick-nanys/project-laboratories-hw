@@ -127,6 +127,7 @@ public class Level {
 	 * Random IceBlock-oknak noveli a horeteget,
 	 * es sebzi a rajta levo jatekosokat, ha
 	 * nincs rajta iglu.
+	 * Teszteleshez, ha csak 1 IceBlock van, akkor arra mindenkepp meghivodik.
 	 */
 	public void blizzard() {
 		if (iceblocks.size() == 1) {
@@ -136,9 +137,15 @@ public class Level {
 			FunctionLogger.log_call("IceBlock ib.getIglu()");
 			if (!iceblocks.get(0).getIglu()) {
 				FunctionLogger.log_return("");
-				FunctionLogger.log_call("Player p.loseHealth()");
-				iceblocks.get(0).getPlayers().get(0).loseHealth();
-				FunctionLogger.log_return("");
+				for(int n =0;n<iceblocks.get(0).getPlayers().size();n++) {
+					String playertype = iceblocks.get(0).getPlayers().get(n).toString();
+					String playername;
+					if(playertype.equals("Researcher")) playername = "r";
+					else playername = "e";
+					FunctionLogger.log_call(String.format("%s %s.loseHealth()", playertype, playername));
+					iceblocks.get(0).getPlayers().get(n).loseHealth();
+					FunctionLogger.log_return("");
+				}
 			}
 		}
 		else if(iceblocks.size()>1) {
@@ -149,9 +156,15 @@ public class Level {
 				FunctionLogger.log_call("IceBlock ib.getIglu()");
 				if (!iceblocks.get(i).getIglu()) {
 					FunctionLogger.log_return("");
-					FunctionLogger.log_call("Player p.loseHealth()");
-					iceblocks.get(i).getPlayers().get(0).loseHealth();
-					FunctionLogger.log_return("");
+					for(int n=0;n<iceblocks.get(i).getPlayers().size();n++) {
+						String playertype = iceblocks.get(i).getPlayers().get(n).toString();
+						String playername;
+						if(playertype.equals("Researcher")) playername = "r";
+						else playername = "e";
+						FunctionLogger.log_call(String.format("%s %s.loseHealth()",playertype, playername));
+						iceblocks.get(i).getPlayers().get(n).loseHealth();
+						FunctionLogger.log_return("");
+					}
 				}
 			}
 		}

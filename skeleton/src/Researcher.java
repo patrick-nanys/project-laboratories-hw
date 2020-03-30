@@ -22,4 +22,13 @@ public class Researcher extends Player {
 		FunctionLogger.log_return("capacity");
 		return capacity;
 	}
+
+	/**
+	 * Teszteleshez, visszaadja az osztaly nevet.
+	 * @return az osztaly neve.
+	 */
+	@Override
+	public String toString() {
+		return "Researcher";
+	}
 }

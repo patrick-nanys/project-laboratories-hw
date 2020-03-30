@@ -51,6 +51,11 @@ public class Part extends Item {
 	public boolean equals(Item item) {
 		return item instanceof Part;
 	}
+
+	/**
+	 * Teszteleshez, visszater az osztaly nevevel.
+	 * @return az osztaly neve.
+	 */
 	public String toString(){
 		return "Part";
 	}
