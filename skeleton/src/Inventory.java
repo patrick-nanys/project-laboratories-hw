@@ -42,8 +42,8 @@ public class Inventory {
 		ArrayList<String> p = FunctionLogger.get_parameters();
 		for(int i = 0; i < items.size(); i++){
 		    Item itemInInventory = items.get(i);
-
-			FunctionLogger.log_call(String.format("Item itemInInventory.equals(%s)", p.get(0)));
+			String itemtype =items.get(i).toString();
+			FunctionLogger.log_call(String.format("%s itemInInventory.equals(%s)",itemtype, p.get(0)));
 			boolean equals = itemInInventory.equals(item);
 			FunctionLogger.log_boolean_return(equals);
 
@@ -67,7 +67,8 @@ public class Inventory {
 		FunctionLogger.log_boolean_return(contains);
 
 		if(contains){
-			FunctionLogger.log_call(String.format("Item %s.use(%s)", param.get(0), param.get(1)));
+			String itemtype = item.toString();
+			FunctionLogger.log_call(String.format("%s %s.use(%s)",itemtype, param.get(0), param.get(1)));
 			item.use(p);
 			FunctionLogger.log_return("");
 		}
