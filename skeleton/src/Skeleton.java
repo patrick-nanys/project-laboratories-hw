@@ -139,21 +139,27 @@ public class Skeleton {
      */
     public void test4(){
         System.out.println("Die in Water test running: ");
+
         FunctionLogger.log_call("<<create>> Level l");
         Level l = new Level(1,0,1);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("<<create>> Eskimo e");
         Eskimo e = new Eskimo(l);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("<<create>> IceBlock ib");
         IceBlock ib = new IceBlock();
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("IceBlock ib.getSea().addPlayer(e)");
         ib.getSea().addPlayer(e);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("Eskimo e.checkPlayerStatus()");
         e.checkPlayerStatus();
         FunctionLogger.log_return("");
+
         System.out.println("Die in Water test finished.");
     }
 
@@ -189,6 +195,7 @@ public class Skeleton {
         FunctionLogger.log_call("IceBlock ib.addPlayer(e)");
         ib.addPlayer(e);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("IceBlock ib.addItem(s)");
         ib.addItem(s);
         FunctionLogger.log_return("");
