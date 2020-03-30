@@ -17,7 +17,7 @@ public abstract class Player {
 	Player(Level level) {
 		this.level = level;
 		inSea = false;
-		FunctionLogger.log_call("<<create>> Inventory invetory");
+		FunctionLogger.log_call("<<create>> Inventory inventory");
 		inventory = new Inventory();
 		FunctionLogger.log_return("");
 	}
