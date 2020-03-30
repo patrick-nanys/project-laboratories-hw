@@ -135,11 +135,11 @@ public class Level {
 			FunctionLogger.log_return("");
 			FunctionLogger.log_call("IceBlock ib.getIglu()");
 			if (!iceblocks.get(0).getIglu()) {
+				FunctionLogger.log_return("");
 				FunctionLogger.log_call("Player p.loseHealth()");
 				iceblocks.get(0).getPlayers().get(0).loseHealth();
 				FunctionLogger.log_return("");
 			}
-			FunctionLogger.log_return("");
 		}
 		for(int i =0; i<iceblocks.size();i++) {
 			FunctionLogger.log_call("IceBlock ib.modifyLayers(+1)");
@@ -147,11 +147,11 @@ public class Level {
 			FunctionLogger.log_return("");
 			FunctionLogger.log_call("IceBlock ib.getIglu()");
 			if (!iceblocks.get(i).getIglu()) {
+				FunctionLogger.log_return("");
 				FunctionLogger.log_call("Player p.loseHealth()");
 				iceblocks.get(i).getPlayers().get(0).loseHealth();
 				FunctionLogger.log_return("");
 			}
-			FunctionLogger.log_return("");
 		}
 	}
 }
