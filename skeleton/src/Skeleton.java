@@ -456,7 +456,6 @@ public class Skeleton {
      * Forgatokonyv:
      * 1. A jatekos ralep egy instabil jegtablara.
      * 2. A jegtabla tullepi a kapacitasat, a jatekos beleesik a tengerbe.
-     *
      */
     public void test13(){
         System.out.println("Player Steps on Unstable IceBlock and it Flips test running: ");
@@ -507,8 +506,17 @@ public class Skeleton {
 
         System.out.println("Player Steps on Unstable IceBlock and it Flips test finished");
     }
-
-    //testUnstableNoFlip
+    /**
+     * Nev:
+     * testUnstableNoFlup
+     * Leiras:
+     * Egy jatekos ralep egy instabil jegtablara, ami nem borul fel.
+     * Aktorok:
+     * Player
+     * Forgatokonyv:
+     * 1. A jatekos ralep egy instabil jegtablara.
+     * 2. A jegtabla nem lepi tul a kapacitasat, a jatekos atkerul az elozo tablarol az instabil tablara.
+     */
     public void test14(){
         System.out.println("Step on Unstable IceBlock and it Does Not Flip test running: ");
 
@@ -554,8 +562,18 @@ public class Skeleton {
 
         System.out.println("Step on Unstable IceBlock and it Does Not Flip test finished");
     }
-
-    //testUsePistol
+    /**
+     * Nev:
+     * testUsePistol
+     * Leiras:
+     * Egy jatekos hasznalja az egyik alkatreszt.
+     * Aktorok:
+     * Player
+     * Forgatokonyv:
+     * 1. A jatekos hasznalja a nala levo alkatreszt.
+     * 1.a Az osszes alkatresz egy helyen van, a jatekosok nyertek.
+     * 1.b Nincs az osszes alkatresz egy helyen, a jatek megy tovabb.
+     */
     public void test15() {
         System.out.println("Test user pistol running:");
 
@@ -602,8 +620,18 @@ public class Skeleton {
 
         System.out.println("Test user pistol finished.");
     }
-
-    //testUseShovel
+    /**
+     * Nev:
+     * testUseShovel
+     * Leiras:
+     * Egy jatekos eltavolit ket egysegnyi havat egy jegtablarol az aso segitsegevel.
+     * Aktorok:
+     * Player
+     * Forgatokonyv:
+     * 1. A jatekos hasznalja az asot es eltavolit ket reteg havat az adott jegtablarol.
+     * 1.a Az adott tablan csak egy reteg ho van, ilyenkor az aso hasznalata egy reteg hot tavolit el.
+     * 1.b Az adott tablan nincs ho, ilyenkor nem tortenik semmi.
+     */
     public void test16() {
         System.out.println("Test use shovel running:");
 
@@ -634,8 +662,17 @@ public class Skeleton {
 
         System.out.println("Test use shovel finished.");
     }
-
-    //testStormAddsSnowLayer
+    /**
+     * Nev:
+     * testStormAddsSnowLayer
+     * Leiras:
+     * A hovihar egy adott tablara plusz horeteget helyez.
+     * Aktorok:
+     * Player
+     * Forgatokonyv:
+     * 1. A hovihar erinti az adott tablat.
+     * 2. A hovihar eggyel noveli a tablan levo horeteget.
+     */
     public void test17() {
         System.out.println("Test Storm Adds Snow Layer test running: ");
             FunctionLogger.log_call("<<create>> Level l");
@@ -654,7 +691,18 @@ public class Skeleton {
             FunctionLogger.log_return("");
             System.out.println("Test Storm Adds Snow Layer test finished.");
     }
-
+    /**
+     * Nev:
+     * testPlayerSurvivesInDivingSuit
+     * Leiras:
+     * Egy jatekos tuleli a tengerben eltoltott kort.
+     * Aktorok:
+     * Player
+     * Forgatokonyv:
+     * 1. A jatekos tengerben van, van rajta DivingSuit.
+     * 2. Eltelik egy kor.
+     * 3. A jatekos meg mindig a tengerben van es meg mindig el.
+     */
     //testPlayerSurvivesInDivingSuit
     public void test18() {
         System.out.println("Test Player Survives In Diving Suit running: ");
