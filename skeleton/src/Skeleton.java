@@ -158,7 +158,7 @@ public class Skeleton {
         IceBlock ib = new IceBlock();
         FunctionLogger.log_return("");
 
-        FunctionLogger.log_call("IceBlock ib.getSea().addPlayer(e)");
+        FunctionLogger.log_call("IceBlock ib.sea.addPlayer(e)");
         ib.getSea().addPlayer(e);
         FunctionLogger.log_return("");
 
