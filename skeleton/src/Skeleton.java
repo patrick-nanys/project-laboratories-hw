@@ -52,29 +52,36 @@ public class Skeleton {
         FunctionLogger.log_call("<<create>> Level l");
         Level l = new Level(2,0,1);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("<<create>> Researcher r");
         Researcher r = new Researcher(l);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("<<create>> IceBlock ib1");
         IceBlock ib1 = new IceBlock();
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("<<create>> IceBlock ib2");
         IceBlock ib2 = new IceBlock();
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("IceBlock ib1.addNeighbour(WEST, ib2)");
         ib1.addNeighbour(DirectionE.WEST, ib2);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("IceBlock ib2.addNeighbour(EAST, ib1)");
         ib2.addNeighbour(DirectionE.EAST,ib1);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("IceBlock ib2.addPlayer(r)");
         ib2.addPlayer(r);
         FunctionLogger.log_return("");
+
         FunctionLogger.log_call("Researcher r.checkStability(IceBlock ib1)");
         int cap = r.checkStability(ib1);
-        FunctionLogger.log_return(Integer.toString(cap));
-        System.out.println("Check capacity test finished.");
+        FunctionLogger.log_int_return(cap);
 
+        System.out.println("Check capacity test finished.");
     }
 
     /**
