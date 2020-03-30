@@ -20,7 +20,8 @@ public class Sea implements PlayerContainerI {
 	 * @return visszater az adott iranyban szomszedos Sea-vel
 	 */
 	public Sea getNeighbour(DirectionE d) {
-		FunctionLogger.log_call("IceBlock position.getNeighbour(d)");
+		String direction = d.name();
+		FunctionLogger.log_call(String.format("IceBlock position.getNeighbour(%s)", direction));
 		IceBlock b = position.getNeighbour(d);
 		FunctionLogger.log_return("b");
 		FunctionLogger.log_call("Sea s.getSea()");
@@ -38,10 +39,14 @@ public class Sea implements PlayerContainerI {
 	public void movePlayer(Player p, PlayerContainerI pc) {
 		String name = FunctionLogger.get_obj_name();
 		String blocktype = pc.toString();
-		FunctionLogger.log_call(String.format("%s pc.addPlayer(p)",blocktype));
+		String playertype = p.toString();
+		String playername;
+		if(playertype.equals("Researcher")) playername = "r";
+		else playername = "e";
+		FunctionLogger.log_call(String.format("%s pc.addPlayer(%s)",blocktype, playername));
 		pc.addPlayer(p);
 		FunctionLogger.log_return("");
-		FunctionLogger.log_call(String.format("Sea %s.removePlayer(p)",name));
+		FunctionLogger.log_call(String.format("Sea %s.removePlayer(%s)",name, playername));
 		this.removePlayer(p);
 		FunctionLogger.log_return("");
 	}
@@ -53,7 +58,12 @@ public class Sea implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, DirectionE d) {
-		FunctionLogger.log_call("IceBlock position.movePlayer(p, d)");
+		String playertype = p.toString();
+		String playername;
+		if(playertype.equals("Researcher")) playername = "r";
+		else playername = "e";
+		String direction = d.name();
+		FunctionLogger.log_call(String.format("IceBlock position.movePlayer(%s, %s)", playername, direction));
 		position.movePlayer(p,d);
 	}
 
