@@ -16,13 +16,21 @@ public class Rope extends Item {
 	public void use(Player player) {
 		String name = FunctionLogger.get_obj_name();
 		ArrayList<String> p = FunctionLogger.get_parameters();
-
+		Player tmp = player;
 		if(player.getInSea()){
-			FunctionLogger.log_call("Player player.getLocation()");
+			String playertype = this.player.toString();
+			String ptype = tmp.toString();
+			String playername;
+			if(playertype.equals("Researcher")) playername = "r";
+			else playername = "e";
+			String pname;
+			if(playertype.equals("Researcher")) pname = "r";
+			else pname = "e";
+			FunctionLogger.log_call(String.format("%s %s.getLocation()",ptype, pname));
 			Sea from = (Sea) player.getLocation();
 			FunctionLogger.log_return("from");
 
-			FunctionLogger.log_call(String.format("Player %s.player.getLocation()", name));
+			FunctionLogger.log_call(String.format("%s player.getLocation()",playertype));
 			IceBlock to = (IceBlock) this.player.getLocation();
 			FunctionLogger.log_return("to");
 

@@ -742,18 +742,6 @@ public class Skeleton {
         level.addPart(part3);
             FunctionLogger.log_return("");
 
-//        FunctionLogger.log_call("IceBlock ib.addItem(part1)");
-//            ib.addItem(part1);
-//        FunctionLogger.log_return("");
-//        FunctionLogger.log_call("IceBlock ib.addItem(part2)");
-//            ib.addItem(part2);
-//        FunctionLogger.log_return("");
-//        FunctionLogger.log_call("IceBlock ib.addItem(part3)");
-//            ib.addItem(part3);
-//        FunctionLogger.log_return("");
-
-
-
             FunctionLogger.log_call("<<create>> Eskimo eskimo1");
         Eskimo eskimo1 = new Eskimo(level);
             FunctionLogger.log_return("");
