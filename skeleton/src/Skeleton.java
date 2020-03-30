@@ -25,7 +25,7 @@ public class Skeleton {
         FunctionLogger.log_call("Eskimo e.buildIglu()");
         e.buildIglu();
         FunctionLogger.log_return("");
-        System.out.println("Build Iglu Test finished.")
+        System.out.println("Build Iglu Test finished.");
     }
 
     //testCheckCapacity
@@ -106,6 +106,8 @@ public class Skeleton {
 
     //testDigOutItem
     public void test5(){
+        System.out.println("Dig Out Item test running: ");
+
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(1,1,1);
         FunctionLogger.log_return("");
@@ -132,10 +134,14 @@ public class Skeleton {
         FunctionLogger.log_call("Eskimo e.digOutItem()");
         e.digOutItem();
         FunctionLogger.log_return("");
+
+        System.out.println("Dig Out Item test finished.");
     }
 
     //testEat
     public void test6(){
+        System.out.println("Eat test running: ");
+
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(1,1,1);
         FunctionLogger.log_return("");
@@ -162,10 +168,13 @@ public class Skeleton {
         FunctionLogger.log_call("Food f.pickedUpBy(e)");
         f.pickedUpBy(e);
         FunctionLogger.log_return("");
+
+        System.out.println("Eat test finished.");
     }
 
     //testSaveWithRope
     public void test7() {
+        System.out.println("Save With Rope test running: ");
         // setup
             FunctionLogger.log_call("<<create>> Iceblock ib");
         Level level = new Level(1,2,1);
@@ -210,10 +219,13 @@ public class Skeleton {
             FunctionLogger.log_call("Eskimo e.useItemOnPlayer(r, player)");
         e.useItemOnPlayer(r, player);
             FunctionLogger.log_return("");
+
+        System.out.println("Save With Rope test finished.");
     }
 
     //testStepInHole
     public void test8() {
+        System.out.println("Step in Hole test running: ");
         // setup
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(2,0,1);
@@ -247,10 +259,13 @@ public class Skeleton {
         FunctionLogger.log_call("Eskimo e.step(EAST)");
         e.step(DirectionE.EAST);
         FunctionLogger.log_return("");
+
+        System.out.println("Step in Hole test finished.");
     }
 
     //testStepOnIceBlock
     public void test9() {
+        System.out.println("Step on IceBlock test running: ");
         // setup
         FunctionLogger.log_call("<<create>> Level level");
         Level level = new Level(2,0,1);
@@ -281,6 +296,8 @@ public class Skeleton {
         FunctionLogger.log_call("Eskimo e.step(WEST)");
         e.step(DirectionE.WEST);
         FunctionLogger.log_return("");
+
+        System.out.println("Step on IceBlock test finished.");
     }
 
     //testStormDamagesPlayer
