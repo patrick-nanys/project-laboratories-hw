@@ -129,16 +129,30 @@ public class Level {
 	 * nincs rajta iglu.
 	 */
 	public void blizzard() {
-		Random r = new Random();
-		int blizzardIceBlocks = r.nextInt(numberOfTiles);
-		int i = 0;
-		while (i < blizzardIceBlocks) {
-			int nextib = r.nextInt(numberOfTiles);
-			if (!iceblocks.get(nextib).getIglu()) {
-				iceblocks.get(nextib).modifyLayers(+1);
-				for (Player p : iceblocks.get(nextib).getPlayers())
-					p.loseHealth();
-				i++;
+		if (iceblocks.size() == 1) {
+			FunctionLogger.log_call("IceBlock ib.modifyLayers(+1)");
+			iceblocks.get(0).modifyLayers(+1);
+			FunctionLogger.log_return("");
+			FunctionLogger.log_call("IceBlock ib.getIglu()");
+			if (!iceblocks.get(0).getIglu()) {
+				FunctionLogger.log_return("");
+				FunctionLogger.log_call("Player p.loseHealth()");
+				iceblocks.get(0).getPlayers().get(0).loseHealth();
+				FunctionLogger.log_return("");
+			}
+		}
+		else if(iceblocks.size()>1) {
+			for (int i = 0; i < iceblocks.size(); i++) {
+				FunctionLogger.log_call("IceBlock ib.modifyLayers(+1)");
+				iceblocks.get(i).modifyLayers(+1);
+				FunctionLogger.log_return("");
+				FunctionLogger.log_call("IceBlock ib.getIglu()");
+				if (!iceblocks.get(i).getIglu()) {
+					FunctionLogger.log_return("");
+					FunctionLogger.log_call("Player p.loseHealth()");
+					iceblocks.get(i).getPlayers().get(0).loseHealth();
+					FunctionLogger.log_return("");
+				}
 			}
 		}
 	}
