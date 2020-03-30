@@ -742,15 +742,52 @@ public class Skeleton {
         level.addPart(part3);
             FunctionLogger.log_return("");
 
-            FunctionLogger.log_call("<<create>> Eskimo eskimo");
-        Eskimo eskimo = new Eskimo(level);
+//        FunctionLogger.log_call("IceBlock ib.addItem(part1)");
+//            ib.addItem(part1);
+//        FunctionLogger.log_return("");
+//        FunctionLogger.log_call("IceBlock ib.addItem(part2)");
+//            ib.addItem(part2);
+//        FunctionLogger.log_return("");
+//        FunctionLogger.log_call("IceBlock ib.addItem(part3)");
+//            ib.addItem(part3);
+//        FunctionLogger.log_return("");
+
+
+
+            FunctionLogger.log_call("<<create>> Eskimo eskimo1");
+        Eskimo eskimo1 = new Eskimo(level);
             FunctionLogger.log_return("");
-            FunctionLogger.log_call("IceBlock ib.addPlayer(eskimo)");
-        ib.addPlayer(eskimo);
+            FunctionLogger.log_call("<<create>> Eskimo eskimo2");
+        Eskimo eskimo2 = new Eskimo(level);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("<<create>> Eskimo eskimo3");
+        Eskimo eskimo3 = new Eskimo(level);
             FunctionLogger.log_return("");
 
+
+            FunctionLogger.log_call("IceBlock ib.addPlayer(eskimo1)");
+        ib.addPlayer(eskimo1);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("IceBlock ib.addPlayer(eskimo2)");
+        ib.addPlayer(eskimo2);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("IceBlock ib.addPlayer(eskimo3)");
+        ib.addPlayer(eskimo3);
+            FunctionLogger.log_return("");
+
+            FunctionLogger.log_call("Eskimo eskimo1.addItem(part1)");
+        eskimo1.addItem(part1);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("Eskimo eskimo1.addItem(part1)");
+        eskimo1.addItem(part1);
+            FunctionLogger.log_return("");
+            FunctionLogger.log_call("Eskimo eskimo1.addItem(part1)");
+        eskimo1.addItem(part1);
+            FunctionLogger.log_return("");
+
+
             FunctionLogger.log_call("Eskimo eskimo.useItem(part1)");
-        eskimo.useItem(part1);
+        eskimo1.useItem(part1);
             FunctionLogger.log_return("");
 
         System.out.println("Test use pistol finished.");
