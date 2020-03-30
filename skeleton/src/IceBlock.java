@@ -28,7 +28,9 @@ public class IceBlock implements PlayerContainerI {
 	 * Alaphelyzetben nincs rajta sem iglu, es nincs benne item sem.
 	 */
 	public IceBlock() {
+		FunctionLogger.log_call("<<create>> Sea sea");
 		sea = new Sea();
+		FunctionLogger.log_return("");
 		neighbours = new ArrayList<>();
 		for(int i=0;i<4;i++) {
 			neighbours.add(i, null);
