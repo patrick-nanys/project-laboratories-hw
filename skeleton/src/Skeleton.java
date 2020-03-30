@@ -364,6 +364,14 @@ public class Skeleton {
         IceBlock iceblock = new IceBlock();
         FunctionLogger.log_return("");
 
+        FunctionLogger.log_call("Level level.addIceBlock(iceblock)");
+        level.addIceBlock(iceblock);
+        FunctionLogger.log_return("");
+
+        FunctionLogger.log_call("Level level.addIceBlock(to)");
+        level.addIceBlock(to);
+        FunctionLogger.log_return("");
+
         FunctionLogger.log_call("IceBlock iceblock.addPlayer(e)");
         iceblock.addPlayer(e);
         FunctionLogger.log_return("");
