@@ -172,10 +172,14 @@ public class IceBlock implements PlayerContainerI {
 	public void movePlayer(Player p, PlayerContainerI pc) {
 		String name = FunctionLogger.get_obj_name();
 		String blocktype = pc.toString();
-		FunctionLogger.log_call(String.format("%s pc.addPlayer(p)", blocktype));
+		String playertype = p.toString();
+		String playername;
+		if(playertype.equals("Researcher")) playername = "r";
+		else playername = "e";
+		FunctionLogger.log_call(String.format("%s pc.addPlayer(%s)", blocktype, playername));
 		pc.addPlayer(p);
 		FunctionLogger.log_return("");
-		FunctionLogger.log_call(String.format("IceBlock %s.removePlayer(p)", name));
+		FunctionLogger.log_call(String.format("IceBlock %s.removePlayer(%s)", name, playername));
 		this.removePlayer(p);
 		FunctionLogger.log_return("");
 	}
@@ -188,10 +192,15 @@ public class IceBlock implements PlayerContainerI {
 	@Override
 	public void movePlayer(Player p, DirectionE d) {
 		String name = FunctionLogger.get_obj_name();
-		FunctionLogger.log_call(String.format("IceBlock %s.getNeighbour(d)", name));
+		String direction = d.name();
+		String playertype = p.toString();
+		FunctionLogger.log_call(String.format("IceBlock %s.getNeighbour(%s)", name, direction));
 		IceBlock neighbour=this.getNeighbour(d);
 		FunctionLogger.log_return("neighbour");
-		FunctionLogger.log_call(String.format("IceBlock %s.movePlayer(p, neighbour)", name));
+		String playername;
+		if(playertype.equals("Researcher")) playername = "r";
+		else playername = "e";
+		FunctionLogger.log_call(String.format("IceBlock %s.movePlayer(%s, neighbour)", name, playername));
 		movePlayer(p, neighbour);
 		FunctionLogger.log_return("");
 	}
@@ -215,6 +224,10 @@ public class IceBlock implements PlayerContainerI {
 		p.setContainer(this);
 	}
 
+	/**
+	 * Teszteleshez, visszaadja az osztaly nevet.
+	 * @return az osztaly neve.
+	 */
 	@Override
 	public String toString() {
 		return "IceBlock";

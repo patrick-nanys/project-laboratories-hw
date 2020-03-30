@@ -9,6 +9,9 @@ public class Menu {
     private HashMap<Integer, String> options;
     private HashMap<Integer, Runnable> tests;
 
+    /**
+     * Inicializalja a menut, elhelyezi benne a skeletonban talalhato teszteket.
+     */
     Menu() {
         // populate
         Skeleton s = new Skeleton();
@@ -53,6 +56,10 @@ public class Menu {
         options.put(18, "Player survives in diving suit test");
     }
 
+    /**
+     * Kiirja konzolra a valaszthato teszteket.
+     * Ha egy teszt lefutott, akkor var a felhasznalo I/N valaszara a tovabbi tesztek futtatasahoz.
+     */
     void show() {
         System.out.println("0. Exit");
         for (HashMap.Entry<Integer, String> entry : options.entrySet())
@@ -60,6 +67,9 @@ public class Menu {
         System.out.print("Your choice: ");
     }
 
+    /**
+     * Futtatja a menut.
+     */
     void run() {
         boolean run = true;
         while (run) {

@@ -38,5 +38,9 @@ public abstract class Item {
 	 */
 	public void pickedUpBy(Player p) {}
 
+	/**
+	 * Teszteleshez, visszaadja az osztaly nevet.
+	 * @return az adott leszarmazott neve.
+	 */
 	public abstract String toString();
 }

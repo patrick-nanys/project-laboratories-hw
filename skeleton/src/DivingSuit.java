@@ -13,6 +13,10 @@ public class DivingSuit extends Item {
 		return item instanceof DivingSuit;
 	}
 
+	/**
+	 * Teszteleshez, visszaadja a tipust.
+	 * @return az osztaly neve.
+	 */
 	public String toString(){
 		return "DivingSuit";
 	}
