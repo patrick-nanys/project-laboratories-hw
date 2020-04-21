@@ -13,7 +13,12 @@ public class UnstableIceBlock extends IceBlock {
 		super();
 		capacity=cap;
 	}
-	/**
+
+	public UnstableIceBlock(Player[] players, Item item, Building building, int snowLayers, int capacity) {
+
+	}
+
+    /**
 	 * Felboritja az instabil jegtablat, beledobva az osszes rajta allo jatekost a tengerbe.
 	 */
 	public void flip() {

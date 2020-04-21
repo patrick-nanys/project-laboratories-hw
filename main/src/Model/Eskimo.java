@@ -5,18 +5,18 @@ package Model;
  */
 public class Eskimo extends Player {
 
-	Eskimo(Level level) {
+	public Eskimo(Level level) {
 		super(level);
 	}
 
-	Eskimo(Level level, Inventory inventory, int health) {
+	public Eskimo(Level level, Inventory inventory, int health) {
 		super(level, inventory, health);
 	}
 
 	/**
 	 * Epit egy iglut az aktualis jegtablan.
 	 */
-	public void buildIglu() {
+	public void buildIglu(IceBlock ib) {
 		if (!getInSea()) {
 			FunctionLogger.log_call("Model.IceBlock ib.setIglu(true)");
 			((IceBlock) container).setIglu(true);

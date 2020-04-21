@@ -36,7 +36,7 @@ public abstract class Player extends Steppable {
 	 * A jatekos lep egyet az adott iranyba.
 	 * @param d a megadott irany amibe leptetni akarjuk
 	 */
-	public void step(DirectionE d) {
+	public void step(IceBlock ib) {
 		String name = FunctionLogger.get_obj_name();
 		ArrayList<String> p = FunctionLogger.get_parameters();
 		String containertype = container.toString();

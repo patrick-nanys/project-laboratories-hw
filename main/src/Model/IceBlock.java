@@ -43,7 +43,12 @@ public class IceBlock implements PlayerContainerI {
 		hasIglu=false;
 		item=null;
 	}
-	/**
+
+	public IceBlock(Player[] players, Item item, Building building, int snowLayers, int capacity) {
+
+	}
+
+    /**
 	 * Megnoveli a tablan talalhato horetegek mennyiseget az adott ertekkel.
 	 * @param d a horetegek valtozasanak merteke
 	 */
@@ -125,26 +130,17 @@ public class IceBlock implements PlayerContainerI {
 		return sea;
 	}
 
+	public void setSea(Sea sea) {
+		this.sea = sea;
+	}
+
 	/**
 	 * Hozzaadja az adott iranyban talalhato szomszedot
 	 * @param d az irany, ahova szeretnenk szomszedot hozzaadni
 	 * @param ib a jegtabla, ami szomszedos lesz az adott "d" iranyban
 	 */
-	public void addNeighbour(DirectionE d, IceBlock ib) {
-		switch(d) {
-			case NORTH:
-				neighbours.add(0,ib);
-				break;
-			case WEST:
-				neighbours.add(1,ib);
-				break;
-			case SOUTH:
-				neighbours.add(2, ib);
-				break;
-			case EAST:
-				neighbours.add(3, ib);
-				break;
-		}
+	public void addNeighbour(IceBlock ib) {
+		neighbours.add(ib);
 	}
 
 	/**

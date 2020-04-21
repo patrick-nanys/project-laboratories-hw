@@ -4,6 +4,7 @@ import Model.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ import static java.lang.Integer.parseInt;
 
 @FunctionalInterface
 interface RunInterface {
-    String run(ArrayList<String> params);
+    String run(String[] params);
 }
 
 public class Controller {
@@ -22,33 +23,36 @@ public class Controller {
     private Player currentPlayer;
 
     private final HashMap<String, RunInterface> functionMap;
+    private enum ParamType {
+        PLAYER, ICE_BLOCK, BEAR, ITEM
+    }
 
-    public Controller(Level level, boolean gameRunning, Player currentPlayer) {
-        this.level = level;
-        this.gameRunning = gameRunning;
-        this.currentPlayer = currentPlayer;
+    public Controller() {
+        this.level = null;
+        this.gameRunning = false;
+        this.currentPlayer = null;
 
         this.functionMap = new HashMap<>();
-        this.functionMap.put("loadGame",         Controller::loadGame);
-        this.functionMap.put("blizzard",         Controller::blizzard);
-        this.functionMap.put("stepPlayer",       Controller::stepPlayer);
-        this.functionMap.put("usePlayerItem",    Controller::usePlayerItem);
-        this.functionMap.put("usePlayerAbility", Controller::usePlayerAbility);
-        this.functionMap.put("swipeSnow",        Controller::swipeSnow);
-        this.functionMap.put("digOutItem",       Controller::digOutItem);
-        this.functionMap.put("skipTurn",         Controller::skipTurn);
-        this.functionMap.put("stepPolarBear",    Controller::stepPolarBear);
-        this.functionMap.put("startGame",        Controller::startGame);
-        this.functionMap.put("stat",             Controller::stat);
-        this.functionMap.put("status",           Controller::status);
-        this.functionMap.put("save",             Controller::save);
+        this.functionMap.put("loadGame",         this::loadGame);
+        this.functionMap.put("blizzard",         this::blizzard);
+        this.functionMap.put("stepPlayer",       this::stepPlayer);
+        this.functionMap.put("usePlayerItem",    this::usePlayerItem);
+        this.functionMap.put("usePlayerAbility", this::usePlayerAbility);
+        this.functionMap.put("swipeSnow",        this::swipeSnow);
+        this.functionMap.put("digOutItem",       this::digOutItem);
+        this.functionMap.put("skipTurn",         this::skipTurn);
+        this.functionMap.put("stepPolarBear",    this::stepPolarBear);
+        this.functionMap.put("startGame",        this::startGame);
+        this.functionMap.put("stat",             this::stat);
+        this.functionMap.put("status",           this::status);
+        this.functionMap.put("save",             this::save);
     }
 
     public String interpret(String input) {
-        ArrayList<String> parts = new ArrayList<>(Arrays.asList(input.split(" ")));
+        String[] inputParts = input.split(" ");
 
-        String command = parts.get(0);
-        ArrayList<String> parameters = new ArrayList<>(parts.subList(1, parts.size()));
+        String command = inputParts[0];
+        String[] parameters = Arrays.copyOfRange(inputParts, 1, inputParts.length);
 
         RunInterface function = functionMap.get(command);
         if (function == null)
@@ -56,106 +60,378 @@ public class Controller {
         return function.run(parameters);
     }
 
-    private Item createItem(char c) {
-        switch(c) {
-            case 'r':
+    private Item createItem(String s) {
+        switch (s) {
+            case "r":
                 return new Rope();
-            case 'f':
+            case "f":
                 return new FragileShovel();
-            case 's':
+            case "s":
                 return new Shovel();
-            case 'd':
+            case "d":
                 return new DivingSuit();
-            case 'F':
+            case "F":
                 return new Food();
-            case 't':
+            case "t":
                 return new Tent();
-            case 'p':
+            case "p":
                 return new Part();
             default:
-                System.out.println(String.format("ERROR: No such item: %c", c));
+                System.out.println(String.format("ERROR: No such item: %s", s));
                 return null;
         }
     }
 
-    private static String loadGame(ArrayList<String> params) {
+    private Building createBuilding(String s) {
+        switch (s) {
+            case "i":
+                return new Iglu();
+            case "t":
+                return new Tent();
+            default:
+                System.out.println(String.format("ERROR: No such building: %s", s));
+                return null;
+        }
+    }
+
+    private String checkForErrors(String[] params, ParamType[] types) {
+        try {
+            if (params.length != types.length)
+                throw new InvalidParameterException("ERROR: Invalid number of parameters!\n");
+
+            for (int i = 0; i < types.length; i++) {
+                switch (types[i]) {
+                    case PLAYER:
+                        if (level.getNumberOfPlayers() < parseInt(params[i]))
+                            throw new InvalidParameterException("ERROR: Player does not exist!\n");
+                        break;
+                    case ICE_BLOCK:
+                        if (level.getNumberOfIceblocks() < parseInt(params[i]))
+                            throw new InvalidParameterException("ERROR: Ice block does not exist!\n");
+                        break;
+                    case BEAR:
+                        if (level.getNumberOfBears() < parseInt(params[i]))
+                            throw new InvalidParameterException("ERROR: Polar bear does not exist!\n");
+                        break;
+                    default:
+                }
+            }
+
+        } catch (InvalidParameterException e) {
+            return e.getMessage();
+        }
+        return "";
+    }
+
+    private String loadGame(String[] params) {
         // error handling
-        if (params.size() != 1)
+        if (params.length != 1)
             return "ERROR: Invalid number of loadGame parameters!\n";
 
         try {
-            Scanner scanner = new Scanner(new File(params.get(0)));
+            Scanner scanner = new Scanner(new File(params[0]));
+
             String[] firstRow = scanner.nextLine().split(";");
             int numberOfTiles = parseInt(firstRow[0]);
             String playerTypes = firstRow[1];
             int numberOfBears = parseInt(firstRow[2]);
 
-            Player[] players = new Player[playerTypes.length()];
 
+            // create players
+            Player[] players = new Player[playerTypes.length()];
             for (int i = 0; i < playerTypes.length(); i++) {
 
+                // read player info
                 String[] playerStats = scanner.nextLine().split(";");
+                int health = parseInt(playerStats[0]);
+                String[] itemLetters = playerStats[1].split(",");
 
                 // create inventory
-                Inventory inv = new Inventory();
-                // have to call pickedUpBy()
+                Inventory inventory = new Inventory();
+                for (String itemLetter : itemLetters) {
+                    Item item = createItem(itemLetter);
+                    inventory.addItem(item);
+                }
 
+                // create player
                 if (playerTypes.charAt(i) == 'e')
-                    players[i] = new Eskimo(playerStats[0], );
+                    players[i] = new Eskimo(level, inventory, health);
+                else if (playerTypes.charAt(i) == 'r')
+                    players[i] = new Researcher(level, inventory, health);
 
             }
+
+            // create bears
+            PolarBear[] bears = new PolarBear[numberOfBears];
+            for (PolarBear bear : bears) {
+                bear = new PolarBear();
+            }
+
+            // create tiles
+            IceBlock[] iceblocks = new IceBlock[numberOfTiles];
+            String[][] neighboursByTile = new String[numberOfTiles][];
+            ArrayList<Item> parts = new ArrayList<>();
+            for (int i = 0; i < numberOfTiles; i++) {
+
+                // read tile info
+
+                String[] tileInfo = scanner.nextLine().split(";");
+                String[] charactersOnTile = tileInfo[0].split(",");
+                String[] playersInSea = tileInfo[1].split(",");
+                String itemS = tileInfo[2];
+                String buildingS = tileInfo[3];
+                int capacity = parseInt(tileInfo[4]);
+                int snowLayers = parseInt(tileInfo[5]);
+                neighboursByTile[i] = tileInfo[6].split(",");
+
+                // create objects on tile
+
+                // get players on tile
+                ArrayList<Player> playersOnTile = new ArrayList<>();
+                for (String characterS : charactersOnTile) {
+                    if (characterS.charAt(0) == 'p')
+                        playersOnTile.add(players[characterS.charAt(1) - 1]);
+                }
+                // create sea and add players to it
+                Sea sea = new Sea();
+                for (String pS : playersInSea) {
+                    sea.addPlayer(players[pS.charAt(1) - 1]);
+                }
+                // create item, building
+                Item item = createItem(itemS);
+                if (itemS.equals("p"))
+                    parts.add(item);
+                Building building = createBuilding(buildingS);
+
+                // create tile
+
+                if (capacity >= playerTypes.length())
+                    iceblocks[i] = new IceBlock((Player[]) playersOnTile.toArray(), item,
+                            building, snowLayers, capacity);
+                else
+                    iceblocks[i] = new UnstableIceBlock((Player[]) playersOnTile.toArray(), item,
+                            building, snowLayers, capacity);
+
+                // connect object to tile
+
+                // connect sea
+                iceblocks[i].setSea(sea);
+                sea.setPosition(iceblocks[i]);
+                // connect bears
+                for (String characterS : charactersOnTile) {
+                    if (characterS.charAt(0) == 'b')
+                        bears[characterS.charAt(1) - 1].setIb(iceblocks[i]);
+                }
+            }
+
+            // connect neighbours
+            for (int i = 0; i < numberOfTiles; i++)
+                for (int j = 0; j < neighboursByTile[i].length; j++)
+                    iceblocks[i].addNeighbour(iceblocks[parseInt(neighboursByTile[i][j]) - 1]);
+
+            // create level
+            this.level = new Level(iceblocks, players, bears, (Item[]) parts.toArray());
+
         } catch (FileNotFoundException e) {
-            return String.format("ERROR: File \"%s\" given to loadGame doesnt esist!\n", params.get(0));
+            return String.format("ERROR: File \"%s\" given to loadGame does not esist!\n", params[0]);
         }
 
         return "";
     }
 
-    private static String blizzard(ArrayList<String> params) {
+    private String blizzard(String[] params) {
+        IceBlock[] iceBlocks = new IceBlock[params.length];
+        for (int i = 0; i < params.length; i++)
+            iceBlocks[i] = level.getIceBlock(parseInt(params[i]));
+        level.blizzard(iceBlocks);
         return "";
     }
 
-    private static String stepPlayer(ArrayList<String> params) {
+    private String stepPlayer(String[] params) {
+        if (gameRunning) {
+            // error handling
+            ParamType[] paramTypes = new ParamType[] {ParamType.ICE_BLOCK};
+            String ret = checkForErrors(params, paramTypes);
+            if (!ret.equals("")) return ret;
+
+            IceBlock iceBlock = level.getIceBlock(parseInt(params[0]));
+            currentPlayer.step(iceBlock);
+        } else {
+            // error handling
+            ParamType[] paramTypes = new ParamType[] {ParamType.PLAYER, ParamType.ICE_BLOCK};
+            String ret = checkForErrors(params, paramTypes);
+            if (!ret.equals("")) return ret;
+
+            Player player = level.getPlayer(parseInt(params[0]));
+            IceBlock iceBlock = level.getIceBlock(parseInt(params[1]));
+            player.step(iceBlock);
+        }
+
         return "";
     }
 
-    private static String usePlayerItem(ArrayList<String> params) {
+    private String usePlayerItem(String[] params) {
+        if (gameRunning) {
+            // error handling
+            ParamType[] paramTypes;
+            if (params.length <= 1) paramTypes = new ParamType[] {ParamType.ITEM};
+            else paramTypes = new ParamType[] {ParamType.ITEM, ParamType.PLAYER};
+            String ret = checkForErrors(params, paramTypes);
+            if (!ret.equals("")) return ret;
+
+            Item item = createItem(params[0]);
+            if (params.length == 1) {
+                currentPlayer.useItem(item);
+            } else {
+                Player other_player = level.getPlayer(parseInt(params[1]));
+                currentPlayer.useItemOnPlayer(item, other_player);
+            }
+        } else {
+            // error handling
+            ParamType[] paramTypes;
+            if (params.length <= 2) paramTypes = new ParamType[] {ParamType.PLAYER, ParamType.ITEM};
+            else paramTypes = new ParamType[] {ParamType.PLAYER, ParamType.ITEM, ParamType.PLAYER};
+            String ret = checkForErrors(params, paramTypes);
+            if (!ret.equals("")) return ret;
+
+            Player player = level.getPlayer(parseInt(params[0]));
+            Item item = createItem(params[1]);
+            if (params.length == 2) {
+                currentPlayer.useItem(item);
+            } else {
+                Player other_player = level.getPlayer(parseInt(params[2]));
+                currentPlayer.useItemOnPlayer(item, other_player);
+            }
+        }
+
         return "";
     }
 
-    private static String usePlayerAbility(ArrayList<String> params) {
+    private String usePlayerAbility(String[] params) {
+        if (gameRunning) {
+            // error handling
+            ParamType[] paramTypes = new ParamType[] {ParamType.ICE_BLOCK};
+            String ret = checkForErrors(params, paramTypes);
+            if (!ret.equals("")) return ret;
+
+            IceBlock iceBlock = level.getIceBlock(parseInt(params[0]));
+            if (currentPlayer instanceof Eskimo)
+                ((Eskimo)currentPlayer).buildIglu(iceBlock);
+            else
+                ((Researcher)currentPlayer).checkStability(iceBlock);
+
+        } else {
+            // error handling
+            ParamType[] paramTypes = new ParamType[] {ParamType.PLAYER, ParamType.ICE_BLOCK};
+            String ret = checkForErrors(params, paramTypes);
+            if (!ret.equals("")) return ret;
+
+            Player player = level.getPlayer(parseInt(params[0]));
+            IceBlock iceBlock = level.getIceBlock(parseInt(params[0]));
+            if (currentPlayer instanceof Eskimo)
+                ((Eskimo)player).buildIglu(iceBlock);
+            else
+                ((Researcher)player).checkStability(iceBlock);
+        }
+
         return "";
     }
 
-    private static String swipeSnow(ArrayList<String> params) {
+    private String swipeSnow(String[] params) {
+        if (gameRunning) {
+            // error handling
+            ParamType[] paramTypes = new ParamType[] {};
+            String ret = checkForErrors(params, paramTypes);
+            if (!ret.equals("")) return ret;
+
+            currentPlayer.swipeWithHand();
+        } else {
+            // error handling
+            ParamType[] paramTypes = new ParamType[] {ParamType.PLAYER};
+            String ret = checkForErrors(params, paramTypes);
+            if (!ret.equals("")) return ret;
+
+            Player player = level.getPlayer(parseInt(params[0]));
+            player.swipeWithHand();
+        }
+
         return "";
     }
 
-    private static String digOutItem(ArrayList<String> params) {
+    private String digOutItem(String[] params) {
+        if (gameRunning) {
+            // error handling
+            ParamType[] paramTypes = new ParamType[] {};
+            String ret = checkForErrors(params, paramTypes);
+            if (!ret.equals("")) return ret;
+
+            currentPlayer.digOutItem();
+        } else {
+            // error handling
+            ParamType[] paramTypes = new ParamType[] {ParamType.PLAYER};
+            String ret = checkForErrors(params, paramTypes);
+            if (!ret.equals("")) return ret;
+
+            Player player = level.getPlayer(parseInt(params[0]));
+            player.digOutItem();
+        }
+
         return "";
     }
 
-    private static String skipTurn(ArrayList<String> params) {
+    private String skipTurn(String[] params) {
+        if (gameRunning) {
+            // error handling
+            ParamType[] paramTypes = new ParamType[] {};
+            String ret = checkForErrors(params, paramTypes);
+            if (!ret.equals("")) return ret;
+
+            ArrayList<Player> players = new ArrayList<Player>(Arrays.asList(level.getPlayers()));
+            int idx = players.indexOf(currentPlayer);
+            if (idx + 1 >= players.size())
+                idx = -1;
+            currentPlayer = players.get(idx + 1);
+        } else {
+            return "ERROR: Game not running!\n";
+        }
+
         return "";
     }
 
-    private static String stepPolarBear(ArrayList<String> params) {
+    private String stepPolarBear(String[] params) {
+        // Error handling
+        ParamType[] paramTypes;
+        if (params.length <= 1) paramTypes = new ParamType[] {ParamType.BEAR};
+        else paramTypes = new ParamType[] {ParamType.BEAR, ParamType.ICE_BLOCK};
+        String ret = checkForErrors(params, paramTypes);
+        if (!ret.equals("")) return ret;
+
+        PolarBear bear = level.getPolarBear(parseInt(params[0]));
+        if (params.length == 1) {
+            bear.step(null);
+        } else {
+            IceBlock iceBlock = level.getIceBlock(parseInt(params[1]));
+            bear.step(iceBlock);
+        }
+
         return "";
     }
 
-    private static String startGame(ArrayList<String> params) {
+    private String startGame(String[] params) {
+
+
         return "";
     }
 
-    private static String stat(ArrayList<String> params) {
+    private String stat(String[] params) {
         return "";
     }
 
-    private static String status(ArrayList<String> params) {
+    private String status(String[] params) {
         return "";
     }
 
-    private static String save(ArrayList<String> params) {
+    private String save(String[] params) {
         return "";
     }
 }

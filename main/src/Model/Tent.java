@@ -1,6 +1,6 @@
 package Model;
 
-public class Tent extends Item {
+public class Tent extends Item implements Building {
     @Override
     public boolean equals(Item item) {
         return false;

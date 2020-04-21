@@ -11,7 +11,7 @@ public class Sea implements PlayerContainerI {
 	private IceBlock position;
 	private ArrayList<Player> players;
 
-	Sea() {
+	public Sea() {
 		players = new ArrayList<Player>();
 	}
 
@@ -87,6 +87,11 @@ public class Sea implements PlayerContainerI {
 		players.add(p);
 		p.setContainer(this);
 	}
+
+	public void setPosition(IceBlock ib)  {
+		position = ib;
+	}
+
 	/**
 	 * Teszteleshez, visszaadja az osztaly nevet.
 	 * @return az osztaly neve.

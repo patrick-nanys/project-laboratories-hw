@@ -26,7 +26,11 @@ public class Level {
 		numberOfPlayers = players;
 	}
 
-	/**
+	public Level(IceBlock[] iceblocks, Player[] players, PolarBear[] bears, Item[] parts) {
+
+	}
+
+    /**
 	 * Inicializalja a Levelt. Egyenlore tesztelesnel ures, mert kezzel inicializalunk.
 	 */
 	public void init() {
@@ -130,8 +134,14 @@ public class Level {
 	 * es sebzi a rajta levo jatekosokat, ha
 	 * nincs rajta iglu.
 	 * Teszteleshez, ha csak 1 Model.IceBlock van, akkor arra mindenkepp meghivodik.
-	 */
-	public void blizzard() {
+     * @param iceBlocks
+     */
+	public void blizzard(IceBlock[] iceBlocks) {
+
+
+		// át kell írni
+
+
 		if (iceblocks.size() == 1) {
 			FunctionLogger.log_call("Model.IceBlock ib.modifyLayers(+1)");
 			iceblocks.get(0).modifyLayers(+1);
@@ -176,5 +186,29 @@ public class Level {
 				}
 			}
 		}
+	}
+
+	public int getNumberOfPlayers() {
+		return 0;
+	}
+
+	public int getNumberOfIceblocks() {
+		return 0;
+	}
+
+	public Player getPlayer(int playerId) {
+		return players[playerId];
+	}
+
+	public int getNumberOfBears() {
+
+	}
+
+	public Player[] getPlayers() {
+		return null;
+	}
+
+	public PolarBear getPolarBear(int id) {
+		return null;
 	}
 }

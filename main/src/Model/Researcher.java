@@ -6,11 +6,11 @@ package Model;
  */
 public class Researcher extends Player {
 
-	Researcher(Level level) {
+	public Researcher(Level level) {
 		super(level);
 	}
 
-	Researcher(Level level, Inventory inventory, int health) {
+	public Researcher(Level level, Inventory inventory, int health) {
 		super(level, inventory, health);
 	}
 
