@@ -10,8 +10,8 @@ public class Researcher extends Player {
 		super(level);
 	}
 
-	Researcher(Level level, Inventory inventory) {
-		super(level, inventory);
+	Researcher(Level level, Inventory inventory, int health) {
+		super(level, inventory, health);
 	}
 
 	/**

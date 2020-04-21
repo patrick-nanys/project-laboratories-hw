@@ -21,10 +21,11 @@ public abstract class Player {
 		FunctionLogger.log_return("");
 	}
 
-	Player(Level level, Inventory inventory) {
+	Player(Level level, Inventory inventory, int health) {
 		this.level = level;
 		inSea = false;
 		this.inventory = inventory;
+		this.health = health;
 	}
 	public void addItem(Item i) {
 		inventory.addItem(i);

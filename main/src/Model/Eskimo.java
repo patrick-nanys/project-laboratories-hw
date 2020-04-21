@@ -9,8 +9,8 @@ public class Eskimo extends Player {
 		super(level);
 	}
 
-	Eskimo(Level level, Inventory inventory) {
-		super(level, inventory);
+	Eskimo(Level level, Inventory inventory, int health) {
+		super(level, inventory, health);
 	}
 
 	/**
