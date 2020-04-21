@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Jatekosokat reprezentalo absztrakt osztály.
  */
-public abstract class Player {
+public abstract class Player extends Steppable {
 	protected boolean inSea;
 	protected int health;
 	protected int turnCounter;
