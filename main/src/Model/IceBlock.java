@@ -232,4 +232,12 @@ public class IceBlock implements PlayerContainerI {
 	public String toString() {
 		return "Model.IceBlock";
 	}
+
+	public Building getBuilding() {
+		return null;
+	}
+
+	public IceBlock[] getNeighbours() {
+		return neighbours.toArray(new IceBlock[0]);
+	}
 }

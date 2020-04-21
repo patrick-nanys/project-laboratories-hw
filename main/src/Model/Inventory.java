@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * List<Model.Item> items: A felvett itemek listaja.
  */
 public class Inventory {
-	private List<Item> items = new ArrayList<Item>();
+	private List<Item> items = new ArrayList<>();
 
 	/**
 	 * Hozzaad egy itemet az inventoryhoz, ha meg nem vett fel olyan tipusu itemet a jatekos.
@@ -74,5 +75,9 @@ public class Inventory {
 			item.use(p);
 			FunctionLogger.log_return("");
 		}
+	}
+
+	public Item[] getItems() {
+		return items.toArray(new Item[0]);
 	}
 }

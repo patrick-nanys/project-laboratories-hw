@@ -100,4 +100,8 @@ public class Sea implements PlayerContainerI {
 	public String toString() {
 		return "Model.Sea";
 	}
+
+	public IceBlock getPosition() {
+		return null;
+	}
 }

@@ -4,6 +4,8 @@ import Model.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,6 +78,8 @@ public class Controller {
                 return new Tent();
             case "p":
                 return new Part();
+            case "-":
+                return null;
             default:
                 System.out.println(String.format("ERROR: No such item: %s", s));
                 return null;
@@ -92,6 +96,47 @@ public class Controller {
                 System.out.println(String.format("ERROR: No such building: %s", s));
                 return null;
         }
+    }
+
+    private String stringFromItem(Item item) {
+        if (item instanceof Rope)
+            return "r";
+        if (item instanceof FragileShovel)
+            return "f";
+        if (item instanceof Shovel)
+            return "s";
+        if (item instanceof DivingSuit)
+            return "d";
+        if (item instanceof Food)
+            return "F";
+        if (item instanceof Tent)
+            return "t";
+        if (item instanceof Part)
+            return "p";
+        return "-";
+    }
+
+    private String stringFromBuilding(Building building) {
+        if (building instanceof Iglu)
+            return "i";
+        if (building instanceof Tent)
+            return "t";
+        return "-";
+    }
+
+    private String stringFromPlayer(Player player) {
+        ArrayList<Player> players = new ArrayList<>(Arrays.asList(level.getPlayers()));
+        return "p" + players.indexOf(player);
+    }
+
+    private String stringFromBear(PolarBear bear) {
+        ArrayList<PolarBear> bears = new ArrayList<>(Arrays.asList(level.getPolarBears()));
+        return "b" + bears.indexOf(bear);
+    }
+
+    private String stringFromIceBlock(IceBlock iceBlock) {
+        ArrayList<IceBlock> iceBlocks = new ArrayList<>(Arrays.asList(level.getIceBlocks()));
+        return String.valueOf(iceBlocks.indexOf(iceBlock));
     }
 
     private String checkForErrors(String[] params, ParamType[] types) {
@@ -150,6 +195,8 @@ public class Controller {
                 Inventory inventory = new Inventory();
                 for (String itemLetter : itemLetters) {
                     Item item = createItem(itemLetter);
+                    if (item == null)
+                        break;
                     inventory.addItem(item);
                 }
 
@@ -339,11 +386,6 @@ public class Controller {
 
     private String swipeSnow(String[] params) {
         if (gameRunning) {
-            // error handling
-            ParamType[] paramTypes = new ParamType[] {};
-            String ret = checkForErrors(params, paramTypes);
-            if (!ret.equals("")) return ret;
-
             currentPlayer.swipeWithHand();
         } else {
             // error handling
@@ -360,11 +402,6 @@ public class Controller {
 
     private String digOutItem(String[] params) {
         if (gameRunning) {
-            // error handling
-            ParamType[] paramTypes = new ParamType[] {};
-            String ret = checkForErrors(params, paramTypes);
-            if (!ret.equals("")) return ret;
-
             currentPlayer.digOutItem();
         } else {
             // error handling
@@ -381,21 +418,16 @@ public class Controller {
 
     private String skipTurn(String[] params) {
         if (gameRunning) {
-            // error handling
-            ParamType[] paramTypes = new ParamType[] {};
-            String ret = checkForErrors(params, paramTypes);
-            if (!ret.equals("")) return ret;
-
             ArrayList<Player> players = new ArrayList<Player>(Arrays.asList(level.getPlayers()));
             int idx = players.indexOf(currentPlayer);
             if (idx + 1 >= players.size())
                 idx = -1;
             currentPlayer = players.get(idx + 1);
         } else {
-            return "ERROR: Game not running!\n";
+            return "ERROR: Game not running, cannot skip turn!\n";
         }
 
-        return "";
+        return "skip";
     }
 
     private String stepPolarBear(String[] params) {
@@ -418,20 +450,160 @@ public class Controller {
     }
 
     private String startGame(String[] params) {
+        Player[] players = level.getPlayers();
+        PolarBear[] bears = level.getPolarBears();
 
+        gameRunning = true;
+        currentPlayer = players[0];
+        level.setGameState(GameStateE.IN_PROGRESS);
+        String ret = "";
+        while (gameRunning) {
+            // step players
+            for (Player player : players) {
+                for (int i = 0; i < 4; i++) {
+                    boolean valid = false;
+                    while (!valid) {
+                        String command = StaticScanner.scanLine();
+                        ret = interpret(command);
+                        if (ret.equals("skip"))
+                            break;
+                        if (!ret.contains("ERROR")) {
+                            valid = true;
+                            System.out.print(ret);
+                        }
+                    }
+                }
+                if (!ret.equals("skip"))
+                    interpret("skipTurn");
+            }
 
-        return "";
+            // step bears
+            for (PolarBear bear : bears) {
+                bear.step(null);
+            }
+
+            // check player statuses
+            for (Player player : players) {
+                player.checkPlayerStatus();
+            }
+
+            // check if game ended
+            if (level.getGameState() != GameStateE.IN_PROGRESS)
+                gameRunning = false;
+        }
+
+        if (level.getGameState() == GameStateE.WON)
+            return "Game won";
+        return "Game over";
     }
 
     private String stat(String[] params) {
-        return "";
+        // error handling
+        ParamType[] paramTypes = new ParamType[] {ParamType.PLAYER};
+        String ret = checkForErrors(params, paramTypes);
+        if (!ret.equals("")) return ret;
+
+        // get data of player
+        Player player = level.getPlayer(parseInt(params[0]));
+        PlayerContainerI container = player.getLocation();
+        IceBlock iceBlock;
+        if (container instanceof Sea) {
+            Sea sea = (Sea) container;
+            iceBlock = sea.getPosition();
+        } else {
+            iceBlock = (IceBlock) container;
+        }
+        ArrayList<IceBlock> iceBlocks = new ArrayList<IceBlock>(Arrays.asList(level.getIceBlocks()));
+        int iceBlockId = iceBlocks.indexOf(iceBlock);
+
+        // create output
+        StringBuilder output = new StringBuilder();
+        output.append(iceBlockId).append(";");
+        output.append(player.getHealth()).append(";");
+        for (Item item : player.getInventory().getItems())
+            output.append(stringFromItem(item)).append(",");
+        if (player.getInventory().getItems().length == 1)
+            output.append("-");
+
+        return output.toString();
     }
 
     private String status(String[] params) {
-        return "";
+        Player[] players = level.getPlayers();
+        IceBlock[] iceBlocks = level.getIceBlocks();
+        ArrayList<PolarBear> bears = new ArrayList<>(Arrays.asList(level.getPolarBears()));
+
+        StringBuilder output = new StringBuilder();
+
+        // build first row
+        output.append(iceBlocks.length).append(";");
+        for (Player player : players)
+            output.append(stringFromPlayer(player));
+        output.append(";");
+        output.append(bears.size()).append("\n");
+
+        // build player info
+        for (Player player : players) {
+            output.append(player.getHealth()).append(";");
+            for (Item item : player.getInventory().getItems()) {
+                output.append(stringFromItem(item)).append(",");
+            }
+            if (player.getInventory().getItems().length == 1)
+                output.append("-");
+            output.append("\n");
+        }
+
+        // build tile info
+        for (IceBlock iceBlock : iceBlocks) {
+            // characters on ice block
+            for (Player player : iceBlock.getPlayers())
+                output.append(stringFromPlayer(player)).append(",");
+            for (PolarBear bear : bears)
+                if (bear.getIb().equals(iceBlock))
+                    output.append(stringFromBear(bear)).append(",");
+            output.append(";");
+
+            // players in sea
+            for (Player player : iceBlock.getSea().getPlayers())
+                output.append(stringFromPlayer(player)).append(",");
+            output.append(";");
+
+            // item
+            output.append(stringFromItem(iceBlock.getItem())).append(";");
+
+            // building
+            output.append(stringFromBuilding(iceBlock.getBuilding())).append(";");
+
+            // capacity
+            output.append(iceBlock.getCapacity()).append(";");
+
+            // snowLayers
+            output.append(iceBlock.getLayer()).append(";");
+
+            // neighbours
+            for (IceBlock neighbour : iceBlock.getNeighbours())
+                output.append(stringFromIceBlock(neighbour)).append(",");
+            output.append(";");
+            output.append("\n");
+        }
+
+        return output.toString();
     }
 
     private String save(String[] params) {
+        String fileName = params[0];
+        String command = String.join("", Arrays.copyOfRange(params, 1, params.length));
+        String ret = interpret(command);
+
+        FileWriter myWriter = null;
+        try {
+            myWriter = new FileWriter(fileName);
+            myWriter.write(ret);
+            myWriter.close();
+        } catch (IOException e) {
+            return "ERROR: File error!";
+        }
+
         return "";
     }
 }

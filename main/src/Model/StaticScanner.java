@@ -20,4 +20,8 @@ public class StaticScanner {
     public static void close() {
         in.close();
     }
+
+    public static String scanLine() {
+        return in.nextLine();
+    }
 }

@@ -6,4 +6,8 @@ public class PolarBear extends Steppable {
     public void setIb(IceBlock iceblock) {
         ib = iceblock;
     }
+
+    public IceBlock getIb() {
+        return ib;
+    }
 }

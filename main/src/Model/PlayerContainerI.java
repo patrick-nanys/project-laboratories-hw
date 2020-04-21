@@ -11,4 +11,6 @@ public interface PlayerContainerI {
 	void addPlayer(Player p);
 
 	String toString ();
+
+    Player[] getPlayers();
 }

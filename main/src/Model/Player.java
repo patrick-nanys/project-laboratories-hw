@@ -214,4 +214,6 @@ public abstract class Player extends Steppable {
 	 */
 	@Override
 	public abstract String toString();
+
+    public abstract int getHealth();
 }

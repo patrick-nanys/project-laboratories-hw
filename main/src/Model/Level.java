@@ -211,4 +211,20 @@ public class Level {
 	public PolarBear getPolarBear(int id) {
 		return null;
 	}
+
+	public void setGameState(GameStateE state) {
+
+	}
+
+	public PolarBear[] getPolarBears() {
+
+	}
+
+	public GameStateE getGameState() {
+		return gameState;
+	}
+
+	public IceBlock[] getIceBlocks() {
+		return iceblocks.toArray(new IceBlock[0]);
+	}
 }
