@@ -5,10 +5,12 @@ package Model;
  */
 public class Eskimo extends Player {
 
-	public Eskimo(Level level) {
-		super(level);
-	}
-
+	/**
+	 * Konstruktor, hogy a tagbáltozókat beállítsuk
+	 * @param level pálya ahol elhelyezkedik
+	 * @param inventory inventory amiben a játékos itemei vannak
+	 * @param health életereje
+	 */
 	public Eskimo(Level level, Inventory inventory, int health) {
 		super(level, inventory, health);
 	}
