@@ -107,7 +107,7 @@ public class Controller {
             case "-":
                 return null;
             default:
-                System.out.println(String.format("ERROR: No such item: %s", s));
+                StaticStandardIO.println(String.format("ERROR: No such item: %s", s));
                 return null;
         }
     }
@@ -124,7 +124,7 @@ public class Controller {
             case "t":
                 return new Tent();
             default:
-                System.out.println(String.format("ERROR: No such building: %s", s));
+                StaticStandardIO.println(String.format("ERROR: No such building: %s", s));
                 return null;
         }
     }
@@ -596,13 +596,13 @@ public class Controller {
                 for (int i = 0; i < 4; i++) {
                     boolean valid = false;
                     while (!valid) {
-                        String command = StaticScanner.scanLine();
+                        String command = StaticStandardIO.readLine();
                         ret = interpret(command);
                         if (ret.equals("skip"))
                             break;
                         if (!ret.contains("ERROR")) {
                             valid = true;
-                            System.out.print(ret);
+                            StaticStandardIO.print(ret);
                         }
                     }
                 }
