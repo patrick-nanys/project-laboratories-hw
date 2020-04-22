@@ -16,15 +16,17 @@ public class Part extends Item {
 	 *               alkatrészt.
 	 */
 	public void use(Player player) {
-		FunctionLogger.log_call("Model.Level level.checkParts()");
-		level.checkParts();
-		FunctionLogger.log_return("");
+		if(player.getInSea() == false){
+			FunctionLogger.log_call("Model.Level level.checkParts()");
+			level.checkParts();
+			FunctionLogger.log_return("");
+		}
 	}
 
 	/**
 	 * Amikor egy játékos felveszi az alkatrészt, ez a függvény elmenti,
 	 * hogy melyik játékosnál van, így lehetővé teszi,
-	 * minhárom alkatrész ellenőrzését.
+	 * mindhárom alkatrész ellenőrzését.
 	 * @param p Az a játékos, aki felveszi az alkatrészt.
 	 */
 	public void pickedUpBy(Player p) {
