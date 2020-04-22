@@ -20,7 +20,7 @@ public class Eskimo extends Player {
 	 */
 	public void buildIglu(IceBlock ib) {
 		if (!getInSea()) {
-			((IceBlock) container).setBuilding(new Iglu());
+			ib.setBuilding(new Iglu());
 		}
 	}
 }
