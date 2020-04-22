@@ -370,7 +370,7 @@ public class Controller {
      * a paraméterben megadott sorszámú táblával.
      * Ha nem fut a játék, akkor a megadott sorszámú játékoson hajtja végre ugyanezt.
      * Ha nem létezik a megadott sorszámú tábla vagy a megadott sorszámú játékos,
-     * akkor egy hiba üzenettel tér vissza, ami “ERROR:”-ral kezdődik.
+     * akkor egy hiba üzenettel tér vissza, ami "ERROR:"-ral kezdődik.
      * @param params stepPlayer bemeneti nyelvi parancs paraméterei
      * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
      */
@@ -402,7 +402,7 @@ public class Controller {
      * egy olyan tárggyal amit a paraméterben kapott tárgy rövidítés alapján hoz létre.
      * Ha nem fut a játék, akkor a megadott sorszámú játékoson hajtja végre ugyanezt.
      * Ha nem létezik a megadott sorszámú játékos, vagy nincs a játékosnál olyan tárgy,
-     * amit megadtak, akkor visszatér egy hibaüzenettel, ami “ERROR:”-ral kezdődik.
+     * amit megadtak, akkor visszatér egy hibaüzenettel, ami "ERROR:"-ral kezdődik.
      * @param params usePlayerItem bemeneti nyelvi parancs paraméterei
      * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
      */
@@ -448,7 +448,7 @@ public class Controller {
      * (Eskimo esetén: buildIglu(), Redearcher esetén: checkStability(megadott sorszámú tábla)).
      * Ha nem fut a játék, akkor a megadott sorszámú játékoson hajtja végre ugyanezt.
      * Ha nem létezik a megadott sorszámú játékos vagy tábla,
-     * akkor visszatér egy hibaüzenettel, ami “ERROR:”-ral kezdődik.
+     * akkor visszatér egy hibaüzenettel, ami "ERROR:"-ral kezdődik.
      * @param params usePlayerAbility bemeneti nyelvi parancs paraméterei
      * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
      */
@@ -486,7 +486,7 @@ public class Controller {
      * Ha fut a játék, akkor az aktuálisan soron lévő játékosnak hívja meg a swipeWithHand() függvényét.
      * Ha nem fut a játék, akkor a megadott sorszámú játékoson hajtja végre ugyanezt.
      * Ha nem létezik a megadott sorszámú játékos,
-     * akkor visszatér egy hibaüzenettel, ami “ERROR:”-ral kezdődik.
+     * akkor visszatér egy hibaüzenettel, ami "ERROR:"-ral kezdődik.
      * @param params swipeSnow bemeneti nyelvi parancs paraméterei
      * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
      */
@@ -510,7 +510,7 @@ public class Controller {
      * Ha fut a játék, akkor az aktuálisan soron lévő játékosnak hívja meg a digOutItem() függvényét.
      * Ha nem fut a játék, akkor a megadott sorszámú játékoson hajtja végre ugyanezt.
      * Ha nem létezik a megadott sorszámú játékos vagy tábla,
-     * akkor visszatér egy hibaüzenettel, ami “ERROR:”-ral kezdődik.
+     * akkor visszatér egy hibaüzenettel, ami "ERROR:"-ral kezdődik.
      * @param params digOutItem bemeneti nyelvi parancs paraméterei
      * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
      */
@@ -531,8 +531,8 @@ public class Controller {
     }
 
     /**
-     * Ha fut a játék, akkor a soron következő játékos lesz az aktuális és visszatér egy “skip”-el.
-     * Ellenkező esetben egy “ERROR:”-ral kezdődő hibaüzenettel.
+     * Ha fut a játék, akkor a soron következő játékos lesz az aktuális és visszatér egy "skip"-el.
+     * Ellenkező esetben egy "ERROR:"-ral kezdődő hibaüzenettel.
      * @param params skipTurn bemeneti nyelvi parancs paraméterei
      * @return ha volt valami hiba, akkor hibaüzenet, különben "skip"
      */
@@ -554,7 +554,7 @@ public class Controller {
      * Meghívja a paraméterben megadott sorszámú jegesmedve step() függvényét
      * Ha meg volt adva tábla sorszám, akkor azzal a táblával, ha nem volt, megadva, akkor null-al.
      * Ha nem létezik a megadott sorszámú jegesmedve vagy tábla,
-     * akkor visszatér egy hibaüzenettel, ami “ERROR:”-ral kezdődik.
+     * akkor visszatér egy hibaüzenettel, ami "ERROR:"-ral kezdődik.
      * @param params stepPolarBear bemeneti nyelvi parancs paraméterei
      * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
      */
@@ -634,7 +634,7 @@ public class Controller {
      * Visszatér annak a táblának a sorszámával amin a megadott sorszámú játékos áll,
      * illetve ennek a játékosnak az élet erejével és azokkal a tárgyakkal amik a játékosnál vannak.
      * Ha nem létezik a megadott sorszámú játékos,
-     * akkor visszatér egy hibaüzenettel, ami “ERROR:”-ral kezdődik.
+     * akkor visszatér egy hibaüzenettel, ami "ERROR:"-ral kezdődik.
      * @param params stat bemeneti nyelvi parancs paraméterei
      * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
      */
