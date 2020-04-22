@@ -6,10 +6,21 @@ package Model;
  */
 public class Researcher extends Player {
 
+
+	/**
+	 * Konstruktor, hogy beállítsuk a pályáját.
+	 * @param level pálya ahol elhelyezkedik
+	 */
 	public Researcher(Level level) {
 		super(level);
 	}
 
+	/**
+	 * Konstruktor, hogy a tagváltozókat beállítsuk
+	 * @param level pálya ahol elhelyezkedik
+	 * @param inventory inventory amiben a játékos itemei vannak
+	 * @param health életereje
+	 */
 	public Researcher(Level level, Inventory inventory, int health) {
 		super(level, inventory, health);
 	}
@@ -19,9 +30,7 @@ public class Researcher extends Player {
 	 * @param ib a megnezendo jegtabla
 	 */
 	public int checkStability(IceBlock ib) {
-		FunctionLogger.log_call("Model.IceBlock ib.getCapacity()");
 		int capacity = ib.getCapacity();
-		FunctionLogger.log_return("capacity");
 		return capacity;
 	}
 

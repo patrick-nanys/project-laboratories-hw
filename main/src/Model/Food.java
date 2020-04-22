@@ -8,7 +8,8 @@ package Model;
 public class Food extends Item {
 
 	/**
-	 * Felülírja az Model.Item pickedUpBy függvényét, meghívja a paraméterként kapott játékos eat függvényét.
+	 * Felülírja az Model.Item pickedUpBy függvényét,
+	 * meghívja a paraméterként kapott játékos eat függvényét.
 	 * @param p a játékos, aki felvette az élelmet
 	 */
 	public void pickedUpBy(Player p) {
@@ -22,9 +23,11 @@ public class Food extends Item {
 	}
 
 	/**
-	 * Felülírja az Model.Item addToInventory függvényét, hogy ne kerülhessen be az élelem a játékos inventory-jába
-	 * @param inventory A kárdáses inventory
-	 * @return Azzal tér vissza, hogy sikeresen hozzáadódott-e az inventoryhoz, tehát mindig false-szal tér vissza.
+	 * Felülírja az Model.Item addToInventory függvényét,
+	 * hogy ne kerülhessen be az élelem a játékos inventory-jába
+	 * @param inventory A kérdéses inventory
+	 * @return Azzal tér vissza, hogy sikeresen hozzáadódott-e
+	 * 			az inventoryhoz, tehát mindig false-szal tér vissza.
 	 */
 	public boolean addToInventory(Inventory inventory) {
 		return false;
