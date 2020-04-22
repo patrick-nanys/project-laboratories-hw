@@ -240,4 +240,8 @@ public class IceBlock implements PlayerContainerI {
 	public IceBlock[] getNeighbours() {
 		return neighbours.toArray(new IceBlock[0]);
 	}
+
+	public void setBuilding(Building b) {
+
+	}
 }

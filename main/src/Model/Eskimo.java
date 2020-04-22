@@ -18,18 +18,7 @@ public class Eskimo extends Player {
 	 */
 	public void buildIglu(IceBlock ib) {
 		if (!getInSea()) {
-			FunctionLogger.log_call("Model.IceBlock ib.setIglu(true)");
-			((IceBlock) container).setIglu(true);
-			FunctionLogger.log_return("");
+			((IceBlock) container).setBuilding(new Iglu());
 		}
-	}
-
-	/**
-	 * Teszteleshez
-	 * @return az osztaly neve
-	 */
-	@Override
-	public String toString() {
-		return "Model.Eskimo";
 	}
 }

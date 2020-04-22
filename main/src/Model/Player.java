@@ -27,6 +27,7 @@ public abstract class Player extends Steppable {
 		this.inventory = inventory;
 		this.health = health;
 	}
+
 	public void addItem(Item i) {
 		inventory.addItem(i);
 		i.pickedUpBy(this);
@@ -212,8 +213,8 @@ public abstract class Player extends Steppable {
 	 * Teszteleshez, visszaadja az osztaly nevet.
 	 * @return az osztaly neve.
 	 */
-	@Override
-	public abstract String toString();
 
-    public abstract int getHealth();
+    public int getHealth() {
+    	return health;
+	}
 }

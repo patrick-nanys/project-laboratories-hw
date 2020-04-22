@@ -15,14 +15,6 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 /**
- * Egységes séma a futtatandó függvényekhez.
- */
-@FunctionalInterface
-interface RunInterface {
-    String run(String[] params);
-}
-
-/**
  * Kezeli a kapcsolatot a bemenet és a modell között.
  * Feldolgozza az egyes bemeneti parancsokat és meghívja a modellnek a megfelelő függvényeit.
  */
@@ -30,6 +22,14 @@ public class Controller {
     private Level level;
     private boolean gameRunning;
     private Player currentPlayer;
+
+    /**
+     * Egységes séma a futtatandó függvényekhez.
+     */
+    @FunctionalInterface
+    interface RunInterface {
+        String run(String[] params);
+    }
 
     private final HashMap<String, RunInterface> functionMap;
 
