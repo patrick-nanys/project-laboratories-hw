@@ -86,14 +86,15 @@ public class Tester {
 
             // capture System.out and run commands
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(buffer));
+            StaticStandardIO.printTo(new PrintStream(buffer));
+            StaticStandardIO.readFrom(tstScanner);
             while (tstScanner.hasNext()) {
                 String ret = c.interpret(tstScanner.nextLine());
                 returns.add(buffer.toString());
                 buffer.reset();
                 returns.add(ret);
             }
-            System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+            StaticStandardIO.reset();
             tstScanner.close();
 
             // read expected
