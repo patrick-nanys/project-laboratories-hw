@@ -1,10 +1,10 @@
 package Model;
 
+import java.util.List;
+
 public interface PlayerContainerI {
 
 	void movePlayer(Player p, PlayerContainerI pc);
-
-	void movePlayer(Player p, DirectionE d);
 	
 	void removePlayer(Player p);
 	
@@ -12,5 +12,5 @@ public interface PlayerContainerI {
 
 	String toString ();
 
-    Player[] getPlayers();
+    List<Player> getPlayers();
 }

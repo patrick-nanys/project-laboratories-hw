@@ -136,7 +136,6 @@ public class IceBlock implements PlayerContainerI {
 
 	/**
 	 * Hozzaadja az adott iranyban talalhato szomszedot
-	 * @param d az irany, ahova szeretnenk szomszedot hozzaadni
 	 * @param ib a jegtabla, ami szomszedos lesz az adott "d" iranyban
 	 */
 	public void addNeighbour(IceBlock ib) {
