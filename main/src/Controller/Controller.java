@@ -14,21 +14,35 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * Egységes séma a futtatandó függvényekhez.
+ */
 @FunctionalInterface
 interface RunInterface {
     String run(String[] params);
 }
 
+/**
+ * Kezeli a kapcsolatot a bemenet és a modell között.
+ * Feldolgozza az egyes bemeneti parancsokat és meghívja a modellnek a megfelelő függvényeit.
+ */
 public class Controller {
     private Level level;
     private boolean gameRunning;
     private Player currentPlayer;
 
     private final HashMap<String, RunInterface> functionMap;
+
+    /**
+     * Parancs paraméterek lehetséges típusai.
+     */
     private enum ParamType {
         PLAYER, ICE_BLOCK, BEAR, ITEM
     }
 
+    /**
+     * Alap konstruktor ami beállítja az tagváltozókat.
+     */
     public Controller() {
         this.level = null;
         this.gameRunning = false;
@@ -50,6 +64,13 @@ public class Controller {
         this.functionMap.put("save",             this::save);
     }
 
+    /**
+     * A megadott inputot részekre bontja (parancs és paraméterek)
+     * és meghívja a parancshoz tartozó függvényt a paraméterekkel,
+     * utána pedig visszatér azzal, amivel a függvény visszatért.
+     * @param input parancs és paraméterei
+     * @return amivel a megadott parancs visszatért
+     */
     public String interpret(String input) {
         String[] inputParts = input.split(" ");
 
@@ -62,6 +83,11 @@ public class Controller {
         return function.run(parameters);
     }
 
+    /**
+     * Létrehoz egy item-et a megadott item rövidítésből.
+     * @param s item rövidítés
+     * @return létrehozott item
+     */
     private Item createItem(String s) {
         switch (s) {
             case "r":
@@ -86,6 +112,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Létrehoz egy building-et a megadott building rövidítésből.
+     * @param s building rövidítés
+     * @return létrehozott building
+     */
     private Building createBuilding(String s) {
         switch (s) {
             case "i":
@@ -98,6 +129,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Visszatér a megadott item szöveges rövidítésével.
+     * @param item megadott item
+     * @return rövidítés
+     */
     private String stringFromItem(Item item) {
         if (item instanceof Rope)
             return "r";
@@ -116,6 +152,11 @@ public class Controller {
         return "-";
     }
 
+    /**
+     * Visszatér a megadott building szöveges rövidítésével.
+     * @param building megaott building
+     * @return rövidítés
+     */
     private String stringFromBuilding(Building building) {
         if (building instanceof Iglu)
             return "i";
@@ -124,21 +165,43 @@ public class Controller {
         return "-";
     }
 
+    /**
+     * Visszatér a megadott player szöveges rövidítésével.
+     * @param player megaott player
+     * @return rövidítés
+     */
     private String stringFromPlayer(Player player) {
         ArrayList<Player> players = new ArrayList<>(Arrays.asList(level.getPlayers()));
         return "p" + players.indexOf(player);
     }
 
+    /**
+     * Visszatér a megadott PolarBear szöveges rövidítésével.
+     * @param bear megaott PolarBear
+     * @return rövidítés
+     */
     private String stringFromBear(PolarBear bear) {
         ArrayList<PolarBear> bears = new ArrayList<>(Arrays.asList(level.getPolarBears()));
         return "b" + bears.indexOf(bear);
     }
 
+    /**
+     * Visszatér a megadott ice block szöveges rövidítésével.
+     * @param iceBlock megaott ice block
+     * @return rövidítés
+     */
     private String stringFromIceBlock(IceBlock iceBlock) {
         ArrayList<IceBlock> iceBlocks = new ArrayList<>(Arrays.asList(level.getIceBlocks()));
         return String.valueOf(iceBlocks.indexOf(iceBlock));
     }
 
+    /**
+     * Megnézi, hogy a megadott paraméterek száma megegyezik a megadott típusok számával,
+     * illetve megnézi, hogy az egyes megadott paraméterek azok léteznek-e.
+     * @param params paraméterek
+     * @param types paraméterek típusai sorrendben
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String checkForErrors(String[] params, ParamType[] types) {
         try {
             if (params.length != types.length)
@@ -168,6 +231,11 @@ public class Controller {
         return "";
     }
 
+    /**
+     * Betölti a pálya leírást egy fájlból és az egyes táblákat és játékosokat létrehozza.
+     * @param params fájl elérési útvonala ahonnan beolvassuk a pályát
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String loadGame(String[] params) {
         // error handling
         if (params.length != 1)
@@ -210,9 +278,6 @@ public class Controller {
 
             // create bears
             PolarBear[] bears = new PolarBear[numberOfBears];
-            for (PolarBear bear : bears) {
-                bear = new PolarBear();
-            }
 
             // create tiles
             IceBlock[] iceblocks = new IceBlock[numberOfTiles];
@@ -286,6 +351,12 @@ public class Controller {
         return "";
     }
 
+    /**
+     * Meghívja a level blizzard() függvényét. Ha params üres, akkor csak egy üres tömböt ad át,
+     * különben a paraméterben kapott mező sorszámoknak megfelelő táblákat.
+     * @param params blizzard bemeneti nyelvi parancs paraméterei
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String blizzard(String[] params) {
         IceBlock[] iceBlocks = new IceBlock[params.length];
         for (int i = 0; i < params.length; i++)
@@ -294,6 +365,15 @@ public class Controller {
         return "";
     }
 
+    /**
+     * Ha fut a játék, akkor az aktuálisan soron lévő játékosnak meghívja a step() függvényét
+     * a paraméterben megadott sorszámú táblával.
+     * Ha nem fut a játék, akkor a megadott sorszámú játékoson hajtja végre ugyanezt.
+     * Ha nem létezik a megadott sorszámú tábla vagy a megadott sorszámú játékos,
+     * akkor egy hiba üzenettel tér vissza, ami “ERROR:”-ral kezdődik.
+     * @param params stepPlayer bemeneti nyelvi parancs paraméterei
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String stepPlayer(String[] params) {
         if (gameRunning) {
             // error handling
@@ -317,6 +397,15 @@ public class Controller {
         return "";
     }
 
+    /**
+     * Ha fut a játék, akkor az aktuálisan soron lévő játékosnak hívja meg a useItem() függvényét
+     * egy olyan tárggyal amit a paraméterben kapott tárgy rövidítés alapján hoz létre.
+     * Ha nem fut a játék, akkor a megadott sorszámú játékoson hajtja végre ugyanezt.
+     * Ha nem létezik a megadott sorszámú játékos, vagy nincs a játékosnál olyan tárgy,
+     * amit megadtak, akkor visszatér egy hibaüzenettel, ami “ERROR:”-ral kezdődik.
+     * @param params usePlayerItem bemeneti nyelvi parancs paraméterei
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String usePlayerItem(String[] params) {
         if (gameRunning) {
             // error handling
@@ -344,16 +433,25 @@ public class Controller {
             Player player = level.getPlayer(parseInt(params[0]));
             Item item = createItem(params[1]);
             if (params.length == 2) {
-                currentPlayer.useItem(item);
+                player.useItem(item);
             } else {
                 Player other_player = level.getPlayer(parseInt(params[2]));
-                currentPlayer.useItemOnPlayer(item, other_player);
+                player.useItemOnPlayer(item, other_player);
             }
         }
 
         return "";
     }
 
+    /**
+     * Ha fut a játék, akkor az aktuálisan soron lévő játékosnak hívja meg a megfelelő függvényét
+     * (Eskimo esetén: buildIglu(), Redearcher esetén: checkStability(megadott sorszámú tábla)).
+     * Ha nem fut a játék, akkor a megadott sorszámú játékoson hajtja végre ugyanezt.
+     * Ha nem létezik a megadott sorszámú játékos vagy tábla,
+     * akkor visszatér egy hibaüzenettel, ami “ERROR:”-ral kezdődik.
+     * @param params usePlayerAbility bemeneti nyelvi parancs paraméterei
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String usePlayerAbility(String[] params) {
         if (gameRunning) {
             // error handling
@@ -384,6 +482,14 @@ public class Controller {
         return "";
     }
 
+    /**
+     * Ha fut a játék, akkor az aktuálisan soron lévő játékosnak hívja meg a swipeWithHand() függvényét.
+     * Ha nem fut a játék, akkor a megadott sorszámú játékoson hajtja végre ugyanezt.
+     * Ha nem létezik a megadott sorszámú játékos,
+     * akkor visszatér egy hibaüzenettel, ami “ERROR:”-ral kezdődik.
+     * @param params swipeSnow bemeneti nyelvi parancs paraméterei
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String swipeSnow(String[] params) {
         if (gameRunning) {
             currentPlayer.swipeWithHand();
@@ -400,6 +506,14 @@ public class Controller {
         return "";
     }
 
+    /**
+     * Ha fut a játék, akkor az aktuálisan soron lévő játékosnak hívja meg a digOutItem() függvényét.
+     * Ha nem fut a játék, akkor a megadott sorszámú játékoson hajtja végre ugyanezt.
+     * Ha nem létezik a megadott sorszámú játékos vagy tábla,
+     * akkor visszatér egy hibaüzenettel, ami “ERROR:”-ral kezdődik.
+     * @param params digOutItem bemeneti nyelvi parancs paraméterei
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String digOutItem(String[] params) {
         if (gameRunning) {
             currentPlayer.digOutItem();
@@ -416,9 +530,15 @@ public class Controller {
         return "";
     }
 
+    /**
+     * Ha fut a játék, akkor a soron következő játékos lesz az aktuális és visszatér egy “skip”-el.
+     * Ellenkező esetben egy “ERROR:”-ral kezdődő hibaüzenettel.
+     * @param params skipTurn bemeneti nyelvi parancs paraméterei
+     * @return ha volt valami hiba, akkor hibaüzenet, különben "skip"
+     */
     private String skipTurn(String[] params) {
         if (gameRunning) {
-            ArrayList<Player> players = new ArrayList<Player>(Arrays.asList(level.getPlayers()));
+            ArrayList<Player> players = new ArrayList<>(Arrays.asList(level.getPlayers()));
             int idx = players.indexOf(currentPlayer);
             if (idx + 1 >= players.size())
                 idx = -1;
@@ -430,6 +550,14 @@ public class Controller {
         return "skip";
     }
 
+    /**
+     * Meghívja a paraméterben megadott sorszámú jegesmedve step() függvényét
+     * Ha meg volt adva tábla sorszám, akkor azzal a táblával, ha nem volt, megadva, akkor null-al.
+     * Ha nem létezik a megadott sorszámú jegesmedve vagy tábla,
+     * akkor visszatér egy hibaüzenettel, ami “ERROR:”-ral kezdődik.
+     * @param params stepPolarBear bemeneti nyelvi parancs paraméterei
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String stepPolarBear(String[] params) {
         // Error handling
         ParamType[] paramTypes;
@@ -449,6 +577,11 @@ public class Controller {
         return "";
     }
 
+    /**
+     * Elindítja a játékot logikát.
+     * @param params startGame bemeneti nyelvi parancs paraméterei
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String startGame(String[] params) {
         Player[] players = level.getPlayers();
         PolarBear[] bears = level.getPolarBears();
@@ -497,6 +630,14 @@ public class Controller {
         return "Game over";
     }
 
+    /**
+     * Visszatér annak a táblának a sorszámával amin a megadott sorszámú játékos áll,
+     * illetve ennek a játékosnak az élet erejével és azokkal a tárgyakkal amik a játékosnál vannak.
+     * Ha nem létezik a megadott sorszámú játékos,
+     * akkor visszatér egy hibaüzenettel, ami “ERROR:”-ral kezdődik.
+     * @param params stat bemeneti nyelvi parancs paraméterei
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String stat(String[] params) {
         // error handling
         ParamType[] paramTypes = new ParamType[] {ParamType.PLAYER};
@@ -513,7 +654,7 @@ public class Controller {
         } else {
             iceBlock = (IceBlock) container;
         }
-        ArrayList<IceBlock> iceBlocks = new ArrayList<IceBlock>(Arrays.asList(level.getIceBlocks()));
+        ArrayList<IceBlock> iceBlocks = new ArrayList<>(Arrays.asList(level.getIceBlocks()));
         int iceBlockId = iceBlocks.indexOf(iceBlock);
 
         // create output
@@ -528,6 +669,12 @@ public class Controller {
         return output.toString();
     }
 
+    /**
+     * Lekéri egyesével a játékosok és az egyes táblák állapotát és visszatér velük
+     * olyan formátumban ahogyan a kimeneti nyelvben meg van adva.
+     * @param params status bemeneti nyelvi parancs paraméterei
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String status(String[] params) {
         Player[] players = level.getPlayers();
         IceBlock[] iceBlocks = level.getIceBlocks();
@@ -590,12 +737,18 @@ public class Controller {
         return output.toString();
     }
 
+    /**
+     * Hív egy interpret()-et a paraméterben kapott paranccsal
+     * és a visszatérési értékét kiírja a paraméterben megadott fájlba.
+     * @param params save bemeneti nyelvi parancs paraméterei
+     * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
+     */
     private String save(String[] params) {
         String fileName = params[0];
         String command = String.join("", Arrays.copyOfRange(params, 1, params.length));
         String ret = interpret(command);
 
-        FileWriter myWriter = null;
+        FileWriter myWriter;
         try {
             myWriter = new FileWriter(fileName);
             myWriter.write(ret);
