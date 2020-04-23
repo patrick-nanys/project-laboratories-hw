@@ -16,11 +16,11 @@ public abstract class Item {
 	 * @return Ha hozzaadta true, ha nem false.
 	 */
 	public boolean addToInventory(Inventory inventory) {
-		String name = FunctionLogger.get_obj_name();
+		//String name = FunctionLogger.get_obj_name();
 
-		FunctionLogger.log_call(String.format("Model.Inventory inventory.addItem(%s)", name));
+		//FunctionLogger.log_call(String.format("Model.Inventory inventory.addItem(%s)", name));
 		boolean added = inventory.addItem(this);
-		FunctionLogger.log_boolean_return(added);
+		//FunctionLogger.log_boolean_return(added);
 
 		return added;
 	}

@@ -21,12 +21,12 @@ public class Inventory {
 	 * @return Ha volt ilyen iteme false, ha nem true.
 	 */
 	public boolean addItem(Item i) {
-		String name = FunctionLogger.get_obj_name();
-		ArrayList<String> p = FunctionLogger.get_parameters();
+		//String name = FunctionLogger.get_obj_name();
+		//ArrayList<String> p = FunctionLogger.get_parameters();
 
-		FunctionLogger.log_call(String.format("Model.Inventory %s.contains(%s)", name, p.get(0)));
+		//FunctionLogger.log_call(String.format("Model.Inventory %s.contains(%s)", name, p.get(0)));
 		boolean contains = contains(i);
-		FunctionLogger.log_boolean_return(contains);
+		//FunctionLogger.log_boolean_return(contains);
 
 		if(contains){
 			return false;
@@ -42,13 +42,13 @@ public class Inventory {
 	 * @return Ha van olyan iteme, akkor true, ha nincs false.
 	 */
 	public boolean contains(Item item) {
-		ArrayList<String> p = FunctionLogger.get_parameters();
+		//ArrayList<String> p = FunctionLogger.get_parameters();
 		for(int i = 0; i < items.size(); i++){
 		    Item itemInInventory = items.get(i);
-			String itemtype =items.get(i).toString();
-			FunctionLogger.log_call(String.format("%s itemInInventory.equals(%s)",itemtype, p.get(0)));
-			boolean equals = itemInInventory.equals(item);
-			FunctionLogger.log_boolean_return(equals);
+			//String itemtype = items.get(i).toString();
+			//FunctionLogger.log_call(String.format("%s itemInInventory.equals(%s)",itemtype, p.get(0)));
+			boolean equals = item.equals(itemInInventory);//.equals(item);
+			//FunctionLogger.log_boolean_return(equals);
 
 			if(equals)
 				return true;
@@ -57,26 +57,40 @@ public class Inventory {
 	}
 
 	/**
-	 * A kivalasztott itemet a
+	 * Hasznalja a kapott itemet, a kapott player parameterrel.
 	 * @param item A hasznalando item.
 	 * @param p Akin hasznalni akarja az itemet a jatekos.
 	 */
 	public void use(Item item, Player p) {
-		ArrayList<String> param = FunctionLogger.get_parameters();
-		String name = FunctionLogger.get_obj_name();
+		//ArrayList<String> param = FunctionLogger.get_parameters();
+		//String name = FunctionLogger.get_obj_name();
 
-		FunctionLogger.log_call(String.format("Model.Inventory %s.contains(%s)", name, param.get(0)));
+		//FunctionLogger.log_call(String.format("Model.Inventory %s.contains(%s)", name, param.get(0)));
 		boolean contains = contains(item);
-		FunctionLogger.log_boolean_return(contains);
+		//FunctionLogger.log_boolean_return(contains);
 
 		if(contains){
-			String itemtype = item.toString();
-			FunctionLogger.log_call(String.format("%s %s.use(%s)",itemtype, param.get(0), param.get(1)));
+			//String itemtype = item.toString();
+			//FunctionLogger.log_call(String.format("%s %s.use(%s)",itemtype, param.get(0), param.get(1)));
 			item.use(p);
-			FunctionLogger.log_return("");
+			//FunctionLogger.log_return("");
 		}
 	}
 
+	/**
+	 * Eltavolitja a kapott itemet az inventorybol.
+	 * @param item Az eltavolitando item.
+	 */
+	public void removeItem(Item item){
+		if(contains(item)){
+			items.remove(item);
+		}
+	}
+
+	/**
+	 * Visszaadja a tarolt itemeket egy tombben.
+	 * @return A tarolt itemek.
+	 */
 	public Item[] getItems() {
 		return items.toArray(new Item[0]);
 	}

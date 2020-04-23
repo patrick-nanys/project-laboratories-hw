@@ -11,7 +11,7 @@ public class UnstableIceBlock extends IceBlock {
 	 */
 	public UnstableIceBlock (int cap) {
 		super();
-		capacity=cap;
+		capacity = cap;
 	}
 
 	public UnstableIceBlock(Player[] players, Item item, Building building, int snowLayers, int capacity) {
@@ -22,11 +22,11 @@ public class UnstableIceBlock extends IceBlock {
 	 * Felboritja az instabil jegtablat, beledobva az osszes rajta allo jatekost a tengerbe.
 	 */
 	public void flip() {
-		String name = FunctionLogger.get_obj_name();
-		for(int i=0;i<players.size();i++) {
-			FunctionLogger.log_call(String.format("Model.UnstableIceBlock %s.movePlayer(players.get(i), %s.sea)", name, name));
+		//String name = FunctionLogger.get_obj_name();
+		for(int i = 0; i < players.size(); i++) {
+			//FunctionLogger.log_call(String.format("Model.UnstableIceBlock %s.movePlayer(players.get(i), %s.sea)", name, name));
 			movePlayer(players.get(i), this.sea);
-			FunctionLogger.log_return("");
+			//FunctionLogger.log_return("");
 		}
 	}
 
@@ -37,11 +37,11 @@ public class UnstableIceBlock extends IceBlock {
 	public void addPlayer(Player p) {
 		players.add(p);
 		p.setContainer(this);
-		if(players.size()>capacity) {
-			String name = FunctionLogger.get_obj_name();
-			FunctionLogger.log_call(String.format("Model.UnstableIceBlock %s.flip()",name));
+		if(players.size() > capacity) {
+			//String name = FunctionLogger.get_obj_name();
+			//FunctionLogger.log_call(String.format("Model.UnstableIceBlock %s.flip()",name));
 			flip();
-			FunctionLogger.log_return("");
+			//FunctionLogger.log_return("");
 		}
 	}
 	/**
