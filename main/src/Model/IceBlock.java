@@ -160,16 +160,6 @@ public class IceBlock implements PlayerContainerI {
 
 	public void setBuilding(Building b) {
 		building = b;
+	}
 
-	}
-	public void damagePlayers(int damage){
-		if(building!=null) building.protect(damage);
-		else {
-			for(Player player:players){
-				for(int i =0;i<damage;i++){
-					player.loseHealth();
-				}
-			}
-		}
-	}
 }
