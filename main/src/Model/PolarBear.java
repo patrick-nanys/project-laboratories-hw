@@ -39,10 +39,11 @@ public class PolarBear extends Steppable {
      */
     public void step(PlayerContainerI pc){
         if(pc == null){
-            int neighbours = ib.getNeighbours().size();
+            List<IceBlock> neighbourslist = ib.getNeighbours();
+            int neighbours = neighbourslist.size();
             Random rnd = new Random();
             int rndnum = rnd.nextInt(neighbours);
-            pc = ib.getNeighbour(rndnum);
+            pc = neighbourslist.get(rndnum);
         }
         ib = (IceBlock) pc;
         this.kill();

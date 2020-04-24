@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Model.Sea osztaly, egy Model.IceBlock-ot korulvevo tengert reprezental. Egy IceBlockon tartozkodo jatekos
@@ -17,15 +18,9 @@ public class Sea implements PlayerContainerI {
 
 	/**
 	 * Elkeri az adott iranyban szomszedos tengert
- 	 * @param d az irany amire kivancsiak vagyunk
 	 * @return visszater az adott iranyban szomszedos Model.Sea-vel
 	 */
-	public Sea getNeighbour(DirectionE d) {
-		String direction = d.name();
-		FunctionLogger.log_call(String.format("Model.IceBlock position.getNeighbour(%s)", direction));
-		IceBlock b = position.getNeighbour(d);
-		FunctionLogger.log_return("b");
-		FunctionLogger.log_call("Model.Sea s.getSea()");
+	public Sea getNeighbour(IceBlock b) {
 		Sea s = b.getSea();
 		FunctionLogger.log_return("s");
 		return s;
@@ -38,34 +33,8 @@ public class Sea implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
-		String name = FunctionLogger.get_obj_name();
-		String blocktype = pc.toString();
-		String playertype = p.toString();
-		String playername;
-		if(playertype.equals("Model.Researcher")) playername = "r";
-		else playername = "e";
-		FunctionLogger.log_call(String.format("%s pc.addPlayer(%s)",blocktype, playername));
 		pc.addPlayer(p);
-		FunctionLogger.log_return("");
-		FunctionLogger.log_call(String.format("Model.Sea %s.removePlayer(%s)",name, playername));
 		this.removePlayer(p);
-		FunctionLogger.log_return("");
-	}
-
-	/**
-	 * Mozgat egy jatekost egy adott iranyba
-	 * @param p a mozgatni kivant jatekos
-	 * @param d az adott irany
-	 */
-	@Override
-	public void movePlayer(Player p, DirectionE d) {
-		String playertype = p.toString();
-		String playername;
-		if(playertype.equals("Model.Researcher")) playername = "r";
-		else playername = "e";
-		String direction = d.name();
-		FunctionLogger.log_call(String.format("Model.IceBlock position.movePlayer(%s, %s)", playername, direction));
-		position.movePlayer(p,d);
 	}
 
 	/**
@@ -88,20 +57,28 @@ public class Sea implements PlayerContainerI {
 		p.setContainer(this);
 	}
 
+	/**
+	 * Visszaadja a tengerben talalhato jatekosok listajat.
+	 * @return players, a tengerben talalhato jatekosok.
+	 */
+	@Override
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	/**
+	 * Beallitja, hogy melyik tabla korul talalhato a tenger.
+	 * @param ib a beallitando tabla.
+	 */
 	public void setPosition(IceBlock ib)  {
 		position = ib;
 	}
 
 	/**
-	 * Teszteleshez, visszaadja az osztaly nevet.
-	 * @return az osztaly neve.
+	 * Visszaadja azt, hogy a tenger melyik tabla korul talalhato.
+	 * @return position, a tablaja.
 	 */
-	@Override
-	public String toString() {
-		return "Model.Sea";
-	}
-
 	public IceBlock getPosition() {
-		return null;
+		return position;
 	}
 }
