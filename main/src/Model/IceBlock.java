@@ -35,7 +35,6 @@ public class IceBlock implements PlayerContainerI {
 		players = new ArrayList<>();
 		snowLayers=0;
 		capacity=6;
-		hasIglu=false;
 		item=null;
 		building = null;
 	}
