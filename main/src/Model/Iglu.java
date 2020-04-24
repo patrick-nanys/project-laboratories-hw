@@ -14,7 +14,7 @@ public class Iglu implements Building {
      * azaz semmilyen kárt nem okoz a játékosoknak.
      */
     @Override
-    public void protect(int damage) {
+    public void protect() {
     }
 
     /**
