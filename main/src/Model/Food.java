@@ -8,22 +8,16 @@ package Model;
 public class Food extends Item {
 
 	/**
-	 * Felülírja az Model.Item pickedUpBy függvényét,
+	 * Felülírja az Item pickedUpBy függvényét,
 	 * meghívja a paraméterként kapott játékos eat függvényét.
 	 * @param p a játékos, aki felvette az élelmet
 	 */
 	public void pickedUpBy(Player p) {
-		String playertype = p.toString();
-		String playername;
-		if(playertype.equals("Model.Researcher")) playername = "r";
-		else playername = "e";
-		FunctionLogger.log_call(String.format("Model.Player %s.eat()", playername));
 		p.eat();
-		FunctionLogger.log_return("");
 	}
 
 	/**
-	 * Felülírja az Model.Item addToInventory függvényét,
+	 * Felülírja az Item addToInventory függvényét,
 	 * hogy ne kerülhessen be az élelem a játékos inventory-jába
 	 * @param inventory A kérdéses inventory
 	 * @return Azzal tér vissza, hogy sikeresen hozzáadódott-e
@@ -42,11 +36,4 @@ public class Food extends Item {
 		return item instanceof Food;
 	}
 
-	/**
-	 * Teszteleshez, visszaadja az osztaly nevet.
-	 * @return az osztaly neve.
-	 */
-	public String toString(){
-		return "Model.Food";
-	}
 }
