@@ -261,10 +261,12 @@ public class Controller {
 
                 // create inventory
                 Inventory inventory = new Inventory();
+                ArrayList<Item> createdItems = new ArrayList<>();
                 for (String itemLetter : itemLetters) {
                     Item item = createItem(itemLetter);
                     if (item == null)
                         break;
+                    createdItems.add(item);
                     inventory.addItem(item);
                 }
 
@@ -273,6 +275,10 @@ public class Controller {
                     players[i] = new Eskimo(level, inventory, health);
                 else if (playerTypes.charAt(i) == 'r')
                     players[i] = new Researcher(level, inventory, health);
+
+                // call picked up by for items
+                for (Item item : createdItems)
+                    item.pickedUpBy(players[i]);
 
             }
 
