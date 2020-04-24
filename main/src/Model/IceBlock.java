@@ -22,6 +22,7 @@ public class IceBlock implements PlayerContainerI {
 	protected Sea sea;
 	protected Item item;
 	protected List <Player> players;
+	protected Building building;
 
 	/**
 	 * Model.IceBlock konstruktor
@@ -30,18 +31,14 @@ public class IceBlock implements PlayerContainerI {
 	 * Alaphelyzetben nincs rajta sem iglu, es nincs benne item sem.
 	 */
 	public IceBlock() {
-		FunctionLogger.log_call("<<create>> Model.Sea sea");
 		sea = new Sea();
-		FunctionLogger.log_return("");
 		neighbours = new ArrayList<>();
-		for(int i=0;i<4;i++) {
-			neighbours.add(i, null);
-		}
 		players = new ArrayList<>();
 		snowLayers=0;
 		capacity=6;
 		hasIglu=false;
 		item=null;
+		building = null;
 	}
 
 	public IceBlock(Player[] players, Item item, Building building, int snowLayers, int capacity) {
@@ -88,25 +85,6 @@ public class IceBlock implements PlayerContainerI {
 	}
 
 	/**
-	 * Beallitja, hogy talalhato-e iglu a tablan
-	 * @param b true: van rajta iglu, false: nincs
-	 */
-	public void setIglu(boolean b) {
-		hasIglu=b;
-	}
-
-	/**
-	 * Visszaadja, hogy talalhato-e a tablan iglu
-	 * @return hasIglu, a boolean ami tarolja, hogy van-e iglu a tablan
-	 */
-	public boolean getIglu() {
-		if (FunctionLogger.ask_question("Van a tablan iglu?")){
-			return true;
-		}
-		else return false;
-	}
-
-	/**
 	 * Visszaadja a tablan egyszerre tartozkodni tudo jatekosok szamat
 	 * @return capacity, a tabla teherbirasa
 	 */
@@ -143,65 +121,14 @@ public class IceBlock implements PlayerContainerI {
 	}
 
 	/**
-	 * Visszaadja az adott iranyban szomszedos jegtablat
-	 * @param d az adott irany, amire kivancsiak vagyunk
-	 * @return Model.IceBlock, az adott iranyban szomszedos tabla
-	 */
-	public IceBlock getNeighbour(DirectionE d) {
-		switch(d) {
-			case NORTH:
-				return neighbours.get(0);
-			case WEST:
-				return neighbours.get(1);
-			case SOUTH:
-				return neighbours.get(2);
-			case EAST:
-				return neighbours.get(3);
-			default:
-				return null;
-		}
-	}
-
-	/**
 	 * Elmozditja az adott jatekost az adott containerre
 	 * @param p A mozditani kivant jatekos
 	 * @param pc A container, amire mozgatunk
 	 */
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
-		String name = FunctionLogger.get_obj_name();
-		String blocktype = pc.toString();
-		String playertype = p.toString();
-		String playername;
-		if(playertype.equals("Model.Researcher")) playername = "r";
-		else playername = "e";
-		FunctionLogger.log_call(String.format("%s pc.addPlayer(%s)", blocktype, playername));
 		pc.addPlayer(p);
-		FunctionLogger.log_return("");
-		FunctionLogger.log_call(String.format("Model.IceBlock %s.removePlayer(%s)", name, playername));
 		this.removePlayer(p);
-		FunctionLogger.log_return("");
-	}
-
-	/**
-	 * Elmozditja az adott jatekost az adott iranyba
-	 * @param p A mozditani kivant jatekos
-	 * @param d A mozditas iranya
-	 */
-	@Override
-	public void movePlayer(Player p, DirectionE d) {
-		String name = FunctionLogger.get_obj_name();
-		String direction = d.name();
-		String playertype = p.toString();
-		FunctionLogger.log_call(String.format("Model.IceBlock %s.getNeighbour(%s)", name, direction));
-		IceBlock neighbour=this.getNeighbour(d);
-		FunctionLogger.log_return("neighbour");
-		String playername;
-		if(playertype.equals("Model.Researcher")) playername = "r";
-		else playername = "e";
-		FunctionLogger.log_call(String.format("Model.IceBlock %s.movePlayer(%s, neighbour)", name, playername));
-		movePlayer(p, neighbour);
-		FunctionLogger.log_return("");
 	}
 
 	/**
@@ -223,24 +150,26 @@ public class IceBlock implements PlayerContainerI {
 		p.setContainer(this);
 	}
 
-	/**
-	 * Teszteleshez, visszaadja az osztaly nevet.
-	 * @return az osztaly neve.
-	 */
-	@Override
-	public String toString() {
-		return "Model.IceBlock";
-	}
-
 	public Building getBuilding() {
-		return null;
+		return building;
 	}
 
-	public IceBlock[] getNeighbours() {
-		return neighbours.toArray(new IceBlock[0]);
+	public List<IceBlock> getNeighbours() {
+		return neighbours;
 	}
 
 	public void setBuilding(Building b) {
+		building = b;
 
+	}
+	public void damagePlayers(int damage){
+		if(building!=null) building.protect(damage);
+		else {
+			for(Player player:players){
+				for(int i =0;i<damage;i++){
+					player.loseHealth();
+				}
+			}
+		}
 	}
 }

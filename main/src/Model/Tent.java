@@ -16,7 +16,7 @@ public class Tent extends Item implements Building {
      * ez a függvény megöli az első játékost a jégtáblán.
      */
     @Override
-    public void protect(){
+    public void protect(int damage){
         List<Player> players =  iceblock.getPlayers();
         if(players != null){
             players.get(0).die();

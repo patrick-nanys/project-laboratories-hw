@@ -10,7 +10,7 @@ public interface Building {
      * A védés műveletének függvénye. Iglu-nál mindentől
      * megvédi a játékosokat, Tent-nél csak a vihartól.
      */
-    void protect();
+    void protect(int damage);
 
     /**
      * Ahhoz szükséges, hogy a tent a kör végén meg tudjon semmisülni.
