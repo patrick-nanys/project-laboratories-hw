@@ -40,6 +40,7 @@ public class Level {
     /**
 	 *
 	 */
+    /*
 	public void init() {
 		ArrayList<Item> items = new ArrayList<>();
 		Random r = new Random();
@@ -93,6 +94,7 @@ public class Level {
 		}
 
 	}
+	*/
 
 	/**
 	 * Ellenorzi, hogy az osszes jatekos es az osszes alkatresz egy mezon van-e. Ha igen, akkor atallitja a
@@ -155,62 +157,26 @@ public class Level {
 	}
 
 	/**
-	 * Reprezental egy hovihart.
-	 * Random Model.IceBlock-oknak noveli a horeteget,
-	 * es sebzi a rajta levo jatekosokat, ha
-	 * nincs rajta iglu.
-	 * Teszteleshez, ha csak 1 Model.IceBlock van, akkor arra mindenkepp meghivodik.
-     * @param iceBlocks
+	 * A vihar függvénye. A megadott jégtáblákra plusz egy réteg havat rak,
+	 * valamint sebzi a játékosokat, ha a táblán nincs iglu vagy sátor.
+	 * Ha nincs megadva jégtábla lista, akkor random mennyiségű,
+	 * random indexű jégtáblákra hívódik meg.
+     * @param iceBlocks_
      */
-	public void blizzard(IceBlock[] iceBlocks) {
-
-
-		// TODO át kell írni
-
-
-		if (iceblocks.size() == 1) {
-			FunctionLogger.log_call("Model.IceBlock ib.modifyLayers(+1)");
-			iceblocks.get(0).modifyLayers(+1);
-			FunctionLogger.log_return("");
-			FunctionLogger.log_call("Model.IceBlock ib.getIglu()");
-			if (!iceblocks.get(0).getIglu()) {
-				FunctionLogger.log_return("");
-				FunctionLogger.log_call("Model.IceBlock ib.getPlayers()");
-				List<Player> blockPlayers = iceblocks.get(0).getPlayers();
-				FunctionLogger.log_return("players");
-				for(int n =0;n<blockPlayers.size();n++) {
-					String playertype = blockPlayers.get(n).toString();
-					String playername;
-					if(playertype.equals("Model.Researcher")) playername = "r";
-					else playername = "e";
-					FunctionLogger.log_call(String.format("%s %s.loseHealth()", playertype, playername));
-					iceblocks.get(0).getPlayers().get(n).loseHealth();
-					FunctionLogger.log_return("");
-				}
-			}
-		}
-		else if(iceblocks.size()>1) {
-			for (int i = 0; i < iceblocks.size(); i++) {
-				FunctionLogger.log_call("Model.IceBlock ib.modifyLayers(+1)");
-				iceblocks.get(i).modifyLayers(+1);
-				FunctionLogger.log_return("");
-				FunctionLogger.log_call("Model.IceBlock ib.getIglu()");
-				if (!iceblocks.get(i).getIglu()) {
-					FunctionLogger.log_return("");
-					FunctionLogger.log_call("Model.IceBlock ib.getPlayers()");
-					List<Player> blockPlayers = iceblocks.get(i).getPlayers();
-					FunctionLogger.log_return("players");
-					for(int n=0;n<blockPlayers.size();n++) {
-						String playertype = blockPlayers.get(n).toString();
-						String playername;
-						if(playertype.equals("Model.Researcher")) playername = "r";
-						else playername = "e";
-						FunctionLogger.log_call(String.format("%s %s.loseHealth()",playertype, playername));
-						blockPlayers.get(n).loseHealth();
-						FunctionLogger.log_return("");
+	public void blizzard(IceBlock[] iceBlocks_) {
+		if (iceBlocks_ != null) {
+			for (IceBlock ib : iceBlocks_) {
+				ib.modifyLayers(+1);
+				if (ib.getBuilding() == null) {
+					List<Player> blockPlayers = ib.getPlayers();
+					for(Player blockedp : blockPlayers) {
+						blockedp.loseHealth();
 					}
 				}
 			}
+		}
+		else {
+			//TODO random jégtáblák
 		}
 	}
 
