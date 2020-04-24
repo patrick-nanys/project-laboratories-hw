@@ -1,8 +1,9 @@
 package Model;
 
 /**
- * Model.UnstableIceBlock osztaly, reprezental egy instabil jegtablat a jatekban.
- * Ha tobb jatekos tartozkodik rajta, mint amennyit elbir, felborul
+ * UnstableIceBlock osztaly. Az IceBlock leszarmazottja.
+ * Ugyanugy viselkedik, mint az IceBlock, kiveve, hogy van egy kapacitasa, ezert
+ * ha tobb jatekos tartozkodik rajta, mint amennyit elbir, akkor felborul.
  */
 public class UnstableIceBlock extends IceBlock {
 	/**
@@ -14,42 +15,37 @@ public class UnstableIceBlock extends IceBlock {
 		capacity = cap;
 	}
 
+	/**
+	 * Konstruktor a fajlbol valo beolvasashoz.
+	 * @param players Rajta allo jatekosok.
+	 * @param item Belefagyott item.
+	 * @param building Rajtalevo epulet.
+	 * @param snowLayers Horetegek szama.
+	 * @param capacity Kapacitas.
+	 */
 	public UnstableIceBlock(Player[] players, Item item, Building building, int snowLayers, int capacity) {
-
+		super(players, item, building, snowLayers, capacity);
 	}
 
     /**
 	 * Felboritja az instabil jegtablat, beledobva az osszes rajta allo jatekost a tengerbe.
 	 */
 	public void flip() {
-		//String name = FunctionLogger.get_obj_name();
 		for(int i = 0; i < players.size(); i++) {
-			//FunctionLogger.log_call(String.format("Model.UnstableIceBlock %s.movePlayer(players.get(i), %s.sea)", name, name));
 			movePlayer(players.get(i), this.sea);
-			//FunctionLogger.log_return("");
 		}
 	}
 
 	/**
-	 * Hozzaadja az adott jatekost az instabil jegtablahoz. Ha tobben allnak rajta, mint a kapacitas, borul.
-	 * @param p A hozzaadni kivant jatekos
+	 * Hozzaadja a kapott jatekost a rajta allo jatekosok listajahoz.
+	 * Ha ezutan tobben allnak rajta, mint a kapacitas, felborul.
+	 * @param p A hozzaadando jatekos
 	 */
 	public void addPlayer(Player p) {
 		players.add(p);
 		p.setContainer(this);
 		if(players.size() > capacity) {
-			//String name = FunctionLogger.get_obj_name();
-			//FunctionLogger.log_call(String.format("Model.UnstableIceBlock %s.flip()",name));
 			flip();
-			//FunctionLogger.log_return("");
 		}
-	}
-	/**
-	 * Teszteleshez, visszaadja az osztaly nevet.
-	 * @return az osztaly neve.
-	 */
-	@Override
-	public String toString(){
-		return "Model.UnstableIceBlock";
 	}
 }
