@@ -7,15 +7,6 @@ package Model;
  */
 public class UnstableIceBlock extends IceBlock {
 	/**
-	 * Konstruktor
-	 * @param cap a kapacitas
-	 */
-	public UnstableIceBlock (int cap) {
-		super();
-		capacity = cap;
-	}
-
-	/**
 	 * Konstruktor a fajlbol valo beolvasashoz.
 	 * @param players Rajta allo jatekosok.
 	 * @param item Belefagyott item.
@@ -31,8 +22,8 @@ public class UnstableIceBlock extends IceBlock {
 	 * Felboritja az instabil jegtablat, beledobva az osszes rajta allo jatekost a tengerbe.
 	 */
 	public void flip() {
-		for(int i = 0; i < players.size(); i++) {
-			movePlayer(players.get(i), this.sea);
+		for (Player player : players) {
+			movePlayer(player, this.sea);
 		}
 	}
 

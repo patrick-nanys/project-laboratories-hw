@@ -34,8 +34,8 @@ public class Inventory {
 	 * @return Ha van olyan iteme, akkor true, ha nincs false.
 	 */
 	public boolean contains(Item item) {
-		for(int i = 0; i < items.size(); i++){
-			if(item.equals(items.get(i)))
+		for (Item value : items) {
+			if (item.equals(value))
 				return true;
 		}
 		return false;

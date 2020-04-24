@@ -5,6 +5,7 @@ package Model;
  * ami minden olyan dolgot reprezentál, amely időben lépni tud.
  */
 public abstract class Steppable {
+    //TODO ennek a törlése
     protected int turnCounter;
 
     /**

@@ -13,7 +13,7 @@ public class Sea implements PlayerContainerI {
 	private ArrayList<Player> players;
 
 	public Sea() {
-		players = new ArrayList<Player>();
+		players = new ArrayList<>();
 	}
 
 	/**
@@ -21,9 +21,7 @@ public class Sea implements PlayerContainerI {
 	 * @return visszater az adott iranyban szomszedos Model.Sea-vel
 	 */
 	public Sea getNeighbour(IceBlock b) {
-		Sea s = b.getSea();
-		FunctionLogger.log_return("s");
-		return s;
+		return b.getSea();
 	}
 
 	/**

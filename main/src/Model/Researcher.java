@@ -6,15 +6,6 @@ package Model;
  */
 public class Researcher extends Player {
 
-
-	/**
-	 * Konstruktor, hogy beállítsuk a pályáját.
-	 * @param level pálya ahol elhelyezkedik
-	 */
-	public Researcher(Level level) {
-		super(level);
-	}
-
 	/**
 	 * Konstruktor, hogy a tagváltozókat beállítsuk
 	 * @param level pálya ahol elhelyezkedik
@@ -30,8 +21,7 @@ public class Researcher extends Player {
 	 * @param ib a megnezendo jegtabla
 	 */
 	public int checkStability(IceBlock ib) {
-		int capacity = ib.getCapacity();
-		return capacity;
+		return ib.getCapacity();
 	}
 
 }

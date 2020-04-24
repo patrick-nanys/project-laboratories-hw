@@ -16,7 +16,7 @@ public class Part extends Item {
 	 *               alkatrészt.
 	 */
 	public void use(Player player) {
-		if(player.getInSea() == false){
+		if(!player.getInSea()){
 			level.checkParts();
 		}
 	}
@@ -38,8 +38,7 @@ public class Part extends Item {
 	 * @return Azzal a hellyel tér vissza, amin a
 	 */
 	public PlayerContainerI getLocation() {
-		PlayerContainerI location = player.getLocation();
-		return location;
+		return player.getLocation();
 	}
 
 	/**

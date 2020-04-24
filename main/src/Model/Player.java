@@ -14,12 +14,6 @@ public abstract class Player extends Steppable {
 	protected Level level;
 	protected PlayerContainerI container;
 
-	Player(Level level) {
-		this.level = level;
-		inSea = false;
-		inventory = new Inventory();
-	}
-
 	Player(Level level, Inventory inventory, int health) {
 		this.level = level;
 		inSea = false;
@@ -48,8 +42,7 @@ public abstract class Player extends Steppable {
 	 * @return jatekosnal van-e a targy
 	 */
 	public boolean hasItem(Item item) {
-		boolean ret = inventory.contains(item);
-		return ret;
+		return inventory.contains(item);
 	}
 
 	/**

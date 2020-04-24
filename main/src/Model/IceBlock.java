@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,11 +49,7 @@ public class IceBlock implements PlayerContainerI {
 	 * @param capacity kapacitas
 	 */
 	public IceBlock(Player[] players, Item item, Building building, int snowLayers, int capacity) {
-		List<Player> tmp = new ArrayList<>();
-		for(Player player:players) {
-			tmp.add(player);
-		}
-		this.players = tmp;
+		this.players = new ArrayList<>(Arrays.asList(players));
 		this.item=item;
 		this.building=building;
 		this.snowLayers=snowLayers;

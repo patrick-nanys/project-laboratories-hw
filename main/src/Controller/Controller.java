@@ -453,6 +453,7 @@ public class Controller {
      * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
      */
     private String usePlayerAbility(String[] params) {
+        int capacity = -1;
         if (gameRunning) {
             // error handling
             ParamType[] paramTypes = new ParamType[] {ParamType.ICE_BLOCK};
@@ -463,7 +464,7 @@ public class Controller {
             if (currentPlayer instanceof Eskimo)
                 ((Eskimo)currentPlayer).buildIglu(iceBlock);
             else
-                ((Researcher)currentPlayer).checkStability(iceBlock);
+                capacity = ((Researcher)currentPlayer).checkStability(iceBlock);
 
         } else {
             // error handling
@@ -476,10 +477,10 @@ public class Controller {
             if (currentPlayer instanceof Eskimo)
                 ((Eskimo)player).buildIglu(iceBlock);
             else
-                ((Researcher)player).checkStability(iceBlock);
+                capacity = ((Researcher)player).checkStability(iceBlock);
         }
 
-        return "";
+        return capacity != -1 ? "IceBlock has capacity of: " + capacity : "";
     }
 
     /**
