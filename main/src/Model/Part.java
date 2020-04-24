@@ -17,9 +17,7 @@ public class Part extends Item {
 	 */
 	public void use(Player player) {
 		if(player.getInSea() == false){
-			FunctionLogger.log_call("Model.Level level.checkParts()");
 			level.checkParts();
-			FunctionLogger.log_return("");
 		}
 	}
 
@@ -40,13 +38,7 @@ public class Part extends Item {
 	 * @return Azzal a hellyel tér vissza, amin a
 	 */
 	public PlayerContainerI getLocation() {
-		String playertype = player.toString();
-		String playername;
-		if(playertype.equals("Model.Researcher")) playername = "r";
-		else playername = "e";
-		FunctionLogger.log_call(String.format("%s %s.getLocation()", playertype, playername));
 		PlayerContainerI location = player.getLocation();
-		FunctionLogger.log_return("location");
 		return location;
 	}
 
@@ -61,11 +53,4 @@ public class Part extends Item {
 		return item instanceof Part;
 	}
 
-	/**
-	 * Teszteleshez, visszater az osztaly nevevel.
-	 * @return az osztaly neve.
-	 */
-	public String toString(){
-		return "Model.Part";
-	}
 }

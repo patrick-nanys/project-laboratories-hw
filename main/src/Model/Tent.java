@@ -55,20 +55,12 @@ public class Tent extends Item implements Building {
     /**
      * Megvizsgálja, hogy a paraméterként kapott item Tent objektum-e.
      * @param item A vizsgalando item.
-     * @return
+     * @return ha Tent akkor igaz, ha nem, akkor hamis.
      */
     @Override
     public boolean equals(Item item) {
         return item instanceof Tent;
     }
 
-    /**
-     * Teszteleshez, visszaadja az osztaly nevet.
-     * @return az osztaly neve
-     */
-    @Override
-    public String toString() {
-        return "Model.Tent";
-    }
 
 }

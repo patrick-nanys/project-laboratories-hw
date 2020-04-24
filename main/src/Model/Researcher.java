@@ -34,12 +34,4 @@ public class Researcher extends Player {
 		return capacity;
 	}
 
-	/**
-	 * Teszteleshez, visszaadja az osztaly nevet.
-	 * @return az osztaly neve.
-	 */
-	@Override
-	public String toString() {
-		return "Model.Researcher";
-	}
 }
