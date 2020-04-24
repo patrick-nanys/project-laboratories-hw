@@ -17,9 +17,7 @@ public abstract class Player extends Steppable {
 	Player(Level level) {
 		this.level = level;
 		inSea = false;
-//		FunctionLogger.log_call("<<create>> Model.Inventory inventory");
 		inventory = new Inventory();
-//		FunctionLogger.log_return("");
 	}
 
 	Player(Level level, Inventory inventory, int health) {
@@ -39,13 +37,8 @@ public abstract class Player extends Steppable {
 	 * @param pc a megadott irany, amibe leptetni akarjuk
 	 */
 	public void step(PlayerContainerI pc) {
-		String name = FunctionLogger.get_obj_name();
-		ArrayList<String> p = FunctionLogger.get_parameters();
-		String containertype = container.toString();
 		if (!getInSea()) {
-			FunctionLogger.log_call(String.format("%s container.movePlayer(%s, %s)",containertype, name, p.get(0)));
-			container.movePlayer(this, d);
-			FunctionLogger.log_return("");
+			container.movePlayer(this, pc);
 		}
 	}
 
@@ -55,10 +48,7 @@ public abstract class Player extends Steppable {
 	 * @return jatekosnal van-e a targy
 	 */
 	public boolean hasItem(Item item) {
-		ArrayList<String> p = FunctionLogger.get_parameters();
-		FunctionLogger.log_call(String.format("Model.Inventory inventory.contains(%s)", p.get(0)));
 		boolean ret = inventory.contains(item);
-		FunctionLogger.log_boolean_return(ret);
 		return ret;
 	}
 
@@ -67,15 +57,9 @@ public abstract class Player extends Steppable {
 	 * és ha nincsen rajta buvarruha, akkor a jatekos meghal.
 	 */
 	public void checkPlayerStatus() {
-		String type = FunctionLogger.get_obj_type();
-		String name = FunctionLogger.get_obj_name();
-		FunctionLogger.log_call("Model.Inventory inventory.contains(divingSuit)");
 		boolean hasDivingSuit = inventory.contains(new DivingSuit());
-		FunctionLogger.log_boolean_return(hasDivingSuit);
 		if (getInSea() && !hasDivingSuit) {
-			FunctionLogger.log_call(String.format("%s %s.die()", type, name));
 			die();
-			FunctionLogger.log_return("");
 		}
 	}
 
@@ -84,7 +68,7 @@ public abstract class Player extends Steppable {
 	 * @return tengerben van-e a jatekos
 	 */
 	public boolean getInSea() {
-		return FunctionLogger.ask_question("Tengerben van a jatekos?");
+		return inSea;
 	}
 
 	/**
@@ -94,16 +78,15 @@ public abstract class Player extends Steppable {
 	public Inventory getInventory() {
 		return inventory;
 	}
+
 	/**
 	 * A jatekos eletero potjat eggyel csokkenti.
+	 * Ha az életereje kevesebb, mint egy, akkor a játékos meghal.
 	 */
 	public void loseHealth() {
-		String type = FunctionLogger.get_obj_type();
-		String name = FunctionLogger.get_obj_name();
-		if (FunctionLogger.ask_question("Kevesebb mint egy a jatekos elete?")) {
-			FunctionLogger.log_call(String.format("%s %s.die()", type, name));
+		health--;
+		if (health < 1) {
 			die();
-			FunctionLogger.log_return("");
 		}
 	}
 
@@ -111,7 +94,7 @@ public abstract class Player extends Steppable {
 	 * A jatekos megeszik egy egysegnyi etelt igy az eletero pontjat eggyel noveli.
 	 */
 	public void eat() {
-		// nen csinal semmit sem, mivel allapotot tarolna
+		health++;
 	}
 
 	/**
@@ -119,61 +102,49 @@ public abstract class Player extends Steppable {
 	 * @param item a hasznalani kivant targy
 	 */
 	public void useItem(Item item) {
-		String name = FunctionLogger.get_obj_name();
-		ArrayList<String> p = FunctionLogger.get_parameters();
 		if (!getInSea()) {
-			FunctionLogger.log_call(String.format("Model.Inventory inventory.use(%s, %s)", p.get(0), name));
 			inventory.use(item, this);
-			FunctionLogger.log_return("");
-		}
-	}
-
-	public void useItemOnPlayer(Item item, Player player) {
-		ArrayList<String> p = FunctionLogger.get_parameters();
-		if (!getInSea()) {
-			FunctionLogger.log_call(String.format("Model.Inventory inventory.use(%s, %s)", p.get(0), p.get(1)));
-			inventory.use(item, player);
-			FunctionLogger.log_return("");
 		}
 	}
 
 	/**
-	 * A jatekos lesopor egy egysegnyi havat a jegtablarol.
+	 * Ha nincs a játékos a tengerben,
+	 * akkor az adott itemet az adott playeren használja úgy,
+	 * hogy a leltárának átadja a feladatot.
+	 * @param item Az eszköz, amit használ a játékoson
+	 * @param player A játékos, amin használja az eszközt.
+	 */
+	public void useItemOnPlayer(Item item, Player player) {
+		if (!getInSea()) {
+			inventory.use(item, player);
+		}
+	}
+
+	/**
+	 * A játékos lesöpör egy egységnyi havat a jégtábláról,
+	 * ezzel módosítja a jégtábla rétegét -1-el, de nem lehet kevesebb 0-nál.
 	 */
 	public void swipeWithHand() {
 		if (!getInSea()) {
-			FunctionLogger.log_call("Model.IceBlock ib.modifyLayers(-1)");
 			((IceBlock) container).modifyLayers(-1);
-			FunctionLogger.log_return("");
 		}
 	}
 
 	/**
-	 * A jatekos kiassa a jegtablabol a benne levo targyat.
+	 * Ha a játékos nincs a tengerben és nincs hó sem a jégtáblán,
+	 * akkor a jégtáblában lévő eszközt hozzáadja a leltárához,
+	 * ha nincs még olyan. Ha nincs, akkor kitörli a jégtáblából,
+	 * és az eszközhöz hozzáadja a játékost.
 	 */
 	public void digOutItem() {
-		String name = FunctionLogger.get_obj_name();
 		if (!getInSea()) {
-			FunctionLogger.log_call("Model.IceBlock ib.getLayer()");
 			IceBlock ib  = ((IceBlock) container);
-			int layer = ib.getLayer();
-			FunctionLogger.log_return("");
-			if (!FunctionLogger.ask_question("Van ho a jegtablan?")) {
-				FunctionLogger.log_call("Model.IceBlock ib.getItem()");
+			if (ib.getLayer() == 0) {
 				Item item = ib.getItem();
-				String itemType = item.toString();
-				String itemName = String.valueOf(itemType.toLowerCase().charAt(0));
-				FunctionLogger.log_return(itemName);
-				FunctionLogger.log_call(String.format("%s %s.addToInventory(inventory)", itemType, itemName));
 				boolean success = item.addToInventory(inventory);
-				FunctionLogger.log_boolean_return(success);
 				if (success) {
-					FunctionLogger.log_call("Model.IceBlock ib.removeItem()");
 					ib.removeItem();
-					FunctionLogger.log_return("");
-					FunctionLogger.log_call(String.format("%s %s.pickUpBy(%s)", itemType, itemName, name));
 					item.pickedUpBy(this);
-					FunctionLogger.log_return("");
 				}
 			}
 		}
@@ -194,27 +165,25 @@ public abstract class Player extends Steppable {
 	public void setContainer(PlayerContainerI cr) {
 		container = cr;
 	}
+
 	/**
 	 * Ertesiti a szintet, hogy vege a jateknak.
 	 */
 	public void die() {
-		FunctionLogger.log_call("Model.Level levelLost()");
 		level.levelLost();
-		FunctionLogger.log_return("");
 	}
 
 	/**
-	 * Model.Level getter
+	 * Level getter
 	 * @return a jatekos eppen melyik szinten jatszik
 	 */
 	public Level getLevel() {
 		return level;
 	}
-	/**
-	 * Teszteleshez, visszaadja az osztaly nevet.
-	 * @return az osztaly neve.
-	 */
 
+	/**
+	 * Visszaadja a játékos életerejét.
+	 */
     public int getHealth() {
     	return health;
 	}

@@ -2,6 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Model.Level osztaly, reprezental egy szintet a jatekban.
@@ -15,7 +16,8 @@ public class Level {
 	private ArrayList<IceBlock> iceblocks;
 	private ArrayList<Part> parts;
 	private GameStateE gameState;
-	private int numberOfTiles, numberOfItems, numberOfPlayers;
+	private ArrayList<PolarBear> bears;
+	private int numberOfTiles, numberOfItems, numberOfPlayers, numberOfBears;
 
 	public Level(int tiles, int items, int players) {
 		parts = new ArrayList<>(3);
@@ -34,7 +36,6 @@ public class Level {
 	 * Inicializalja a Levelt. Egyenlore tesztelesnel ures, mert kezzel inicializalunk.
 	 */
 	public void init() {
-		/*
 		for (int i = 0; i < numberOfTiles; i++) {
 			addIceBlock();
 		}
@@ -65,8 +66,6 @@ public class Level {
 			iceblocks[index].addPlayer(p);
 		}
 
-
-*/
 	}
 
 	/**
@@ -74,10 +73,17 @@ public class Level {
 	 * szint gameState-jet WON-ra.
 	 */
 	public void checkParts() {
-		String name = FunctionLogger.get_obj_name();
-		if (FunctionLogger.ask_question("Egy mezon vannak a jatekosok az alkatreszekkel?")) {
-			FunctionLogger.log_call(String.format("%s.levelWon()",name));
+		for (IceBlock ib: iceblocks) {
+			for (Part part : parts) {
+				if (!part.getLocation().equals(ib))
+					break;
+			}
+			for (Player p : getPlayers()) {
+				if (!p.getLocation().equals(ib))
+					break;
+			}
 			levelWon();
+			return;
 		}
 	}
 
@@ -189,35 +195,36 @@ public class Level {
 	}
 
 	public int getNumberOfPlayers() {
-		return 0;
+		return numberOfPlayers;
 	}
 
 	public int getNumberOfIceblocks() {
-		return 0;
-	}
-
-	public Player getPlayer(int playerId) {
-		return players[playerId];
+		return numberOfTiles;
 	}
 
 	public int getNumberOfBears() {
-
+		return numberOfBears;
 	}
 
+	public Player getPlayer(int playerId) {
+		return getPlayers()[playerId];
+	}
+
+	//TODO WHAT???
 	public Player[] getPlayers() {
 		return null;
 	}
 
 	public PolarBear getPolarBear(int id) {
-		return null;
+		return bears.get(id);
 	}
 
 	public void setGameState(GameStateE state) {
-
+		gameState = state;
 	}
 
 	public PolarBear[] getPolarBears() {
-
+		return bears.toArray(new PolarBear[0]);
 	}
 
 	public GameStateE getGameState() {
