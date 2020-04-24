@@ -9,23 +9,28 @@ import java.util.Random;
  * iceblocks, a palyan levo jegtablak
  * parts, a palyan levo, a jatek megnyeresehez szukseges alkatreszek
  * gamestate, a jatek allasa
- * numberOfTiles, numberOfItems, numberOfPlayers, a jatekban talalhato
- * jegtablak, targyak, jatekosok mennyisege.
+ * bears a jegesmedvék a pályán
+ * numberOfTiles, numberOfItems, numberOfPlayers, numberOfBears a jatekban talalhato
+ * jegtablak, targyak, jatekosok, jegesmedvék mennyisege.
  */
 public class Level {
 	private ArrayList<IceBlock> iceblocks;
 	private ArrayList<Part> parts;
-	private GameStateE gameState;
+	private ArrayList<Player> players;
 	private ArrayList<PolarBear> bears;
+	private GameStateE gameState;
 	private int numberOfTiles, numberOfItems, numberOfPlayers, numberOfBears;
 
-	public Level(int tiles, int items, int players) {
+	public Level(int tiles, int items, int nPlayers, int nBears) {
 		parts = new ArrayList<>(3);
 		iceblocks = new ArrayList<>();
+		players = new ArrayList<>();
+		bears = new ArrayList<>();
 		gameState = GameStateE.IN_PROGRESS;
 		numberOfTiles = tiles;
 		numberOfItems = items;
-		numberOfPlayers = players;
+		numberOfPlayers = nPlayers;
+		numberOfBears = nBears;
 	}
 
 	public Level(IceBlock[] iceblocks, Player[] players, PolarBear[] bears, Item[] parts) {
@@ -33,37 +38,58 @@ public class Level {
 	}
 
     /**
-	 * Inicializalja a Levelt. Egyenlore tesztelesnel ures, mert kezzel inicializalunk.
+	 *
 	 */
 	public void init() {
+		ArrayList<Item> items = new ArrayList<>();
+		Random r = new Random();
+
 		for (int i = 0; i < numberOfTiles; i++) {
-			addIceBlock();
+			boolean iceblockType = r.nextBoolean();
+			if (iceblockType)
+				addIceBlock(new IceBlock());
+			else {
+				int cap = r.nextInt(numberOfPlayers);
+				addIceBlock(new UnstableIceBlock(cap));
+			}
 		}
 
-		for (int i = 0; i < numberOfItems; i++) {
-
+		for (int i = 0; i < numberOfItems-3; i++) {
+			int itemType = r.nextInt(6);
+			switch (itemType) {
+				case 0: items.add(new DivingSuit()); break;
+				case 1: items.add(new Food()); break;
+				case 2: items.add(new FragileShovel()); break;
+				case 3: items.add(new Tent()); break;
+				case 4: items.add(new Rope()); break;
+				case 5: items.add(new Shovel()); break;
+			}
 		}
 
-		for (Model.IceBlock ib : iceblocks) {
+		//TODO parts
+
+		//TODO How about neighbours?
+		for (IceBlock ib : iceblocks) {
 
 		}
 
 		for (int i = 0; i < numberOfItems; i++) {
 			Random r = new Random();
 			int index = r.nextInt(numberOfTiles);
-			iceblocks[index].addItem();
+			iceblocks.get(index).addItem();
 		}
 
 		for (int i = 0; i < numberOfPlayers; i++) {
 			Random r = new Random();
-			if (r.nextInt(2) == 0)
-				Model.Eskimo p = new Model.Eskimo();
+			if (r.nextBoolean())
+				Eskimo p = new Eskimo(this, new Inventory(), 5);
 			else
-				Model.Researcher p = new Model.Researcher();
+				Researcher p = new Researcher(this, new Inventory(), 6);
+			//TODO hogy is volt ez? Mennyit életük van?
 
 			int index = r.nextInt(numberOfTiles);
 			// mindenki külön blokkon kell, hogy legyen??
-			iceblocks[index].addPlayer(p);
+			iceblocks.get(index).addPlayer(p);
 		}
 
 	}
@@ -92,10 +118,7 @@ public class Level {
 	 * @param p a hozzaadni kivant alkatresz.
 	 */
 	public void addPart(Part p) {
-		ArrayList<String> param =  FunctionLogger.get_parameters();
-		FunctionLogger.log_call(String.format("Model.Part parts.add(%s)",param.get(0)));
 		parts.add(p);
-		FunctionLogger.log_return("");
 	}
 
 	/**
@@ -108,14 +131,11 @@ public class Level {
 	}
 
 	/**
-	 * Hozzaad egy adott Model.IceBlock-ot a levelhez.
-	 * @param ib a hozzaadni kivant Model.IceBlock.
+	 * Hozzaad egy adott IceBlock-ot a levelhez.
+	 * @param ib a hozzaadni kivant IceBlock.
 	 */
 	public void addIceBlock(IceBlock ib) {
-		ArrayList<String> param =  FunctionLogger.get_parameters();
-		FunctionLogger.log_call(String.format("Model.IceBlock iceblocks.add(%s)",param.get(0)));
 		iceblocks.add(ib);
-		FunctionLogger.log_return("");
 	}
 
 	/**
@@ -145,7 +165,7 @@ public class Level {
 	public void blizzard(IceBlock[] iceBlocks) {
 
 
-		// át kell írni
+		// TODO át kell írni
 
 
 		if (iceblocks.size() == 1) {
@@ -210,9 +230,8 @@ public class Level {
 		return getPlayers()[playerId];
 	}
 
-	//TODO WHAT???
 	public Player[] getPlayers() {
-		return null;
+		return players.toArray(new Player[0]);
 	}
 
 	public PolarBear getPolarBear(int id) {
