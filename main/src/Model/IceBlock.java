@@ -16,7 +16,6 @@ import java.util.List;
  */
 public class IceBlock implements PlayerContainerI {
 	protected int snowLayers;
-	protected boolean hasIglu;
 	protected int capacity;
 	protected List <IceBlock> neighbours;
 	protected Sea sea;
