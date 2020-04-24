@@ -3,22 +3,23 @@ package Model;
 import java.util.ArrayList;
 
 /**
- * Jatekosokat reprezentalo absztrakt osztály.
+ * Ez az absztrakt osztály a játékosokat reprezentálja a játékban.
+ * A játékosok célja, hogy összegyűjtsék az alkatrészeket, és ezzel megnyerjék a játékot.
+ * Ebből az osztályból származnak a Eskimo és Researcher osztályok.
  */
 public abstract class Player extends Steppable {
 	protected boolean inSea;
 	protected int health;
-	protected int turnCounter;
-	protected Inventory inventory;
+	private Inventory inventory;
 	protected Level level;
 	protected PlayerContainerI container;
 
 	Player(Level level) {
 		this.level = level;
 		inSea = false;
-		FunctionLogger.log_call("<<create>> Model.Inventory inventory");
+//		FunctionLogger.log_call("<<create>> Model.Inventory inventory");
 		inventory = new Inventory();
-		FunctionLogger.log_return("");
+//		FunctionLogger.log_return("");
 	}
 
 	Player(Level level, Inventory inventory, int health) {
@@ -34,10 +35,10 @@ public abstract class Player extends Steppable {
 	}
 
 	/**
-	 * A jatekos lep egyet az adott iranyba.
-	 * @param d a megadott irany amibe leptetni akarjuk
+	 * A jatekos lep az adott konténerre.
+	 * @param pc a megadott irany, amibe leptetni akarjuk
 	 */
-	public void step(IceBlock ib) {
+	public void step(PlayerContainerI pc) {
 		String name = FunctionLogger.get_obj_name();
 		ArrayList<String> p = FunctionLogger.get_parameters();
 		String containertype = container.toString();
