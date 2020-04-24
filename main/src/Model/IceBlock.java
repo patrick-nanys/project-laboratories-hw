@@ -41,8 +41,24 @@ public class IceBlock implements PlayerContainerI {
 		building = null;
 	}
 
+	/**
+	 *
+	 * @param players
+	 * @param item
+	 * @param building
+	 * @param snowLayers
+	 * @param capacity
+	 */
 	public IceBlock(Player[] players, Item item, Building building, int snowLayers, int capacity) {
-
+		List<Player> tmp = new ArrayList<>();
+		for(Player player:players) {
+			tmp.add(player);
+		}
+		this.players = tmp;
+		this.item=item;
+		this.building=building;
+		this.snowLayers=snowLayers;
+		this.capacity=capacity;
 	}
 
     /**
