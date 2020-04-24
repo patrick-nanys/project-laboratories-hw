@@ -57,16 +57,28 @@ public class Sea implements PlayerContainerI {
 		p.setContainer(this);
 	}
 
+	/**
+	 * Visszaadja a tengerben talalhato jatekosok listajat.
+	 * @return players, a tengerben talalhato jatekosok.
+	 */
 	@Override
 	public List<Player> getPlayers() {
 		return players;
 	}
 
+	/**
+	 * Beallitja, hogy melyik tabla korul talalhato a tenger.
+	 * @param ib a beallitando tabla.
+	 */
 	public void setPosition(IceBlock ib)  {
 		position = ib;
 	}
 
+	/**
+	 * Visszaadja azt, hogy a tenger melyik tabla korul talalhato.
+	 * @return position, a tablaja.
+	 */
 	public IceBlock getPosition() {
-		return null;
+		return position;
 	}
 }

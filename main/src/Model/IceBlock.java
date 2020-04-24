@@ -42,12 +42,12 @@ public class IceBlock implements PlayerContainerI {
 	}
 
 	/**
-	 *
-	 * @param players
-	 * @param item
-	 * @param building
-	 * @param snowLayers
-	 * @param capacity
+	 * IceBlock konstruktor egy elore megadott esetre, pl ha fajlbol olvasunk be
+	 * @param players jatekosok
+	 * @param item targy
+	 * @param building epulet
+	 * @param snowLayers horetegek
+	 * @param capacity kapacitas
 	 */
 	public IceBlock(Player[] players, Item item, Building building, int snowLayers, int capacity) {
 		List<Player> tmp = new ArrayList<>();
@@ -166,14 +166,26 @@ public class IceBlock implements PlayerContainerI {
 		p.setContainer(this);
 	}
 
+	/**
+	 * Visszaadja a tablan talalhato epuletet
+	 * @return building, az epulet
+	 */
 	public Building getBuilding() {
 		return building;
 	}
 
+	/**
+	 * Visszaadja a szomszedok listajat.
+	 * @return neighbours, a tablaval szomszedos tablak
+	 */
 	public List<IceBlock> getNeighbours() {
 		return neighbours;
 	}
 
+	/**
+	 * Beallitja a tablan talalhato epuletet.
+	 * @param b a "felepitendo" epulet
+	 */
 	public void setBuilding(Building b) {
 		building = b;
 	}
