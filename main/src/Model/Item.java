@@ -1,28 +1,24 @@
 package Model;
 
 /**
- * Model.Item osztaly. A kulonbozo itemek ososztalya.
+ * Ez az absztrakt osztaly reprezental egy altalanos targyat a jatekban.
+ * Ososztalyul szolgal a specifikacioban szereplo kulonbozo targyaknak.
  */
 public abstract class Item {
 	/**
-	 * Nem csinal semmit, akinek kell override-olja, akinek nem, nem hasznalja.
+	 * A parameterkent kapott jatekos hasznalja az adott targyat,
+	 * a leszarmazottak valositjak meg.
 	 * @param player A jatekos, akin hasznaljuk az itemet.
 	 */
 	public void use(Player player) {}
 
 	/**
-	 * Hozzaadja az itemet egy jatekos inventory-ahoz, ha tudja.
+	 * Hozzaadja magat egy jatekos inventory-ahoz, ha tudja.
 	 * @param inventory Az invetory, amihez hozza probalja adni magat.
 	 * @return Ha hozzaadta true, ha nem false.
 	 */
 	public boolean addToInventory(Inventory inventory) {
-		//String name = FunctionLogger.get_obj_name();
-
-		//FunctionLogger.log_call(String.format("Model.Inventory inventory.addItem(%s)", name));
-		boolean added = inventory.addItem(this);
-		//FunctionLogger.log_boolean_return(added);
-
-		return added;
+		return inventory.addItem(this);
 	}
 
 	/**
@@ -35,14 +31,10 @@ public abstract class Item {
 	public abstract boolean equals(Item item);
 
 	/**
-	 * Beallitja, hogy ki vette fel.
+	 * Beallitja, hogy ki vette fel. Azon targyak hasznaljak,
+	 * amiknek szuksege van arra, hogy megjegyezzek/interakcioba
+	 * lepjenek az oket felvevo jatekossal.
 	 * @param p Az ot felvevo jatekos.
 	 */
 	public void pickedUpBy(Player p) {}
-
-	/**
-	 * Teszteleshez, visszaadja az osztaly nevet.
-	 * @return az adott leszarmazott neve.
-	 */
-	public abstract String toString();
 }
