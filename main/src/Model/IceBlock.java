@@ -25,22 +25,6 @@ public class IceBlock implements PlayerContainerI {
 	protected Building building;
 
 	/**
-	 * IceBlock konstruktor
-	 * Hozzarendelunk egy tengert, letrehozzuk a listakat, nincs rajta alaphelyzetben ho.
-	 * Kapacitas 6, mivel maximum 5 jatekos lehet, így nem fog soha felfordulni.
-	 * Alaphelyzetben nincs rajta sem iglu, es nincs benne item sem.
-	 */
-	public IceBlock() {
-		sea = new Sea();
-		neighbours = new ArrayList<>();
-		players = new ArrayList<>();
-		snowLayers=0;
-		capacity=6;
-		item=null;
-		building = null;
-	}
-
-	/**
 	 * IceBlock konstruktor egy elore megadott esetre, pl ha fajlbol olvasunk be
 	 * @param players jatekosok
 	 * @param item targy
@@ -54,6 +38,7 @@ public class IceBlock implements PlayerContainerI {
 		this.building=building;
 		this.snowLayers=snowLayers;
 		this.capacity=capacity;
+		neighbours = new ArrayList<>();
 	}
 
     /**

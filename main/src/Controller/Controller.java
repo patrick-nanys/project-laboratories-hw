@@ -2,15 +2,15 @@ package Controller;
 
 import Model.*;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import static java.lang.Integer.parseInt;
 
@@ -123,6 +123,8 @@ public class Controller {
                 return new Iglu();
             case "t":
                 return new Tent();
+            case "-":
+                return null;
             default:
                 StaticStandardIO.println(String.format("ERROR: No such building: %s", s));
                 return null;
@@ -134,7 +136,7 @@ public class Controller {
      * @param item megadott item
      * @return rövidítés
      */
-    private String stringFromItem(Item item) {
+    private String stringFromItem(Object item) {
         if (item instanceof Rope)
             return "r";
         if (item instanceof FragileShovel)
@@ -170,9 +172,22 @@ public class Controller {
      * @param player megaott player
      * @return rövidítés
      */
-    private String stringFromPlayer(Player player) {
-        ArrayList<Player> players = new ArrayList<>(Arrays.asList(level.getPlayers()));
-        return "p" + players.indexOf(player);
+    private String stringFromPlayer(Object player) {
+        ArrayList<Player> players = level.getPlayers();
+        return "p" + (players.indexOf((Player) player) + 1);
+    }
+
+    /**
+     * Visszatér a megadott player típusának szöveges rövidítésével.
+     * @param player megaott player
+     * @return rövidítés
+     */
+    private String stringTypeFromPlayer(Player player) {
+        if (player instanceof Eskimo)
+            return "e";
+        if (player instanceof Researcher)
+            return "r";
+        return "-";
     }
 
     /**
@@ -181,8 +196,8 @@ public class Controller {
      * @return rövidítés
      */
     private String stringFromBear(PolarBear bear) {
-        ArrayList<PolarBear> bears = new ArrayList<>(Arrays.asList(level.getPolarBears()));
-        return "b" + bears.indexOf(bear);
+        ArrayList<PolarBear> bears = level.getPolarBears();
+        return "b" + (bears.indexOf(bear) + 1);
     }
 
     /**
@@ -190,9 +205,9 @@ public class Controller {
      * @param iceBlock megaott ice block
      * @return rövidítés
      */
-    private String stringFromIceBlock(IceBlock iceBlock) {
-        ArrayList<IceBlock> iceBlocks = new ArrayList<>(Arrays.asList(level.getIceBlocks()));
-        return String.valueOf(iceBlocks.indexOf(iceBlock));
+    private String stringFromIceBlock(Object iceBlock) {
+        ArrayList<IceBlock> iceBlocks = level.getIceBlocks();
+        return String.valueOf(iceBlocks.indexOf((IceBlock) iceBlock) + 1);
     }
 
     /**
@@ -251,7 +266,7 @@ public class Controller {
 
 
             // create players
-            Player[] players = new Player[playerTypes.length()];
+            ArrayList<Player> players = new ArrayList<>();
             for (int i = 0; i < playerTypes.length(); i++) {
 
                 // read player info
@@ -272,28 +287,33 @@ public class Controller {
 
                 // create player
                 if (playerTypes.charAt(i) == 'e')
-                    players[i] = new Eskimo(level, inventory, health);
+                    players.add(new Eskimo(level, inventory, health));
                 else if (playerTypes.charAt(i) == 'r')
-                    players[i] = new Researcher(level, inventory, health);
+                    players.add(new Researcher(level, inventory, health));
 
                 // call picked up by for items
                 for (Item item : createdItems)
-                    item.pickedUpBy(players[i]);
+                    item.pickedUpBy(players.get(i));
 
             }
 
             // create bears
-            PolarBear[] bears = new PolarBear[numberOfBears];
+            ArrayList<PolarBear> bears = new ArrayList<>();
+            for (int i = 0; i < numberOfBears; i++)
+                bears.add(new PolarBear());
 
             // create tiles
-            IceBlock[] iceblocks = new IceBlock[numberOfTiles];
+            ArrayList<IceBlock> iceblocks = new ArrayList<>();
             String[][] neighboursByTile = new String[numberOfTiles][];
-            ArrayList<Item> parts = new ArrayList<>();
+            ArrayList<Part> parts = new ArrayList<>();
             for (int i = 0; i < numberOfTiles; i++) {
 
                 // read tile info
 
                 String[] tileInfo = scanner.nextLine().split(";");
+                if (tileInfo.length != 7)
+                    return "ERROR: There should be 7 properties for an IceBlock!\n";
+
                 String[] charactersOnTile = tileInfo[0].split(",");
                 String[] playersInSea = tileInfo[1].split(",");
                 String itemS = tileInfo[2];
@@ -306,49 +326,59 @@ public class Controller {
 
                 // get players on tile
                 ArrayList<Player> playersOnTile = new ArrayList<>();
-                for (String characterS : charactersOnTile) {
-                    if (characterS.charAt(0) == 'p')
-                        playersOnTile.add(players[characterS.charAt(1) - 1]);
+                if (!charactersOnTile[0].equals("-")) {
+                    for (String characterS : charactersOnTile) {
+                        if (characterS.charAt(0) == 'p')
+                            playersOnTile.add(players.get(Character.getNumericValue(characterS.charAt(1)) - 1));
+                    }
                 }
                 // create sea and add players to it
                 Sea sea = new Sea();
-                for (String pS : playersInSea) {
-                    sea.addPlayer(players[pS.charAt(1) - 1]);
+                if (!playersInSea[0].equals("-")) {
+                    for (String pS : playersInSea) {
+                        sea.addPlayer(players.get(Character.getNumericValue(pS.charAt(1)) - 1));
+                    }
                 }
                 // create item, building
                 Item item = createItem(itemS);
                 if (itemS.equals("p"))
-                    parts.add(item);
+                    parts.add((Part) item);
                 Building building = createBuilding(buildingS);
 
                 // create tile
 
                 if (capacity >= playerTypes.length())
-                    iceblocks[i] = new IceBlock((Player[]) playersOnTile.toArray(), item,
-                            building, snowLayers, capacity);
+                    iceblocks.add(new IceBlock(playersOnTile.toArray(new Player[0]), item,
+                            building, snowLayers, capacity));
                 else
-                    iceblocks[i] = new UnstableIceBlock((Player[]) playersOnTile.toArray(), item,
-                            building, snowLayers, capacity);
+                    iceblocks.add(new UnstableIceBlock(playersOnTile.toArray(new Player[0]), item,
+                            building, snowLayers, capacity));
 
                 // connect object to tile
 
-                // connect sea
-                iceblocks[i].setSea(sea);
-                sea.setPosition(iceblocks[i]);
+                // connect players
+                for (Player player : playersOnTile)
+                    player.setContainer(iceblocks.get(iceblocks.size() - 1));
                 // connect bears
                 for (String characterS : charactersOnTile) {
                     if (characterS.charAt(0) == 'b')
-                        bears[characterS.charAt(1) - 1].setIb(iceblocks[i]);
+                        bears.get(Character.getNumericValue(characterS.charAt(1)) - 1).setIb(iceblocks.get(i));
                 }
+                // connect sea
+                iceblocks.get(i).setSea(sea);
+                sea.setPosition(iceblocks.get(i));
             }
 
             // connect neighbours
-            for (int i = 0; i < numberOfTiles; i++)
-                for (int j = 0; j < neighboursByTile[i].length; j++)
-                    iceblocks[i].addNeighbour(iceblocks[parseInt(neighboursByTile[i][j]) - 1]);
+            for (int i = 0; i < numberOfTiles; i++) {
+                for (int j = 0; j < neighboursByTile[i].length; j++) {
+                    if (!neighboursByTile[i][j].equals("-"))
+                        iceblocks.get(i).addNeighbour(iceblocks.get(parseInt(neighboursByTile[i][j]) - 1));
+                }
+            }
 
             // create level
-            this.level = new Level(iceblocks, players, bears, (Item[]) parts.toArray());
+            this.level = new Level(iceblocks, players, bears, parts);
 
         } catch (FileNotFoundException e) {
             return String.format("ERROR: File \"%s\" given to loadGame does not esist!\n", params[0]);
@@ -364,9 +394,9 @@ public class Controller {
      * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
      */
     private String blizzard(String[] params) {
-        IceBlock[] iceBlocks = new IceBlock[params.length];
-        for (int i = 0; i < params.length; i++)
-            iceBlocks[i] = level.getIceBlock(parseInt(params[i]));
+        ArrayList<IceBlock> iceBlocks = new ArrayList<>();
+        for (String param : params)
+            iceBlocks.add(level.getIceBlock(parseInt(param) - 1));
         level.blizzard(iceBlocks);
         return "";
     }
@@ -387,7 +417,7 @@ public class Controller {
             String ret = checkForErrors(params, paramTypes);
             if (!ret.equals("")) return ret;
 
-            IceBlock iceBlock = level.getIceBlock(parseInt(params[0]));
+            IceBlock iceBlock = level.getIceBlock(parseInt(params[0]) - 1);
             currentPlayer.step(iceBlock);
         } else {
             // error handling
@@ -395,8 +425,8 @@ public class Controller {
             String ret = checkForErrors(params, paramTypes);
             if (!ret.equals("")) return ret;
 
-            Player player = level.getPlayer(parseInt(params[0]));
-            IceBlock iceBlock = level.getIceBlock(parseInt(params[1]));
+            Player player = level.getPlayer(parseInt(params[0]) - 1);
+            IceBlock iceBlock = level.getIceBlock(parseInt(params[1]) - 1);
             player.step(iceBlock);
         }
 
@@ -425,7 +455,7 @@ public class Controller {
             if (params.length == 1) {
                 currentPlayer.useItem(item);
             } else {
-                Player other_player = level.getPlayer(parseInt(params[1]));
+                Player other_player = level.getPlayer(parseInt(params[1]) - 1);
                 currentPlayer.useItemOnPlayer(item, other_player);
             }
         } else {
@@ -436,12 +466,12 @@ public class Controller {
             String ret = checkForErrors(params, paramTypes);
             if (!ret.equals("")) return ret;
 
-            Player player = level.getPlayer(parseInt(params[0]));
+            Player player = level.getPlayer(parseInt(params[0]) - 1);
             Item item = createItem(params[1]);
             if (params.length == 2) {
                 player.useItem(item);
             } else {
-                Player other_player = level.getPlayer(parseInt(params[2]));
+                Player other_player = level.getPlayer(parseInt(params[2]) - 1);
                 player.useItemOnPlayer(item, other_player);
             }
         }
@@ -466,7 +496,7 @@ public class Controller {
             String ret = checkForErrors(params, paramTypes);
             if (!ret.equals("")) return ret;
 
-            IceBlock iceBlock = level.getIceBlock(parseInt(params[0]));
+            IceBlock iceBlock = level.getIceBlock(parseInt(params[0]) - 1);
             if (currentPlayer instanceof Eskimo)
                 ((Eskimo)currentPlayer).buildIglu(iceBlock);
             else
@@ -478,8 +508,8 @@ public class Controller {
             String ret = checkForErrors(params, paramTypes);
             if (!ret.equals("")) return ret;
 
-            Player player = level.getPlayer(parseInt(params[0]));
-            IceBlock iceBlock = level.getIceBlock(parseInt(params[0]));
+            Player player = level.getPlayer(parseInt(params[0]) - 1);
+            IceBlock iceBlock = level.getIceBlock(parseInt(params[0]) - 1);
             if (currentPlayer instanceof Eskimo)
                 ((Eskimo)player).buildIglu(iceBlock);
             else
@@ -506,7 +536,7 @@ public class Controller {
             String ret = checkForErrors(params, paramTypes);
             if (!ret.equals("")) return ret;
 
-            Player player = level.getPlayer(parseInt(params[0]));
+            Player player = level.getPlayer(parseInt(params[0]) - 1);
             player.swipeWithHand();
         }
 
@@ -530,7 +560,7 @@ public class Controller {
             String ret = checkForErrors(params, paramTypes);
             if (!ret.equals("")) return ret;
 
-            Player player = level.getPlayer(parseInt(params[0]));
+            Player player = level.getPlayer(parseInt(params[0]) - 1);
             player.digOutItem();
         }
 
@@ -545,7 +575,7 @@ public class Controller {
      */
     private String skipTurn(String[] params) {
         if (gameRunning) {
-            ArrayList<Player> players = new ArrayList<>(Arrays.asList(level.getPlayers()));
+            ArrayList<Player> players = level.getPlayers();
             int idx = players.indexOf(currentPlayer);
             if (idx + 1 >= players.size())
                 idx = -1;
@@ -573,11 +603,11 @@ public class Controller {
         String ret = checkForErrors(params, paramTypes);
         if (!ret.equals("")) return ret;
 
-        PolarBear bear = level.getPolarBear(parseInt(params[0]));
+        PolarBear bear = level.getPolarBear(parseInt(params[0]) - 1);
         if (params.length == 1) {
             bear.step(null);
         } else {
-            IceBlock iceBlock = level.getIceBlock(parseInt(params[1]));
+            IceBlock iceBlock = level.getIceBlock(parseInt(params[1]) - 1);
             bear.step(iceBlock);
         }
 
@@ -590,16 +620,16 @@ public class Controller {
      * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
      */
     private String startGame(String[] params) {
-        Player[] players = level.getPlayers();
-        PolarBear[] bears = level.getPolarBears();
+        ArrayList<Player> players = level.getPlayers();
+        ArrayList<PolarBear> bears = level.getPolarBears();
 
         gameRunning = true;
-        currentPlayer = players[0];
+        currentPlayer = players.get(0);
         level.setGameState(GameStateE.IN_PROGRESS);
         String ret = "";
         while (gameRunning) {
             // step players
-            for (Player player : players) {
+            for (Player ignored : players) {
                 for (int i = 0; i < 4; i++) {
                     boolean valid = false;
                     while (!valid) {
@@ -637,6 +667,34 @@ public class Controller {
         return "Game over";
     }
 
+    @FunctionalInterface
+    private interface GetStringCommand{
+        String getString(Object o);
+    }
+
+    private void buildStringInfo(ArrayList<?> objects, GetStringCommand command, StringBuilder stringBuilder) {
+        if (objects.size() == 0) {
+            stringBuilder.append("-");
+        } else {
+            ArrayList<String> strings = new ArrayList<>();
+            for (Object o : objects)
+                strings.add(command.getString(o));
+            stringBuilder.append(String.join(",", strings));
+        }
+    }
+
+    /**
+     * A megadott játékosnak beleépíti az adatait a megadott StringBuilder-be.
+     * @param player játékos akinek kellenek az adatai
+     * @param output megadott kimenet az adatoknak
+     */
+    private void outputPlayerInfo(Player player, StringBuilder output) {
+        output.append(player.getHealth()).append(";");
+        ArrayList<Item> playerItems = (ArrayList<Item>) player.getInventory().getItems();
+        buildStringInfo(playerItems, this::stringFromItem, output);
+        output.append("\n");
+    }
+
     /**
      * Visszatér annak a táblának a sorszámával amin a megadott sorszámú játékos áll,
      * illetve ennek a játékosnak az élet erejével és azokkal a tárgyakkal amik a játékosnál vannak.
@@ -651,8 +709,8 @@ public class Controller {
         String ret = checkForErrors(params, paramTypes);
         if (!ret.equals("")) return ret;
 
-        // get data of player
-        Player player = level.getPlayer(parseInt(params[0]));
+        // get player and id of the ice block he is standing on
+        Player player = level.getPlayer(parseInt(params[0]) - 1);
         PlayerContainerI container = player.getLocation();
         IceBlock iceBlock;
         if (container instanceof Sea) {
@@ -661,17 +719,13 @@ public class Controller {
         } else {
             iceBlock = (IceBlock) container;
         }
-        ArrayList<IceBlock> iceBlocks = new ArrayList<>(Arrays.asList(level.getIceBlocks()));
+        ArrayList<IceBlock> iceBlocks = level.getIceBlocks();
         int iceBlockId = iceBlocks.indexOf(iceBlock);
 
         // create output
         StringBuilder output = new StringBuilder();
         output.append(iceBlockId).append(";");
-        output.append(player.getHealth()).append(";");
-        for (Item item : player.getInventory().getItems())
-            output.append(stringFromItem(item)).append(",");
-        if (player.getInventory().getItems().length == 1)
-            output.append("-");
+        outputPlayerInfo(player, output);
 
         return output.toString();
     }
@@ -683,43 +737,40 @@ public class Controller {
      * @return ha volt valami hiba, akkor hibaüzenet, különben egy üres string
      */
     private String status(String[] params) {
-        Player[] players = level.getPlayers();
-        IceBlock[] iceBlocks = level.getIceBlocks();
-        ArrayList<PolarBear> bears = new ArrayList<>(Arrays.asList(level.getPolarBears()));
+        ArrayList<Player> players = level.getPlayers();
+        ArrayList<IceBlock> iceBlocks = level.getIceBlocks();
+        ArrayList<PolarBear> bears = level.getPolarBears();
 
         StringBuilder output = new StringBuilder();
 
         // build first row
-        output.append(iceBlocks.length).append(";");
+        output.append(iceBlocks.size()).append(";");
         for (Player player : players)
-            output.append(stringFromPlayer(player));
+            output.append(stringTypeFromPlayer(player));
         output.append(";");
         output.append(bears.size()).append("\n");
 
         // build player info
-        for (Player player : players) {
-            output.append(player.getHealth()).append(";");
-            for (Item item : player.getInventory().getItems()) {
-                output.append(stringFromItem(item)).append(",");
-            }
-            if (player.getInventory().getItems().length == 1)
-                output.append("-");
-            output.append("\n");
-        }
+        for (Player player : players)
+            outputPlayerInfo(player, output);
 
         // build tile info
         for (IceBlock iceBlock : iceBlocks) {
             // characters on ice block
-            for (Player player : iceBlock.getPlayers())
-                output.append(stringFromPlayer(player)).append(",");
+            List<Player> playersOnBlock = iceBlock.getPlayers();
+            if (playersOnBlock.size() != 0)
+                buildStringInfo((ArrayList<Player>) playersOnBlock, this::stringFromPlayer, output);
+            ArrayList<String> bearsOnIceBlockS = new ArrayList<>();
             for (PolarBear bear : bears)
                 if (bear.getIb().equals(iceBlock))
-                    output.append(stringFromBear(bear)).append(",");
-            output.append(";");
+                    bearsOnIceBlockS.add(stringFromBear(bear));
+            if (playersOnBlock.size() == 0 && bearsOnIceBlockS.size() == 0)
+                output.append("-").append(";");
+            else
+                output.append(String.join(",", bearsOnIceBlockS)).append(";");
 
             // players in sea
-            for (Player player : iceBlock.getSea().getPlayers())
-                output.append(stringFromPlayer(player)).append(",");
+            buildStringInfo((ArrayList<Player>) iceBlock.getSea().getPlayers(), this::stringFromPlayer, output);
             output.append(";");
 
             // item
@@ -735,9 +786,7 @@ public class Controller {
             output.append(iceBlock.getLayer()).append(";");
 
             // neighbours
-            for (IceBlock neighbour : iceBlock.getNeighbours())
-                output.append(stringFromIceBlock(neighbour)).append(",");
-            output.append(";");
+            buildStringInfo((ArrayList<IceBlock>) iceBlock.getNeighbours(), this::stringFromIceBlock, output);
             output.append("\n");
         }
 

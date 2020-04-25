@@ -1,9 +1,7 @@
 package Controller;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.lang.Integer.*;
 
@@ -69,50 +67,62 @@ public class Tester {
      * @param number teszt sorszáma
      */
     public void test(int number) {
-        Controller c = new Controller();
-        String fileName = "loadGame " +  number + ".tst";
-        c.interpret(fileName);
+        if (number == 35) {
+            for (Map.Entry<Integer, String> entry : options.entrySet())
+                test(entry.getKey());
+        } else {
+            Controller c = new Controller();
+            String prefix = "main\\testfiles\\test" + (number < 10 ? "0" : "") + number;
+            String testFile = prefix + ".tst";
+            String expectedFile = prefix + ".expc";
+            System.out.print(c.interpret("loadGame " + testFile));
 
-        ArrayList<String> returns = new ArrayList<>();
-        ArrayList<String> expectedReturns = new ArrayList<>();
-        try {
-            Scanner tstScanner = new Scanner(new File(fileName));
+            ArrayList<String> returns = new ArrayList<>();
+            ArrayList<String> expectedReturns = new ArrayList<>();
+            try {
+                Scanner tstScanner = new Scanner(new File(testFile));
 
-            // skip to the given part in file
-            String[] firstRow = tstScanner.nextLine().split(";");
-            int numberOfLinesToReadThrough = parseInt(firstRow[0]) + firstRow[1].length();
-            for (int i = 0; i < numberOfLinesToReadThrough + 1; i++)
-                tstScanner.nextLine();
+                // skip to the given part in file
+                String[] firstRow = tstScanner.nextLine().split(";");
+                int numberOfLinesToReadThrough = parseInt(firstRow[0]) + firstRow[1].length();
+                for (int i = 0; i < numberOfLinesToReadThrough; i++) {
+                    String ret = tstScanner.nextLine();
+                    int k = 0;
+                }
 
-            // capture System.out and run commands
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            StaticStandardIO.printTo(new PrintStream(buffer));
-            StaticStandardIO.readFrom(tstScanner);
-            while (tstScanner.hasNext()) {
-                String ret = c.interpret(tstScanner.nextLine());
-                returns.add(buffer.toString());
-                buffer.reset();
-                returns.add(ret);
+                // capture System.out and run commands
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                StaticStandardIO.printTo(new PrintStream(buffer));
+                StaticStandardIO.readFrom(tstScanner);
+                while (tstScanner.hasNext()) {
+                    String command = tstScanner.nextLine();
+                    String ret = c.interpret(command);
+                    if (!buffer.toString().equals(""))
+                        returns.addAll(Arrays.asList(buffer.toString().split("\n")));
+                    buffer.reset();
+                    if (!ret.equals(""))
+                        returns.addAll(Arrays.asList(ret.split("\n")));
+                }
+                StaticStandardIO.reset();
+                tstScanner.close();
+
+                // read expected
+                Scanner expScanner = new Scanner(new File(expectedFile));
+                while (expScanner.hasNext())
+                    expectedReturns.add(expScanner.nextLine());
+                expScanner.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            StaticStandardIO.reset();
-            tstScanner.close();
 
-            // read expected
-            Scanner expScanner = new Scanner(new File(number + ".exp"));
-            while (expScanner.hasNext())
-                expectedReturns.add(expScanner.nextLine());
-            expScanner.close();
+            boolean matched = compare(returns.toArray(new String[0]), expectedReturns.toArray(new String[0]));
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            if (matched)
+                System.out.println(options.get(number) + " succeeded");
+            else
+                System.out.println("--" + options.get(number) + " failed");
         }
-
-        boolean matched = compare(returns.toArray(new String[0]), expectedReturns.toArray(new String[0]));
-
-        if (matched)
-            System.out.println(options.get(number) + " succeeded");
-        else
-            System.out.println(options.get(number) + " failed");
     }
 
     /**

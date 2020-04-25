@@ -11,7 +11,7 @@ import java.util.List;
  * List<Item> items: A felvett itemek listaja.
  */
 public class Inventory {
-	private List<Item> items = new ArrayList<>();
+	private ArrayList<Item> items = new ArrayList<>();
 
 	/**
 	 * Hozzaad egy itemet magahoz, ha meg nincs olyan tipusu item benne.
@@ -66,7 +66,7 @@ public class Inventory {
 	 * Visszaadja a tarolt itemeket egy tombben.
 	 * @return A tarolt itemek.
 	 */
-	public Item[] getItems() {
-		return items.toArray(new Item[0]);
+	public List<Item> getItems() {
+		return items;
 	}
 }

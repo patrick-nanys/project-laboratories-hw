@@ -180,4 +180,8 @@ public abstract class Player extends Steppable {
     public int getHealth() {
     	return health;
 	}
+
+	public void removeItem(Item item) {
+    	inventory.removeItem(item);
+	}
 }

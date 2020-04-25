@@ -19,82 +19,14 @@ public class Level {
 	private ArrayList<Player> players;
 	private ArrayList<PolarBear> bears;
 	private GameStateE gameState;
-	private int numberOfTiles, numberOfItems, numberOfPlayers, numberOfBears;
 
-	public Level(int tiles, int items, int nPlayers, int nBears) {
-		parts = new ArrayList<>(3);
-		iceblocks = new ArrayList<>();
-		players = new ArrayList<>();
-		bears = new ArrayList<>();
-		gameState = GameStateE.IN_PROGRESS;
-		numberOfTiles = tiles;
-		numberOfItems = items;
-		numberOfPlayers = nPlayers;
-		numberOfBears = nBears;
+	public Level(ArrayList<IceBlock> iceblocks, ArrayList<Player> players, ArrayList<PolarBear> bears, ArrayList<Part> parts) {
+		this.gameState = GameStateE.IN_PROGRESS;
+		this.iceblocks = iceblocks;
+		this.players = players;
+		this.bears = bears;
+		this.parts = parts;
 	}
-
-	public Level(IceBlock[] iceblocks, Player[] players, PolarBear[] bears, Item[] parts) {
-
-	}
-
-    /**
-	 *
-	 */
-    /*
-	public void init() {
-		ArrayList<Item> items = new ArrayList<>();
-		Random r = new Random();
-
-		for (int i = 0; i < numberOfTiles; i++) {
-			boolean iceblockType = r.nextBoolean();
-			if (iceblockType)
-				addIceBlock(new IceBlock());
-			else {
-				int cap = r.nextInt(numberOfPlayers);
-				addIceBlock(new UnstableIceBlock(cap));
-			}
-		}
-
-		for (int i = 0; i < numberOfItems-3; i++) {
-			int itemType = r.nextInt(6);
-			switch (itemType) {
-				case 0: items.add(new DivingSuit()); break;
-				case 1: items.add(new Food()); break;
-				case 2: items.add(new FragileShovel()); break;
-				case 3: items.add(new Tent()); break;
-				case 4: items.add(new Rope()); break;
-				case 5: items.add(new Shovel()); break;
-			}
-		}
-
-		//TODO parts
-
-		//TODO How about neighbours?
-		for (IceBlock ib : iceblocks) {
-
-		}
-
-		for (int i = 0; i < numberOfItems; i++) {
-			Random r = new Random();
-			int index = r.nextInt(numberOfTiles);
-			iceblocks.get(index).addItem();
-		}
-
-		for (int i = 0; i < numberOfPlayers; i++) {
-			Random r = new Random();
-			if (r.nextBoolean())
-				Eskimo p = new Eskimo(this, new Inventory(), 5);
-			else
-				Researcher p = new Researcher(this, new Inventory(), 6);
-			//TODO hogy is volt ez? Mennyit életük van?
-
-			int index = r.nextInt(numberOfTiles);
-			// mindenki külön blokkon kell, hogy legyen??
-			iceblocks.get(index).addPlayer(p);
-		}
-
-	}
-	*/
 
 	/**
 	 * Ellenorzi, hogy az osszes jatekos es az osszes alkatresz egy mezon van-e. Ha igen, akkor atallitja a
@@ -161,11 +93,11 @@ public class Level {
 	 * valamint sebzi a játékosokat, ha a táblán nincs iglu vagy sátor.
 	 * Ha nincs megadva jégtábla lista, akkor random mennyiségű,
 	 * random indexű jégtáblákra hívódik meg.
-     * @param iceBlocks_
+     * @param iceBlocks
      */
-	public void blizzard(IceBlock[] iceBlocks_) {
-		if (iceBlocks_ != null) {
-			for (IceBlock ib : iceBlocks_) {
+	public void blizzard(ArrayList<IceBlock> iceBlocks) {
+		if (iceBlocks != null) {
+			for (IceBlock ib : iceBlocks) {
 				ib.modifyLayers(+1);
 				if (ib.getBuilding() == null) {
 					List<Player> blockPlayers = ib.getPlayers();
@@ -181,23 +113,23 @@ public class Level {
 	}
 
 	public int getNumberOfPlayers() {
-		return numberOfPlayers;
+		return players.size();
 	}
 
 	public int getNumberOfIceblocks() {
-		return numberOfTiles;
+		return iceblocks.size();
 	}
 
 	public int getNumberOfBears() {
-		return numberOfBears;
+		return bears.size();
 	}
 
 	public Player getPlayer(int playerId) {
-		return getPlayers()[playerId];
+		return players.get(playerId);
 	}
 
-	public Player[] getPlayers() {
-		return players.toArray(new Player[0]);
+	public ArrayList<Player> getPlayers() {
+		return players;
 	}
 
 	public PolarBear getPolarBear(int id) {
@@ -208,15 +140,15 @@ public class Level {
 		gameState = state;
 	}
 
-	public PolarBear[] getPolarBears() {
-		return bears.toArray(new PolarBear[0]);
+	public ArrayList<PolarBear> getPolarBears() {
+		return bears;
 	}
 
 	public GameStateE getGameState() {
 		return gameState;
 	}
 
-	public IceBlock[] getIceBlocks() {
-		return iceblocks.toArray(new IceBlock[0]);
+	public ArrayList<IceBlock> getIceBlocks() {
+		return iceblocks;
 	}
 }
