@@ -85,18 +85,15 @@ public class Tester {
                 // skip to the given part in file
                 String[] firstRow = tstScanner.nextLine().split(";");
                 int numberOfLinesToReadThrough = parseInt(firstRow[0]) + firstRow[1].length();
-                for (int i = 0; i < numberOfLinesToReadThrough; i++) {
-                    String ret = tstScanner.nextLine();
-                    int k = 0;
-                }
+                for (int i = 0; i < numberOfLinesToReadThrough; i++)
+                    tstScanner.nextLine();
 
                 // capture System.out and run commands
                 ByteArrayOutputStream buffer = new ByteArrayOutputStream();
                 StaticStandardIO.printTo(new PrintStream(buffer));
                 StaticStandardIO.readFrom(tstScanner);
                 while (tstScanner.hasNext()) {
-                    String command = tstScanner.nextLine();
-                    String ret = c.interpret(command);
+                    String ret = c.interpret(tstScanner.nextLine());
                     if (!buffer.toString().equals(""))
                         returns.addAll(Arrays.asList(buffer.toString().split("\n")));
                     buffer.reset();
