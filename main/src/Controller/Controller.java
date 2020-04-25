@@ -667,11 +667,13 @@ public class Controller {
         return "Game over";
     }
 
+    //TODO comment
     @FunctionalInterface
     private interface GetStringCommand{
         String getString(Object o);
     }
 
+    //TODO comment
     private void buildStringInfo(ArrayList<?> objects, GetStringCommand command, StringBuilder stringBuilder) {
         if (objects.size() == 0) {
             stringBuilder.append("-");
