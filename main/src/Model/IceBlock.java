@@ -10,7 +10,7 @@ import java.util.List;
  *  snowLayers az IceBlockon talalhato horetegek
  *  hasIglu az IceBlockon talalhato-e iglu
  *  capacity az IceBlockon egyszerre tartozkodhato jatekosok
- *  neighbours az Model.IceBlock szomszedai
+ *  neighbours az IceBlock szomszedai
  *  sea az IceBlockhoz kapcsolodo sea
  *  item az IceBlockba fagyott item
  *  players az IceBlockon talalhato jatekosok
@@ -25,7 +25,7 @@ public class IceBlock implements PlayerContainerI {
 	protected Building building;
 
 	/**
-	 * Model.IceBlock konstruktor
+	 * IceBlock konstruktor
 	 * Hozzarendelunk egy tengert, letrehozzuk a listakat, nincs rajta alaphelyzetben ho.
 	 * Kapacitas 6, mivel maximum 5 jatekos lehet, így nem fog soha felfordulni.
 	 * Alaphelyzetben nincs rajta sem iglu, es nincs benne item sem.
@@ -124,8 +124,8 @@ public class IceBlock implements PlayerContainerI {
 	}
 
 	/**
-	 * Hozzaadja az adott iranyban talalhato szomszedot
-	 * @param ib a jegtabla, ami szomszedos lesz az adott "d" iranyban
+	 * Hozzaadja a jegtabla egy szomszedjat.
+	 * @param ib a jegtabla, ami a jegtabla uj szomszedja lesz.
 	 */
 	public void addNeighbour(IceBlock ib) {
 		neighbours.add(ib);

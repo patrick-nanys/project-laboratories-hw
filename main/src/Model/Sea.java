@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Model.Sea osztaly, egy Model.IceBlock-ot korulvevo tengert reprezental. Egy IceBlockon tartozkodo jatekos
+ * Sea osztaly, egy IceBlock-ot korulvevo tengert reprezental. Egy IceBlockon tartozkodo jatekos
  * 		inSea booleanje hatarozza meg, hogy a jatekos tengerben van, vagy az IceBlockon
- * 	 Model.IceBlock position: Az Model.IceBlock, amihez tartozik
+ * 	 IceBlock position: Az IceBlock, amihez tartozik
+ * 	 ArrayList<Player> players: A tengerben talalhato jatekosok
  */
 public class Sea implements PlayerContainerI {
 	private IceBlock position;
@@ -17,8 +18,8 @@ public class Sea implements PlayerContainerI {
 	}
 
 	/**
-	 * Elkeri az adott iranyban szomszedos tengert
-	 * @return visszater az adott iranyban szomszedos Model.Sea-vel
+	 * Elkeri az adott jegtablan levo tengert
+	 * @return visszater az adott jegtablan szomszedos Sea-vel
 	 */
 	public Sea getNeighbour(IceBlock b) {
 		return b.getSea();
@@ -36,7 +37,7 @@ public class Sea implements PlayerContainerI {
 	}
 
 	/**
-	 * Eltavolitja az adott jatekost a tablarol, igy a sea-rol is
+	 * Eltavolitja az adott jatekost a sea-rol.
 	 * @param p az eltavolitani kivant jatekos
 	 */
 	@Override
@@ -45,8 +46,7 @@ public class Sea implements PlayerContainerI {
 	}
 
 	/**
-	 * Hozzaad egy jatekost a tengerhez, ugy, hogy hozzaadja a tablahoz, majd true-ra allitja az inSea-t.
-	 * Majd ha kesz a Model.Player osztaly
+	 * Hozzaad a tengerhez egy jatekost.
 	 * @param p a hozzadni kivant jatekos
 	 */
 	@Override
