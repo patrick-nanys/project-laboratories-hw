@@ -267,7 +267,10 @@ public class Controller {
 
             // create players
             ArrayList<Player> players = new ArrayList<>();
+            List<List<Item>> createdItems = new ArrayList<>(playerTypes.length());
             for (int i = 0; i < playerTypes.length(); i++) {
+                // extend createdItems list
+                createdItems.add(new ArrayList<>());
 
                 // read player info
                 String[] playerStats = scanner.nextLine().split(";");
@@ -276,12 +279,12 @@ public class Controller {
 
                 // create inventory
                 Inventory inventory = new Inventory();
-                ArrayList<Item> createdItems = new ArrayList<>();
+
                 for (String itemLetter : itemLetters) {
                     Item item = createItem(itemLetter);
                     if (item == null)
                         break;
-                    createdItems.add(item);
+                    createdItems.get(i).add(item);
                     inventory.addItem(item);
                 }
 
@@ -290,11 +293,6 @@ public class Controller {
                     players.add(new Eskimo(inventory, health));
                 else if (playerTypes.charAt(i) == 'r')
                     players.add(new Researcher(inventory, health));
-
-                // call picked up by for items
-                for (Item item : createdItems)
-                    item.pickedUpBy(players.get(i));
-
             }
 
             // create bears
@@ -384,6 +382,15 @@ public class Controller {
             // create level
             this.level = new Level(iceblocks, players, bears, parts);
 
+            // set level for players
+            for (Player player : players)
+                player.setLevel(this.level);
+
+            // call pickedUpBy for items now that level has been set for players
+            for (int i = 0; i < playerTypes.length(); i++) {
+                for (Item item : createdItems.get(i))
+                    item.pickedUpBy(players.get(i));
+            }
         } catch (FileNotFoundException e) {
             return String.format("ERROR: File \"%s\" given to loadGame does not esist!\n", params[0]);
         }
