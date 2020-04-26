@@ -64,6 +64,10 @@ public abstract class Player extends Steppable {
 		return inSea;
 	}
 
+	public void setInSea(boolean b){
+		inSea = b;
+	}
+
 	/**
 	 * Visszaadja a leltarat
 	 * @return A jatekos inventoryja.
