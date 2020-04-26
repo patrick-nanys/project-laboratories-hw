@@ -53,6 +53,7 @@ public class Tent extends Item implements Building {
         if(ib.getBuilding() == null){
             ib.setBuilding(this);
             iceblock = ib;
+            player.getInventory().removeItem(this);
         }
     }
 
