@@ -336,7 +336,9 @@ public class Controller {
                 Sea sea = new Sea();
                 if (!playersInSea[0].equals("-")) {
                     for (String pS : playersInSea) {
-                        sea.addPlayer(players.get(Character.getNumericValue(pS.charAt(1)) - 1));
+                        Player playerInSea = players.get(Character.getNumericValue(pS.charAt(1)) - 1);
+                        sea.addPlayer(playerInSea);
+                        playerInSea.setInSea(true);
                     }
                 }
                 // create item, building
@@ -357,8 +359,10 @@ public class Controller {
                 // connect object to tile
 
                 // connect players
-                for (Player player : playersOnTile)
+                for (Player player : playersOnTile) {
                     player.setContainer(iceblocks.get(iceblocks.size() - 1));
+                    player.setInSea(false);
+                }
                 // connect bears
                 for (String characterS : charactersOnTile) {
                     if (characterS.charAt(0) == 'b')
