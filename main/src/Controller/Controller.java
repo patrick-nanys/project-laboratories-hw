@@ -630,6 +630,8 @@ public class Controller {
     // TODO comment
     private String playerTurn(Player player, String ret) {
         for (int i = 0; i < 4; i++) {
+            if (level.getGameState() != GameStateE.IN_PROGRESS)
+                return "end";
             boolean valid = false;
             while (!valid) {
                 String command = StaticStandardIO.readLine();
@@ -639,6 +641,8 @@ public class Controller {
                     return ret;
                 if (!ret.contains("ERROR")) {
                     valid = true;
+                    if (level.getGameState() == GameStateE.WON) StaticStandardIO.print("Game won");
+                    if (level.getGameState() == GameStateE.LOST) StaticStandardIO.print("Game over");
                     StaticStandardIO.print(ret);
                 }
             }
@@ -664,8 +668,6 @@ public class Controller {
             for (int i = 0; i < players.size(); i++) {
                 ret = playerTurn(players.get(i), ret);
 
-                if (level.getGameState() == GameStateE.WON) return "Game won";
-                if (level.getGameState() == GameStateE.LOST) return "Game over";
                 if (ret.equals("end")) return "";
 
                 if (!ret.equals("skip"))
