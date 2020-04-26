@@ -143,7 +143,7 @@ public abstract class Player extends Steppable {
 	 */
 	public void digOutItem() {
 		if (!getInSea()) {
-			IceBlock ib  = ((IceBlock) container);
+			IceBlock ib  = (IceBlock) container;
 			if (ib.getLayer() == 0) {
 				Item item = ib.getItem();
 				boolean success = item.addToInventory(inventory);
