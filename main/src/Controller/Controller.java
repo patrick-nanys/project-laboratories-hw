@@ -708,13 +708,23 @@ public class Controller {
     }
 
     //TODO comment
-    private void buildStringInfo(ArrayList<?> objects, GetStringCommand command, StringBuilder stringBuilder) {
+    private static class PlayerStringComparator<T> implements Comparator<T> {
+        @Override
+        public int compare(T s1, T s2) {
+            return Character.compare(((String) s1).charAt(1), ((String) s2).charAt(1));
+        }
+    }
+
+    //TODO comment
+    private void buildStringInfo(ArrayList<?> objects, GetStringCommand command, Comparator<String> comparator, StringBuilder stringBuilder) {
         if (objects.size() == 0) {
             stringBuilder.append("-");
         } else {
             ArrayList<String> strings = new ArrayList<>();
             for (Object o : objects)
                 strings.add(command.getString(o));
+            if (comparator != null)
+                strings.sort(comparator);
             stringBuilder.append(String.join(",", strings));
         }
     }
@@ -727,7 +737,7 @@ public class Controller {
     private void outputPlayerInfo(Player player, StringBuilder output) {
         output.append(player.getHealth()).append(";");
         ArrayList<Item> playerItems = (ArrayList<Item>) player.getInventory().getItems();
-        buildStringInfo(playerItems, this::stringFromItem, output);
+        buildStringInfo(playerItems, this::stringFromItem, null, output);
         output.append("\n");
     }
 
@@ -795,7 +805,7 @@ public class Controller {
             // characters on ice block
             List<Player> playersOnBlock = iceBlock.getPlayers();
             if (playersOnBlock.size() != 0)
-                buildStringInfo((ArrayList<Player>) playersOnBlock, this::stringFromPlayer, output);
+                buildStringInfo((ArrayList<Player>) playersOnBlock, this::stringFromPlayer, new PlayerStringComparator<>(), output);
             ArrayList<String> bearsOnIceBlockS = new ArrayList<>();
             for (PolarBear bear : bears)
                 if (bear.getIb().equals(iceBlock))
@@ -809,7 +819,7 @@ public class Controller {
             }
 
             // players in sea
-            buildStringInfo((ArrayList<Player>) iceBlock.getSea().getPlayers(), this::stringFromPlayer, output);
+            buildStringInfo((ArrayList<Player>) iceBlock.getSea().getPlayers(), this::stringFromPlayer, new PlayerStringComparator<>(), output);
             output.append(";");
 
             // item
@@ -825,7 +835,7 @@ public class Controller {
             output.append(iceBlock.getLayer()).append(";");
 
             // neighbours
-            buildStringInfo((ArrayList<IceBlock>) iceBlock.getNeighbours(), this::stringFromIceBlock, output);
+            buildStringInfo((ArrayList<IceBlock>) iceBlock.getNeighbours(), this::stringFromIceBlock, null, output);
             output.append("\n");
         }
 
