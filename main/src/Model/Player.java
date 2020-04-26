@@ -180,6 +180,10 @@ public abstract class Player extends Steppable {
 		return level;
 	}
 
+	/**
+	 * Level setter
+	 * @param _level a beallitando level
+	 */
 	public void setLevel(Level _level){
 		level = _level;
 	}
@@ -190,6 +194,10 @@ public abstract class Player extends Steppable {
     	return health;
 	}
 
+	/**
+	 * ELtavolitja a kapott itemet az inventorybol.
+	 * @param item Az eltavolitando item.
+	 */
 	public void removeItem(Item item) {
     	inventory.removeItem(item);
 	}
