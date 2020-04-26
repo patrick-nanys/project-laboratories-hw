@@ -107,8 +107,52 @@ public class Level {
 				}
 			}
 		}
+		/*
 		else {
-			//TODO random jégtáblák
+			Random r = new Random();
+			int numIceblocks = r.nextInt(iceblocks.size()) + 1;
+			boolean[] usedIceblock = new boolean[iceblocks.size()];
+			for (boolean ib :usedIceblock) { ib = false; }
+
+			int i = 0;
+			while (i < numIceblocks) {
+				int randomIndex = r.nextInt(iceblocks.size());
+				if (!usedIceblock[randomIndex]) {
+					usedIceblock[randomIndex] = true;
+					IceBlock ib = iceblocks.get(randomIndex);
+					ib.modifyLayers(+1);
+					if (ib.getBuilding() == null) {
+						for (Player blockedp : ib.getPlayers()) {
+							blockedp.loseHealth();
+						}
+					}
+					i++;
+				}
+			}
+		}
+		 */
+	}
+
+	public void blizzard() {
+		Random r = new Random();
+		int numIceblocks = r.nextInt(iceblocks.size()) + 1;
+		boolean[] usedIceblock = new boolean[iceblocks.size()];
+		for (boolean ib :usedIceblock) { ib = false; }
+
+		int i = 0;
+		while (i < numIceblocks) {
+			int randomIndex = r.nextInt(iceblocks.size());
+			if (!usedIceblock[randomIndex]) {
+				usedIceblock[randomIndex] = true;
+				IceBlock ib = iceblocks.get(randomIndex);
+				ib.modifyLayers(+1);
+				if (ib.getBuilding() == null) {
+					for (Player blockedp : ib.getPlayers()) {
+						blockedp.loseHealth();
+					}
+				}
+				i++;
+			}
 		}
 	}
 
