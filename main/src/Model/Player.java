@@ -8,7 +8,7 @@ import java.util.List;
  * A játékosok célja, hogy összegyűjtsék az alkatrészeket, és ezzel megnyerjék a játékot.
  * Ebből az osztályból származnak a Eskimo és Researcher osztályok.
  */
-public abstract class Player extends Steppable {
+public abstract class Player implements Steppable {
 	protected boolean inSea;
 	protected int health;
 	private Inventory inventory;
