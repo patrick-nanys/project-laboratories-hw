@@ -12,8 +12,8 @@ public class Researcher extends Player {
 	 * @param inventory inventory amiben a játékos itemei vannak
 	 * @param health életereje
 	 */
-	public Researcher(Level level, Inventory inventory, int health) {
-		super(level, inventory, health);
+	public Researcher(Inventory inventory, int health) {
+		super(inventory, health);
 	}
 
 	/**
