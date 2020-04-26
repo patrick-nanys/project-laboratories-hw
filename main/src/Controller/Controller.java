@@ -789,8 +789,11 @@ public class Controller {
                     bearsOnIceBlockS.add(stringFromBear(bear));
             if (playersOnBlock.size() == 0 && bearsOnIceBlockS.size() == 0)
                 output.append("-").append(";");
-            else
+            else {
+                if (playersOnBlock.size() != 0)
+                    output.append(",");
                 output.append(String.join(",", bearsOnIceBlockS)).append(";");
+            }
 
             // players in sea
             buildStringInfo((ArrayList<Player>) iceBlock.getSea().getPlayers(), this::stringFromPlayer, output);
