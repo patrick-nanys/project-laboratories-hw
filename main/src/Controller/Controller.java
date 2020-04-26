@@ -633,7 +633,7 @@ public class Controller {
             boolean valid = false;
             while (!valid) {
                 String command = StaticStandardIO.readLine();
-                if (command == null) return "";
+                if (command == null) return "end";
                 ret = interpret(command);
                 if (ret.equals("skip"))
                     return ret;
@@ -661,8 +661,12 @@ public class Controller {
         String ret = "";
         while (gameRunning) {
             // step players
-            for (Player player : players) {
-                ret = playerTurn(player, ret);
+            for (int i = 0; i < players.size(); i++) {
+                ret = playerTurn(players.get(i), ret);
+
+                if (level.getGameState() == GameStateE.WON) return "Game won";
+                if (ret.equals("end")) return "";
+
                 if (!ret.equals("skip"))
                     interpret("skipTurn");
             }
