@@ -47,10 +47,10 @@ public class Inventory {
 	 * @param p Akin hasznalni akarja az itemet a jatekos.
 	 */
 	public void use(Item item, Player p) {
-		for(Item _item : items){
-			if(item.equals(_item))
-				_item.use(p);
-		}
+        for(int i = 0; i < items.size(); i++){
+            if(item.equals(items.get(i)))
+                items.get(i).use(p);
+        }
 	}
 
 	/**
@@ -58,10 +58,10 @@ public class Inventory {
 	 * @param item Az eltavolitando item.
 	 */
 	public void removeItem(Item item){
-		for(Item _item : items){
-			if(item.equals(_item))
-				items.remove(_item);
-		}
+	    for(int i = 0; i < items.size(); i++){
+            if(item.equals(items.get(i)))
+                items.remove(items.get(i));
+        }
 	}
 
 	/**
