@@ -8,6 +8,11 @@ package Model;
 public class Iglu implements Building {
     protected IceBlock iceBlock;
 
+    @Override
+    public void setIceblock(IceBlock ib) {
+        iceBlock = ib;
+    }
+
     /**
      * Mivel az iglu a vihartól, és a medvétől is
      * megvédi a játékost, így ez a függvény üres,

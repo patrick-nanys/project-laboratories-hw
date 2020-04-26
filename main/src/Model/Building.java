@@ -16,4 +16,8 @@ public interface Building {
      * Ahhoz szükséges, hogy a tent a kör végén meg tudjon semmisülni.
      */
     void selfDestruct();
+
+
+    void setIceblock(IceBlock ib);
 }
+
