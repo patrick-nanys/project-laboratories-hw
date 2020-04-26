@@ -18,13 +18,12 @@ public class Food extends Item {
 
 	/**
 	 * Felülírja az Item addToInventory függvényét,
-	 * hogy ne kerülhessen be az élelem a játékos inventory-jába
+	 * hogy ne kerüljön a játékos inventory-jába.
 	 * @param inventory A kérdéses inventory
-	 * @return Azzal tér vissza, hogy sikeresen hozzáadódott-e
-	 * 			az inventoryhoz, tehát mindig false-szal tér vissza.
+	 * @return Igazzal tér vissza.
 	 */
 	public boolean addToInventory(Inventory inventory) {
-		return false;
+		return true;
 	}
 
 	/**
