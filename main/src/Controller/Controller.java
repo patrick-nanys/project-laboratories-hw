@@ -627,6 +627,25 @@ public class Controller {
         return "";
     }
 
+    // TODO comment
+    private String playerTurn(Player player, String ret) {
+        for (int i = 0; i < 4; i++) {
+            boolean valid = false;
+            while (!valid) {
+                String command = StaticStandardIO.readLine();
+                if (command == null) return "";
+                ret = interpret(command);
+                if (ret.equals("skip"))
+                    return ret;
+                if (!ret.contains("ERROR")) {
+                    valid = true;
+                    StaticStandardIO.print(ret);
+                }
+            }
+        }
+        return ret;
+    }
+
     /**
      * Elindítja a játékot logikát.
      * @param params startGame bemeneti nyelvi parancs paraméterei
@@ -642,21 +661,8 @@ public class Controller {
         String ret = "";
         while (gameRunning) {
             // step players
-            for (Player ignored : players) {
-                for (int i = 0; i < 4; i++) {
-                    boolean valid = false;
-                    while (!valid) {
-                        String command = StaticStandardIO.readLine();
-                        if (command == null) return "";
-                        ret = interpret(command);
-                        if (ret.equals("skip"))
-                            break;
-                        if (!ret.contains("ERROR")) {
-                            valid = true;
-                            StaticStandardIO.print(ret);
-                        }
-                    }
-                }
+            for (Player player : players) {
+                ret = playerTurn(player, ret);
                 if (!ret.equals("skip"))
                     interpret("skipTurn");
             }
