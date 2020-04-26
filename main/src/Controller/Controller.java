@@ -2,15 +2,12 @@ package Controller;
 
 import Model.*;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.security.InvalidParameterException;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import static java.lang.Integer.parseInt;
 
@@ -627,8 +624,13 @@ public class Controller {
         return "";
     }
 
-    // TODO comment
-    private String playerTurn(Player player, String ret) {
+    /**
+     * Az aktuálisan soron lévő játékosnak levezényli a négy lépését amit megtehet.
+     * @return visszatérési értéke az utolsó futtatott parancsnak, illetve "skip" ha skipTurn-olt a játékos,
+     * illetve "end" ha vége van a játéknak
+     */
+    private String playerTurn() {
+        String ret = "";
         for (int i = 0; i < 4; i++) {
             if (level.getGameState() != GameStateE.IN_PROGRESS)
                 return "end";
@@ -662,11 +664,11 @@ public class Controller {
         gameRunning = (level.getGameState() == null);
         currentPlayer = players.get(0);
         level.setGameState(GameStateE.IN_PROGRESS);
-        String ret = "";
+        String ret;
         while (gameRunning) {
             // step players
-            for (int i = 0; i < players.size(); i++) {
-                ret = playerTurn(players.get(i), ret);
+            for (Player ignored : players) {
+                ret = playerTurn();
 
                 if (ret.equals("end")) return "";
 
@@ -683,7 +685,7 @@ public class Controller {
             for (IceBlock iceBlock : level.getIceBlocks()) {
                 Building b = iceBlock.getBuilding();
                 if (b instanceof Tent)
-                    ((Tent) b).selfDestruct();
+                    b.selfDestruct();
             }
 
             // check player statuses
@@ -701,13 +703,18 @@ public class Controller {
         return "Game over";
     }
 
-    //TODO comment
+    /**
+     * Egységes sáma a szöveggé alakító függvényekhez.
+     */
     @FunctionalInterface
     private interface GetStringCommand{
         String getString(Object o);
     }
 
-    //TODO comment
+    /**
+     * Játékosok szöveges formátumát hasonlítja össze.
+     * @param <T> típus aminek mindig String-nek kell lennie
+     */
     private static class PlayerStringComparator<T> implements Comparator<T> {
         @Override
         public int compare(T s1, T s2) {
@@ -715,7 +722,14 @@ public class Controller {
         }
     }
 
-    //TODO comment
+    /**
+     * Generikus string építő, ami a megadott objektumokon végigmenve stringekké alakítja, sorbarendezi
+     * aztán hozzáadja a megadott stringbuilderhez
+     * @param objects objektumok amiket bele akarunk építeni a megadott stringbuilderbe
+     * @param command stringgé alakító függvény
+     * @param comparator amivel összehasonlítjunk két elemet a rendezésnél, ez null, ha nem akarunk rendezni
+     * @param stringBuilder amit építeni akarunk
+     */
     private void buildStringInfo(ArrayList<?> objects, GetStringCommand command, Comparator<String> comparator, StringBuilder stringBuilder) {
         if (objects.size() == 0) {
             stringBuilder.append("-");
