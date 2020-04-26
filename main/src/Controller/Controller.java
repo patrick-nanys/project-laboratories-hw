@@ -647,7 +647,7 @@ public class Controller {
                     boolean valid = false;
                     while (!valid) {
                         String command = StaticStandardIO.readLine();
-                        if (command == null) return "ERROR: You messed up the test commands!";
+                        if (command == null) return "";
                         ret = interpret(command);
                         if (ret.equals("skip"))
                             break;
