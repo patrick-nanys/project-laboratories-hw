@@ -39,6 +39,8 @@ public class IceBlock implements PlayerContainerI {
 		this.snowLayers=snowLayers;
 		this.capacity=capacity;
 		neighbours = new ArrayList<>();
+		if (building != null)
+			building.setIceblock(this);
 	}
 
     /**
