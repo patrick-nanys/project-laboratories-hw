@@ -15,12 +15,9 @@ p1;-;-;-;2;0;3,5,7,10,13
 -;-;-;-;0;1;8,9,12
 p3;-;-;-;1;2;9,10,11,13
 p2;-;-;-;3;2;6,7,10,12
+stepPlayer 1 5
+stepPlayer 2 6
+stepPlayer 3 9
+stepPolarBear 1 5
 startGame
-stepPlayer 5
-skipTurn
-stepPlayer 6
-skipTurn
-stepPlayer 9
-skipTurn
-stepPolarBear 5
 status
