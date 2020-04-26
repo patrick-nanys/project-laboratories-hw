@@ -64,6 +64,10 @@ public abstract class Player extends Steppable {
 		return inSea;
 	}
 
+	/**
+	 * Beállítja az inSea attribútumot.
+	 * @param b igaz, vagy hamis-e
+	 */
 	public void setInSea(boolean b){
 		inSea = b;
 	}
