@@ -99,15 +99,8 @@ public abstract class Player extends Steppable {
 	 * @param item a hasznalani kivant targy
 	 */
 	public void useItem(Item item) {
-		if (!getInSea()) {
-			List<Item> items = inventory.getItems();
-			for(Item _item : items){
-				if(_item.equals(item)){
-					inventory.use(_item, this);
-					break;
-				}
-			}
-		}
+		if (!getInSea())
+			inventory.use(item, this);
 	}
 
 	/**
@@ -118,15 +111,8 @@ public abstract class Player extends Steppable {
 	 * @param player A játékos, amin használja az eszközt.
 	 */
 	public void useItemOnPlayer(Item item, Player player) {
-		if (!getInSea()) {
-			List<Item> items = inventory.getItems();
-			for(Item _item : items){
-				if(_item.equals(item)){
-					inventory.use(_item, player);
-					break;
-				}
-			}
-		}
+		if (!getInSea())
+			inventory.use(item, player);
 	}
 
 	/**

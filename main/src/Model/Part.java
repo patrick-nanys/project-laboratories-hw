@@ -31,6 +31,11 @@ public class Part extends Item {
 		player = p;
 		level = p.getLevel();
 	}
+
+	/**
+	 * Beallitja a level attributumat a kapott level objektumra.
+	 * @param _level A beallitando level objektum.
+	 */
 	public void setLevel(Level _level){
 		level = _level;
 	}
