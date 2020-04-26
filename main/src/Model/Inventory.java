@@ -47,8 +47,9 @@ public class Inventory {
 	 * @param p Akin hasznalni akarja az itemet a jatekos.
 	 */
 	public void use(Item item, Player p) {
-		if(contains(item)){
-			item.use(p);
+		for(Item _item : items){
+			if(item.equals(_item))
+				_item.use(p);
 		}
 	}
 
