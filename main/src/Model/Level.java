@@ -29,6 +29,9 @@ public class Level {
 		}
 		this.bears = bears;
 		this.parts = parts;
+		for(Part part : parts) {
+			part.setLevel(this);
+		}
 	}
 
 	/**

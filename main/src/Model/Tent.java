@@ -11,6 +11,11 @@ import java.util.List;
 public class Tent extends Item implements Building {
     protected IceBlock iceblock;
 
+    @Override
+    public void setIceblock(IceBlock ib) {
+        iceblock = ib;
+    }
+
     /**
      * Védő függvény. Mivel a sátor nem véd a jegesmedvétől,
      * ez a függvény megöli az első játékost a jégtáblán.
@@ -34,7 +39,6 @@ public class Tent extends Item implements Building {
         iceblock = null;
     }
 
-
     /**
      * A sátor, mint Item használatának függvénye.
      * beállítja a paraméterként kapott játékos helyének
@@ -49,6 +53,7 @@ public class Tent extends Item implements Building {
         if(ib.getBuilding() == null){
             ib.setBuilding(this);
             iceblock = ib;
+            player.getInventory().removeItem(this);
         }
     }
 

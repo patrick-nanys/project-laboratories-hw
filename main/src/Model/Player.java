@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Ez az absztrakt osztály a játékosokat reprezentálja a játékban.
@@ -95,7 +96,13 @@ public abstract class Player extends Steppable {
 	 */
 	public void useItem(Item item) {
 		if (!getInSea()) {
-			inventory.use(item, this);
+			List<Item> items = inventory.getItems();
+			for(Item _item : items){
+				if(_item.equals(item)){
+					inventory.use(_item, this);
+					break;
+				}
+			}
 		}
 	}
 
@@ -108,7 +115,13 @@ public abstract class Player extends Steppable {
 	 */
 	public void useItemOnPlayer(Item item, Player player) {
 		if (!getInSea()) {
-			inventory.use(item, player);
+			List<Item> items = inventory.getItems();
+			for(Item _item : items){
+				if(_item.equals(item)){
+					inventory.use(_item, player);
+					break;
+				}
+			}
 		}
 	}
 
