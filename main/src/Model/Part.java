@@ -12,11 +12,11 @@ public class Part extends Item {
 	/**
 	 * Az alkatrész használatának függvénye. ellenőrzi a pálya segítségével, hogy
 	 * minden alkatrész egy jégtáblán van e.
-	 * @param player Az a játékos, aki használni szeretné az adott
+	 * @param _player Az a játékos, aki használni szeretné az adott
 	 *               alkatrészt.
 	 */
-	public void use(Player player) {
-		if(!player.getInSea()){
+	public void use(Player _player) {
+		if(!_player.getInSea()){
 			level.checkParts();
 		}
 	}
@@ -31,7 +31,9 @@ public class Part extends Item {
 		player = p;
 		level = p.getLevel();
 	}
-
+	public void setLevel(Level _level){
+		level = _level;
+	}
 	/**
 	 * Visszaadja azt a helyet, amin az a játékos, akinél az adott
 	 * alkatrész van, éppen elhelyezkedik.
