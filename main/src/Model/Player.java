@@ -8,19 +8,29 @@ import java.util.List;
  * A játékosok célja, hogy összegyűjtsék az alkatrészeket, és ezzel megnyerjék a játékot.
  * Ebből az osztályból származnak a Eskimo és Researcher osztályok.
  */
-public abstract class Player extends Steppable {
+public abstract class Player implements Steppable {
 	protected boolean inSea;
 	protected int health;
 	private Inventory inventory;
 	protected Level level;
 	protected PlayerContainerI container;
 
+	/**
+	 * Player konstruktora adott leltárra és életerő pontra.
+	 * @param inventory a játékos leltára.
+	 * @param health a játékos életerő pontja
+	 */
 	Player(Inventory inventory, int health) {
 		inSea = false;
 		this.inventory = inventory;
 		this.health = health;
 	}
 
+	/**
+	 * Hozzáad egy Item-et a játékoshoz,
+	 * aki pedig beteszi a leltárába.
+	 * @param i Az Item, amit hozzáad.
+	 */
 	public void addItem(Item i) {
 		inventory.addItem(i);
 		i.pickedUpBy(this);

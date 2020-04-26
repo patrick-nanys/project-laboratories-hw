@@ -22,10 +22,10 @@ public class UnstableIceBlock extends IceBlock {
 	 * Felboritja az instabil jegtablat, beledobva az osszes rajta allo jatekost a tengerbe.
 	 */
 	public void flip() {
-		// this loop needs to stay like this, or else it throws ConcurrentModificationException
-		for (int i = 0; i < players.size(); i++) {
-			players.get(i).setInSea(true);
-			movePlayer(players.get(i), this.sea);
+		int size = players.size();
+		for (int i = 0; i < size; i++) {
+			players.get(0).setInSea(true);
+			movePlayer(players.get(0), this.sea);
 		}
 	}
 

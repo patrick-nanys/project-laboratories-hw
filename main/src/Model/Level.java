@@ -20,6 +20,13 @@ public class Level {
 	private ArrayList<PolarBear> bears;
 	private GameStateE gameState;
 
+	/**
+	 * Level konstruktor adott jégtáblákra, játékosokra, medvékre, rakétarészekre
+	 * @param iceblocks a jégtáblák listája
+	 * @param players a játékosok listája
+	 * @param bears a medvék listája
+	 * @param parts a rakétarészek listája
+	 */
 	public Level(ArrayList<IceBlock> iceblocks, ArrayList<Player> players, ArrayList<PolarBear> bears, ArrayList<Part> parts) {
 		this.gameState = null;
 		this.iceblocks = iceblocks;
@@ -93,7 +100,7 @@ public class Level {
 	 * valamint sebzi a játékosokat, ha a táblán nincs iglu vagy sátor.
 	 * Ha nincs megadva jégtábla lista, akkor random mennyiségű,
 	 * random indexű jégtáblákra hívódik meg.
-     * @param iceBlocks
+     * @param iceBlocks a jégtáblák listája
      */
 	public void blizzard(ArrayList<IceBlock> iceBlocks) {
 		if (iceBlocks != null) {
@@ -107,30 +114,6 @@ public class Level {
 				}
 			}
 		}
-		/*
-		else {
-			Random r = new Random();
-			int numIceblocks = r.nextInt(iceblocks.size()) + 1;
-			boolean[] usedIceblock = new boolean[iceblocks.size()];
-			for (boolean ib :usedIceblock) { ib = false; }
-
-			int i = 0;
-			while (i < numIceblocks) {
-				int randomIndex = r.nextInt(iceblocks.size());
-				if (!usedIceblock[randomIndex]) {
-					usedIceblock[randomIndex] = true;
-					IceBlock ib = iceblocks.get(randomIndex);
-					ib.modifyLayers(+1);
-					if (ib.getBuilding() == null) {
-						for (Player blockedp : ib.getPlayers()) {
-							blockedp.loseHealth();
-						}
-					}
-					i++;
-				}
-			}
-		}
-		 */
 	}
 
 	public void blizzard() {
@@ -156,42 +139,84 @@ public class Level {
 		}
 	}
 
+	/**
+	 * Visszaadja a játékosok számát a szinten.
+	 * @return játékosok száma a szinten
+	 */
 	public int getNumberOfPlayers() {
 		return players.size();
 	}
 
+	/**
+	 * Visszaadja a jégtáblák számát.
+	 * @return jégtáblák száma a szinten.
+	 */
 	public int getNumberOfIceblocks() {
 		return iceblocks.size();
 	}
 
+	/**
+	 * Visszaadja a medvék számát a szinten.
+	 * @return a medvék száma a szinten
+	 */
 	public int getNumberOfBears() {
 		return bears.size();
 	}
 
+	/**
+	 * Visszaadja az adott indexu játékost.
+	 * @param playerId játékos index
+	 * @return az adott indexű játékos
+	 */
 	public Player getPlayer(int playerId) {
 		return players.get(playerId);
 	}
 
+	/**
+	 * Visszaadja a játékosok listáját a szinten.
+	 * @return a játékosok listája
+	 */
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
 
+	/**
+	 * Visszaadja az adott indexű jegesmedvét.
+	 * @param id az adott index
+	 * @return az adott indexű jegesmedve
+	 */
 	public PolarBear getPolarBear(int id) {
 		return bears.get(id);
 	}
 
+	/**
+	 * Beállítja a szint játékállapotát.
+	 * @param state a beállítandó állapot.
+	 */
 	public void setGameState(GameStateE state) {
 		gameState = state;
 	}
 
+	/**
+	 * Visszaadja a jegesmedvék listáját.
+	 * @return jegesmedvék listája
+	 */
 	public ArrayList<PolarBear> getPolarBears() {
 		return bears;
 	}
 
+	/**
+	 * Visszaadja az aktuális játékállapotot.
+	 * @return Játékállapot
+	 */
 	public GameStateE getGameState() {
 		return gameState;
 	}
 
+	/**
+	 * Visszaadja a jégtáblák listáját.
+	 * @return Jégtáblák listája
+	 */
 	public ArrayList<IceBlock> getIceBlocks() {
 		return iceblocks;
 	}

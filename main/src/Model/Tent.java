@@ -22,10 +22,10 @@ public class Tent extends Item implements Building {
      */
     @Override
     public void protect(){
-        List<Player> players =  iceblock.getPlayers();
-        if(players != null){
-            players.get(0).die();
+        if(iceblock.getPlayers() != null){
+            iceblock.getPlayers().get(0).die();
         }
+        this.selfDestruct();
     }
 
     /**
