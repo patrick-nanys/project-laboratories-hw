@@ -169,6 +169,7 @@ public abstract class Player extends Steppable {
 	 * Ertesiti a szintet, hogy vege a jateknak.
 	 */
 	public void die() {
+		if(health!=0) health = 0;
 		level.levelLost();
 	}
 
