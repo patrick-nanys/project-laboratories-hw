@@ -287,9 +287,9 @@ public class Controller {
 
                 // create player
                 if (playerTypes.charAt(i) == 'e')
-                    players.add(new Eskimo(level, inventory, health));
+                    players.add(new Eskimo(inventory, health));
                 else if (playerTypes.charAt(i) == 'r')
-                    players.add(new Researcher(level, inventory, health));
+                    players.add(new Researcher(inventory, health));
 
                 // call picked up by for items
                 for (Item item : createdItems)
@@ -490,30 +490,32 @@ public class Controller {
      */
     private String usePlayerAbility(String[] params) {
         int capacity = -1;
+        Player player;
+        ParamType[] paramTypes;
+
+        //error handling
         if (gameRunning) {
-            // error handling
-            ParamType[] paramTypes = new ParamType[] {ParamType.ICE_BLOCK};
-            String ret = checkForErrors(params, paramTypes);
-            if (!ret.equals("")) return ret;
-
-            IceBlock iceBlock = level.getIceBlock(parseInt(params[0]) - 1);
-            if (currentPlayer instanceof Eskimo)
-                ((Eskimo)currentPlayer).buildIglu(iceBlock);
+            player = level.getPlayer(parseInt(params[0]) - 1);
+            if (player instanceof Eskimo)
+                paramTypes = new ParamType[] {};
             else
-                capacity = ((Researcher)currentPlayer).checkStability(iceBlock);
-
+                paramTypes = new ParamType[] {ParamType.ICE_BLOCK};
         } else {
-            // error handling
-            ParamType[] paramTypes = new ParamType[] {ParamType.PLAYER, ParamType.ICE_BLOCK};
-            String ret = checkForErrors(params, paramTypes);
-            if (!ret.equals("")) return ret;
-
-            Player player = level.getPlayer(parseInt(params[0]) - 1);
-            IceBlock iceBlock = level.getIceBlock(parseInt(params[0]) - 1);
-            if (currentPlayer instanceof Eskimo)
-                ((Eskimo)player).buildIglu(iceBlock);
+            player = level.getPlayer(parseInt(params[0]) - 1);
+            if (player instanceof Eskimo)
+                paramTypes = new ParamType[] {ParamType.PLAYER};
             else
-                capacity = ((Researcher)player).checkStability(iceBlock);
+                paramTypes = new ParamType[] {ParamType.PLAYER, ParamType.ICE_BLOCK};
+        }
+        String ret = checkForErrors(params, paramTypes);
+        if (!ret.equals("")) return ret;
+
+        if (player instanceof Eskimo) {
+            ((Eskimo)player).buildIglu();
+        }
+        else {
+            IceBlock iceBlock = level.getIceBlock(parseInt(params[0]) - 1);
+            capacity = ((Researcher)player).checkStability(iceBlock);
         }
 
         return capacity != -1 ? "IceBlock has capacity of: " + capacity : "";

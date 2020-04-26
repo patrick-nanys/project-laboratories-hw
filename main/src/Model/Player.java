@@ -15,8 +15,7 @@ public abstract class Player extends Steppable {
 	protected Level level;
 	protected PlayerContainerI container;
 
-	Player(Level level, Inventory inventory, int health) {
-		this.level = level;
+	Player(Inventory inventory, int health) {
 		inSea = false;
 		this.inventory = inventory;
 		this.health = health;
