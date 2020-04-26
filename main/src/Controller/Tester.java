@@ -72,6 +72,7 @@ public class Tester {
                 test(entry.getKey());
         } else {
             Controller c = new Controller();
+            boolean exceptionCaught = false;
             String prefix = "main\\testfiles\\test" + (number < 10 ? "0" : "") + number;
             String testFile = prefix + ".tst";
             String expectedFile = prefix + ".expc";
@@ -111,11 +112,12 @@ public class Tester {
 
             } catch (Exception e) {
                 e.printStackTrace();
+                exceptionCaught = true;
             }
 
             boolean matched = compare(returns.toArray(new String[0]), expectedReturns.toArray(new String[0]));
 
-            if (matched)
+            if (matched && !exceptionCaught)
                 System.out.println(options.get(number) + " succeeded");
             else
                 System.out.println("--" + options.get(number) + " failed");

@@ -654,6 +654,13 @@ public class Controller {
                 bear.step(null);
             }
 
+            // destroy tents
+            for (IceBlock iceBlock : level.getIceBlocks()) {
+                Building b = iceBlock.getBuilding();
+                if (b instanceof Tent)
+                    ((Tent) b).selfDestruct();
+            }
+
             // check player statuses
             for (Player player : players) {
                 player.checkPlayerStatus();
