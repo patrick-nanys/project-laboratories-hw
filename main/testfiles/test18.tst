@@ -4,4 +4,5 @@
 p1,p2;-;-;t;3;0;2
 b1;-;-;-;3;0;1
 stepPolarBear 1 1
+startGame
 status
