@@ -25,6 +25,7 @@ public class UnstableIceBlock extends IceBlock {
 		// this loop needs to stay like this, or else it throws ConcurrentModificationException
 		for (int i = 0; i < players.size(); i++) {
 			movePlayer(players.get(i), this.sea);
+			players.get(i).setInSea(true);
 		}
 	}
 
