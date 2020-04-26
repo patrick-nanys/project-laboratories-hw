@@ -174,6 +174,9 @@ public abstract class Player extends Steppable {
 		return level;
 	}
 
+	public void setLevel(Level _level){
+		level = _level;
+	}
 	/**
 	 * Visszaadja a játékos életerejét.
 	 */
