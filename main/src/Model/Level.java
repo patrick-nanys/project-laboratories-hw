@@ -24,6 +24,9 @@ public class Level {
 		this.gameState = GameStateE.IN_PROGRESS;
 		this.iceblocks = iceblocks;
 		this.players = players;
+		for(Player player : players){
+			player.setLevel(this);
+		}
 		this.bears = bears;
 		this.parts = parts;
 	}
