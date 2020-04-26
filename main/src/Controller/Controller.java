@@ -665,6 +665,7 @@ public class Controller {
                 ret = playerTurn(players.get(i), ret);
 
                 if (level.getGameState() == GameStateE.WON) return "Game won";
+                if (level.getGameState() == GameStateE.LOST) return "Game over";
                 if (ret.equals("end")) return "";
 
                 if (!ret.equals("skip"))
