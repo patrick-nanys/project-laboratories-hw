@@ -63,7 +63,7 @@ public class PolarBear extends Steppable {
         if(building != null) {
             building.protect();
         }
-        else if(players != null) {
+        else if(players != null && players.size() != 0) {
             players.get(0).die();
         }
     }
