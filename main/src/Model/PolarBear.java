@@ -11,7 +11,7 @@ import java.util.Random;
     lévőket), de a sátorba be tud menni, az nem véd ellene.
  */
 
-public class PolarBear extends Steppable {
+public class PolarBear implements Steppable {
     private IceBlock ib;
 
     /**
