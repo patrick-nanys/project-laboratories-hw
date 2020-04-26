@@ -790,7 +790,7 @@ public class Controller {
             if (playersOnBlock.size() == 0 && bearsOnIceBlockS.size() == 0)
                 output.append("-").append(";");
             else {
-                if (playersOnBlock.size() != 0)
+                if (playersOnBlock.size() != 0 && bearsOnIceBlockS.size() != 0)
                     output.append(",");
                 output.append(String.join(",", bearsOnIceBlockS)).append(";");
             }
