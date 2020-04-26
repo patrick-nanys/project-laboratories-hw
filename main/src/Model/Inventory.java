@@ -58,8 +58,9 @@ public class Inventory {
 	 * @param item Az eltavolitando item.
 	 */
 	public void removeItem(Item item){
-		if(contains(item)){
-			items.remove(item);
+		for(Item _item : items){
+			if(item.equals(_item))
+				items.remove(_item);
 		}
 	}
 
