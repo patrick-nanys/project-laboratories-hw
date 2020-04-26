@@ -21,7 +21,7 @@ public class Level {
 	private GameStateE gameState;
 
 	public Level(ArrayList<IceBlock> iceblocks, ArrayList<Player> players, ArrayList<PolarBear> bears, ArrayList<Part> parts) {
-		this.gameState = GameStateE.IN_PROGRESS;
+		this.gameState = null;
 		this.iceblocks = iceblocks;
 		this.players = players;
 		for(Player player : players){

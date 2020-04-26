@@ -625,7 +625,7 @@ public class Controller {
         ArrayList<Player> players = level.getPlayers();
         ArrayList<PolarBear> bears = level.getPolarBears();
 
-        gameRunning = true;
+        gameRunning = (level.getGameState() == null);
         currentPlayer = players.get(0);
         level.setGameState(GameStateE.IN_PROGRESS);
         String ret = "";
@@ -636,6 +636,7 @@ public class Controller {
                     boolean valid = false;
                     while (!valid) {
                         String command = StaticStandardIO.readLine();
+                        if (command == null) return "ERROR: You messed up the test commands!";
                         ret = interpret(command);
                         if (ret.equals("skip"))
                             break;
