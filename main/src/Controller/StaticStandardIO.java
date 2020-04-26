@@ -59,15 +59,9 @@ public class StaticStandardIO {
      * @return beolvasott egész szám
      */
     public static int readInt() {
+        if (otherInputSet && !in.hasNext())
+            return -1;
         return in.nextInt();
-    }
-
-    /**
-     * Visszatér a beolvasott karakterrel.
-     * @return beolvasott karakter
-     */
-    public static char readChar() {
-        return in.next().charAt(0);
     }
 
     /**
@@ -75,6 +69,8 @@ public class StaticStandardIO {
      * @return beolvasott sor.
      */
     public static String readLine() {
+        if (otherInputSet && !in.hasNext())
+            return null;
         return in.nextLine();
     }
 
