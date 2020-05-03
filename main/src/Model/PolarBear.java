@@ -3,12 +3,12 @@ package Model;
 import java.util.List;
 import java.util.Random;
 
-/*
-    Ez az osztály reprezentálja a játékban a jegesmedvét.
-    Véletlenszerűen kószál, körönként egyet lép. Ha elkap valakit
-    (közös jégtáblán áll vele), vége a játéknak.
-    Az iglun átgyalogol, nem megy be (az iglu megvédi a benne
-    lévőket), de a sátorba be tud menni, az nem véd ellene.
+/**
+ * Ez az osztály reprezentálja a játékban a jegesmedvét.
+ * Véletlenszerűen kószál, körönként egyet lép. Ha elkap valakit
+ * (közös jégtáblán áll vele), vége a játéknak.
+ * Az iglun átgyalogol, nem megy be (az iglu megvédi a benne
+ * lévőket), de a sátorba be tud menni, az nem véd ellene.
  */
 
 public class PolarBear implements Steppable {
