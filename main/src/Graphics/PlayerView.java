@@ -1,4 +1,4 @@
 package Graphics;
 
-public class PlayerView {
+public class PlayerView extends GameElementView {
 }

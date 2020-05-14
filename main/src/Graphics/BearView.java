@@ -1,4 +1,4 @@
 package Graphics;
 
-public class BearView {
+public class BearView extends GameElementView {
 }

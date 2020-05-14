@@ -1,4 +1,4 @@
 package Graphics;
 
-public class IceBlockView {
+public class IceBlockView extends GameElementView {
 }
