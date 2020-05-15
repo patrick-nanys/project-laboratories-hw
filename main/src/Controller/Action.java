@@ -3,7 +3,7 @@ package Controller;
 import Model.Level;
 
 public abstract class Action {
-    private Level level;
+    protected Level level;
     protected Controller controller;
 
     abstract void click();

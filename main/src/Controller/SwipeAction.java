@@ -6,6 +6,6 @@ public class SwipeAction extends Action  {
 
     @Override
     void click() {
-        controller.getCurrentPlayer().swipeWithHand();
+        controller.interpret("swipeSnow");
     }
 }

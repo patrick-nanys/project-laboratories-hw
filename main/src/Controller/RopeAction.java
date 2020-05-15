@@ -4,6 +4,8 @@ import Model.Player;
 import Model.PlayerContainerI;
 import Model.Rope;
 
+import java.util.ArrayList;
+
 public class RopeAction extends Action  {
     @Override
     void click() {
@@ -12,8 +14,8 @@ public class RopeAction extends Action  {
 
     @Override
     void call(Object o) {
-        Player player = controller.getCurrentPlayer();
-        if (player.hasItem(new Rope()))
-            player.useItemOnPlayer(new Rope(), (Player) o );
+        ArrayList<Player> players = level.getPlayers();
+        int playerId = players.indexOf( (Player) o );
+        controller.interpret("usePlayerItem r " + playerId);
     }
 }

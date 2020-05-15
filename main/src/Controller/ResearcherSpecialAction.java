@@ -1,7 +1,10 @@
 package Controller;
 
+import Model.IceBlock;
 import Model.Player;
 import Model.PlayerContainerI;
+
+import java.util.ArrayList;
 
 public class ResearcherSpecialAction extends Action  {
     @Override
@@ -11,7 +14,8 @@ public class ResearcherSpecialAction extends Action  {
 
     @Override
     void call(Object o) {
-        Player player = controller.getCurrentPlayer();
-        player.step( (PlayerContainerI) o );
+        ArrayList<IceBlock> iceBlocks = level.getIceBlocks();
+        int iceBlockId = iceBlocks.indexOf( (IceBlock) o );
+        controller.interpret("usePlayerAbility " + iceBlockId);
     }
 }
