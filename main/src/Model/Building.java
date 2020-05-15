@@ -25,6 +25,10 @@ public interface Building {
     IceBlock getIceBlock();
 
     void addBuildingView(BuildingView bv);
+
     BuildingView getBuildingView();
+
+    String ToString();
+
 }
 

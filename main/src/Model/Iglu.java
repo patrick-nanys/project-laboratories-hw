@@ -42,4 +42,8 @@ public class Iglu implements Building {
     public BuildingView getBuildingView(){
         return bv;
     }
+
+    public String ToString() {
+        return "Iglu";
+    }
 }

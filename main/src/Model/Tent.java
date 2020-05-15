@@ -78,4 +78,7 @@ public class Tent extends Item implements Building {
     public BuildingView getBuildingView(){
         return bv;
     }
+    public String ToString() {
+        return "Tent";
+    }
 }
