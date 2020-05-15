@@ -8,7 +8,6 @@ public class Researcher extends Player {
 
 	/**
 	 * Konstruktor, hogy a tagváltozókat beállítsuk
-	 * @param level pálya ahol elhelyezkedik
 	 * @param inventory inventory amiben a játékos itemei vannak
 	 * @param health életereje
 	 */
@@ -22,6 +21,10 @@ public class Researcher extends Player {
 	 */
 	public int checkStability(IceBlock ib) {
 		return ib.getCapacity();
+	}
+
+	public String ToString(){
+		return "Eskimo";
 	}
 
 }

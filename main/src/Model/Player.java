@@ -1,5 +1,7 @@
 package Model;
 
+import Graphics.PlayerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ public abstract class Player implements Steppable {
 	private Inventory inventory;
 	protected Level level;
 	protected PlayerContainerI container;
+	protected PlayerView pv;
 
 	/**
 	 * Player konstruktora adott leltárra és életerő pontra.
@@ -212,4 +215,14 @@ public abstract class Player implements Steppable {
 	public void removeItem(Item item) {
     	inventory.removeItem(item);
 	}
+
+	public void addPlayerView(PlayerView _pv){
+		pv = _pv;
+	}
+	public PlayerView getPlayerView(){
+		return pv;
+	}
+
+	public abstract String ToString();
+
 }

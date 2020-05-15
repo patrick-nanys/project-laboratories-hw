@@ -22,4 +22,8 @@ public class Eskimo extends Player {
 			((IceBlock)container).setBuilding(new Iglu());
 		}
 	}
+
+	public String ToString(){
+		return "Eskimo";
+	}
 }
