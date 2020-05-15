@@ -1,5 +1,7 @@
 package Model;
 
+import Graphics.BuildingView;
+
 /**
  * Ez az interfész reprezentál egy épületet a játékban.
  * A védő és önmegsemmisítő függvényeket tartalmazza.
@@ -19,5 +21,10 @@ public interface Building {
 
 
     void setIceblock(IceBlock ib);
+
+    IceBlock getIceBlock();
+
+    void addBuildingView(BuildingView bv);
+    BuildingView getBuildingView();
 }
 

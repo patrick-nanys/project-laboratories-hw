@@ -1,5 +1,7 @@
 package Model;
 
+import Graphics.BuildingView;
+
 /**
  * Ez az osztály reprezentál egy iglut a játékban.
  * Nem tud megsemmisülni, és a játékosokat megvédi
@@ -7,6 +9,7 @@ package Model;
  */
 public class Iglu implements Building {
     protected IceBlock iceBlock;
+    private BuildingView bv;
 
     @Override
     public void setIceblock(IceBlock ib) {
@@ -28,5 +31,15 @@ public class Iglu implements Building {
      */
     @Override
     public void selfDestruct(){
+    }
+
+    public IceBlock getIceBlock(){return iceBlock;}
+
+
+    public void addBuildingView(BuildingView _bv){
+        bv = _bv;
+    }
+    public BuildingView getBuildingView(){
+        return bv;
     }
 }

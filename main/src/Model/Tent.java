@@ -1,5 +1,7 @@
 package Model;
 
+import Graphics.BuildingView;
+
 import java.util.List;
 
 /**
@@ -10,6 +12,7 @@ import java.util.List;
 
 public class Tent extends Item implements Building {
     protected IceBlock iceblock;
+    private BuildingView bv;
 
     @Override
     public void setIceblock(IceBlock ib) {
@@ -67,5 +70,12 @@ public class Tent extends Item implements Building {
         return item instanceof Tent;
     }
 
+    public IceBlock getIceBlock() {return iceblock;}
 
+    public void addBuildingView(BuildingView _bv){
+        bv = _bv;
+    }
+    public BuildingView getBuildingView(){
+        return bv;
+    }
 }
