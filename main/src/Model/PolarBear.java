@@ -1,5 +1,7 @@
 package Model;
 
+import Graphics.BearView;
+
 import java.util.List;
 import java.util.Random;
 
@@ -13,6 +15,7 @@ import java.util.Random;
 
 public class PolarBear implements Steppable {
     private IceBlock ib;
+    private BearView bv;
 
     /**
      * Beállítja az ib attribútumát a paraméterként kapott
@@ -67,4 +70,10 @@ public class PolarBear implements Steppable {
             players.get(0).die();
         }
     }
+    public IceBlock getIceBlock(){return ib;}
+
+    public void addBearView(BearView _bv){
+        bv = _bv;
+    }
+    public BearView getBearView() { return bv; }
 }
