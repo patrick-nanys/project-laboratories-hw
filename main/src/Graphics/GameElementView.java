@@ -1,11 +1,14 @@
 package Graphics;
 
+import Controller.Controller;
+
 import java.awt.*;
 
 public class GameElementView {
 
     protected Point position;
     protected Dimension size;
+    protected Controller controller;
 
     public GameElementView(){};
     public GameElementView(Point p, Dimension s){
