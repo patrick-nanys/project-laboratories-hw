@@ -18,11 +18,17 @@ public class IceBlockView extends GameElementView {
         icon = new JButton();
         capacity = new JLabel();
         ImageIcon imgicon;
-        ///////////////////////////////////////////////////////////////////////////////////////////////
 
-        //itt majd if/elseben mas mas texture az imgiconnak ha Szonja feljon elmondani h melyik-melyik
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////
+        if(ib.getLayer()==0 && ib.getCapacity()==0){
+            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_holenosnowt.png");
+        }
+        else if(ib.getLayer()==0 && ib.getCapacity()>0){
+            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png");
+        }
+        else {
+            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_iceblockt.png");
+        }
 
         icon.setIcon(imgicon);
         Integer cap = ib.getCapacity();
@@ -32,11 +38,17 @@ public class IceBlockView extends GameElementView {
     }
 
     public void update(){
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //if/elseben textura valtoztatas hotol fuggoen
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////
+        ImageIcon imgicon;
+        if(ib.getLayer()==0 && ib.getCapacity()==0){
+            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_holenosnowt.png");
+        }
+        else if(ib.getLayer()==0 && ib.getCapacity()>0){
+            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png");
+        }
+        else {
+            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_iceblockt.png");
+        }
+        icon.setIcon(imgicon);
     }
     public void close(){
         icon.setVisible(false);

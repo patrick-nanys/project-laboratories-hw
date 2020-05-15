@@ -15,4 +15,8 @@ public class DivingSuit extends Item {
 		return item instanceof DivingSuit;
 	}
 
+	public String ToString(){
+		return "DivingSuit";
+	}
+
 }

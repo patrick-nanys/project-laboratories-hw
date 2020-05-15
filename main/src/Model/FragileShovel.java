@@ -31,4 +31,8 @@ public class FragileShovel extends Item {
     public boolean equals(Item item) {
         return item instanceof FragileShovel;
     }
+
+    public String ToString(){
+        return "FragileShovel";
+    }
 }

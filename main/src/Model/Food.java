@@ -35,4 +35,8 @@ public class Food extends Item {
 		return item instanceof Food;
 	}
 
+	public String ToString(){
+		return "Food";
+	}
+
 }

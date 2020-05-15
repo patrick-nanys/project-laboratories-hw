@@ -59,4 +59,8 @@ public class Part extends Item {
 		return item instanceof Part;
 	}
 
+	public String ToString(){
+		return "Part";
+	}
+
 }
