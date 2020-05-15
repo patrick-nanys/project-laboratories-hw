@@ -19,6 +19,7 @@ public class Controller {
     private Level level;
     private boolean gameRunning;
     private Player currentPlayer;
+    private Action currentAction;
 
     /**
      * Egységes séma a futtatandó függvényekhez.
@@ -59,6 +60,30 @@ public class Controller {
         this.functionMap.put("stat",             this::stat);
         this.functionMap.put("status",           this::status);
         this.functionMap.put("save",             this::save);
+    }
+
+    /**
+     * Getter az aktuális játékosra.
+     * @return soron lévő játékos
+     */
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    /**
+     * Setter a currentAction-re.
+     * @param action az éppen végrehajtott akció
+     */
+    public void setCurrentAction(Action action) {
+        currentAction = action;
+    }
+
+    /**
+     * Getter a currentAction-re.
+     * @return az éppen végrehajtott akció
+     */
+    public Action getCurrentAction() {
+        return currentAction;
     }
 
     /**
