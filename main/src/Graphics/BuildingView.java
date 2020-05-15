@@ -24,6 +24,7 @@ public class BuildingView extends GameElementView {
         icon.setIcon(imgicon);
         position = building.getIceBlock().getIceBlockView().getPosition();
         icon.setLocation(position);
+        icon.setVisible(true);
     }
 
     public void update(){

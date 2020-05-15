@@ -18,6 +18,7 @@ public class BearView extends GameElementView {
         bear = _bear;
         position = bear.getIceBlock().getIceBlockView().getPosition();
         icon.setLocation(position);
+        icon.setVisible(true);
     }
 
     public void update(){

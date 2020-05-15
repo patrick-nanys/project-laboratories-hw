@@ -1,5 +1,7 @@
 package Model;
 
+import Graphics.IceBlockView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,7 @@ public class IceBlock implements PlayerContainerI {
 	protected Item item;
 	protected List <Player> players;
 	protected Building building;
+	protected IceBlockView ibv;
 
 	/**
 	 * IceBlock konstruktor egy elore megadott esetre, pl ha fajlbol olvasunk be
@@ -170,6 +173,13 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	public void setBuilding(Building b) {
 		building = b;
+	}
+
+	public void addIceBlockView(IceBlockView _ibv){
+		ibv = _ibv;
+	}
+	public IceBlockView getIceBlockView(){
+		return ibv;
 	}
 
 }
