@@ -1,10 +1,13 @@
 package Model;
 
+import Graphics.ItemView;
+
 /**
  * Ez az absztrakt osztaly reprezental egy altalanos targyat a jatekban.
  * Ososztalyul szolgal a specifikacioban szereplo kulonbozo targyaknak.
  */
 public abstract class Item {
+	protected ItemView iv;
 	/**
 	 * A parameterkent kapott jatekos hasznalja az adott targyat,
 	 * a leszarmazottak valositjak meg.
@@ -39,4 +42,11 @@ public abstract class Item {
 	public void pickedUpBy(Player p) {}
 
 	public abstract String ToString();
+
+	public void addItemView(ItemView _iv){
+		iv = _iv;
+	}
+	public ItemView getItemView(){
+		return iv;
+	}
 }
