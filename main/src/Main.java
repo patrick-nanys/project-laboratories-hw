@@ -31,8 +31,8 @@ public class Main {
     public static void main(String[] args) {
         StaticStandardIO.init();
 
-        //run();
-        test();
+        run();
+        //test();
 
         /*if (args.length == 0)
             run();

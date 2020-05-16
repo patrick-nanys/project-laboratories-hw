@@ -56,7 +56,9 @@ public class Controller {
         this.currentPlayer = null;
 
         this.functionMap = new HashMap<>();
+        this.functionMap.put("startMenu",        this::startMenu);
         this.functionMap.put("loadGame",         this::loadGame);
+        this.functionMap.put("loadGameWithView", this::loadGameWithView);
         this.functionMap.put("blizzard",         this::blizzard);
         this.functionMap.put("stepPlayer",       this::stepPlayer);
         this.functionMap.put("usePlayerItem",    this::usePlayerItem);
@@ -432,6 +434,9 @@ public class Controller {
         frame = new JFrame("Our Awesome OOF titled eskimo game");
         frame.setSize(600, 600);
         menu = new Menu(this, frame);
+
+        menu.enable();
+        frame.setVisible(true);
 
         return "";
     }

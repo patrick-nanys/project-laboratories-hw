@@ -80,21 +80,25 @@ public class PlayerActionsView extends GameElementView {
         buttons.add(swipe);
         actions.add(new SwipeAction());
     }
+
     public void setVisibility(boolean val){
         visible = val;
         update();
     }
+
     public void update(){
         for(JButton button : buttons){
             button.setVisible(visible);
         }
     }
+
     public void close(){
         for(JButton button : buttons){
             button.setVisible(false);
         }
         buttons.clear();
     }
+
     public void updateButtons(){
         for(JButton button : buttons){
             frame.remove(button);
@@ -161,11 +165,13 @@ public class PlayerActionsView extends GameElementView {
     }
 
     public void handleClicks(){
+        //TODO this
         //dunno what to do here
         //dunno what to do here
         //dunno what to do here
         //dunno what to do here
     }
+
     public void addViewToFrame(JFrame frame){
         this.frame = frame;
         for(JButton button : buttons){
