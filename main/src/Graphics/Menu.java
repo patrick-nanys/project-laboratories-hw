@@ -10,6 +10,7 @@ public class Menu {
     private JButton startgame;
     private JButton exitgame;
     private JFrame frame;
+    private boolean enabled;
 
     public Menu(Controller _controller,JFrame _frame){
         frame = _frame;
@@ -35,10 +36,15 @@ public class Menu {
     public void enable(){
         frame.add(startgame);
         frame.add(exitgame);
+        enabled = true;
     }
     public void disable(){
         frame.remove(startgame);
         frame.remove(exitgame);
+        enabled = false;
+    }
+    public boolean isEnabled(){
+        return enabled;
     }
 
 

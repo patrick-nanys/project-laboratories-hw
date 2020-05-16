@@ -89,4 +89,7 @@ public class PlayerView extends GameElementView {
         frame.add(icon);
         frame.add(health);
     }
+    public Player getPlayer(){
+        return p;
+    }
 }
