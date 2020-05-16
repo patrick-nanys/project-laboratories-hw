@@ -10,10 +10,14 @@ public class IceBlockView extends GameElementView {
     private IceBlock ib;
     private JButton icon;
     private JLabel capacity;
+    private ItemView itemView;
 
     public IceBlockView(IceBlock _ib, Point _position){
         ib = _ib;
         position = _position;
+        if(ib.getItem()!=null)
+        itemView = new ItemView(ib.getItem(),ib);
+
 
         icon = new JButton();
         capacity = new JLabel();

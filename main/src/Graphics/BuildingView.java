@@ -8,6 +8,7 @@ public class BuildingView extends GameElementView {
 
     private Building building;
     private JLabel icon;
+    private boolean addedtoframe;
 
     public BuildingView(Building _building){
         super();
@@ -25,11 +26,15 @@ public class BuildingView extends GameElementView {
         position = building.getIceBlock().getIceBlockView().getPosition();
         icon.setLocation(position);
         icon.setVisible(true);
+        addedtoframe = false;
     }
 
     public void update(){
         position = building.getIceBlock().getIceBlockView().getPosition();
         icon.setLocation(position);
+        if(!addedtoframe){
+            addViewToFrame(building.getIceBlock().getPlayers().get(0).getLevel().getLevelView().getFrame());
+        }
     }
     public void clear(){
         icon.setVisible(false);

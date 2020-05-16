@@ -1,7 +1,6 @@
 package Graphics;
 
-import Model.IceBlock;
-import Model.Level;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,10 +16,12 @@ public class LevelView extends GameElementView {
 
     //controllerben van get current player fv
 
-    public LevelView(Level _level, JFrame _frame){
+    public LevelView(Level _level){
         level = _level;
-        frame = _frame;
+        frame = new JFrame("Our Awesome OOF titled eskimo game");
         List<IceBlock> iceblocks = level.getIceBlocks();
+        List <Player> playersm = level.getPlayers();
+        List <PolarBear> bears = level.getPolarBears();
 
         for(IceBlock ib : iceblocks){
             for(IceBlock ib2 : iceblocks){
@@ -34,6 +35,32 @@ public class LevelView extends GameElementView {
                 }
             }
         }
+        for(Player player : playersm){
+            actions.add(new PlayerActionsView(player));
+            players.add(player.getPlayerView());
+        }
+        for(PlayerView pv : players){
+            pv.addViewToFrame(frame);
+        }
+        for(IceBlock ib : iceblocks){
+            ib.getIceBlockView().addViewToFrame(frame);
+        }
+        for(PolarBear bear : bears){
+            bear.getBearView().addViewToFrame(frame);
+        }
+
+
+        exitGame = new JButton("Exit Game");
+        exitGame.setLocation(new Point(0,0));
+        exitGame.setSize(new Dimension(20,20));
+        exitGame.setVisible(true);
+
+
+    }
+    public JFrame getFrame(){
+        return frame;
+    }
+    public void update(){
 
     }
 }
