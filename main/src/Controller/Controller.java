@@ -2,12 +2,14 @@ package Controller;
 
 import Model.*;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.util.*;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -414,7 +416,43 @@ public class Controller {
                     item.pickedUpBy(players.get(i));
             }
         } catch (FileNotFoundException e) {
-            return String.format("ERROR: File \"%s\" given to loadGame does not esist!\n", params[0]);
+            return String.format("ERROR: File \"%s\" given to loadGame does not exist!\n", params[0]);
+        }
+
+        return "";
+    }
+
+    private String loadGameWithView(String[] params) {
+        // error handling
+        if (params.length != 1)
+            return "ERROR: Invalid number of loadGameWithView parameters!\n";
+
+        String ret = loadGame(params);
+        if (ret.contains("ERROR"))
+            return ret;
+
+        try {
+            Scanner scanner = new Scanner(new File(params[0]));
+
+            // read data in first row
+            String[] firstRow = scanner.nextLine().split(";");
+            int numberOfTiles = parseInt(firstRow[0]);
+            String playerTypes = firstRow[1];
+
+            // go to where the view location data starts
+            for (int i = 0; i < playerTypes.length(); i++) scanner.nextLine();
+            for (int i = 0; i < numberOfTiles; i++) scanner.nextLine();
+
+            // read in base width and heights
+            String[] dimensionData = scanner.nextLine().split(";");
+            String[] ibData = dimensionData[0].split(",");
+            String[] otherData = dimensionData[1].split(",");
+            Dimension iceBlockD = new Dimension(Integer.parseInt(ibData[0]), Integer.parseInt(ibData[1]));
+            Dimension otherD = new Dimension(Integer.parseInt(otherData[0]), Integer.parseInt(otherData[1]));
+
+            // 
+        } catch (FileNotFoundException e) {
+            return String.format("ERROR: File \"%s\" given to loadGameWithView does not exist!\n", params[0]);
         }
 
         return "";
