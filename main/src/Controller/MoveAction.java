@@ -14,6 +14,6 @@ public class MoveAction extends Action  {
     public void call(Object o) {
         ArrayList<IceBlock> iceBlocks = level.getIceBlocks();
         int iceBlockId = iceBlocks.indexOf( (IceBlock) o );
-        controller.interpret("stepPlayer " + iceBlockId);
+        controller.interpret("stepPlayer " + (iceBlockId+1));
     }
 }
