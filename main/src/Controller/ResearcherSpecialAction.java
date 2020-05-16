@@ -14,6 +14,6 @@ public class ResearcherSpecialAction extends Action  {
     public void call(Object o) {
         ArrayList<IceBlock> iceBlocks = level.getIceBlocks();
         int iceBlockId = iceBlocks.indexOf( (IceBlock) o );
-        controller.interpret("usePlayerAbility " + iceBlockId);
+        controller.interpret("usePlayerAbility " + (iceBlockId+1));
     }
 }

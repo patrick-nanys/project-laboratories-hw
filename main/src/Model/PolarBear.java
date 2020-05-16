@@ -49,6 +49,7 @@ public class PolarBear implements Steppable {
             pc = neighbourslist.get(rndnum);
         }
         ib = (IceBlock) pc;
+        bv.update();
         this.kill();
     }
 
