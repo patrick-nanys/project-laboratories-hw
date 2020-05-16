@@ -15,7 +15,6 @@ public class LevelView extends GameElementView {
     private JFrame frame;
     private Menu menu;
 
-    //controllerben van get current player fv
 
     public LevelView(Level _level){
         level = _level;
@@ -114,7 +113,7 @@ public class LevelView extends GameElementView {
     public void update(){
         if(menu.isEnabled()) menu.disable();
         Player current = controller.getCurrentPlayer();
-        int at;
+
         for(int i =0;i<players.size();i++){
             if(players.get(i).getPlayer().equals(current)){
                 players.get(i).setTurn(true);
