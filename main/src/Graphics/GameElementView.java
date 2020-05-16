@@ -10,7 +10,7 @@ public class GameElementView {
     protected Dimension size;
     protected Controller controller;
 
-    public GameElementView(){};
+    public GameElementView(){}
     public GameElementView(Point p, Dimension s){
         position = p;
         size = s;
@@ -19,10 +19,11 @@ public class GameElementView {
         size = s;
     }
 
-    public void update() {};
-    public void close(){};
+    public void update() {}
+    public void close(){}
 
     public Point getPosition() {return position;}
+    public void setPosition(Point p) { position = p; }
     public Dimension getSize() {return size;}
     public void addController(Controller _c){
         controller = _c;

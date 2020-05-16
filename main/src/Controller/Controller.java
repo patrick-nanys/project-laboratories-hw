@@ -1,9 +1,12 @@
 package Controller;
 
 import Model.*;
+import Graphics.*;
 
-import java.awt.*;
+import javax.swing.*;
 import java.io.File;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,6 +25,10 @@ public class Controller {
     private boolean gameRunning;
     private Player currentPlayer;
     private Action currentAction;
+
+    private Menu menu;
+    private LevelView levelView;
+    private JFrame frame;
 
     /**
      * Egységes séma a futtatandó függvényekhez.
@@ -280,8 +287,7 @@ public class Controller {
         if (params.length != 1)
             return "ERROR: Invalid number of loadGame parameters!\n";
 
-        try {
-            Scanner scanner = new Scanner(new File(params[0]));
+        try(Scanner scanner = new Scanner(new File(params[0]))) {
 
             String[] firstRow = scanner.nextLine().split(";");
             int numberOfTiles = parseInt(firstRow[0]);
@@ -422,17 +428,16 @@ public class Controller {
         return "";
     }
 
-    private String loadGameWithView(String[] params) {
-        // error handling
-        if (params.length != 1)
-            return "ERROR: Invalid number of loadGameWithView parameters!\n";
+    private String startMenu(String[] params) {
+        frame = new JFrame("Our Awesome OOF titled eskimo game");
+        frame.setSize(600, 600);
+        menu = new Menu(this, frame);
 
-        String ret = loadGame(params);
-        if (ret.contains("ERROR"))
-            return ret;
+        return "";
+    }
 
-        try {
-            Scanner scanner = new Scanner(new File(params[0]));
+    private String readViewData(String fileName, Dimension iceBlockDim, Dimension otherDim, ArrayList<Point> iceBlockPositions) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
 
             // read data in first row
             String[] firstRow = scanner.nextLine().split(";");
@@ -447,13 +452,55 @@ public class Controller {
             String[] dimensionData = scanner.nextLine().split(";");
             String[] ibData = dimensionData[0].split(",");
             String[] otherData = dimensionData[1].split(",");
-            Dimension iceBlockD = new Dimension(Integer.parseInt(ibData[0]), Integer.parseInt(ibData[1]));
-            Dimension otherD = new Dimension(Integer.parseInt(otherData[0]), Integer.parseInt(otherData[1]));
+            iceBlockDim.setSize(Integer.parseInt(ibData[0]), Integer.parseInt(ibData[1]));
+            otherDim.setSize(Integer.parseInt(otherData[0]), Integer.parseInt(otherData[1]));
 
-            // 
+            // read iceblock locations
+            for (int i = 0; i < numberOfTiles; i++) {
+                String[] strs = scanner.nextLine().split(",");
+                iceBlockPositions.add(new Point(Integer.parseInt(strs[0]), Integer.parseInt(strs[1])));
+            }
         } catch (FileNotFoundException e) {
-            return String.format("ERROR: File \"%s\" given to loadGameWithView does not exist!\n", params[0]);
+            return String.format("ERROR: File \"%s\" given to loadGameWithView does not exist!\n", fileName);
         }
+
+        return "";
+    }
+
+    private String loadGameWithView(String[] params) {
+        // error handling
+        if (params.length != 1)
+            return "ERROR: Invalid number of loadGameWithView parameters!\n";
+
+        // load game
+        String ret = loadGame(params);
+        if (ret.contains("ERROR"))
+            return ret;
+
+        // read view data
+        Dimension iceBlockDim = new Dimension(), otherDim = new Dimension();
+        ArrayList<Point> iceBlockPositions = new ArrayList<>();
+        ret = readViewData(params[0], iceBlockDim, otherDim, iceBlockPositions);
+        if (ret.contains("ERROR"))
+            return ret;
+
+        // setup views
+
+        // iceblocks
+        ArrayList<IceBlock> iceBlocks = level.getIceBlocks();
+        int maxElements = level.getNumberOfPlayers() + 2; // players + item + building
+        for (int i = 0; i < iceBlocks.size(); i++)
+            iceBlocks.get(i).addIceBlockView(new IceBlockView(iceBlocks.get(i), iceBlockPositions.get(i), maxElements));
+        // players
+        ArrayList<Player> players = level.getPlayers();
+        for (Player player : players)
+            player.addPlayerView(new PlayerView(player));
+        // bears
+        ArrayList<PolarBear> bears = level.getPolarBears();
+        for (PolarBear bear : bears)
+            bear.addBearView(new BearView(bear));
+
+        levelView = new LevelView(level, frame, menu);
 
         return "";
     }

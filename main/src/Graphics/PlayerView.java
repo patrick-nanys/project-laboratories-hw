@@ -15,6 +15,7 @@ public class PlayerView extends GameElementView {
     private JButton icon;
     private JLabel health;
 
+    //TODO átírás, iceblockView kezelje, hogy hol van
     public PlayerView(Player _p){
         p = _p;
         if(!p.getInSea()){
@@ -42,9 +43,9 @@ public class PlayerView extends GameElementView {
 
         icon.setIcon(imgicon);
 
-        Integer hp = p.getHealth();
+        int hp = p.getHealth();
 
-        health = new JLabel(hp.toString());
+        health = new JLabel(Integer.toString(hp));
 
         icon.setVisible(true);
         health.setVisible(true);
@@ -70,9 +71,9 @@ public class PlayerView extends GameElementView {
             position.y += delta.y;
         }
 
-        Integer hp = p.getHealth();
+        int hp = p.getHealth();
 
-        health.setText(hp.toString());
+        health.setText(Integer.toString(hp));
 
     }
 

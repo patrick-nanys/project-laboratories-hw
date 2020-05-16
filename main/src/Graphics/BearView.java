@@ -10,7 +10,7 @@ public class BearView extends GameElementView {
     private JLabel icon;
     private PolarBear bear;
 
-    BearView(PolarBear _bear) {
+    public BearView(PolarBear _bear) {
         super();
         icon = new JLabel();
         ImageIcon imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_polarbeart.png");
