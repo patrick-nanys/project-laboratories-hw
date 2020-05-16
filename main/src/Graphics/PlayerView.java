@@ -84,4 +84,9 @@ public class PlayerView extends GameElementView {
     public void handleClick() {
         controller.getCurrentAction().call(this);
     }
+
+    public void addViewToFrame(JFrame frame){
+        frame.add(icon);
+        frame.add(health);
+    }
 }

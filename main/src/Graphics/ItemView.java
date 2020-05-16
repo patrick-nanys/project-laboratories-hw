@@ -53,4 +53,8 @@ public class ItemView extends GameElementView {
     public void close(){
         icon.setVisible(false);
     }
+
+    public void addViewToFrame(JFrame frame){
+        frame.add(icon);
+    }
 }

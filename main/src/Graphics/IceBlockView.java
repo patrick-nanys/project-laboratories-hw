@@ -63,5 +63,10 @@ public class IceBlockView extends GameElementView {
         controller.getCurrentAction().call(this);
     }
 
+    public void addViewToFrame(JFrame frame){
+        frame.add(icon);
+        frame.add(capacity);
+    }
+
 
 }
