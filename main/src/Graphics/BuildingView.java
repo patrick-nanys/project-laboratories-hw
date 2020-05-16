@@ -34,4 +34,8 @@ public class BuildingView extends GameElementView {
     public void clear(){
         icon.setVisible(false);
     }
+
+    public void addViewToFrame(JFrame frame){
+        frame.add(icon);
+    }
 }
