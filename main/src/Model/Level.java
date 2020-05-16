@@ -1,5 +1,9 @@
 package Model;
 
+import Graphics.ItemView;
+import Graphics.LevelView;
+
+import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,6 +23,7 @@ public class Level {
 	private ArrayList<Player> players;
 	private ArrayList<PolarBear> bears;
 	private GameStateE gameState;
+	private LevelView lv;
 
 	/**
 	 * Level konstruktor adott jégtáblákra, játékosokra, medvékre, rakétarészekre
@@ -219,5 +224,12 @@ public class Level {
 	 */
 	public ArrayList<IceBlock> getIceBlocks() {
 		return iceblocks;
+	}
+
+	public void addLevelView(LevelView _lv){
+		lv = _lv;
+	}
+	public LevelView getLevelView(){
+		return lv;
 	}
 }

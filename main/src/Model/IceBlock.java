@@ -52,6 +52,7 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	public void modifyLayers(int d) {
 		snowLayers+=d;
+		ibv.update();
 	}
 
 	/**
@@ -82,7 +83,8 @@ public class IceBlock implements PlayerContainerI {
 	 * Eltavolitja a tablaba fagyott itemet
 	 */
 	public void removeItem() {
-		item=null;
+        item.getItemView().close();
+	    item=null;
 	}
 
 	/**
@@ -130,6 +132,7 @@ public class IceBlock implements PlayerContainerI {
 	public void movePlayer(Player p, PlayerContainerI pc) {
 		pc.addPlayer(p);
 		this.removePlayer(p);
+		p.getPlayerView().update();
 	}
 
 	/**
