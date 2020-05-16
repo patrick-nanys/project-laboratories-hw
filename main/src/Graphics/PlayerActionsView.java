@@ -19,7 +19,8 @@ public class PlayerActionsView extends GameElementView {
     private Player player;
     private JFrame frame;
 
-    public PlayerActionsView(Inventory _inventory, Player _player){
+    public PlayerActionsView(Inventory _inventory, Player _player, JFrame _frame){
+        frame = _frame;
         inventory = _inventory;
         player = _player;
         visible = false;
@@ -156,6 +157,7 @@ public class PlayerActionsView extends GameElementView {
         swipe.setVisible(visible);
         buttons.add(swipe);
         actions.add(new SwipeAction());
+        addViewToFrame(frame);
     }
 
     public void handleClicks(){

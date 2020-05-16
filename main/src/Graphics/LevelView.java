@@ -36,7 +36,7 @@ public class LevelView extends GameElementView {
             }
         }
         for(Player player : playersm){
-            actions.add(new PlayerActionsView(player.getInventory(), player));
+            actions.add(new PlayerActionsView(player.getInventory(), player, frame));
             players.add(player.getPlayerView());
         }
         for(PlayerView pv : players){
@@ -64,6 +64,12 @@ public class LevelView extends GameElementView {
         return frame;
     }
     public void update(){
-
+        GameStateE gs = level.getGameState();
+        if(gs == GameStateE.LOST || gs == GameStateE.WON){
+            close();
+        }
+    }
+    public void close(){
+        //megjelenitjuk a menut
     }
 }
