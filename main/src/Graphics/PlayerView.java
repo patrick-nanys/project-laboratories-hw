@@ -80,4 +80,8 @@ public class PlayerView extends GameElementView {
         icon.setVisible(false);
         health.setVisible(false);
     }
+
+    public void handleClick() {
+        controller.getCurrentAction().call(this);
+    }
 }

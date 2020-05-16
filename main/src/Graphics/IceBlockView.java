@@ -60,7 +60,7 @@ public class IceBlockView extends GameElementView {
     }
 
     public void handleClick(){
-        //idk what to do here
+        controller.getCurrentAction().call(this);
     }
 
 

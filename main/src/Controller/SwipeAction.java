@@ -1,11 +1,9 @@
 package Controller;
 
-import Model.Player;
-
 public class SwipeAction extends Action  {
 
     @Override
-    void click() {
+    public void click() {
         controller.interpret("swipeSnow");
     }
 }

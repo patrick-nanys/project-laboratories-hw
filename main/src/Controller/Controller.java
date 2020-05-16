@@ -657,7 +657,6 @@ public class Controller {
     private String playerTurn() {
         String ret = "";
         for (int i = 0; i < 4; i++) {
-            StaticStandardIO.print(String.format("Number of steps left: %d\n", i));
             if (level.getGameState() != GameStateE.IN_PROGRESS)
                 return "end";
             boolean valid = false;
@@ -691,11 +690,9 @@ public class Controller {
         currentPlayer = players.get(0);
         level.setGameState(GameStateE.IN_PROGRESS);
         String ret;
-        int player_id = 0;
         while (gameRunning) {
             // step players
             for (Player ignored : players) {
-                StaticStandardIO.print(String.format("Current player id: %d\n", player_id+++1));
                 ret = playerTurn();
 
                 if (ret.equals("end")) return "";
