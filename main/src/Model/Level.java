@@ -1,5 +1,7 @@
 package Model;
 
+import Graphics.LevelView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,6 +21,7 @@ public class Level {
 	private ArrayList<Player> players;
 	private ArrayList<PolarBear> bears;
 	private GameStateE gameState;
+	private LevelView lv;
 
 	/**
 	 * Level konstruktor adott jégtáblákra, játékosokra, medvékre, rakétarészekre
