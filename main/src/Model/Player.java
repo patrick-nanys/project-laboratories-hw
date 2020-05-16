@@ -99,6 +99,7 @@ public abstract class Player implements Steppable {
 	 */
 	public void loseHealth() {
 		health--;
+		pv.update();
 		if (health < 1) {
 			die();
 		}
@@ -182,6 +183,7 @@ public abstract class Player implements Steppable {
 	 * Ertesiti a szintet, hogy vege a jateknak.
 	 */
 	public void die() {
+		pv.close();
 		if(health!=0) health = 0;
 		level.levelLost();
 	}

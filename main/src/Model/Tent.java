@@ -39,6 +39,7 @@ public class Tent extends Item implements Building {
     @Override
     public void selfDestruct(){
         iceblock.setBuilding(null);
+        bv.close();
         iceblock = null;
     }
 
@@ -57,6 +58,8 @@ public class Tent extends Item implements Building {
             ib.setBuilding(this);
             iceblock = ib;
             player.getInventory().removeItem(this);
+            addBuildingView(new BuildingView(this));
+            bv.update();
         }
     }
 
