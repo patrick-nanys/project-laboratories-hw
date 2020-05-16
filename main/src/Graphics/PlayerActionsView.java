@@ -162,6 +162,9 @@ public class PlayerActionsView extends GameElementView {
 
     public void handleClicks(){
         //dunno what to do here
+        //dunno what to do here
+        //dunno what to do here
+        //dunno what to do here
     }
     public void addViewToFrame(JFrame frame){
         this.frame = frame;
