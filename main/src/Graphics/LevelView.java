@@ -106,9 +106,11 @@ public class LevelView extends GameElementView {
 
 
     }
+
     public JFrame getFrame(){
         return frame;
     }
+
     public void update(){
         if(menu.isEnabled()) menu.disable();
         Player current = controller.getCurrentPlayer();
@@ -128,6 +130,7 @@ public class LevelView extends GameElementView {
             close();
         }
     }
+
     public void close(){
 
         for(PlayerView p : players){
@@ -148,9 +151,11 @@ public class LevelView extends GameElementView {
         for(PlayerActionsView pv : actions){
             pv.close();
         }
+
         for(PolarBear bear : level.getPolarBears()){
             bear.getBearView().close();
         }
+
         menu.enable();
     }
 }
