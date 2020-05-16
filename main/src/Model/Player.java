@@ -109,6 +109,7 @@ public abstract class Player implements Steppable {
 	 */
 	public void eat() {
 		health++;
+		pv.update();
 	}
 
 	/**
