@@ -60,13 +60,13 @@ public class PlayerView extends GameElementView {
     public void update(){
         if(!p.getInSea()){
             IceBlock ib = (IceBlock)p.getLocation();
-            position = ib.getIceBlockView().getPosition();
+            ib.getIceBlockView().addView(this);
         }
         else{
             //itt ezzel a deltaval meg kiserletezni kell majd
-            Point delta = new Point(5,5);
+            Point delta = new Point(0,5);
             IceBlock ib = ((Sea)p.getLocation()).getPosition();
-            position = ib.getIceBlockView().getPosition();
+            ib.getIceBlockView().addView(this);
             position.x += delta.x;
             position.y += delta.y;
         }

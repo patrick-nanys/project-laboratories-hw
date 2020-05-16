@@ -44,6 +44,12 @@ public class LevelView extends GameElementView {
         }
         for(IceBlock ib : iceblocks){
             ib.getIceBlockView().addViewToFrame(frame);
+            if(ib.getItem()!=null){
+                ib.getItem().getItemView().addViewToFrame(frame);
+            }
+            if(ib.getBuilding()!=null){
+                ib.getBuilding().getBuildingView().addViewToFrame(frame);
+            }
         }
         for(PolarBear bear : bears){
             bear.getBearView().addViewToFrame(frame);
@@ -89,6 +95,14 @@ public class LevelView extends GameElementView {
         }
         for(IceBlock ib : iceblocks){
             ib.getIceBlockView().addViewToFrame(frame);
+
+            if(ib.getItem()!=null){
+                ib.getItem().getItemView().addViewToFrame(frame);
+            }
+            if(ib.getBuilding()!=null){
+                ib.getBuilding().getBuildingView().addViewToFrame(frame);
+            }
+
         }
         for(PolarBear bear : bears){
             bear.getBearView().addViewToFrame(frame);
