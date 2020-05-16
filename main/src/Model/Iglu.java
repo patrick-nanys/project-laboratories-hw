@@ -11,6 +11,10 @@ public class Iglu implements Building {
     protected IceBlock iceBlock;
     private BuildingView bv;
 
+    public Iglu (){
+        bv = new BuildingView(this);
+    }
+
     @Override
     public void setIceblock(IceBlock ib) {
         iceBlock = ib;

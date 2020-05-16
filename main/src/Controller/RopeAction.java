@@ -14,6 +14,6 @@ public class RopeAction extends Action  {
     public void call(Object o) {
         ArrayList<Player> players = level.getPlayers();
         int playerId = players.indexOf( (Player) o );
-        controller.interpret("usePlayerItem r " + playerId);
+        controller.interpret("usePlayerItem r " + (playerId+1));
     }
 }
