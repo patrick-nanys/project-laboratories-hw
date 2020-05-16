@@ -36,7 +36,7 @@ public class LevelView extends GameElementView {
             }
         }
         for(Player player : playersm){
-            actions.add(new PlayerActionsView(player));
+            actions.add(new PlayerActionsView(player.getInventory()));
             players.add(player.getPlayerView());
         }
         for(PlayerView pv : players){
