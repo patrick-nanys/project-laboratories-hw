@@ -73,29 +73,21 @@ public class IceBlockView extends GameElementView {
     }
 
     public void update(){
-        if(ib.getLayer()==0 && ib.getCapacity()==0){
-            try {
-                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_holenosnowt.png",216, 216));
-            }
-            catch(IOException ioe){
-                ioe.printStackTrace();
-            }
-        }
-        else if(ib.getLayer()==0 && ib.getCapacity()>0){
-            try {
-                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png",216, 216));
-            }
-            catch(IOException ioe){
-                ioe.printStackTrace();
-            }
-        }
-        else {
-            try {
-                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iceblockt.png", 216, 216));
-            }
-            catch(IOException ioe){
-                ioe.printStackTrace();
-            }
+        String filePath;
+        if (ib.getLayer()==0 && ib.getCapacity()==0)
+            filePath = "main/PicsRightsizeAndTransp/rsz_holenosnowt.png";
+        else if (ib.getLayer()==0 && ib.getCapacity()>0)
+            filePath = "main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png";
+        else
+            filePath = "main/PicsRightsizeAndTransp/rsz_iceblockt.png";
+
+        try {
+            icon = new TexturedLabel(filePath,
+                    (int)(position.x-(double)size.width/2),
+                    (int)(position.y-(double)size.height/2),
+                    size.width, size.height);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         }
     }
     public void close(){
