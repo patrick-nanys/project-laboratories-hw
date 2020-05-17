@@ -166,7 +166,7 @@ public class PlayerActionsView extends GameElementView {
                     buttonsel.setSize(new Dimension(150, 60));
                     buttonsel.setVisible(false);
                     buttonsel.setLayout(null);
-                    selected.add(i, buttonsel);
+                    selected.add(buttonsel);
                 }
 
             }
