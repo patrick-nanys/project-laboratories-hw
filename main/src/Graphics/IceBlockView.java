@@ -83,10 +83,7 @@ public class IceBlockView extends GameElementView {
             filePath = "main/PicsRightsizeAndTransp/rsz_iceblockt.png";
 
         try {
-            icon = new TexturedLabel(filePath,
-                    (int)(position.x-(double)size.width/2),
-                    (int)(position.y-(double)size.height/2),
-                    size.width, size.height);
+            icon.setImage(new ScaledImage(filePath,size.width,size.height));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
