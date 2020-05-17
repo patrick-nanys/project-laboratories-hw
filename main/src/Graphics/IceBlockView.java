@@ -4,6 +4,8 @@ import Model.IceBlock;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 public class IceBlockView extends GameElementView {
@@ -66,6 +68,8 @@ public class IceBlockView extends GameElementView {
         capacity.setLayout(null);
         capacity.setVisible(false);
         icon.setVisible(true);
+
+        mouseInit();
     }
 
     public void update(){
@@ -128,6 +132,35 @@ public class IceBlockView extends GameElementView {
         int x = (int) Math.round(r * Math.cos((angleStep * numElements) + startingAngle) + position.x);
         int y = (int) Math.round(r * Math.sin((angleStep * numElements) + startingAngle) + position.y);
         view.setPosition(new Point(x, y));
+    }
+
+    public void mouseInit(){
+        icon.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                handleClick();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
     }
 
 }

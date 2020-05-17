@@ -84,7 +84,7 @@ public class PlayerActionsView extends GameElementView {
 
         Dimension framesize = frame.getSize();
         int startx = ((int)(framesize.getWidth()/6)*4)-75;
-        int starty = 160;
+        int starty = 240;
         List<Item> items = inventory.getItems();
         for(int i = 0; i<items.size();i++){
             String name = items.get(i).ToString();
@@ -159,11 +159,13 @@ public class PlayerActionsView extends GameElementView {
                 npe.printStackTrace();
             }
         }
-        TexturedLabel special, specialsel, swipe, swipesel;
+        TexturedLabel special, specialsel, swipe, swipesel, dig, digsel;
         special = null;
         swipe = null;
         specialsel = null;
         swipesel = null;
+        dig = null;
+        digsel = null;
         String ptype = player.ToString();
         starty = 0;
         try {
@@ -216,10 +218,31 @@ public class PlayerActionsView extends GameElementView {
             selected.add(swipe);
 
             actions.add(new SwipeAction());
+
+            try {
+                dig = new TexturedLabel("main/PicsRightsizeAndTransp/dig.png", startx, starty+80, 150, 60);
+                digsel = new TexturedLabel("main/PicsRightsizeAndTransp/dig_selected.png", startx, starty+80, 150, 60);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+            dig.setLocation(startx,starty+160);
+            dig.setSize(new Dimension(150,60));
+            dig.setVisible(false);
+            dig.setLayout(null);
+            buttons.add(dig);
+
+            digsel.setLocation(startx,starty+160);
+            digsel.setSize(new Dimension(150,60));
+            digsel.setVisible(false);
+            digsel.setLayout(null);
+            selected.add(digsel);
+
+            actions.add(new DigOutItemAction());
         }
         catch(NullPointerException npe){
             npe.printStackTrace();
         }
+
     }
 
     public void addViewToFrame(JFrame frame){

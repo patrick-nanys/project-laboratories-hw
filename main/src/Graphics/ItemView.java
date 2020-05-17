@@ -91,4 +91,6 @@ public class ItemView extends GameElementView {
     public void addViewToFrame(JFrame frame){
         frame.add(icon);
     }
+
+
 }
