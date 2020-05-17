@@ -26,7 +26,8 @@ public class Eskimo extends Player {
 			i.setIceblock((IceBlock)container);
 			if (Level.viewsActive()) {
 				IceBlock ib = (IceBlock) container;
-				BuildingView bv = new BuildingView(i,((IceBlock) container).getIceBlockView(),((IceBlock) container).getIceBlockView().getViewController());
+				//this is ugly, sorry
+				BuildingView bv = new BuildingView(i,((IceBlock) container).getIceBlockView(),((IceBlock) container).getIceBlockView().getViewController(), ((IceBlock) container).getPlayers().get(0).getLevel().getLevelView().getFreeLabel());
 				i.addBuildingView(bv);
 				i.getBuildingView().update();
 			}

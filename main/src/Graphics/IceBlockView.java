@@ -33,8 +33,9 @@ public class IceBlockView extends GameElementView {
         BuildingView buildingView = null;
         ItemView itemView = null;
         if (ib.getBuilding() != null) {
-            buildingView = new BuildingView(ib.getBuilding(), this, this.viewController);
+            buildingView = new BuildingView(ib.getBuilding(), this, this.viewController, ib.getPlayers().get(0).getLevel().getLevelView().getFreeLabel());
             ib.getBuilding().addBuildingView(buildingView);
+            buildingView.update();
         }
         if (ib.getItem() != null) {
             itemView = new ItemView(ib.getItem(), ib, this);
@@ -59,7 +60,9 @@ public class IceBlockView extends GameElementView {
         }
 
         int cap = ib.getCapacity();
-        capacity = new JLabel(Integer.toString(cap));
+        capacity = new JLabel("Capacity: " + Integer.toString(cap));
+        capacity.setLocation(position.x + size.width/4 - 90,position.y+size.height-90);
+        capacity.setBounds(position.x + size.width/4 -80,position.y+size.height-90,120,20);
 
         icon.setLayout(null);
         capacity.setLayout(null);
