@@ -1,7 +1,7 @@
 package Controller;
 
 public class EskimoSpecialAction extends Action  {
-    EskimoSpecialAction(ViewController viewController) {
+    public EskimoSpecialAction(ViewController viewController) {
         super(viewController);
     }
 

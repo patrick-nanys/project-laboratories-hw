@@ -106,7 +106,7 @@ public class ViewController {
         ArrayList<IceBlock> iceBlocks = level.getIceBlocks();
         int maxElements = level.getNumberOfPlayers() + 2; // players + item + building
         for (int i = 0; i < iceBlocks.size(); i++)
-            iceBlocks.get(i).addIceBlockView(new IceBlockView(iceBlocks.get(i), iceBlockPositions.get(i), maxElements));
+            iceBlocks.get(i).addIceBlockView(new IceBlockView(iceBlocks.get(i), iceBlockPositions.get(i), maxElements, this));
         // players
         ArrayList<Player> players = level.getPlayers();
         for (Player player : players)
@@ -117,6 +117,7 @@ public class ViewController {
             bear.addBearView(new BearView(bear, this));
 
         levelView = new LevelView(level, frame, menu, this);
+        level.addLevelView(levelView);
 
         Level.setViewsActive(true);
     }
@@ -124,11 +125,13 @@ public class ViewController {
     public void startGame() {
         currentPlayerId = 0;
         level.setGameState(GameStateE.IN_PROGRESS);
+        numberOfStepsLeft = numberOfStepsPerPlayer;
         levelView.update();
     }
 
     public void handlePlayerTurn() {
         numberOfStepsLeft--;
+        System.out.println(numberOfStepsLeft + "turns left");
         if (numberOfStepsLeft == 0) {
             skipTurn();
         }
@@ -190,8 +193,15 @@ public class ViewController {
     }
 
     public void digOutItem() {
-        level.getPlayer(currentPlayerId).digOutItem();
-        handlePlayerTurn();
+        if(!level.getPlayer(currentPlayerId).getInSea()) {
+            IceBlock ib = ((IceBlock) level.getPlayer(currentPlayerId).getLocation());
+            if(ib.getItem()!=null) {
+                level.getPlayer(currentPlayerId).digOutItem();
+                handlePlayerTurn();
+                levelView.updateActionViews();
+                levelView.update();
+            }
+        }
     }
 
     public void skipTurn() {

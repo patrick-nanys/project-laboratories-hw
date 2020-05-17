@@ -14,6 +14,7 @@ public class LevelView extends GameElementView {
     private TexturedLabel exitGame;
     private List<PlayerActionsView> actions;
     private List <PlayerView> playerViews;
+    TexturedLabel gamebg, actionsbg;
     private final Level level;
     private final JFrame frame;
     private Menu menu;
@@ -120,7 +121,6 @@ public class LevelView extends GameElementView {
         exitGame.setLocation(new Point(0,0));
         exitGame.setVisible(true);
         frame.add(exitGame);
-        TexturedLabel gamebg, actionsbg;
         gamebg = null;
         actionsbg = null;
         try {
@@ -154,9 +154,18 @@ public class LevelView extends GameElementView {
         }
 
     }
+    public TexturedLabel getActionsBg(){
+        return actionsbg;
+    }
 
     public JFrame getFrame(){
         return frame;
+    }
+
+    public void updateActionViews(){
+        for(PlayerActionsView pv : actions){
+            pv.updateButtons(this);
+        }
     }
 
     public void update(){

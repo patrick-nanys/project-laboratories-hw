@@ -3,7 +3,7 @@ package Controller;
 import Model.Shovel;
 
 public class ShovelAction extends Action  {
-    ShovelAction(ViewController viewController) {
+    public ShovelAction(ViewController viewController) {
         super(viewController);
     }
 

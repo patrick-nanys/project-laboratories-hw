@@ -28,7 +28,9 @@ public class Inventory {
 			return false;
 		} else {
 			items.add(i);
-			pav.updateButtons();
+			if(Level.viewsActive()) {
+				pav.updateButtons(pav.getPlayer().getLevel().getLevelView());
+			}
 			return true;
 		}
 	}

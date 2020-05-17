@@ -6,7 +6,7 @@ import Model.Rope;
 import java.util.ArrayList;
 
 public class RopeAction extends Action  {
-    RopeAction(ViewController viewController) {
+    public RopeAction(ViewController viewController) {
         super(viewController);
     }
 

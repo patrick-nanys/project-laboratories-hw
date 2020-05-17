@@ -3,7 +3,7 @@ package Controller;
 import Model.FragileShovel;
 
 public class FragileShovelAction extends Action  {
-    FragileShovelAction(ViewController viewController) {
+    public FragileShovelAction(ViewController viewController) {
         super(viewController);
     }
 

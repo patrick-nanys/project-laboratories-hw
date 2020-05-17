@@ -1,5 +1,7 @@
 package Model;
 
+import Graphics.BuildingView;
+
 /**
  * Egy eskimo jatekost reprezental, aki tud iglut epiteni.
  */
@@ -21,8 +23,13 @@ public class Eskimo extends Player {
 		if (!getInSea()) {
 			Iglu i = new Iglu();
 			((IceBlock)container).setBuilding(i);
-			if (Level.viewsActive())
+			i.setIceblock((IceBlock)container);
+			if (Level.viewsActive()) {
+				IceBlock ib = (IceBlock) container;
+				BuildingView bv = new BuildingView(i,((IceBlock) container).getIceBlockView(),((IceBlock) container).getIceBlockView().getViewController());
+				i.addBuildingView(bv);
 				i.getBuildingView().update();
+			}
 		}
 	}
 

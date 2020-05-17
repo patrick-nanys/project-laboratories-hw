@@ -37,7 +37,7 @@ public class PlayerView extends GameElementView {
         }
         turn = false;
 
-        String ptype = p.toString();
+        String ptype = p.ToString();
         if(ptype.equals("Eskimo")){
             try {
                 icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_2eskimot.png", position.x, position.y, 46, 46);
@@ -64,7 +64,7 @@ public class PlayerView extends GameElementView {
 
 
         icon.setLocation(position.x,position.y);
-        icon.setSize(30,30);
+        icon.setSize(icon.getWidth(),icon.getHeight());
         icon.setLayout(null);
 
         icon.setVisible(true);

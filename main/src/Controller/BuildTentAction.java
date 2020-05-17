@@ -3,7 +3,7 @@ package Controller;
 import Model.Tent;
 
 public class BuildTentAction extends Action {
-    BuildTentAction(ViewController viewController) {
+    public BuildTentAction(ViewController viewController) {
         super(viewController);
     }
 

@@ -27,7 +27,7 @@ public class Researcher extends Player {
 	}
 
 	public String ToString(){
-		return "Eskimo";
+		return "Researcher";
 	}
 
 }

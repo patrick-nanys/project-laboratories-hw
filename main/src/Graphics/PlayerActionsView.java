@@ -64,18 +64,20 @@ public class PlayerActionsView extends GameElementView {
         selected.clear();
     }
 
-    public void updateButtons(){
+    public void updateButtons(LevelView lv){
         for(TexturedLabel button : buttons){
             frame.remove(button);
         }
+        frame.remove(lv.getActionsBg());
         buttons.clear();
         selected.clear();
         actions.clear();
 
         setupButtons();
         mouseInit();
-
         addViewToFrame(frame);
+        frame.add(lv.getActionsBg());
+        update();
     }
     public void setupButtons(){
         hasPart = false;
@@ -93,7 +95,7 @@ public class PlayerActionsView extends GameElementView {
             TexturedLabel buttonsel = null;
             try {
                 if (name.equals("FragileShovel")) {
-                    actions.add(i, new FragileShovelAction());
+                    actions.add(i, new FragileShovelAction(viewController));
                     try {
                         button = new TexturedLabel("main/PicsRightsizeAndTransp/usefragile.png", startx, starty + i * 80, 150, 60);
                         buttonsel = new TexturedLabel("main/PicsRightsizeAndTransp/usefragile_selected.png", startx, starty + i * 80, 150, 60);
@@ -103,7 +105,7 @@ public class PlayerActionsView extends GameElementView {
 
                 } else if (name.equals("Part")) {
                     if(!hasPart) {
-                        actions.add(i, new PartAction());
+                        actions.add(i, new PartAction(viewController));
                         try {
                             button = new TexturedLabel("main/PicsRightsizeAndTransp/usepart.png", startx, starty + i * 80, 150, 60);
                             buttonsel = new TexturedLabel("main/PicsRightsizeAndTransp/usepart_selected.png", startx, starty + i * 80, 150, 60);
@@ -114,7 +116,7 @@ public class PlayerActionsView extends GameElementView {
                     }
 
                 } else if (name.equals("Rope")) {
-                    actions.add(i, new RopeAction());
+                    actions.add(i, new RopeAction(viewController));
                     try {
                         button = new TexturedLabel("main/PicsRightsizeAndTransp/userope.png", startx, starty + i * 80, 150, 60);
                         buttonsel = new TexturedLabel("main/PicsRightsizeAndTransp/userope_selected.png", startx, starty + i * 80, 150, 60);
@@ -123,7 +125,7 @@ public class PlayerActionsView extends GameElementView {
                     }
 
                 } else if (name.equals("Shovel")) {
-                    actions.add(i, new ShovelAction());
+                    actions.add(i, new ShovelAction(viewController));
                     try {
                         button = new TexturedLabel("main/PicsRightsizeAndTransp/useshovel.png", startx, starty + i * 80, 150, 60);
                         buttonsel = new TexturedLabel("main/PicsRightsizeAndTransp/useshovel_selected.png", startx, starty + i * 80, 150, 60);
@@ -134,7 +136,7 @@ public class PlayerActionsView extends GameElementView {
                 }
                 //egyebkent Tent
                 else {
-                    actions.add(i, new BuildTentAction());
+                    actions.add(i, new BuildTentAction(viewController));
                     try {
                         button = new TexturedLabel("main/PicsRightsizeAndTransp/usetent.png", startx, starty + i * 80, 150, 60);
                         buttonsel = new TexturedLabel("main/PicsRightsizeAndTransp/usetent_selected.png", startx, starty + i * 80, 150, 60);
@@ -171,7 +173,7 @@ public class PlayerActionsView extends GameElementView {
         starty = 0;
         try {
             if (ptype.equals("Eskimo")) {
-                actions.add(new EskimoSpecialAction());
+                actions.add(new EskimoSpecialAction(viewController));
                 try {
                     special = new TexturedLabel("main/PicsRightsizeAndTransp/buildiglu.png", startx, starty, 150, 60);
                     specialsel = new TexturedLabel("main/PicsRightsizeAndTransp/buildiglu_selected.png", startx, starty, 150, 60);
@@ -180,7 +182,7 @@ public class PlayerActionsView extends GameElementView {
                 }
 
             } else {
-                actions.add(new ResearcherSpecialAction());
+                actions.add(new ResearcherSpecialAction(viewController));
                 try {
                     special = new TexturedLabel("main/PicsRightsizeAndTransp/checkcapacity.png", startx, starty, 150, 60);
                     specialsel = new TexturedLabel("main/PicsRightsizeAndTransp/checkcapacity_selected.png", startx, starty, 150, 60);
@@ -218,7 +220,7 @@ public class PlayerActionsView extends GameElementView {
             swipesel.setLayout(null);
             selected.add(swipesel);
 
-            actions.add(new SwipeAction());
+            actions.add(new SwipeAction(viewController));
 
             try {
                 dig = new TexturedLabel("main/PicsRightsizeAndTransp/dig.png", startx, starty+160, 150, 60);
@@ -238,7 +240,7 @@ public class PlayerActionsView extends GameElementView {
             digsel.setLayout(null);
             selected.add(digsel);
 
-            actions.add(new DigOutItemAction());
+            actions.add(new DigOutItemAction(viewController));
         }
         catch(NullPointerException npe){
             npe.printStackTrace();
@@ -251,6 +253,10 @@ public class PlayerActionsView extends GameElementView {
         for(TexturedLabel button : buttons){
             frame.add(button);
         }
+    }
+
+    public Player getPlayer(){
+        return player;
     }
 
     public void mouseInit(){

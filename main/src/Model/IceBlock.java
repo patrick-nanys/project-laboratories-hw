@@ -52,6 +52,7 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	public void modifyLayers(int d) {
 		snowLayers+=d;
+		if(snowLayers<0) snowLayers = 0;
 		if (Level.viewsActive())
 			ibv.update();
 	}

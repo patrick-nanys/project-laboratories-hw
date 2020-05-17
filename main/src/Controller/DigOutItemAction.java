@@ -1,7 +1,7 @@
 package Controller;
 
 public class DigOutItemAction extends Action  {
-    DigOutItemAction(ViewController viewController) {
+    public DigOutItemAction(ViewController viewController) {
         super(viewController);
     }
 

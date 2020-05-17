@@ -1,11 +1,12 @@
 package Controller;
 
+import Graphics.IceBlockView;
 import Model.IceBlock;
 
 import java.util.ArrayList;
 
 public class ResearcherSpecialAction extends Action  {
-    ResearcherSpecialAction(ViewController viewController) {
+    public ResearcherSpecialAction(ViewController viewController) {
         super(viewController);
     }
 
@@ -16,6 +17,6 @@ public class ResearcherSpecialAction extends Action  {
 
     @Override
     public void call(Object o) {
-        viewController.usePlayerAbility( (IceBlock) o );
+        viewController.usePlayerAbility( ((IceBlockView) o).getIceBlock() );
     }
 }

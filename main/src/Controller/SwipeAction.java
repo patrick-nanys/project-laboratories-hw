@@ -1,7 +1,7 @@
 package Controller;
 
 public class SwipeAction extends Action  {
-    SwipeAction(ViewController viewController) {
+    public SwipeAction(ViewController viewController) {
         super(viewController);
     }
 

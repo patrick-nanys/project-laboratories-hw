@@ -5,7 +5,7 @@ import Model.IceBlock;
 import java.util.ArrayList;
 
 public class MoveAction extends Action  {
-    MoveAction(ViewController viewController) {
+    public MoveAction(ViewController viewController) {
         super(viewController);
     }
 

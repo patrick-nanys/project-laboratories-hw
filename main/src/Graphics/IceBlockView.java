@@ -1,8 +1,10 @@
 package Graphics;
 
+import Controller.ViewController;
 import Model.IceBlock;
 
 import javax.swing.*;
+import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,9 +18,11 @@ public class IceBlockView extends GameElementView {
     private int maxElements;
     private int elementCalls;
 
-    public IceBlockView(IceBlock _ib, Point _position, int _maxElements){
+    public IceBlockView(IceBlock _ib, Point _position, int _maxElements, ViewController _viewController){
 
         super(_position, new Dimension(216, 216));
+        size = new Dimension(216,216);
+        viewController = _viewController;
 
         ib = _ib;
         capacity = new JLabel();
@@ -77,7 +81,7 @@ public class IceBlockView extends GameElementView {
     }
 
     public void update(){
-
+        System.out.println(ib.getLayer());
         if(ib.getLayer()==0 && ib.getCapacity()==0){
             try {
                 icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_holenosnowt.png",216, 216));
@@ -141,6 +145,12 @@ public class IceBlockView extends GameElementView {
         int x = (int) Math.round(r * Math.cos((angleStep * numElements) + startingAngle)+size.width/5 + position.x);
         int y = (int) Math.round(r * Math.sin((angleStep * numElements) + startingAngle) + position.y);
         view.setPosition(new Point(x, y));
+    }
+    public IceBlock getIceBlock(){
+        return ib;
+    }
+    public ViewController getViewController(){
+        return viewController;
     }
 
     public void mouseInit(){
