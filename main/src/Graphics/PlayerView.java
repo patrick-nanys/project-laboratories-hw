@@ -24,7 +24,7 @@ public class PlayerView extends GameElementView {
         }
         else{
             //itt ezzel a deltaval meg kiserletezni kell majd
-            Point delta = new Point(55,55);
+            Point delta = new Point(0,55);
             IceBlock ib = ((Sea)p.getLocation()).getPosition();
             ib.getIceBlockView().addView(this);
             position.x += delta.x;
@@ -53,8 +53,8 @@ public class PlayerView extends GameElementView {
         int hp = p.getHealth();
 
         health = new JLabel(Integer.toString(hp));
-        health.setLocation(position.x,position.y+40);
-        health.setBounds(position.x,position.y+40,health.getWidth(),health.getHeight());
+        health.setLocation(position.x,position.y+50);
+        health.setBounds(position.x,position.y+50,health.getWidth(),health.getHeight());
         health.setLayout(null);
 
 
@@ -79,7 +79,7 @@ public class PlayerView extends GameElementView {
         }
         else{
             //itt ezzel a deltaval meg kiserletezni kell majd
-            Point delta = new Point(0,5);
+            Point delta = new Point(0,55);
             IceBlock ib = ((Sea)p.getLocation()).getPosition();
             ib.getIceBlockView().addView(this);
             position.x += delta.x;
@@ -89,8 +89,8 @@ public class PlayerView extends GameElementView {
         int hp = p.getHealth();
 
         health.setText(Integer.toString(hp));
-        health.setLocation(position.x,position.y+40);
-        health.setBounds(position.x,position.y+40,health.getWidth(),health.getHeight());
+        health.setLocation(position.x,position.y+55);
+        health.setBounds(position.x,position.y+55,health.getWidth(),health.getHeight());
 
         icon.setLocation(position);
 
