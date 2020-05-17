@@ -133,10 +133,12 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
-		pc.addPlayer(p);
-		this.removePlayer(p);
-		if (Level.viewsActive())
-			p.getPlayerView().update();
+		if(neighbours.contains((IceBlock)pc)) {
+			pc.addPlayer(p);
+			this.removePlayer(p);
+			if (Level.viewsActive())
+				p.getPlayerView().update();
+		}
 	}
 
 	/**
