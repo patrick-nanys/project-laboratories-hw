@@ -69,7 +69,9 @@ public class IceBlockView extends GameElementView {
         }
 
         int cap = ib.getCapacity();
-        capacity = new JLabel(Integer.toString(cap));
+        capacity = new JLabel("Capacity: " + Integer.toString(cap));
+        capacity.setLocation(position.x + size.width/4 - 90,position.y+size.height-90);
+        capacity.setBounds(position.x + size.width/4 -80,position.y+size.height-90,120,20);
 
         icon.setLayout(null);
         capacity.setLayout(null);

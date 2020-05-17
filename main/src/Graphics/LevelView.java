@@ -21,6 +21,7 @@ public class LevelView extends GameElementView {
     private final Level level;
     private final JFrame frame;
     private Menu menu;
+    private IceBlockLines ibl;
 
 
     public LevelView(Level _level){
@@ -32,18 +33,6 @@ public class LevelView extends GameElementView {
         List <Player> players = level.getPlayers();
         List <PolarBear> bears = level.getPolarBears();
 
-        for(IceBlock ib : iceblocks){
-            for(IceBlock ib2 : iceblocks){
-                if(!ib.equals(ib2)){
-                    if(ib.getNeighbours().contains(ib2)){
-                        Point a = ib.getIceBlockView().getPosition();
-                        Point b = ib2.getIceBlockView().getPosition();
-                        frame.getGraphics().setColor(Color.BLACK);
-                        frame.getGraphics().drawLine(a.x,a.y,b.x,b.y);
-                    }
-                }
-            }
-        }
         for(Player player : players){
             actions.add(new PlayerActionsView(player.getInventory(), player, frame, this.viewController));
             playerViews.add(player.getPlayerView());
@@ -94,9 +83,21 @@ public class LevelView extends GameElementView {
         List <Player> playersm = level.getPlayers();
         List <PolarBear> bears = level.getPolarBears();
 
+        ibl = new IceBlockLines(iceblocks, frame);
+
+        ibl.setBounds(0,0,frame.getWidth(),frame.getHeight());
+        ibl.setSize(frame.getWidth(),frame.getHeight());
+        ibl.setLocation(0,0);
+        ibl.setLayout(null);
+
+        ibl.setVisible(true);
+
+        frame.getContentPane().add(ibl);
+
         for(int i = 0; i<iceblocks.size()*2;i++){
             TexturedLabel freelabel = new TexturedLabel();
             freelabel.setVisible(false);
+            freelabel.setLocation(0,0);
             freelabels.add(freelabel);
         }
         for(TexturedLabel label : freelabels){
@@ -198,6 +199,9 @@ public class LevelView extends GameElementView {
         }
         mouseInit();
 
+        IdlePaintThread ipt = new IdlePaintThread(frame);
+        ipt.start();
+
     }
     public TexturedLabel getActionsBg(){
         return actionsbg;
@@ -264,6 +268,9 @@ public class LevelView extends GameElementView {
         frame.remove(gamebg);
         frame.remove(actionsbg);
 
+        ibl.setVisible(false);
+        frame.remove(ibl);
+
         menu.enable();
     }
     public ViewController getViewController(){
@@ -323,6 +330,7 @@ public class LevelView extends GameElementView {
     public TexturedLabel getFreeLabel(){
         TexturedLabel freelabel = freelabels.get(freelabels.size()-1);
         freelabels.remove(freelabels.size()-1);
+        freelabel.setVisible(true);
         return freelabel;
     }
 }

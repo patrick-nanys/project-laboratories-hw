@@ -37,6 +37,7 @@ public class BuildingView extends GameElementView {
         }
 
         icon.setLocation(position);
+        icon.setBounds(position.x,position.y,37,37);
         icon.setVisible(true);
         addedtoframe = false;
         icon.setLayout(null);

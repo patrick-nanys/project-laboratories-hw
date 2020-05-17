@@ -94,8 +94,9 @@ public class PlayerView extends GameElementView {
         int hp = p.getHealth();
 
         health.setText(Integer.toString(hp));
-        health.setLocation(position.x,position.y+55);
-        health.setBounds(position.x,position.y+55,health.getWidth(),health.getHeight());
+        health.setLocation(position.x-10,position.y);
+        health.setBounds(position.x-10,position.y,20,20);
+        health.setVisible(turn);
 
         icon.setLocation(position);
 

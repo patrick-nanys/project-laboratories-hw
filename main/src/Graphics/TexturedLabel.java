@@ -53,6 +53,8 @@ public class TexturedLabel extends JLabel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image,0,0,this);
+        if(image != null) {
+            g.drawImage(image, 0, 0, this);
+        }
     }
 }
