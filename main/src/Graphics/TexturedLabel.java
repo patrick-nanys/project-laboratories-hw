@@ -18,6 +18,7 @@ public class TexturedLabel extends JLabel {
         super(new ScaledImage(s,width,height).getIcon());
         scaledImage = new ScaledImage(s,width,height);
         image = scaledImage.getImage();
+        this.setSize(width,height);
         this.setBounds(x,y,width,height);
     }
 
