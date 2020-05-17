@@ -158,8 +158,11 @@ public class ViewController {
             level.blizzard();
 
         // check if game ended
-        //if (level.getGameState() != GameStateE.IN_PROGRESS)
-            //TODO display game ended stuff
+        if (level.getGameState() == GameStateE.WON)
+            levelView.gameWon();
+        if (level.getGameState() == GameStateE.LOST)
+            levelView.gameLost();
+
     }
 
     public void stepPlayer(IceBlock iceBlock) {

@@ -20,8 +20,7 @@ public class IceBlockView extends GameElementView {
 
     public IceBlockView(IceBlock _ib, Point _position, int _maxElements, ViewController _viewController){
 
-        super(_position, new Dimension(216, 216));
-        size = new Dimension(216,216);
+        super(_position, new Dimension(190, 190));
         viewController = _viewController;
 
         ib = _ib;
@@ -72,7 +71,6 @@ public class IceBlockView extends GameElementView {
         int cap = ib.getCapacity();
         capacity = new JLabel(Integer.toString(cap));
 
-        icon.setSize(216, 216); // lehet nem kell
         icon.setLayout(null);
         capacity.setLayout(null);
         capacity.setVisible(false);
