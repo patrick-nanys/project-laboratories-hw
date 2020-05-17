@@ -11,11 +11,11 @@ public class BuildingView extends GameElementView {
     private TexturedLabel icon;
     private boolean addedtoframe;
 
-    public BuildingView(Building _building){
+    public BuildingView(Building _building, IceBlockView iceBlockView){
         super();
         building = _building;
         String type = building.ToString();
-        building.getIceBlock().getIceBlockView().addView(this);
+        iceBlockView.addView(this);
         if(type.equals("Iglu")){
             try {
                 icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iglut.png", position.x, position.y, 37, 37);

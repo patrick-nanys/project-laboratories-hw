@@ -10,14 +10,13 @@ public class ItemView extends GameElementView {
     private String name;
     private TexturedLabel icon;
     private Item item;
-    private IceBlock ib;
+    private final IceBlock ib;
 
-    public ItemView(Item _item, IceBlock _ib){
+    public ItemView(Item _item, IceBlock _ib, IceBlockView iceBlockView){
         item = _item;
         name = item.ToString();
-        ImageIcon imgicon;
         ib = _ib;
-        ib.getIceBlockView().addView(this);
+        iceBlockView.addView(this);
         if(name.equals("DivingSuit")){
             try {
                 icon = new TexturedLabel("main/PicsRightsizeAndTransp/DivingSuittrnsp.png", position.x, position.y, 37, 37);

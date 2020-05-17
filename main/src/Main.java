@@ -33,10 +33,6 @@ public class Main {
 
     public static void main(String[] args) {
         StaticStandardIO.init();
-
-        //run();
-        //test();
-
         if (args.length == 0)
             runUI();
         else if (args[0].equals("-console"))

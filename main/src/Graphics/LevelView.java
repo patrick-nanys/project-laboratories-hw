@@ -5,23 +5,26 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LevelView extends GameElementView {
 
     private TexturedLabel exitGame;
     private List<PlayerActionsView> actions;
-    private List <PlayerView> players;
-    private Level level;
-    private JFrame frame;
+    private List <PlayerView> playerViews;
+    private final Level level;
+    private final JFrame frame;
     private Menu menu;
 
 
     public LevelView(Level _level){
+        actions = new ArrayList<>();
+        playerViews = new ArrayList<>();
         level = _level;
         frame = new JFrame("Our Awesome OOF titled eskimo game");
         List<IceBlock> iceblocks = level.getIceBlocks();
-        List <Player> playersm = level.getPlayers();
+        List <Player> players = level.getPlayers();
         List <PolarBear> bears = level.getPolarBears();
 
         for(IceBlock ib : iceblocks){
@@ -36,11 +39,11 @@ public class LevelView extends GameElementView {
                 }
             }
         }
-        for(Player player : playersm){
+        for(Player player : players){
             actions.add(new PlayerActionsView(player.getInventory(), player, frame));
-            players.add(player.getPlayerView());
+            playerViews.add(player.getPlayerView());
         }
-        for(PlayerView pv : players){
+        for(PlayerView pv : playerViews){
             pv.addViewToFrame(frame);
         }
         for(IceBlock ib : iceblocks){
@@ -71,6 +74,8 @@ public class LevelView extends GameElementView {
 
     }
     public LevelView(Level _level, JFrame _frame, Menu _menu){
+        actions = new ArrayList<>();
+        playerViews = new ArrayList<>();
         level = _level;
         frame = _frame;
         menu = _menu;
@@ -94,9 +99,9 @@ public class LevelView extends GameElementView {
             PlayerActionsView pav = new PlayerActionsView(player.getInventory(), player, frame);
             actions.add(pav);
             player.getInventory().addPlayerActionsView(pav);
-            players.add(player.getPlayerView());
+            playerViews.add(player.getPlayerView());
         }
-        for(PlayerView pv : players){
+        for(PlayerView pv : playerViews){
             pv.addViewToFrame(frame);
         }
 
@@ -155,13 +160,13 @@ public class LevelView extends GameElementView {
         if(menu.isEnabled()) menu.disable();
         Player current = viewController.getCurrentPlayer();
 
-        for(int i =0;i<players.size();i++){
-            if(players.get(i).getPlayer().equals(current)){
-                players.get(i).setTurn(true);
+        for(int i = 0; i< playerViews.size(); i++){
+            if(playerViews.get(i).getPlayer().equals(current)){
+                playerViews.get(i).setTurn(true);
                 actions.get(i).setVisibility(true);
             }
             else{
-                players.get(i).setTurn(false);
+                playerViews.get(i).setTurn(false);
                 actions.get(i).setVisibility(false);
             }
         }
@@ -173,7 +178,7 @@ public class LevelView extends GameElementView {
 
     public void close(){
 
-        for(PlayerView p : players){
+        for(PlayerView p : playerViews){
             p.close();
         }
 

@@ -70,7 +70,9 @@ public class Menu {
                 try {
                     viewController.loadGame(levelFileName);
                 } catch (Exception exception) {
+                    exception.printStackTrace();
                     System.out.println(exception.getMessage());
+                    return;
                 }
                 viewController.startGame();
             }

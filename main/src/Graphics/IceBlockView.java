@@ -16,9 +16,10 @@ public class IceBlockView extends GameElementView {
     private int maxElements;
 
     public IceBlockView(IceBlock _ib, Point _position, int _maxElements){
-        ib = _ib;
-        position = _position;
 
+        super(_position, new Dimension(216, 216));
+
+        ib = _ib;
         capacity = new JLabel();
         maxElements = _maxElements;
 
@@ -26,19 +27,19 @@ public class IceBlockView extends GameElementView {
         BuildingView buildingView = null;
         ItemView itemView = null;
         if (ib.getBuilding() != null) {
-            buildingView = new BuildingView(ib.getBuilding());
+            buildingView = new BuildingView(ib.getBuilding(), this);
             addView(buildingView);
             ib.getBuilding().addBuildingView(buildingView);
         }
         if (ib.getItem() != null) {
-            itemView = new ItemView(ib.getItem(),ib);
+            itemView = new ItemView(ib.getItem(), ib, this);
             addView(itemView);
             ib.getItem().addItemView(itemView);
         }
 
         if(ib.getLayer()==0 && ib.getCapacity()==0){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_holenosnowt.png", position.x, position.y, 216, 216);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_holenosnowt.png", position.x, position.y, size.width, size.height);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -46,7 +47,7 @@ public class IceBlockView extends GameElementView {
         }
         else if(ib.getLayer()==0 && ib.getCapacity()>0){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png", position.x, position.y, 216, 216);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png", position.x, position.y, size.width, size.height);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -54,7 +55,7 @@ public class IceBlockView extends GameElementView {
         }
         else {
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblockt.png", position.x, position.y, 216, 216);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblockt.png", position.x, position.y, size.width, size.height);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -64,6 +65,7 @@ public class IceBlockView extends GameElementView {
         int cap = ib.getCapacity();
         capacity = new JLabel(Integer.toString(cap));
 
+        icon.setSize(216, 216); // lehet nem kell
         icon.setLayout(null);
         capacity.setLayout(null);
         capacity.setVisible(false);

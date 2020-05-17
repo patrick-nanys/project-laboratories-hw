@@ -74,13 +74,6 @@ public class ViewController {
             for (int i = 0; i < playerTypes.length(); i++) scanner.nextLine();
             for (int i = 0; i < numberOfTiles; i++) scanner.nextLine();
 
-            // read in base width and heights
-            String[] dimensionData = scanner.nextLine().split(";");
-            String[] ibData = dimensionData[0].split(",");
-            String[] otherData = dimensionData[1].split(",");
-            iceBlockDim.setSize(Integer.parseInt(ibData[0]), Integer.parseInt(ibData[1]));
-            otherDim.setSize(Integer.parseInt(otherData[0]), Integer.parseInt(otherData[1]));
-
             // read iceblock locations
             for (int i = 0; i < numberOfTiles; i++) {
                 String[] strs = scanner.nextLine().split(",");
