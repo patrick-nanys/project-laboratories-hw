@@ -1,8 +1,10 @@
 package Controller;
 
+import Model.Shovel;
+
 public class ShovelAction extends Action  {
     @Override
     public void click() {
-        controller.interpret("usePlayerItem s");
+        viewController.usePlayerItem(new Shovel());
     }
 }

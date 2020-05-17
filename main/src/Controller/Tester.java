@@ -71,7 +71,7 @@ public class Tester {
             for (Map.Entry<Integer, String> entry : options.entrySet())
                 test(entry.getKey());
         } else {
-            Controller c = new Controller();
+            ConsoleController c = new ConsoleController();
             boolean exceptionCaught = false;
             String prefix = "main\\testfiles\\test" + (number < 10 ? "0" : "") + number;
             String testFile = prefix + ".tst";

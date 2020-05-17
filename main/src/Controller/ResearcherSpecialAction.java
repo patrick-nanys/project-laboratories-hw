@@ -7,13 +7,11 @@ import java.util.ArrayList;
 public class ResearcherSpecialAction extends Action  {
     @Override
     public void click() {
-        controller.setCurrentAction(this);
+        viewController.setCurrentAction(this);
     }
 
     @Override
     public void call(Object o) {
-        ArrayList<IceBlock> iceBlocks = level.getIceBlocks();
-        int iceBlockId = iceBlocks.indexOf( (IceBlock) o );
-        controller.interpret("usePlayerAbility " + (iceBlockId+1));
+        viewController.usePlayerAbility( (IceBlock) o );
     }
 }

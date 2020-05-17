@@ -21,7 +21,8 @@ public class Researcher extends Player {
 	 */
 	public int checkStability(IceBlock ib) {
 		int cap = ib.getCapacity();
-		ib.getIceBlockView().capacityChecked();
+		if (Level.viewsActive())
+			ib.getIceBlockView().capacityChecked();
 		return cap;
 	}
 

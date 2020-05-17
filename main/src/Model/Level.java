@@ -25,6 +25,8 @@ public class Level {
 	private GameStateE gameState;
 	private LevelView lv;
 
+	private static boolean viewsActive = false;
+
 	/**
 	 * Level konstruktor adott jégtáblákra, játékosokra, medvékre, rakétarészekre
 	 * @param iceblocks a jégtáblák listája
@@ -39,6 +41,17 @@ public class Level {
 		this.bears = bears;
 		this.parts = parts;
 	}
+
+	/**
+	 * Igazra állítja a setViewActive-ot.
+	 */
+	public static void setViewsActive(boolean b) { viewsActive = b; }
+
+	/**
+	 * Getter a viewsActive-ra.
+	 * @return van-e megjelenítés
+	 */
+	public static boolean viewsActive() { return viewsActive; }
 
 	/**
 	 * Ellenorzi, hogy az osszes jatekos es az osszes alkatresz egy mezon van-e. Ha igen, akkor atallitja a

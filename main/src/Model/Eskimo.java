@@ -21,7 +21,8 @@ public class Eskimo extends Player {
 		if (!getInSea()) {
 			Iglu i = new Iglu();
 			((IceBlock)container).setBuilding(i);
-			i.getBuildingView().update();
+			if (Level.viewsActive())
+				i.getBuildingView().update();
 		}
 	}
 

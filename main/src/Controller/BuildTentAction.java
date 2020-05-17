@@ -1,8 +1,10 @@
 package Controller;
 
+import Model.Tent;
+
 public class BuildTentAction extends Action {
     @Override
     public void click() {
-        controller.interpret("usePlayerItem t");
+        viewController.usePlayerItem(new Tent());
     }
 }

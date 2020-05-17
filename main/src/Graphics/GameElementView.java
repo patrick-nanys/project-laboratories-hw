@@ -1,6 +1,6 @@
 package Graphics;
 
-import Controller.Controller;
+import Controller.ViewController;
 
 import java.awt.*;
 
@@ -8,7 +8,7 @@ public class GameElementView {
 
     protected Point position;
     protected Dimension size;
-    protected Controller controller;
+    protected ViewController viewController;
 
     public GameElementView(){}
     public GameElementView(Point p, Dimension s){
@@ -25,7 +25,7 @@ public class GameElementView {
     public Point getPosition() {return position;}
     public void setPosition(Point p) { position = p; }
     public Dimension getSize() {return size;}
-    public void addController(Controller _c){
-        controller = _c;
+    public void addController(ViewController _c){
+        viewController = _c;
     }
 }

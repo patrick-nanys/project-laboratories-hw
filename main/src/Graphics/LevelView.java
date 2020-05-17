@@ -134,7 +134,7 @@ public class LevelView extends GameElementView {
 
     public void update(){
         if(menu.isEnabled()) menu.disable();
-        Player current = controller.getCurrentPlayer();
+        Player current = viewController.getCurrentPlayer();
 
         for(int i =0;i<players.size();i++){
             if(players.get(i).getPlayer().equals(current)){

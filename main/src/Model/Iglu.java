@@ -9,10 +9,11 @@ import Graphics.BuildingView;
  */
 public class Iglu implements Building {
     protected IceBlock iceBlock;
-    private BuildingView bv;
+    private BuildingView bv = null;
 
     public Iglu (){
-        bv = new BuildingView(this);
+        if (Level.viewsActive())
+            bv = new BuildingView(this);
     }
 
     @Override

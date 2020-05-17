@@ -4,7 +4,7 @@ import Model.Level;
 
 public abstract class Action {
     protected Level level;
-    protected Controller controller;
+    protected ViewController viewController;
 
     public abstract void click();
 

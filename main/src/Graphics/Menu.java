@@ -1,6 +1,7 @@
 package Graphics;
 
-import Controller.Controller;
+import Controller.ConsoleController;
+import Controller.ViewController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,18 +10,18 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 
 public class Menu {
-    private Controller controller;
+    private final ViewController viewController;
     private TexturedLabel startgame;
     private TexturedLabel exitgame;
     private TexturedLabel background;
     private TexturedLabel startgame_selected;
     private TexturedLabel exitgame_selected;
-    private JFrame frame;
+    private final JFrame frame;
     private boolean enabled;
 
-    public Menu(Controller _controller,JFrame _frame){
+    public Menu(ViewController _View_controller, JFrame _frame){
         frame = _frame;
-        controller = _controller;
+        viewController = _View_controller;
         frame.setLayout(null);
 
         try {
@@ -65,7 +66,13 @@ public class Menu {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                //ide jon a kontroller startgame hivasa
+                String levelFileName = ""; // ide kell beírni a fájl nevét amiben a pálya van
+                try {
+                    viewController.loadGame(levelFileName);
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
+                viewController.startGame();
             }
 
             @Override

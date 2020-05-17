@@ -83,7 +83,7 @@ public class PlayerView extends GameElementView {
     }
 
     public void handleClick() {
-        controller.getCurrentAction().call(this);
+        viewController.getCurrentAction().call(this);
     }
 
     public void addViewToFrame(JFrame frame){

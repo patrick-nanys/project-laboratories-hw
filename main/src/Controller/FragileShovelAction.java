@@ -1,8 +1,10 @@
 package Controller;
 
+import Model.FragileShovel;
+
 public class FragileShovelAction extends Action  {
     @Override
     public void click() {
-        controller.interpret("usePlayerItem f");
+        viewController.usePlayerItem(new FragileShovel());
     }
 }

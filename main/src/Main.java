@@ -1,11 +1,14 @@
 import Controller.*;
 
-import java.io.File;
-
 public class Main {
 
-    public static void run() {
-        Controller c = new Controller();
+    public static void runUI() {
+        ViewController c = new ViewController();
+        c.startMenu();
+    }
+
+    public static void runConsole() {
+        ConsoleController c = new ConsoleController();
         System.out.println("Type 'exit' to exit the program.");
         String input = StaticStandardIO.readLine();
         while (!input.equals("exit")) {
@@ -31,11 +34,13 @@ public class Main {
     public static void main(String[] args) {
         StaticStandardIO.init();
 
-        run();
-        //test();
+        //run();
+        test();
 
         /*if (args.length == 0)
-            run();
+            runUI();
+        else if (args[0].equals("-console"))
+            runConsole();
         else if (args[0].equals("-test"))
             test();
         else

@@ -1,12 +1,8 @@
 package Controller;
 
 import Model.*;
-import Graphics.*;
 
-import javax.swing.*;
 import java.io.File;
-import java.awt.Dimension;
-import java.awt.Point;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,15 +16,10 @@ import static java.lang.Integer.parseInt;
  * Kezeli a kapcsolatot a bemenet és a modell között.
  * Feldolgozza az egyes bemeneti parancsokat és meghívja a modellnek a megfelelő függvényeit.
  */
-public class Controller {
+public class ConsoleController {
     private Level level;
     private boolean gameRunning;
     private Player currentPlayer;
-    private Action currentAction;
-
-    private Menu menu;
-    private LevelView levelView;
-    private JFrame frame;
 
     /**
      * Egységes séma a futtatandó függvényekhez.
@@ -50,15 +41,13 @@ public class Controller {
     /**
      * Alap konstruktor ami beállítja az tagváltozókat.
      */
-    public Controller() {
+    public ConsoleController() {
         this.level = null;
         this.gameRunning = false;
         this.currentPlayer = null;
 
         this.functionMap = new HashMap<>();
-        this.functionMap.put("startMenu",        this::startMenu);
         this.functionMap.put("loadGame",         this::loadGame);
-        this.functionMap.put("loadGameWithView", this::loadGameWithView);
         this.functionMap.put("blizzard",         this::blizzard);
         this.functionMap.put("stepPlayer",       this::stepPlayer);
         this.functionMap.put("usePlayerItem",    this::usePlayerItem);
@@ -73,28 +62,20 @@ public class Controller {
         this.functionMap.put("save",             this::save);
     }
 
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
     /**
      * Getter az aktuális játékosra.
      * @return soron lévő játékos
      */
     public Player getCurrentPlayer() {
         return currentPlayer;
-    }
-
-    /**
-     * Setter a currentAction-re.
-     * @param action az éppen végrehajtott akció
-     */
-    public void setCurrentAction(Action action) {
-        currentAction = action;
-    }
-
-    /**
-     * Getter a currentAction-re.
-     * @return az éppen végrehajtott akció
-     */
-    public Action getCurrentAction() {
-        return currentAction;
     }
 
     /**
@@ -427,86 +408,7 @@ public class Controller {
             return String.format("ERROR: File \"%s\" given to loadGame does not exist!\n", params[0]);
         }
 
-        return "";
-    }
-
-    private String startMenu(String[] params) {
-        frame = new JFrame("Our Awesome OOF titled eskimo game");
-        frame.setSize(1200, 800);
-        frame.setResizable(false);
-        menu = new Menu(this, frame);
-
-        menu.enable();
-        frame.setVisible(true);
-
-        return "";
-    }
-
-    private String readViewData(String fileName, Dimension iceBlockDim, Dimension otherDim, ArrayList<Point> iceBlockPositions) {
-        try (Scanner scanner = new Scanner(new File(fileName))) {
-
-            // read data in first row
-            String[] firstRow = scanner.nextLine().split(";");
-            int numberOfTiles = parseInt(firstRow[0]);
-            String playerTypes = firstRow[1];
-
-            // go to where the view location data starts
-            for (int i = 0; i < playerTypes.length(); i++) scanner.nextLine();
-            for (int i = 0; i < numberOfTiles; i++) scanner.nextLine();
-
-            // read in base width and heights
-            String[] dimensionData = scanner.nextLine().split(";");
-            String[] ibData = dimensionData[0].split(",");
-            String[] otherData = dimensionData[1].split(",");
-            iceBlockDim.setSize(Integer.parseInt(ibData[0]), Integer.parseInt(ibData[1]));
-            otherDim.setSize(Integer.parseInt(otherData[0]), Integer.parseInt(otherData[1]));
-
-            // read iceblock locations
-            for (int i = 0; i < numberOfTiles; i++) {
-                String[] strs = scanner.nextLine().split(",");
-                iceBlockPositions.add(new Point(Integer.parseInt(strs[0]), Integer.parseInt(strs[1])));
-            }
-        } catch (FileNotFoundException e) {
-            return String.format("ERROR: File \"%s\" given to loadGameWithView does not exist!\n", fileName);
-        }
-
-        return "";
-    }
-
-    private String loadGameWithView(String[] params) {
-        // error handling
-        if (params.length != 1)
-            return "ERROR: Invalid number of loadGameWithView parameters!\n";
-
-        // load game
-        String ret = loadGame(params);
-        if (ret.contains("ERROR"))
-            return ret;
-
-        // read view data
-        Dimension iceBlockDim = new Dimension(), otherDim = new Dimension();
-        ArrayList<Point> iceBlockPositions = new ArrayList<>();
-        ret = readViewData(params[0], iceBlockDim, otherDim, iceBlockPositions);
-        if (ret.contains("ERROR"))
-            return ret;
-
-        // setup views
-
-        // iceblocks
-        ArrayList<IceBlock> iceBlocks = level.getIceBlocks();
-        int maxElements = level.getNumberOfPlayers() + 2; // players + item + building
-        for (int i = 0; i < iceBlocks.size(); i++)
-            iceBlocks.get(i).addIceBlockView(new IceBlockView(iceBlocks.get(i), iceBlockPositions.get(i), maxElements));
-        // players
-        ArrayList<Player> players = level.getPlayers();
-        for (Player player : players)
-            player.addPlayerView(new PlayerView(player));
-        // bears
-        ArrayList<PolarBear> bears = level.getPolarBears();
-        for (PolarBear bear : bears)
-            bear.addBearView(new BearView(bear));
-
-        levelView = new LevelView(level, frame, menu);
+        Level.setViewsActive(false);
 
         return "";
     }
