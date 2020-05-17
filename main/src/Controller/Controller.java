@@ -432,7 +432,8 @@ public class Controller {
 
     private String startMenu(String[] params) {
         frame = new JFrame("Our Awesome OOF titled eskimo game");
-        frame.setSize(600, 600);
+        frame.setSize(1200, 800);
+        frame.setResizable(false);
         menu = new Menu(this, frame);
 
         menu.enable();

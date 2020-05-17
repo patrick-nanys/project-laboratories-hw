@@ -26,7 +26,7 @@ public class Menu {
         try {
             startgame = new TexturedLabel("main/PicsRightsizeAndTransp/startgame.png", 0, 0, 150, 60);
             exitgame = new TexturedLabel("main/PicsRightsizeAndTransp/exitgame.png", 0, 0, 150, 60);
-            background = new TexturedLabel("main/PicsRightsizeAndTransp/menubackground.gif", 0, 0, 600, 600);
+            background = new TexturedLabel("main/PicsRightsizeAndTransp/menubackground.gif", 0, 0, frame.getWidth(), frame.getHeight());
             startgame_selected = new TexturedLabel("main/PicsRightsizeAndTransp/startgame_selected.png", 0,0,150,60);
             exitgame_selected = new TexturedLabel("main/PicsRightsizeAndTransp/exitgame_selected.png", 0,0,150,60);
         }
@@ -35,19 +35,19 @@ public class Menu {
         }
         Dimension framesize = frame.getSize();
 
-        startgame.setLocation(framesize.width/2 - 75,framesize.width/2 - 50);
+        startgame.setLocation(framesize.width/2 - 75,framesize.height/2 - 50);
 
-        exitgame.setLocation(framesize.width/2 + 75,framesize.width/2 + 50);
+        exitgame.setLocation(framesize.width/2 + 75,framesize.height/2 + 50);
 
         background.setLocation(0,0);
 
         startgame.setSize(new Dimension(150,60));
         exitgame.setSize(new Dimension(150,60));
-        background.setSize(600,600);
+        background.setSize(frame.getWidth(),frame.getHeight());
 
-        startgame.setBounds(framesize.width/2 - 75,framesize.width/2 - 100,150,60);
-        exitgame.setBounds(framesize.width/2 - 75,framesize.width/2 + 50, 150,60);
-        background.setBounds(0,0,600,600);
+        startgame.setBounds(framesize.width/2 - 75,framesize.height/2 - 100,150,60);
+        exitgame.setBounds(framesize.width/2 - 75,framesize.height/2 + 100, 150,60);
+        background.setBounds(0,0,frame.getWidth(),frame.getHeight());
 
         startgame.setLayout(null);
         exitgame.setLayout(null);
