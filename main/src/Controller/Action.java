@@ -1,10 +1,11 @@
 package Controller;
 
-import Model.Level;
-
 public abstract class Action {
-    protected Level level;
     protected ViewController viewController;
+
+    Action(ViewController viewController) {
+        this.viewController = viewController;
+    }
 
     public abstract void click();
 

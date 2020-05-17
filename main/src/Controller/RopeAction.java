@@ -6,6 +6,10 @@ import Model.Rope;
 import java.util.ArrayList;
 
 public class RopeAction extends Action  {
+    RopeAction(ViewController viewController) {
+        super(viewController);
+    }
+
     @Override
     public void click() {
         viewController.setCurrentAction(this);

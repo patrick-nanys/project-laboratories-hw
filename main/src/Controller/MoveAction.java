@@ -5,6 +5,10 @@ import Model.IceBlock;
 import java.util.ArrayList;
 
 public class MoveAction extends Action  {
+    MoveAction(ViewController viewController) {
+        super(viewController);
+    }
+
     @Override
     public void click() {
         viewController.setCurrentAction(this);

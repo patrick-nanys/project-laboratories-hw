@@ -16,7 +16,6 @@ import static java.lang.Integer.parseInt;
 
 public class ViewController {
     private Level level = null;
-    private boolean gameRunning = false;
     private int currentPlayerId = 0;
     private final int numberOfStepsPerPlayer = 4;
     private int numberOfStepsLeft = 0;
@@ -26,7 +25,7 @@ public class ViewController {
     private LevelView levelView = null;
     private JFrame frame = null;
 
-    private Random rand = new Random();
+    private final Random rand = new Random();
 
     /**
      * Getter az aktuális játékosra.
