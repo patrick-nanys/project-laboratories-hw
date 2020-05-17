@@ -94,7 +94,7 @@ public class LevelView extends GameElementView {
         gamelost = null;
         try {
             gamewon = new TexturedLabel("main/PicsRightsizeAndTransp/gamewon.png", frame.getWidth() / 2 - 100, frame.getHeight() / 2, 150, 60);
-            gamelost = new TexturedLabel("main/PicsRightsizeAndTransp/gamelost.png", frame.getWidth() / 2 - 100, frame.getHeight() / 2, 150, 60);
+            gamelost = new TexturedLabel("main/PicsRightsizeAndTransp/gameover.png", frame.getWidth() / 2 - 100, frame.getHeight() / 2, 150, 60);
         }
         catch(IOException ioe){
             ioe.printStackTrace();
