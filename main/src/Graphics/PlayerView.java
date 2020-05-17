@@ -6,6 +6,7 @@ import Model.Sea;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class PlayerView extends GameElementView {
 
@@ -32,19 +33,34 @@ public class PlayerView extends GameElementView {
         turn = false;
 
         String ptype = p.toString();
-        ImageIcon imgicon;
         if(ptype.equals("Eskimo")){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_2eskimot.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_2eskimot.png", position.x, position.y, 30, 30);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         else{
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_1researchert.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_1researchert.png", position.x, position.y, 30, 30);
+            }
+            catch (IOException ioe){
+                ioe.printStackTrace();
+            }
         }
-
-        icon.setIcon(imgicon);
 
         int hp = p.getHealth();
 
         health = new JLabel(Integer.toString(hp));
+        health.setLocation(position.x,position.y+40);
+        health.setBounds(position.x,position.y+40,health.getWidth(),health.getHeight());
+        health.setLayout(null);
+
+
+        icon.setLocation(position.x,position.y);
+        icon.setSize(30,30);
+        icon.setLayout(null);
 
         icon.setVisible(true);
         health.setVisible(true);
@@ -73,6 +89,10 @@ public class PlayerView extends GameElementView {
         int hp = p.getHealth();
 
         health.setText(Integer.toString(hp));
+        health.setLocation(position.x,position.y+40);
+        health.setBounds(position.x,position.y+40,health.getWidth(),health.getHeight());
+
+        icon.setLocation(position);
 
     }
 

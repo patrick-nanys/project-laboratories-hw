@@ -228,6 +228,7 @@ public class PlayerActionsView extends GameElementView {
             frame.add(button);
         }
     }
+
     public void mouseInit(){
         for(int i = 0; i<buttons.size();i++){
             current = i;
@@ -235,7 +236,9 @@ public class PlayerActionsView extends GameElementView {
                 private ScaledImage icon = buttons.get(current).getScaledImage();
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    actions.get(current).click();
+                    if(visible) {
+                        actions.get(current).click();
+                    }
                 }
 
                 @Override
@@ -250,13 +253,17 @@ public class PlayerActionsView extends GameElementView {
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    icon = selected.get(current).getScaledImage();
-                    buttons.get(current).setImage(selected.get(current).getScaledImage());
+                    if(visible) {
+                        icon = selected.get(current).getScaledImage();
+                        buttons.get(current).setImage(selected.get(current).getScaledImage());
+                    }
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    buttons.get(current).setImage(icon);
+                    if(visible) {
+                        buttons.get(current).setImage(icon);
+                    }
                 }
             });
         }
