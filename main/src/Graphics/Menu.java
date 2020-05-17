@@ -4,11 +4,17 @@ import Controller.Controller;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.IOException;
 
 public class Menu {
     private Controller controller;
-    private JButton startgame;
-    private JButton exitgame;
+    private TexturedLabel startgame;
+    private TexturedLabel exitgame;
+    private TexturedLabel background;
+    private TexturedLabel startgame_selected;
+    private TexturedLabel exitgame_selected;
     private JFrame frame;
     private boolean enabled;
 
@@ -17,53 +23,107 @@ public class Menu {
         controller = _controller;
         frame.setLayout(null);
 
-        startgame = new JButton("Start Game");
-        exitgame = new JButton("Exit Game");
+        try {
+            startgame = new TexturedLabel("main/PicsRightsizeAndTransp/startgame.png", 0, 0, 150, 60);
+            exitgame = new TexturedLabel("main/PicsRightsizeAndTransp/exitgame.png", 0, 0, 150, 60);
+            background = new TexturedLabel("main/PicsRightsizeAndTransp/menubackground.gif", 0, 0, 600, 600);
+            startgame_selected = new TexturedLabel("main/PicsRightsizeAndTransp/startgame_selected.png", 0,0,150,60);
+            exitgame_selected = new TexturedLabel("main/PicsRightsizeAndTransp/exitgame_selected.png", 0,0,150,60);
+        }
+        catch(IOException ioe){
+            ioe.printStackTrace();
+        }
         Dimension framesize = frame.getSize();
 
-        startgame.setLocation(0,0);
+        startgame.setLocation(framesize.width/2 - 75,framesize.width/2 - 50);
 
-        exitgame.setLocation(0,0);
+        exitgame.setLocation(framesize.width/2 + 75,framesize.width/2 + 50);
 
-        startgame.setSize(new Dimension(120,60));
-        exitgame.setSize(new Dimension(120,60));
+        background.setLocation(0,0);
 
-        startgame.setBounds(0,0,120,60);
-        exitgame.setBounds(0,0,120,60);
+        startgame.setSize(new Dimension(150,60));
+        exitgame.setSize(new Dimension(150,60));
+        background.setSize(600,600);
+
+        startgame.setBounds(framesize.width/2 - 75,framesize.width/2 - 100,150,60);
+        exitgame.setBounds(framesize.width/2 - 75,framesize.width/2 + 50, 150,60);
+        background.setBounds(0,0,600,600);
+
+        startgame.setLayout(null);
+        exitgame.setLayout(null);
+        background.setLayout(null);
 
         startgame.setVisible(true);
         exitgame.setVisible(true);
+        background.setVisible(true);
 
+        mouseDragInit();
+    }
+    public void mouseDragInit(){
+        startgame.addMouseListener(new MouseListener(){
+            private ScaledImage icon = startgame.getScaledImage();
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //ide jon a kontroller startgame hivasa
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                icon = startgame.getScaledImage();
+                startgame.setImage(startgame_selected.getScaledImage());
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                startgame.setImage(icon);
+            }
+        });
+        exitgame.addMouseListener(new MouseListener(){
+            private ScaledImage icon = exitgame.getScaledImage();
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                icon = exitgame.getScaledImage();
+                exitgame.setImage(exitgame_selected.getScaledImage());
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                exitgame.setImage(icon);
+            }
+        });
     }
     public void enable(){
-        JPanel startpanel = new JPanel();
-        JPanel exitpanel = new JPanel();
 
-        Dimension framesize = frame.getSize();
-        Point middle = new Point(framesize.width/2, framesize.height/2);
-        int delta = 30;
-
-        startpanel.setLocation(new Point(middle.x-60, middle.y-delta));
-        startpanel.setSize(120,60);
-        startpanel.setBounds(middle.x-60,middle.y-5*delta, 120, 60);
-        startpanel.setLayout(null);
-
-        exitpanel.setLocation(new Point(middle.x-60, middle.y));
-        exitpanel.setSize(120,60);
-        exitpanel.setBounds(middle.x-60, middle.y,120,60);
-        exitpanel.setLayout(null);
-
-
-        startpanel.add(startgame);
-        exitpanel.add(exitgame);
-        //TODO: Sajat button es labelek es panelek a paintcomponenthez hogy tudjunk ra kepet rajzolni
-        ImageIcon starticon = new ImageIcon("PicsRightsizeAndTransp/startgamebg.png");
-
-        startpanel.setLayout(null);
-        exitpanel.setLayout(null);
-
-        frame.add(exitpanel);
-        frame.add(startpanel);
+        frame.add(exitgame);
+        frame.add(startgame);
+        frame.add(background);
 
         frame.repaint();
         frame.setVisible(true);
@@ -72,6 +132,7 @@ public class Menu {
     public void disable(){
         frame.remove(startgame);
         frame.remove(exitgame);
+        frame.remove(background);
         frame.repaint();
         frame.setVisible(true);
         enabled = false;

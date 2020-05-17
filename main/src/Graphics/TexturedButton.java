@@ -14,9 +14,9 @@ public class TexturedButton extends JButton{
         super();
     }
 
-    public TexturedButton(String s, int x, int y, int width, int height) throws IOException {
-        super(new ScaledImage(s,width,height).getIcon());
-        scaledImage = new ScaledImage(s,width,height);
+    public TexturedButton(String file, int x, int y, int width, int height) throws IOException {
+        super(new ScaledImage(file,width,height).getIcon());
+        scaledImage = new ScaledImage(file,width,height);
         image = scaledImage.getImage();
         this.setBounds(x,y,width,height);
     }

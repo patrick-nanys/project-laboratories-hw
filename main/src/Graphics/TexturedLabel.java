@@ -27,7 +27,7 @@ public class TexturedLabel extends JLabel {
         image = scaledImage.getImage();
     }
 
-    public ScaledImage getScaledGifImage() {
+    public ScaledImage getScaledImage() {
         return scaledImage;
     }
     public int getX() {
@@ -53,5 +53,4 @@ public class TexturedLabel extends JLabel {
         super.paintComponent(g);
         g.drawImage(image,0,0,this);
     }
-}
 }
