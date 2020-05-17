@@ -66,7 +66,7 @@ public class Menu {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                String levelFileName = ""; // ide kell beírni a fájl nevét amiben a pálya van
+                String levelFileName = "main/maps/map.txt";
                 try {
                     viewController.loadGame(levelFileName);
                 } catch (Exception exception) {

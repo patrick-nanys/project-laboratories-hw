@@ -169,14 +169,17 @@ public class ViewController {
 
     public void stepPlayer(IceBlock iceBlock) {
         level.getPlayer(currentPlayerId).step(iceBlock);
+        handlePlayerTurn();
     }
 
     public void usePlayerItem(Item item) {
         level.getPlayer(currentPlayerId).useItem(item);
+        handlePlayerTurn();
     }
 
     public void usePlayerItemOnPlayer(Item item, Player player) {
         level.getPlayer(currentPlayerId).useItemOnPlayer(item, player);
+        handlePlayerTurn();
     }
 
     public void usePlayerAbility(Object o) {
@@ -185,14 +188,17 @@ public class ViewController {
             ((Eskimo) player).buildIglu();
         else if (player instanceof Researcher)
             ((Researcher) player).checkStability( (IceBlock) o );
+        handlePlayerTurn();
     }
 
     public void swipeSnow() {
         level.getPlayer(currentPlayerId).swipeWithHand();
+        handlePlayerTurn();
     }
 
     public void digOutItem() {
         level.getPlayer(currentPlayerId).digOutItem();
+        handlePlayerTurn();
     }
 
     public void skipTurn() {
@@ -200,5 +206,6 @@ public class ViewController {
         currentPlayerId = (currentPlayerId + 1) % level.getNumberOfPlayers();
         if (currentPlayerId == 0)
             handleEndOfRound();
+        levelView.update();
     }
 }
