@@ -77,7 +77,7 @@ public class LevelView extends GameElementView {
         exitGame.setLocation(new Point(0,0));
         exitGame.setVisible(true);
         exitGame_selected.setLocation(0,0);
-        exitGame.setVisible(true);
+        exitGame_selected.setVisible(true);
 
 
     }
@@ -122,6 +122,9 @@ public class LevelView extends GameElementView {
 
         gamewon.setVisible(false);
         gamelost.setVisible(false);
+
+        frame.add(gamewon);
+        frame.add(gamelost);
 
         for(Player player : playersm){
             PlayerActionsView pav = new PlayerActionsView(player.getInventory(), player, frame, viewController);
@@ -225,8 +228,11 @@ public class LevelView extends GameElementView {
             }
         }
         GameStateE gs = level.getGameState();
-        if(gs == GameStateE.LOST || gs == GameStateE.WON){
-            close();
+        if(gs == GameStateE.LOST){
+            gameLost();
+        }
+        else if(gs == GameStateE.WON){
+            gameWon();
         }
     }
 
@@ -270,6 +276,8 @@ public class LevelView extends GameElementView {
             @Override
             public void mouseClicked(MouseEvent e) {
                 close();
+                frame.remove(gamelost);
+                frame.remove(gamewon);
                 menu.enable();
             }
 

@@ -83,7 +83,6 @@ public class PlayerActionsView extends GameElementView {
         for(TexturedLabel button : buttons){
             frame.remove(button);
         }
-        frame.remove(lv.getActionsBg());
         buttons.clear();
         selected.clear();
         actions.clear();
