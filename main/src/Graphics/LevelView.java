@@ -5,13 +5,15 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LevelView extends GameElementView {
 
-    private TexturedLabel exitGame;
+    private TexturedLabel exitGame, exitGame_selected, gamewon, gamelost;
     private List<PlayerActionsView> actions;
     private List <PlayerView> playerViews;
     TexturedLabel gamebg, actionsbg;
@@ -66,11 +68,14 @@ public class LevelView extends GameElementView {
 
         try {
             exitGame = new TexturedLabel("main/PicsRightsizeAndTransp/exitgame.png", 0, 0, 80, 50);
+            exitGame_selected =  new TexturedLabel("main/PicsRightsizeAndTransp/exitgame_selected.png", 0, 0, 80, 50);
         }
         catch (IOException ioe){
             ioe.printStackTrace();
         }
         exitGame.setLocation(new Point(0,0));
+        exitGame.setVisible(true);
+        exitGame_selected.setLocation(0,0);
         exitGame.setVisible(true);
 
 
@@ -113,13 +118,17 @@ public class LevelView extends GameElementView {
             ib.getIceBlockView().addViewToFrame(frame);
         }
         try {
-            exitGame = new TexturedLabel("main/PicsRightsizeAndTransp/exitgame.png", 0, 0, 80, 50);
+            exitGame = new TexturedLabel("main/PicsRightsizeAndTransp/exitgame.png", frame.getWidth()-100, frame.getHeight()-100, 80, 50);
+            exitGame_selected =  new TexturedLabel("main/PicsRightsizeAndTransp/exitgame_selected.png", frame.getWidth()-100, frame.getHeight()-100, 80, 50);
         }
         catch (IOException ioe){
             ioe.printStackTrace();
         }
-        exitGame.setLocation(new Point(0,0));
+        exitGame.setLocation(new Point(frame.getWidth()-100, frame.getHeight()-100));
         exitGame.setVisible(true);
+        exitGame_selected.setLocation(frame.getWidth()-100, frame.getHeight()-100);
+        exitGame_selected.setVisible(true);
+
         frame.add(exitGame);
         gamebg = null;
         actionsbg = null;
@@ -152,6 +161,7 @@ public class LevelView extends GameElementView {
                 }
             }
         }
+        mouseInit();
 
     }
     public TexturedLabel getActionsBg(){
@@ -213,10 +223,51 @@ public class LevelView extends GameElementView {
             bear.getBearView().close();
         }
         frame.remove(exitGame);
+        frame.remove(gamebg);
+        frame.remove(actionsbg);
 
         menu.enable();
     }
     public ViewController getViewController(){
         return viewController;
+    }
+
+    public void mouseInit(){
+        exitGame.addMouseListener(new MouseListener() {
+            private ScaledImage icon = exitGame.getScaledImage();
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                close();
+                menu.enable();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                exitGame.setImage(exitGame_selected.getScaledImage());
+                frame.repaint();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                exitGame.setImage(icon);
+                frame.repaint();
+            }
+        });
+    }
+    public void gameLost(){
+        gamelost.setVisible(true);
+    }
+    public void gamewon(){
+        gamewon.setVisible(true);
     }
 }

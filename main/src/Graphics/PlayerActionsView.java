@@ -86,8 +86,8 @@ public class PlayerActionsView extends GameElementView {
         actions = new ArrayList<Action>();
 
         Dimension framesize = frame.getSize();
-        int startx = ((int)(framesize.getWidth()/6)*4)+ 75;
-        int starty = 240;
+        int startx = ((int)(framesize.getWidth()/6)*4)+ 40;
+        int starty = 410;
         List<Item> items = inventory.getItems();
         for(int i = 0; i<items.size();i++){
             String name = items.get(i).ToString();
@@ -162,15 +162,20 @@ public class PlayerActionsView extends GameElementView {
                 npe.printStackTrace();
             }
         }
-        TexturedLabel special, specialsel, swipe, swipesel, dig, digsel;
+        TexturedLabel special, specialsel, swipe, swipesel, dig, digsel, move, movesel, skip, skipsel;
         special = null;
         swipe = null;
         specialsel = null;
         swipesel = null;
         dig = null;
         digsel = null;
+        move = null;
+        movesel = null;
+        skip = null;
+        skipsel = null;
+
         String ptype = player.ToString();
-        starty = 0;
+        starty = 10;
         try {
             if (ptype.equals("Eskimo")) {
                 actions.add(new EskimoSpecialAction(viewController));
@@ -241,6 +246,46 @@ public class PlayerActionsView extends GameElementView {
             selected.add(digsel);
 
             actions.add(new DigOutItemAction(viewController));
+
+            try {
+                move = new TexturedLabel("main/PicsRightsizeAndTransp/move.png", startx, starty+240, 150, 60);
+                movesel = new TexturedLabel("main/PicsRightsizeAndTransp/move_selected.png", startx, starty+240, 150, 60);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+            move.setLocation(startx,starty+240);
+            move.setSize(new Dimension(150,60));
+            move.setVisible(false);
+            move.setLayout(null);
+            buttons.add(move);
+
+            movesel.setLocation(startx,starty+160);
+            movesel.setSize(new Dimension(150,60));
+            movesel.setVisible(false);
+            movesel.setLayout(null);
+            selected.add(movesel);
+
+            actions.add(new MoveAction(viewController));
+
+            try {
+                skip = new TexturedLabel("main/PicsRightsizeAndTransp/skip.png", startx + 160, 10, 150, 60);
+                skipsel = new TexturedLabel("main/PicsRightsizeAndTransp/skip_selected.png", startx + 160, 10, 150, 60);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+            skip.setLocation(startx + 160,10);
+            skip.setSize(new Dimension(150,60));
+            skip.setVisible(false);
+            skip.setLayout(null);
+            buttons.add(skip);
+
+            skipsel.setLocation(startx + 160,10);
+            skipsel.setSize(new Dimension(150,60));
+            skipsel.setVisible(false);
+            skipsel.setLayout(null);
+            selected.add(skipsel);
+
+            actions.add(new SkipTurnAction(viewController));
         }
         catch(NullPointerException npe){
             npe.printStackTrace();

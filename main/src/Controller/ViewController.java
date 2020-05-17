@@ -131,7 +131,6 @@ public class ViewController {
 
     public void handlePlayerTurn() {
         numberOfStepsLeft--;
-        System.out.println(numberOfStepsLeft + "turns left");
         if (numberOfStepsLeft == 0) {
             skipTurn();
         }

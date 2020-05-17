@@ -130,7 +130,9 @@ public class Menu {
         });
     }
     public void enable(){
-
+        startgame.setVisible(true);
+        exitgame.setVisible(true);
+        background.setVisible(true);
         frame.add(exitgame);
         frame.add(startgame);
         frame.add(background);

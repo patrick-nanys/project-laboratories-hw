@@ -81,7 +81,6 @@ public class IceBlockView extends GameElementView {
     }
 
     public void update(){
-        System.out.println(ib.getLayer());
         if(ib.getLayer()==0 && ib.getCapacity()==0){
             try {
                 icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_holenosnowt.png",216, 216));
