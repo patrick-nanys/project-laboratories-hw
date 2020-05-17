@@ -36,7 +36,7 @@ public class IceBlockView extends GameElementView {
 
         if(ib.getLayer()==0 && ib.getCapacity()==0){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_holenosnowt.png", position.x, position.y, 100, 100);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_holenosnowt.png", position.x, position.y, 50, 50);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -44,7 +44,7 @@ public class IceBlockView extends GameElementView {
         }
         else if(ib.getLayer()==0 && ib.getCapacity()>0){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png", position.x, position.y, 100, 100);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png", position.x, position.y, 50, 50);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -52,7 +52,7 @@ public class IceBlockView extends GameElementView {
         }
         else {
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblockt.png", position.x, position.y, 100, 100);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblockt.png", position.x, position.y, 50, 50);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -72,7 +72,7 @@ public class IceBlockView extends GameElementView {
 
         if(ib.getLayer()==0 && ib.getCapacity()==0){
             try {
-                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_holenosnowt.png",100, 100));
+                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_holenosnowt.png",50, 50));
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -80,7 +80,7 @@ public class IceBlockView extends GameElementView {
         }
         else if(ib.getLayer()==0 && ib.getCapacity()>0){
             try {
-                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png",100, 100));
+                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png",50, 50));
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -88,7 +88,7 @@ public class IceBlockView extends GameElementView {
         }
         else {
             try {
-                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iceblockt.png", 100, 100));
+                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iceblockt.png", 50, 50));
             }
             catch(IOException ioe){
                 ioe.printStackTrace();

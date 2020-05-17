@@ -12,21 +12,20 @@ public class PlayerView extends GameElementView {
     private Player p;
     private String name;
     private boolean turn;
-    private JButton icon;
+    private TexturedLabel icon;
     private JLabel health;
 
-    //TODO átírás, iceblockView kezelje, hogy hol van
     public PlayerView(Player _p){
         p = _p;
         if(!p.getInSea()){
             IceBlock ib = (IceBlock)p.getLocation();
-            position = ib.getIceBlockView().getPosition();
+            ib.getIceBlockView().addView(this);
         }
         else{
             //itt ezzel a deltaval meg kiserletezni kell majd
-            Point delta = new Point(5,5);
+            Point delta = new Point(55,55);
             IceBlock ib = ((Sea)p.getLocation()).getPosition();
-            position = ib.getIceBlockView().getPosition();
+            ib.getIceBlockView().addView(this);
             position.x += delta.x;
             position.y += delta.y;
         }
