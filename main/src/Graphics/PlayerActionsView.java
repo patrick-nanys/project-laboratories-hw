@@ -103,7 +103,7 @@ public class PlayerActionsView extends GameElementView {
             TexturedLabel buttonsel = null;
             try {
                 if (name.equals("FragileShovel")) {
-                    actions.add(i, new FragileShovelAction(viewController));
+                    actions.add(new FragileShovelAction(viewController));
                     try {
                         button = new TexturedLabel("main/PicsRightsizeAndTransp/usefragile.png", startx, starty + i * 80, 150, 60);
                         buttonsel = new TexturedLabel("main/PicsRightsizeAndTransp/usefragile_selected.png", startx, starty + i * 80, 150, 60);
@@ -113,7 +113,7 @@ public class PlayerActionsView extends GameElementView {
 
                 } else if (name.equals("Part")) {
                     if(!hasPart) {
-                        actions.add(i, new PartAction(viewController));
+                        actions.add(new PartAction(viewController));
                         try {
                             button = new TexturedLabel("main/PicsRightsizeAndTransp/usepart.png", startx, starty + i * 80, 150, 60);
                             buttonsel = new TexturedLabel("main/PicsRightsizeAndTransp/usepart_selected.png", startx, starty + i * 80, 150, 60);
@@ -124,7 +124,7 @@ public class PlayerActionsView extends GameElementView {
                     }
 
                 } else if (name.equals("Rope")) {
-                    actions.add(i, new RopeAction(viewController));
+                    actions.add(new RopeAction(viewController));
                     try {
                         button = new TexturedLabel("main/PicsRightsizeAndTransp/userope.png", startx, starty + i * 80, 150, 60);
                         buttonsel = new TexturedLabel("main/PicsRightsizeAndTransp/userope_selected.png", startx, starty + i * 80, 150, 60);
@@ -133,7 +133,7 @@ public class PlayerActionsView extends GameElementView {
                     }
 
                 } else if (name.equals("Shovel")) {
-                    actions.add(i, new ShovelAction(viewController));
+                    actions.add(new ShovelAction(viewController));
                     try {
                         button = new TexturedLabel("main/PicsRightsizeAndTransp/useshovel.png", startx, starty + i * 80, 150, 60);
                         buttonsel = new TexturedLabel("main/PicsRightsizeAndTransp/useshovel_selected.png", startx, starty + i * 80, 150, 60);
@@ -142,9 +142,12 @@ public class PlayerActionsView extends GameElementView {
                     }
 
                 }
+                else if(name.equals("DivingSuit")){
+
+                }
                 //egyebkent Tent
                 else {
-                    actions.add(i, new BuildTentAction(viewController));
+                    actions.add(new BuildTentAction(viewController));
                     try {
                         button = new TexturedLabel("main/PicsRightsizeAndTransp/usetent.png", startx, starty + i * 80, 150, 60);
                         buttonsel = new TexturedLabel("main/PicsRightsizeAndTransp/usetent_selected.png", startx, starty + i * 80, 150, 60);
@@ -152,18 +155,19 @@ public class PlayerActionsView extends GameElementView {
                         ioe.printStackTrace();
                     }
                 }
+                if(button!=null) {
+                    button.setLocation(new Point(startx, starty + i * 80));
+                    button.setSize(new Dimension(150, 60));
+                    button.setVisible(false);
+                    button.setLayout(null);
+                    buttons.add(button);
 
-                button.setLocation(new Point(startx, starty + i * 80));
-                button.setSize(new Dimension(150,60));
-                button.setVisible(false);
-                button.setLayout(null);
-                buttons.add(i, button);
-
-                buttonsel.setLocation(new Point(startx, starty + i * 80));
-                buttonsel.setSize(new Dimension(150,60));
-                buttonsel.setVisible(false);
-                buttonsel.setLayout(null);
-                selected.add(i, buttonsel);
+                    buttonsel.setLocation(new Point(startx, starty + i * 80));
+                    buttonsel.setSize(new Dimension(150, 60));
+                    buttonsel.setVisible(false);
+                    buttonsel.setLayout(null);
+                    selected.add(i, buttonsel);
+                }
 
             }
             catch(NullPointerException npe){
