@@ -12,15 +12,16 @@ public class BuildingView extends GameElementView {
     private TexturedLabel icon;
     private boolean addedtoframe;
 
-    public BuildingView(Building _building, IceBlockView iceBlockView, ViewController _viewController){
+    public BuildingView(Building _building, IceBlockView iceBlockView, ViewController _viewController, TexturedLabel freelabel){
         super();
         building = _building;
         String type = building.ToString();
         iceBlockView.addView(this);
         viewController = _viewController;
+        icon = freelabel;
         if(type.equals("Iglu")){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iglut.png", position.x, position.y, 37, 37);
+                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iglut.png",37, 37));
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -28,7 +29,7 @@ public class BuildingView extends GameElementView {
         }
         else{
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_tentt.png", position.x, position.y, 37, 37);
+                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_tentt.png", 37, 37));
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -45,14 +46,13 @@ public class BuildingView extends GameElementView {
         building.getIceBlock().getIceBlockView().addView(this);
         icon.setLocation(position);
         if(!addedtoframe){
-            addViewToFrame(building.getIceBlock().getPlayers().get(0).getLevel().getLevelView().getFrame());
+            icon.setVisible(true);
+            addedtoframe = true;
+            building.getIceBlock().getPlayers().get(0).getLevel().getLevelView().getFrame().repaint();
         }
     }
     public void clear(){
         icon.setVisible(false);
     }
 
-    public void addViewToFrame(JFrame frame){
-        frame.add(icon);
-    }
 }

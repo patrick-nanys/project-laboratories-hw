@@ -33,9 +33,10 @@ public class IceBlockView extends GameElementView {
         BuildingView buildingView = null;
         ItemView itemView = null;
         if (ib.getBuilding() != null) {
-            buildingView = new BuildingView(ib.getBuilding(), this, this.viewController);
+            buildingView = new BuildingView(ib.getBuilding(), this, this.viewController, ib.getPlayers().get(0).getLevel().getLevelView().getFreeLabel());
             addView(buildingView);
             ib.getBuilding().addBuildingView(buildingView);
+            buildingView.update();
         }
         if (ib.getItem() != null) {
             itemView = new ItemView(ib.getItem(), ib, this);

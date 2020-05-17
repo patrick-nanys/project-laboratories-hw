@@ -60,7 +60,7 @@ public class Tent extends Item implements Building {
             iceblock = ib;
             player.getInventory().removeItem(this);
             if (Level.viewsActive()) {
-                addBuildingView(new BuildingView(this, ib.getIceBlockView(), ib.getPlayers().get(0).getLevel().getLevelView().getViewController()));
+                addBuildingView(new BuildingView(this, ib.getIceBlockView(), ib.getPlayers().get(0).getLevel().getLevelView().getViewController(),ib.getPlayers().get(0).getLevel().getLevelView().getFreeLabel()));
                 bv.update();
             }
         }

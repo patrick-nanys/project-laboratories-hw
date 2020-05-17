@@ -14,6 +14,7 @@ import java.util.List;
 public class LevelView extends GameElementView {
 
     private TexturedLabel exitGame, exitGame_selected, gamewon, gamelost;
+    private List <TexturedLabel> freelabels;
     private List<PlayerActionsView> actions;
     private List <PlayerView> playerViews;
     TexturedLabel gamebg, actionsbg;
@@ -56,7 +57,7 @@ public class LevelView extends GameElementView {
                 ib.getItem().getItemView().addViewToFrame(frame);
             }
             if(ib.getBuilding()!=null){
-                ib.getBuilding().getBuildingView().addViewToFrame(frame);
+                ib.getBuilding().getBuildingView().update();
             }
         }
         for(PolarBear bear : bears){
@@ -83,18 +84,32 @@ public class LevelView extends GameElementView {
     public LevelView(Level _level, JFrame _frame, Menu _menu, ViewController _viewController){
         actions = new ArrayList<>();
         playerViews = new ArrayList<>();
+        freelabels = new ArrayList<>();
         level = _level;
         frame = _frame;
         menu = _menu;
         viewController = _viewController;
+
         List<IceBlock> iceblocks = level.getIceBlocks();
         List <Player> playersm = level.getPlayers();
         List <PolarBear> bears = level.getPolarBears();
+
+        for(int i = 0; i<iceblocks.size()*2;i++){
+            TexturedLabel freelabel = new TexturedLabel();
+            freelabel.setVisible(false);
+            freelabels.add(freelabel);
+        }
+        for(TexturedLabel label : freelabels){
+            frame.add(label);
+        }
+
+
+
         gamewon = null;
         gamelost = null;
         try {
             gamewon = new TexturedLabel("main/PicsRightsizeAndTransp/gamewon.png", frame.getWidth() / 2 - 100, frame.getHeight() / 2, 150, 60);
-            gamelost = new TexturedLabel("main/PicsRightsizeAndTransp/gamelost.png", frame.getWidth() / 2 - 100, frame.getHeight() / 2, 150, 60);
+            gamelost = new TexturedLabel("main/PicsRightsizeAndTransp/gameover.png", frame.getWidth() / 2 - 100, frame.getHeight() / 2, 150, 60);
         }
         catch(IOException ioe){
             ioe.printStackTrace();
@@ -130,7 +145,7 @@ public class LevelView extends GameElementView {
                 ib.getItem().getItemView().addViewToFrame(frame);
             }
             if(ib.getBuilding()!=null){
-                ib.getBuilding().getBuildingView().addViewToFrame(frame);
+                ib.getBuilding().getBuildingView().update();
             }
             ib.getIceBlockView().addViewToFrame(frame);
         }
@@ -287,6 +302,7 @@ public class LevelView extends GameElementView {
         }
         gamelost.setVisible(true);
         exitGame.setVisible(true);
+        frame.repaint();
     }
     public void gameWon(){
         for(PlayerActionsView pav : actions){
@@ -294,5 +310,11 @@ public class LevelView extends GameElementView {
         }
         gamewon.setVisible(true);
         exitGame.setVisible(true);
+        frame.repaint();
+    }
+    public TexturedLabel getFreeLabel(){
+        TexturedLabel freelabel = freelabels.get(freelabels.size()-1);
+        freelabels.remove(freelabels.size()-1);
+        return freelabel;
     }
 }
