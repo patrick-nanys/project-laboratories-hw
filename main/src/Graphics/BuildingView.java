@@ -44,6 +44,7 @@ public class BuildingView extends GameElementView {
     }
 
     public void update(){
+
         building.getIceBlock().getIceBlockView().addView(this);
         icon.setLocation(position);
         if(!addedtoframe){

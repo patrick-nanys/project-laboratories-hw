@@ -10,7 +10,7 @@ public interface PlayerContainerI {
 	
 	void addPlayer(Player p);
 
-	String toString ();
+	String ToString ();
 
     List<Player> getPlayers();
 }

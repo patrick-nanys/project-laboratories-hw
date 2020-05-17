@@ -133,7 +133,15 @@ public class IceBlock implements PlayerContainerI {
 	 */
 	@Override
 	public void movePlayer(Player p, PlayerContainerI pc) {
-		if(neighbours.contains((IceBlock)pc)) {
+		if(pc.ToString().equals("IceBlock")) {
+			if (neighbours.contains((IceBlock) pc)) {
+				pc.addPlayer(p);
+				this.removePlayer(p);
+				if (Level.viewsActive())
+					p.getPlayerView().update();
+			}
+		}
+		else {
 			pc.addPlayer(p);
 			this.removePlayer(p);
 			if (Level.viewsActive())
@@ -189,6 +197,9 @@ public class IceBlock implements PlayerContainerI {
 	}
 	public IceBlockView getIceBlockView(){
 		return ibv;
+	}
+	public String ToString(){
+		return "IceBlock";
 	}
 
 }
