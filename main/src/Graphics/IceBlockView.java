@@ -1,10 +1,11 @@
 package Graphics;
 
 import Controller.ViewController;
+import Controller.Action;
 import Model.IceBlock;
 
-import javax.swing.*;
-import javax.swing.text.View;
+import javax.swing.JLabel;
+import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -100,7 +101,9 @@ public class IceBlockView extends GameElementView {
     }
 
     public void handleClick(){
-        viewController.getCurrentAction().call(this);
+        Action currentAction = viewController.getCurrentAction();
+        if (currentAction != null)
+            currentAction.call(this);
     }
 
     public void addViewToFrame(JFrame frame){
@@ -121,14 +124,14 @@ public class IceBlockView extends GameElementView {
             containedViews.add(view);
 
         // calculate position
-        double r = (double)size.width / 2;
+        double r = (double)size.width / 2 - (double)size.width/4.5;
         double angleStep = 360.0 / maxElements;
         double startingAngle = 180.0 / 2;
         int angleOfItem = (int)Math.round((angleStep * numElements) + startingAngle);
         double cos = Math.cos(Math.toRadians(angleOfItem));
         double sin = -Math.sin(Math.toRadians(angleOfItem));
-        int x = (int) Math.round(r * cos + position.x);
-        int y = (int) Math.round(r * sin + position.y);
+        int x = (int) Math.round(r * cos + position.x - 20);
+        int y = (int) Math.round(r * sin + position.y - 10);
         view.setPosition(new Point(x, y));
     }
     public IceBlock getIceBlock(){
