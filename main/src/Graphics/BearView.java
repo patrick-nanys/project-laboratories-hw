@@ -4,25 +4,31 @@ import javax.swing.*;
 import Model.PolarBear;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class BearView extends GameElementView {
 
-    private JLabel icon;
+    private TexturedLabel icon;
     private PolarBear bear;
 
     public BearView(PolarBear _bear) {
         super();
-        icon = new JLabel();
-        ImageIcon imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_polarbeart.png");
-        icon.setIcon(imgicon);
+
         bear = _bear;
-        position = bear.getIceBlock().getIceBlockView().getPosition();
+        bear.getIceBlock().getIceBlockView().addView(this);
+        try {
+            icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_polarbeart.png", position.x, position.y, 50, 50);
+        }
+        catch(IOException ioe){
+            ioe.printStackTrace();
+        }
         icon.setLocation(position);
         icon.setVisible(true);
+        icon.setLayout(null);
     }
 
     public void update(){
-        position = bear.getIceBlock().getIceBlockView().getPosition();
+        bear.getIceBlock().getIceBlockView().addView(this);
         icon.setLocation(position);
     }
     public void close(){

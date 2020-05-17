@@ -4,10 +4,11 @@ import Model.IceBlock;
 import Model.Item;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class ItemView extends GameElementView {
     private String name;
-    private JLabel icon;
+    private TexturedLabel icon;
     private Item item;
     private IceBlock ib;
 
@@ -16,38 +17,71 @@ public class ItemView extends GameElementView {
         name = item.ToString();
         ImageIcon imgicon;
         ib = _ib;
-
+        ib.getIceBlockView().addView(this);
         if(name.equals("DivingSuit")){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/DivingSuittrnsp.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/DivingSuittrnsp.png", position.x, position.y, 30, 30);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         else if(name.equals("Food")){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_foodt.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_foodt.png", position.x, position.y, 30, 30);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         else if(name.equals("FragileShovel")){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_fragileshovelt.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_fragileshovelt.png", position.x, position.y, 30, 30);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         else if(name.equals("Part")){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_partt.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_partt.png", position.x, position.y, 30, 30);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         else if(name.equals("Rope")){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_ropet.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_ropet.png", position.x, position.y, 30, 30);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         else if(name.equals("Shovel")){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_1shovelt.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_1shovelt.png", position.x, position.y, 30, 30);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         //egyebkent Tent
         else{
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_tentt.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_tentt.png", position.x, position.y, 30, 30);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
 
-        icon.setIcon(imgicon);
-        position = ib.getIceBlockView().getPosition();
         icon.setLocation(position);
         icon.setVisible(true);
 
     }
     public void update(){
-        position = ib.getIceBlockView().getPosition();
+        ib.getIceBlockView().addView(this);
         icon.setLocation(position);
     }
     public void close(){

@@ -38,6 +38,7 @@ public class TexturedLabel extends JLabel {
     }
     public void setLocation(int x, int y) {
         super.setLocation(x, y);
+        super.setBounds(x,y,this.getWidth(),this.getHeight());
     }
 
     public void setLocation(double x, double y) {

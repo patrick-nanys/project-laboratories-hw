@@ -3,34 +3,44 @@ package Graphics;
 import Model.Building;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class BuildingView extends GameElementView {
 
     private Building building;
-    private JLabel icon;
+    private TexturedLabel icon;
     private boolean addedtoframe;
 
     public BuildingView(Building _building){
         super();
-        icon = new JLabel();
         building = _building;
         String type = building.ToString();
-        ImageIcon imgicon;
+        building.getIceBlock().getIceBlockView().addView(this);
         if(type.equals("Iglu")){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_iglut.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iglut.png", position.x, position.y, 50, 50);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         else{
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_tentt.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_tentt.png", position.x, position.y, 50, 50);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
-        icon.setIcon(imgicon);
-        position = building.getIceBlock().getIceBlockView().getPosition();
+
         icon.setLocation(position);
         icon.setVisible(true);
         addedtoframe = false;
+        icon.setLayout(null);
     }
 
     public void update(){
-        position = building.getIceBlock().getIceBlockView().getPosition();
+        building.getIceBlock().getIceBlockView().addView(this);
         icon.setLocation(position);
         if(!addedtoframe){
             addViewToFrame(building.getIceBlock().getPlayers().get(0).getLevel().getLevelView().getFrame());

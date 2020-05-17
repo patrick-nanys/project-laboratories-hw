@@ -4,11 +4,12 @@ import Model.IceBlock;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class IceBlockView extends GameElementView {
 
     private IceBlock ib;
-    private JButton icon;
+    private TexturedLabel icon;
     private JLabel capacity;
     private int maxElements;
 
@@ -16,9 +17,7 @@ public class IceBlockView extends GameElementView {
         ib = _ib;
         position = _position;
 
-        icon = new JButton();
         capacity = new JLabel();
-        ImageIcon imgicon;
         maxElements = _maxElements;
 
         // setup building and item
@@ -36,34 +35,65 @@ public class IceBlockView extends GameElementView {
         }
 
         if(ib.getLayer()==0 && ib.getCapacity()==0){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_holenosnowt.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_holenosnowt.png", position.x, position.y, 100, 100);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         else if(ib.getLayer()==0 && ib.getCapacity()>0){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png", position.x, position.y, 100, 100);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         else {
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_iceblockt.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblockt.png", position.x, position.y, 100, 100);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
 
-        icon.setIcon(imgicon);
         int cap = ib.getCapacity();
         capacity = new JLabel(Integer.toString(cap));
+
+        icon.setLayout(null);
+        capacity.setLayout(null);
         capacity.setVisible(false);
         icon.setVisible(true);
     }
 
     public void update(){
-        ImageIcon imgicon;
+
         if(ib.getLayer()==0 && ib.getCapacity()==0){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_holenosnowt.png");
+            try {
+                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_holenosnowt.png",100, 100));
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         else if(ib.getLayer()==0 && ib.getCapacity()>0){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png");
+            try {
+                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png",100, 100));
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         else {
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_iceblockt.png");
+            try {
+                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iceblockt.png", 100, 100));
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
-        icon.setIcon(imgicon);
     }
     public void close(){
         icon.setVisible(false);

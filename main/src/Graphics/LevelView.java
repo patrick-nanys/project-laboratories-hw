@@ -4,11 +4,12 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.List;
 
 public class LevelView extends GameElementView {
 
-    private JButton exitGame;
+    private TexturedLabel exitGame;
     private List<PlayerActionsView> actions;
     private List <PlayerView> players;
     private Level level;
@@ -58,10 +59,13 @@ public class LevelView extends GameElementView {
             pav.addViewToFrame(frame);
         }
 
-
-        exitGame = new JButton("Exit Game");
+        try {
+            exitGame = new TexturedLabel("main/PicsRightsizeAndTransp/exitgame.png", 0, 0, 80, 50);
+        }
+        catch (IOException ioe){
+            ioe.printStackTrace();
+        }
         exitGame.setLocation(new Point(0,0));
-        exitGame.setSize(new Dimension(20,20));
         exitGame.setVisible(true);
 
 
@@ -111,11 +115,15 @@ public class LevelView extends GameElementView {
             pav.addViewToFrame(frame);
         }
 
-
-        exitGame = new JButton("Exit Game");
+        try {
+            exitGame = new TexturedLabel("main/PicsRightsizeAndTransp/exitgame.png", 0, 0, 80, 50);
+        }
+        catch (IOException ioe){
+            ioe.printStackTrace();
+        }
         exitGame.setLocation(new Point(0,0));
-        exitGame.setSize(new Dimension(20,20));
         exitGame.setVisible(true);
+        frame.add(exitGame);
 
 
     }
@@ -168,6 +176,7 @@ public class LevelView extends GameElementView {
         for(PolarBear bear : level.getPolarBears()){
             bear.getBearView().close();
         }
+        frame.remove(exitGame);
 
         menu.enable();
     }
