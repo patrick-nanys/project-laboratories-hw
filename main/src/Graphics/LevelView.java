@@ -22,6 +22,7 @@ public class LevelView extends GameElementView {
     private final JFrame frame;
     private Menu menu;
     private IceBlockLines ibl;
+    private IdlePaintThread ipt;
 
 
     public LevelView(Level _level){
@@ -199,7 +200,7 @@ public class LevelView extends GameElementView {
         }
         mouseInit();
 
-        IdlePaintThread ipt = new IdlePaintThread(frame);
+        ipt = new IdlePaintThread(frame);
         ipt.start();
 
     }
@@ -249,6 +250,7 @@ public class LevelView extends GameElementView {
         List<IceBlock> iceblocks = level.getIceBlocks();
         for(IceBlock ib : iceblocks){
             ib.getIceBlockView().close();
+            ib.getIceBlockView().removeFromFrame(frame);
             if(ib.getBuilding()!=null){
                 ib.getBuilding().getBuildingView().close();
             }
@@ -264,12 +266,19 @@ public class LevelView extends GameElementView {
         for(PolarBear bear : level.getPolarBears()){
             bear.getBearView().close();
         }
+        ipt.stopPaint();
         frame.remove(exitGame);
         frame.remove(gamebg);
         frame.remove(actionsbg);
 
         ibl.setVisible(false);
         frame.remove(ibl);
+
+        frame.getContentPane().removeAll();
+
+        frame.repaint();
+
+
 
         menu.enable();
     }

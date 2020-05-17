@@ -107,6 +107,10 @@ public class IceBlockView extends GameElementView {
         frame.add(icon);
         frame.add(capacity);
     }
+    public void removeFromFrame(JFrame frame){
+        frame.remove(icon);
+        frame.remove(capacity);
+    }
 
     public void addView(GameElementView view) {
         int numElements = containedViews.size();
