@@ -26,11 +26,12 @@ public class PlayerActionsView extends GameElementView {
     private boolean hasPart;
     private int current;
 
-    public PlayerActionsView(Inventory _inventory, Player _player, JFrame _frame){
+    public PlayerActionsView(Inventory _inventory, Player _player, JFrame _frame, ViewController _viewController){
         frame = _frame;
         inventory = _inventory;
         player = _player;
         visible = false;
+        viewController = _viewController;
 
         setupButtons();
         mouseInit();
@@ -83,7 +84,7 @@ public class PlayerActionsView extends GameElementView {
         actions = new ArrayList<Action>();
 
         Dimension framesize = frame.getSize();
-        int startx = ((int)(framesize.getWidth()/6)*4)-75;
+        int startx = ((int)(framesize.getWidth()/6)*4)+ 75;
         int starty = 240;
         List<Item> items = inventory.getItems();
         for(int i = 0; i<items.size();i++){
@@ -215,13 +216,13 @@ public class PlayerActionsView extends GameElementView {
             swipesel.setSize(new Dimension(150,60));
             swipesel.setVisible(false);
             swipesel.setLayout(null);
-            selected.add(swipe);
+            selected.add(swipesel);
 
             actions.add(new SwipeAction());
 
             try {
-                dig = new TexturedLabel("main/PicsRightsizeAndTransp/dig.png", startx, starty+80, 150, 60);
-                digsel = new TexturedLabel("main/PicsRightsizeAndTransp/dig_selected.png", startx, starty+80, 150, 60);
+                dig = new TexturedLabel("main/PicsRightsizeAndTransp/dig.png", startx, starty+160, 150, 60);
+                digsel = new TexturedLabel("main/PicsRightsizeAndTransp/dig_selected.png", startx, starty+160, 150, 60);
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
@@ -256,11 +257,12 @@ public class PlayerActionsView extends GameElementView {
         for(int i = 0; i<buttons.size();i++){
             current = i;
             buttons.get(i).addMouseListener(new MouseListener() {
-                private ScaledImage icon = buttons.get(current).getScaledImage();
+                int index = current;
+                private ScaledImage icon = buttons.get(index).getScaledImage();
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if(visible) {
-                        actions.get(current).click();
+                        actions.get(index).click();
                     }
                 }
 
@@ -277,15 +279,16 @@ public class PlayerActionsView extends GameElementView {
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     if(visible) {
-                        icon = selected.get(current).getScaledImage();
-                        buttons.get(current).setImage(selected.get(current).getScaledImage());
+                        buttons.get(index).setImage(selected.get(index).getScaledImage());
+                        frame.repaint();
                     }
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
                     if(visible) {
-                        buttons.get(current).setImage(icon);
+                        buttons.get(index).setImage(icon);
+                        frame.repaint();
                     }
                 }
             });

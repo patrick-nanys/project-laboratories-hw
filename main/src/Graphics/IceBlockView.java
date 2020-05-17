@@ -14,6 +14,7 @@ public class IceBlockView extends GameElementView {
     private TexturedLabel icon;
     private JLabel capacity;
     private int maxElements;
+    private int elementCalls;
 
     public IceBlockView(IceBlock _ib, Point _position, int _maxElements){
 
@@ -22,12 +23,13 @@ public class IceBlockView extends GameElementView {
         ib = _ib;
         capacity = new JLabel();
         maxElements = _maxElements;
+        elementCalls = 0;
 
         // setup building and item
         BuildingView buildingView = null;
         ItemView itemView = null;
         if (ib.getBuilding() != null) {
-            buildingView = new BuildingView(ib.getBuilding(), this);
+            buildingView = new BuildingView(ib.getBuilding(), this, this.viewController);
             addView(buildingView);
             ib.getBuilding().addBuildingView(buildingView);
         }
@@ -39,7 +41,7 @@ public class IceBlockView extends GameElementView {
 
         if(ib.getLayer()==0 && ib.getCapacity()==0){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_holenosnowt.png", position.x, position.y, size.width, size.height);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_holenosnowt.png", position.x-size.width/2, position.y-size.height/2, size.width, size.height);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -47,7 +49,7 @@ public class IceBlockView extends GameElementView {
         }
         else if(ib.getLayer()==0 && ib.getCapacity()>0){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png", position.x, position.y, size.width, size.height);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png", position.x-size.width/2, position.y-size.height/2, size.width, size.height);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -55,7 +57,7 @@ public class IceBlockView extends GameElementView {
         }
         else {
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblockt.png", position.x, position.y, size.width, size.height);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblockt.png", position.x-size.width/2, position.y-size.height/2, size.width, size.height);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -127,11 +129,16 @@ public class IceBlockView extends GameElementView {
         if (ib.getBuilding() != null)
             numElements++;
 
+        if(elementCalls<numElements) {
+            elementCalls++;
+            numElements = elementCalls;
+        }
+
         // calculate position
         double r = (double)size.width / 2;
         double angleStep = 2*Math.PI / maxElements;
         double startingAngle = Math.PI / 2;
-        int x = (int) Math.round(r * Math.cos((angleStep * numElements) + startingAngle) + position.x);
+        int x = (int) Math.round(r * Math.cos((angleStep * numElements) + startingAngle)+size.width/5 + position.x);
         int y = (int) Math.round(r * Math.sin((angleStep * numElements) + startingAngle) + position.y);
         view.setPosition(new Point(x, y));
     }

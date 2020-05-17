@@ -4,6 +4,7 @@ import Model.IceBlock;
 import Model.Item;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class ItemView extends GameElementView {
@@ -74,9 +75,6 @@ public class ItemView extends GameElementView {
                 ioe.printStackTrace();
             }
         }
-
-        icon.setLocation(position);
-        icon.setVisible(true);
 
     }
     public void update(){

@@ -1,5 +1,6 @@
 package Graphics;
 
+import Controller.ViewController;
 import Model.*;
 
 import javax.swing.*;
@@ -40,7 +41,7 @@ public class LevelView extends GameElementView {
             }
         }
         for(Player player : players){
-            actions.add(new PlayerActionsView(player.getInventory(), player, frame));
+            actions.add(new PlayerActionsView(player.getInventory(), player, frame, this.viewController));
             playerViews.add(player.getPlayerView());
         }
         for(PlayerView pv : playerViews){
@@ -73,30 +74,19 @@ public class LevelView extends GameElementView {
 
 
     }
-    public LevelView(Level _level, JFrame _frame, Menu _menu){
+    public LevelView(Level _level, JFrame _frame, Menu _menu, ViewController _viewController){
         actions = new ArrayList<>();
         playerViews = new ArrayList<>();
         level = _level;
         frame = _frame;
         menu = _menu;
+        viewController = _viewController;
         List<IceBlock> iceblocks = level.getIceBlocks();
         List <Player> playersm = level.getPlayers();
         List <PolarBear> bears = level.getPolarBears();
 
-        for(IceBlock ib : iceblocks){
-            for(IceBlock ib2 : iceblocks){
-                if(!ib.equals(ib2)){
-                    if(ib.getNeighbours().contains(ib2)){
-                        Point a = ib.getIceBlockView().getPosition();
-                        Point b = ib2.getIceBlockView().getPosition();
-                        frame.getGraphics().setColor(Color.BLACK);
-                        frame.getGraphics().drawLine(a.x,a.y,b.x,b.y);
-                    }
-                }
-            }
-        }
         for(Player player : playersm){
-            PlayerActionsView pav = new PlayerActionsView(player.getInventory(), player, frame);
+            PlayerActionsView pav = new PlayerActionsView(player.getInventory(), player, frame, viewController);
             actions.add(pav);
             player.getInventory().addPlayerActionsView(pav);
             playerViews.add(player.getPlayerView());
@@ -112,7 +102,6 @@ public class LevelView extends GameElementView {
             pav.addViewToFrame(frame);
         }
         for(IceBlock ib : iceblocks){
-            ib.getIceBlockView().addViewToFrame(frame);
 
             if(ib.getItem()!=null){
                 ib.getItem().getItemView().addViewToFrame(frame);
@@ -120,7 +109,7 @@ public class LevelView extends GameElementView {
             if(ib.getBuilding()!=null){
                 ib.getBuilding().getBuildingView().addViewToFrame(frame);
             }
-
+            ib.getIceBlockView().addViewToFrame(frame);
         }
         try {
             exitGame = new TexturedLabel("main/PicsRightsizeAndTransp/exitgame.png", 0, 0, 80, 50);
@@ -149,6 +138,20 @@ public class LevelView extends GameElementView {
 
         frame.add(gamebg);
         frame.add(actionsbg);
+
+
+        for(IceBlock ib : iceblocks){
+            for(IceBlock ib2 : iceblocks){
+                if(!ib.equals(ib2)){
+                    if(ib.getNeighbours().contains(ib2)){
+                        Point a = ib.getIceBlockView().getPosition();
+                        Point b = ib2.getIceBlockView().getPosition();
+                        frame.getGraphics().setColor(Color.BLACK);
+                        frame.getGraphics().drawLine(a.x,a.y,b.x,b.y);
+                    }
+                }
+            }
+        }
 
     }
 
@@ -203,5 +206,8 @@ public class LevelView extends GameElementView {
         frame.remove(exitGame);
 
         menu.enable();
+    }
+    public ViewController getViewController(){
+        return viewController;
     }
 }

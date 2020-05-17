@@ -111,13 +111,13 @@ public class ViewController {
         // players
         ArrayList<Player> players = level.getPlayers();
         for (Player player : players)
-            player.addPlayerView(new PlayerView(player));
+            player.addPlayerView(new PlayerView(player, this));
         // bears
         ArrayList<PolarBear> bears = level.getPolarBears();
         for (PolarBear bear : bears)
-            bear.addBearView(new BearView(bear));
+            bear.addBearView(new BearView(bear, this));
 
-        levelView = new LevelView(level, frame, menu);
+        levelView = new LevelView(level, frame, menu, this);
 
         Level.setViewsActive(true);
     }
@@ -125,6 +125,7 @@ public class ViewController {
     public void startGame() {
         currentPlayerId = 0;
         level.setGameState(GameStateE.IN_PROGRESS);
+        levelView.update();
     }
 
     public void handlePlayerTurn() {

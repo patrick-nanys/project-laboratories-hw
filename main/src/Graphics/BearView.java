@@ -1,6 +1,8 @@
 package Graphics;
 
 import javax.swing.*;
+
+import Controller.ViewController;
 import Model.PolarBear;
 
 import java.awt.*;
@@ -11,9 +13,9 @@ public class BearView extends GameElementView {
     private TexturedLabel icon;
     private PolarBear bear;
 
-    public BearView(PolarBear _bear) {
+    public BearView(PolarBear _bear, ViewController _viewController) {
         super();
-
+        viewController = _viewController;
         bear = _bear;
         bear.getIceBlock().getIceBlockView().addView(this);
         try {

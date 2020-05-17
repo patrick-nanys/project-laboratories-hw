@@ -75,6 +75,7 @@ public class Menu {
                     return;
                 }
                 viewController.startGame();
+                disable();
             }
 
             @Override
@@ -139,6 +140,9 @@ public class Menu {
         enabled = true;
     }
     public void disable(){
+        startgame.setVisible(false);
+        exitgame.setVisible(false);
+        background.setVisible(false);
         frame.remove(startgame);
         frame.remove(exitgame);
         frame.remove(background);

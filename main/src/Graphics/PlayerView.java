@@ -1,10 +1,12 @@
 package Graphics;
 
+import Controller.ViewController;
 import Model.IceBlock;
 import Model.Player;
 import Model.Sea;
 
 import javax.swing.*;
+import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -18,8 +20,9 @@ public class PlayerView extends GameElementView {
     private TexturedLabel icon;
     private JLabel health;
 
-    public PlayerView(Player _p){
+    public PlayerView(Player _p, ViewController _viewController){
         p = _p;
+        viewController = _viewController;
         if(!p.getInSea()){
             IceBlock ib = (IceBlock)p.getLocation();
             ib.getIceBlockView().addView(this);
