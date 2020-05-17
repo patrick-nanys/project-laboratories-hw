@@ -18,7 +18,7 @@ public class BuildingView extends GameElementView {
         building.getIceBlock().getIceBlockView().addView(this);
         if(type.equals("Iglu")){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iglut.png", position.x, position.y, 50, 50);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iglut.png", position.x, position.y, 37, 37);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -26,7 +26,7 @@ public class BuildingView extends GameElementView {
         }
         else{
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_tentt.png", position.x, position.y, 50, 50);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_tentt.png", position.x, position.y, 37, 37);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();

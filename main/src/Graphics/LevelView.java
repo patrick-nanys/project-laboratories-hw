@@ -91,11 +91,20 @@ public class LevelView extends GameElementView {
             }
         }
         for(Player player : playersm){
-            actions.add(new PlayerActionsView(player.getInventory(), player, frame));
+            PlayerActionsView pav = new PlayerActionsView(player.getInventory(), player, frame);
+            actions.add(pav);
+            player.getInventory().addPlayerActionsView(pav);
             players.add(player.getPlayerView());
         }
         for(PlayerView pv : players){
             pv.addViewToFrame(frame);
+        }
+
+        for(PolarBear bear : bears){
+            bear.getBearView().addViewToFrame(frame);
+        }
+        for(PlayerActionsView pav : actions){
+            pav.addViewToFrame(frame);
         }
         for(IceBlock ib : iceblocks){
             ib.getIceBlockView().addViewToFrame(frame);
@@ -108,13 +117,6 @@ public class LevelView extends GameElementView {
             }
 
         }
-        for(PolarBear bear : bears){
-            bear.getBearView().addViewToFrame(frame);
-        }
-        for(PlayerActionsView pav : actions){
-            pav.addViewToFrame(frame);
-        }
-
         try {
             exitGame = new TexturedLabel("main/PicsRightsizeAndTransp/exitgame.png", 0, 0, 80, 50);
         }
@@ -124,7 +126,24 @@ public class LevelView extends GameElementView {
         exitGame.setLocation(new Point(0,0));
         exitGame.setVisible(true);
         frame.add(exitGame);
+        TexturedLabel gamebg, actionsbg;
+        gamebg = null;
+        actionsbg = null;
+        try {
+            gamebg = new TexturedLabel("main/PicsRightsizeAndTransp/gamebg.png",0,0,(int)(2*(frame.getWidth()/3)),frame.getHeight());
+            actionsbg = new TexturedLabel("main/PicsRightsizeAndTransp/actionsbg.png", (int)(2*(frame.getWidth()/3)),0,(int)(frame.getWidth()/3), frame.getHeight());
+        }
+        catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+        gamebg.setLocation(0,0);
+        actionsbg.setLocation((int)(2*(frame.getWidth()/3)),0);
 
+        gamebg.setVisible(true);
+        actionsbg.setVisible(true);
+
+        frame.add(gamebg);
+        frame.add(actionsbg);
 
     }
 

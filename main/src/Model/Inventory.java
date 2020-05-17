@@ -1,5 +1,7 @@
 package Model;
 
+import Graphics.PlayerActionsView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,8 @@ import java.util.List;
  */
 public class Inventory {
 	private ArrayList<Item> items = new ArrayList<>();
+	private PlayerActionsView pav;
+
 
 	/**
 	 * Hozzaad egy itemet magahoz, ha meg nincs olyan tipusu item benne.
@@ -24,6 +28,7 @@ public class Inventory {
 			return false;
 		} else {
 			items.add(i);
+			pav.updateButtons();
 			return true;
 		}
 	}
@@ -70,5 +75,11 @@ public class Inventory {
 	 */
 	public List<Item> getItems() {
 		return items;
+	}
+	public void addPlayerActionsView(PlayerActionsView _pav){
+		pav = _pav;
+	}
+	public PlayerActionsView getPlayerActionsView(){
+		return pav;
 	}
 }

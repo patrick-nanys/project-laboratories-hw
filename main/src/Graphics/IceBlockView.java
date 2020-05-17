@@ -4,6 +4,8 @@ import Model.IceBlock;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 public class IceBlockView extends GameElementView {
@@ -36,7 +38,7 @@ public class IceBlockView extends GameElementView {
 
         if(ib.getLayer()==0 && ib.getCapacity()==0){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_holenosnowt.png", position.x, position.y, 100, 100);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_holenosnowt.png", position.x, position.y, 216, 216);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -44,7 +46,7 @@ public class IceBlockView extends GameElementView {
         }
         else if(ib.getLayer()==0 && ib.getCapacity()>0){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png", position.x, position.y, 100, 100);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png", position.x, position.y, 216, 216);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -52,7 +54,7 @@ public class IceBlockView extends GameElementView {
         }
         else {
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblockt.png", position.x, position.y, 100, 100);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_iceblockt.png", position.x, position.y, 216, 216);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -66,13 +68,15 @@ public class IceBlockView extends GameElementView {
         capacity.setLayout(null);
         capacity.setVisible(false);
         icon.setVisible(true);
+
+        mouseInit();
     }
 
     public void update(){
 
         if(ib.getLayer()==0 && ib.getCapacity()==0){
             try {
-                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_holenosnowt.png",100, 100));
+                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_holenosnowt.png",216, 216));
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -80,7 +84,7 @@ public class IceBlockView extends GameElementView {
         }
         else if(ib.getLayer()==0 && ib.getCapacity()>0){
             try {
-                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png",100, 100));
+                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iceblocknowsnowt.png",216, 216));
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -88,7 +92,7 @@ public class IceBlockView extends GameElementView {
         }
         else {
             try {
-                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iceblockt.png", 100, 100));
+                icon.setImage(new ScaledImage("main/PicsRightsizeAndTransp/rsz_iceblockt.png", 216, 216));
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -128,6 +132,35 @@ public class IceBlockView extends GameElementView {
         int x = (int) Math.round(r * Math.cos((angleStep * numElements) + startingAngle) + position.x);
         int y = (int) Math.round(r * Math.sin((angleStep * numElements) + startingAngle) + position.y);
         view.setPosition(new Point(x, y));
+    }
+
+    public void mouseInit(){
+        icon.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                handleClick();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
     }
 
 }

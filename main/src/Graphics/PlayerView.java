@@ -6,46 +6,63 @@ import Model.Sea;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.IOException;
 
 public class PlayerView extends GameElementView {
 
     private Player p;
     private String name;
     private boolean turn;
-    private JButton icon;
+    private TexturedLabel icon;
     private JLabel health;
 
-    //TODO átírás, iceblockView kezelje, hogy hol van
     public PlayerView(Player _p){
         p = _p;
         if(!p.getInSea()){
             IceBlock ib = (IceBlock)p.getLocation();
-            position = ib.getIceBlockView().getPosition();
+            ib.getIceBlockView().addView(this);
         }
         else{
             //itt ezzel a deltaval meg kiserletezni kell majd
-            Point delta = new Point(5,5);
+            Point delta = new Point(0,55);
             IceBlock ib = ((Sea)p.getLocation()).getPosition();
-            position = ib.getIceBlockView().getPosition();
+            ib.getIceBlockView().addView(this);
             position.x += delta.x;
             position.y += delta.y;
         }
         turn = false;
 
         String ptype = p.toString();
-        ImageIcon imgicon;
         if(ptype.equals("Eskimo")){
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_2eskimot.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_2eskimot.png", position.x, position.y, 46, 46);
+            }
+            catch(IOException ioe){
+                ioe.printStackTrace();
+            }
         }
         else{
-            imgicon = new ImageIcon("PicsRightsizeAndTransp/rsz_1researchert.png");
+            try {
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_1researchert.png", position.x, position.y, 37, 42);
+            }
+            catch (IOException ioe){
+                ioe.printStackTrace();
+            }
         }
-
-        icon.setIcon(imgicon);
 
         int hp = p.getHealth();
 
         health = new JLabel(Integer.toString(hp));
+        health.setLocation(position.x,position.y+50);
+        health.setBounds(position.x,position.y+50,health.getWidth(),health.getHeight());
+        health.setLayout(null);
+
+
+        icon.setLocation(position.x,position.y);
+        icon.setSize(30,30);
+        icon.setLayout(null);
 
         icon.setVisible(true);
         health.setVisible(true);
@@ -64,7 +81,7 @@ public class PlayerView extends GameElementView {
         }
         else{
             //itt ezzel a deltaval meg kiserletezni kell majd
-            Point delta = new Point(0,5);
+            Point delta = new Point(0,55);
             IceBlock ib = ((Sea)p.getLocation()).getPosition();
             ib.getIceBlockView().addView(this);
             position.x += delta.x;
@@ -74,6 +91,10 @@ public class PlayerView extends GameElementView {
         int hp = p.getHealth();
 
         health.setText(Integer.toString(hp));
+        health.setLocation(position.x,position.y+55);
+        health.setBounds(position.x,position.y+55,health.getWidth(),health.getHeight());
+
+        icon.setLocation(position);
 
     }
 
@@ -92,5 +113,33 @@ public class PlayerView extends GameElementView {
     }
     public Player getPlayer(){
         return p;
+    }
+    public void mouseInit(){
+        icon.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                handleClick();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
     }
 }
