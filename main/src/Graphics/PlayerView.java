@@ -38,21 +38,24 @@ public class PlayerView extends GameElementView {
         turn = false;
 
         String ptype = p.ToString();
-        if(ptype.equals("Eskimo")){
-            try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_2eskimot.png", position.x, position.y, 46, 46);
-            }
-            catch(IOException ioe){
-                ioe.printStackTrace();
-            }
+        String filePath;
+        if (ptype.equals("Eskimo")) {
+            filePath = "main/PicsRightsizeAndTransp/rsz_2eskimot.png";
+            size = new Dimension(46, 46);
+        } else {
+            filePath = "main/PicsRightsizeAndTransp/rsz_1researchert.png";
+            size = new Dimension(37, 42);
         }
-        else{
-            try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_1researchert.png", position.x, position.y, 37, 42);
-            }
-            catch (IOException ioe){
-                ioe.printStackTrace();
-            }
+
+        size = new Dimension(35, 35);
+
+        try {
+            icon = new TexturedLabel(filePath,
+                    (int)(position.x - (double)size.width/2),
+                    (int)(position.y - (double)size.height/2),
+                    size.width, size.height);
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
         }
 
         int hp = p.getHealth();
@@ -63,7 +66,7 @@ public class PlayerView extends GameElementView {
         health.setLayout(null);
 
 
-        icon.setLocation(position.x,position.y);
+        icon.setLocation((int)(position.x - (double)size.width/2), (int)(position.y - (double)size.height/2));
         icon.setSize(icon.getWidth(),icon.getHeight());
         icon.setLayout(null);
 
