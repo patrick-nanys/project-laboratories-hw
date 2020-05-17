@@ -90,6 +90,23 @@ public class LevelView extends GameElementView {
         List<IceBlock> iceblocks = level.getIceBlocks();
         List <Player> playersm = level.getPlayers();
         List <PolarBear> bears = level.getPolarBears();
+        gamewon = null;
+        gamelost = null;
+        try {
+            gamewon = new TexturedLabel("main/PicsRightsizeAndTransp/gamewon.png", frame.getWidth() / 2 - 100, frame.getHeight() / 2, 150, 60);
+            gamelost = new TexturedLabel("main/PicsRightsizeAndTransp/gamelost.png", frame.getWidth() / 2 - 100, frame.getHeight() / 2, 150, 60);
+        }
+        catch(IOException ioe){
+            ioe.printStackTrace();
+        }
+        gamewon.setLocation(frame.getWidth() / 2 - 100, frame.getHeight() / 2);
+        gamelost.setLocation(frame.getWidth() / 2 - 100, frame.getHeight() / 2);
+
+        gamewon.setSize(150,60);
+        gamelost.setSize(150,60);
+
+        gamewon.setVisible(false);
+        gamelost.setVisible(false);
 
         for(Player player : playersm){
             PlayerActionsView pav = new PlayerActionsView(player.getInventory(), player, frame, viewController);
@@ -265,9 +282,17 @@ public class LevelView extends GameElementView {
         });
     }
     public void gameLost(){
+        for(PlayerActionsView pav : actions){
+            pav.gameEnded(this);
+        }
         gamelost.setVisible(true);
+        exitGame.setVisible(true);
     }
-    public void gamewon(){
+    public void gameWon(){
+        for(PlayerActionsView pav : actions){
+            pav.gameEnded(this);
+        }
         gamewon.setVisible(true);
+        exitGame.setVisible(true);
     }
 }

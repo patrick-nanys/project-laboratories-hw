@@ -79,6 +79,15 @@ public class PlayerActionsView extends GameElementView {
         frame.add(lv.getActionsBg());
         update();
     }
+    public void gameEnded(LevelView lv){
+        for(TexturedLabel button : buttons){
+            frame.remove(button);
+        }
+        frame.remove(lv.getActionsBg());
+        buttons.clear();
+        selected.clear();
+        actions.clear();
+    }
     public void setupButtons(){
         hasPart = false;
         buttons = new ArrayList<TexturedLabel>();
