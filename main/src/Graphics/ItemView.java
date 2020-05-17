@@ -44,7 +44,7 @@ public class ItemView extends GameElementView {
         }
         else if(name.equals("Part")){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_partt.png", position.x, position.y, 37, 37);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_partt.png", position.x, position.y, 45, 29);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -52,7 +52,7 @@ public class ItemView extends GameElementView {
         }
         else if(name.equals("Rope")){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_ropet.png", position.x, position.y, 45, 29);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_ropet.png", position.x, position.y, 35, 35);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
