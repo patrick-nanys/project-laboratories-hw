@@ -17,7 +17,7 @@ public class BearView extends GameElementView {
         super();
         viewController = _viewController;
         bear = _bear;
-        bear.getIceBlock().getIceBlockView().addView(this);
+        position = bear.getIceBlock().getIceBlockView().getPosition();
         try {
             icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_polarbeart.png", position.x, position.y, 45, 45);
         }
