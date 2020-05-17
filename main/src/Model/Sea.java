@@ -79,4 +79,8 @@ public class Sea implements PlayerContainerI {
 	public IceBlock getPosition() {
 		return position;
 	}
+
+	public String ToString(){
+		return "Sea";
+	}
 }
