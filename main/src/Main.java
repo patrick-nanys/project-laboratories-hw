@@ -35,15 +35,15 @@ public class Main {
         StaticStandardIO.init();
 
         //run();
-        test();
+        //test();
 
-        /*if (args.length == 0)
+        if (args.length == 0)
             runUI();
         else if (args[0].equals("-console"))
             runConsole();
         else if (args[0].equals("-test"))
             test();
         else
-            System.out.println("Arguments error!");*/
+            System.out.println("Arguments error!");
     }
 }
