@@ -17,7 +17,7 @@ public class BearView extends GameElementView {
         bear = _bear;
         bear.getIceBlock().getIceBlockView().addView(this);
         try {
-            icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_polarbeart.png", position.x, position.y, 50, 50);
+            icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_polarbeart.png", position.x, position.y, 45, 45);
         }
         catch(IOException ioe){
             ioe.printStackTrace();

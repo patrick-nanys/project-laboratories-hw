@@ -35,7 +35,7 @@ public class PlayerView extends GameElementView {
         String ptype = p.toString();
         if(ptype.equals("Eskimo")){
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_2eskimot.png", position.x, position.y, 30, 30);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_2eskimot.png", position.x, position.y, 46, 46);
             }
             catch(IOException ioe){
                 ioe.printStackTrace();
@@ -43,7 +43,7 @@ public class PlayerView extends GameElementView {
         }
         else{
             try {
-                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_1researchert.png", position.x, position.y, 30, 30);
+                icon = new TexturedLabel("main/PicsRightsizeAndTransp/rsz_1researchert.png", position.x, position.y, 37, 42);
             }
             catch (IOException ioe){
                 ioe.printStackTrace();
