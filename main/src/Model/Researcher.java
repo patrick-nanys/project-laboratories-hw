@@ -20,10 +20,20 @@ public class Researcher extends Player {
 	 * @param ib a megnezendo jegtabla
 	 */
 	public int checkStability(IceBlock ib) {
-		int cap = ib.getCapacity();
-		if (Level.viewsActive())
-			ib.getIceBlockView().capacityChecked();
-		return cap;
+		if(!inSea) {
+			if(((IceBlock) container).getNeighbours().contains(ib)) {
+				int cap = ib.getCapacity();
+				if (Level.viewsActive())
+					ib.getIceBlockView().capacityChecked();
+				return cap;
+			}
+			else {
+				return -1;
+			}
+		}
+		else {
+			return -1;
+		}
 	}
 
 	public String ToString(){
