@@ -141,6 +141,9 @@ public class Level {
 		}
 	}
 
+	/**
+	 * Hovihart kavar
+	 */
 	public void blizzard() {
 		Random r = new Random();
 		int numIceblocks = r.nextInt(iceblocks.size()) + 1;
