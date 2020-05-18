@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A pálya megjelenítéséért felelős osztály.
+ */
 public class LevelView extends GameElementView {
 
     private TexturedLabel exitGame, exitGame_selected, gamewon, gamelost;
@@ -25,7 +28,10 @@ public class LevelView extends GameElementView {
     private IdlePaintThread ipt;
     private JLabel turnlabel;
 
-
+    /**
+     * Konstruktor.
+     * @param _level A megjelenítendő pálya.
+     */
     public LevelView(Level _level){
         actions = new ArrayList<>();
         playerViews = new ArrayList<>();
@@ -80,6 +86,14 @@ public class LevelView extends GameElementView {
 
 
     }
+
+    /**
+     * Konstruktor.
+     * @param _level A megjelenítendő pálya.
+     * @param _frame A frame, amin megjelenik.
+     * @param _menu A menü.
+     * @param _viewController A megjelenítés kontrollere.
+     */
     public LevelView(Level _level, JFrame _frame, Menu _menu, ViewController _viewController){
         actions = new ArrayList<>();
         playerViews = new ArrayList<>();
@@ -221,25 +235,43 @@ public class LevelView extends GameElementView {
 
     }
 
+    /**
+     * Frissíti az adott játékos lépéseinek kiírását.
+     * @param _n Ahány lépése még hátra van.
+     */
     public void updateTurns(int _n){
         Integer n = _n;
         turnlabel.setText("Turns remaining: " + n.toString());
     }
 
+    /**
+     * A gombok mögötti hátteret adja vissza.
+     * @return A háttér
+     */
     public TexturedLabel getActionsBg(){
         return actionsbg;
     }
 
+    /**
+     * Visszaadja a frame-et, amin van.
+     * @return A frame.
+     */
     public JFrame getFrame(){
         return frame;
     }
 
+    /**
+     * Frissíti a műveleteket.
+     */
     public void updateActionViews(){
         for(PlayerActionsView pv : actions){
             pv.updateButtons(this);
         }
     }
 
+    /**
+     * Frissíti a pálya kinézetét.
+     */
     public void update(){
         if(menu.isEnabled()) menu.disable();
         Player current = viewController.getCurrentPlayer();
@@ -263,6 +295,9 @@ public class LevelView extends GameElementView {
         }
     }
 
+    /**
+     * Leszedi a pálya megjelenítését.
+     */
     public void close(){
 
         for(PlayerView p : playerViews){
@@ -304,10 +339,18 @@ public class LevelView extends GameElementView {
 
         menu.enable();
     }
+
+    /**
+     * Visszaadja a kinézet kontroller objektumát.
+     * @return A view controller objektum.
+     */
     public ViewController getViewController(){
         return viewController;
     }
 
+    /**
+     * Beállítja az egér action listenerét.
+     */
     public void mouseInit(){
         exitGame.addMouseListener(new MouseListener() {
             private ScaledImage icon = exitGame.getScaledImage();
@@ -342,6 +385,11 @@ public class LevelView extends GameElementView {
             }
         });
     }
+
+    /**
+     * Megjeleníti a Game Over kiírást, és leállítja a játékot,
+     * ha a játékosok veszítenek.
+     */
     public void gameLost(){
         for(PlayerActionsView pav : actions){
             pav.gameEnded(this);
@@ -350,6 +398,10 @@ public class LevelView extends GameElementView {
         exitGame.setVisible(true);
         frame.repaint();
     }
+
+    /**
+     * Megállítja a játékot, és kiírja, hogy nyertek a játékosok.
+     */
     public void gameWon(){
         for(PlayerActionsView pav : actions){
             pav.gameEnded(this);
@@ -358,6 +410,11 @@ public class LevelView extends GameElementView {
         exitGame.setVisible(true);
         frame.repaint();
     }
+
+    /**
+     * Visszaad egy szabad labelt.
+     * @return A szabad label.
+     */
     public TexturedLabel getFreeLabel(){
         TexturedLabel freelabel = freelabels.get(freelabels.size()-1);
         freelabels.remove(freelabels.size()-1);
