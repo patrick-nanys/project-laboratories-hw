@@ -12,6 +12,9 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A jégtáblák megjelenítéséért felelős osztály.
+ */
 public class IceBlockView extends GameElementView {
 
     private IceBlock ib;
@@ -20,6 +23,13 @@ public class IceBlockView extends GameElementView {
     private int maxElements;
     private ArrayList<GameElementView> containedViews;
 
+    /**
+     * Konstruktor.
+     * @param _ib A megjelenítendő jégtábla.
+     * @param _position A megjelenítendő jégtábla elhelyezkedése.
+     * @param _maxElements A maximális elemszám, ami ráfér a jégtáblára.
+     * @param _viewController A megjelenítést irányító objektum.
+     */
     public IceBlockView(IceBlock _ib, Point _position, int _maxElements, ViewController _viewController){
 
         super(_position, new Dimension(190, 190));
@@ -73,6 +83,9 @@ public class IceBlockView extends GameElementView {
         mouseInit();
     }
 
+    /**
+     * A megjelenítés frissítését végzi.
+     */
     public void update(){
         String filePath;
         if (ib.getLayer()==0 && ib.getCapacity()==0)
@@ -88,30 +101,53 @@ public class IceBlockView extends GameElementView {
             ioe.printStackTrace();
         }
     }
+
+    /**
+     * A megjelenítés befejezését végzi.
+     */
     public void close(){
         icon.setVisible(false);
         capacity.setVisible(false);
     }
 
+    /**
+     * Megjeleníti a jégtábla kapacitását.
+     */
     public void capacityChecked(){
         capacity.setVisible(true);
     }
 
+    /**
+     * A jégtáblák kattintását kezeli.
+     */
     public void handleClick(){
         Action currentAction = viewController.getCurrentAction();
         if (currentAction != null)
             currentAction.call(this);
     }
 
+    /**
+     * Hozzáadja a jégtáblát a frame-hez.
+     * @param frame A frame, amihez hozzá szeretnénk adni.
+     */
     public void addViewToFrame(JFrame frame){
         frame.add(icon);
         frame.add(capacity);
     }
+
+    /**
+     * Leveszi a jégtáblát a frame-ről.
+     * @param frame Amiről le szeretnénk venni.
+     */
     public void removeFromFrame(JFrame frame){
         frame.remove(icon);
         frame.remove(capacity);
     }
 
+    /**
+     * Beállítja az elem megjelenítő objektumát.
+     * @param view A beállítandó GameElementView objektumot.
+     */
     public void addView(GameElementView view) {
         int numElements = containedViews.size();
 
@@ -131,13 +167,26 @@ public class IceBlockView extends GameElementView {
         int y = (int) Math.round(r * sin + position.y - 10);
         view.setPosition(new Point(x, y));
     }
+
+    /**
+     * Visszaadja a megjelenített jégtábla objektumot.
+     * @return A megjelenített jégtábla objektum.
+     */
     public IceBlock getIceBlock(){
         return ib;
     }
+
+    /**
+     * Visszaadja a megjelenítő kontrollert.
+     * @return
+     */
     public ViewController getViewController(){
         return viewController;
     }
 
+    /**
+     * Beállítja az egér action listenert.
+     */
     public void mouseInit(){
         icon.addMouseListener(new MouseListener() {
             @Override
