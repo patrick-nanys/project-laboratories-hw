@@ -105,7 +105,8 @@ public class Level {
 	 */
 	public void levelWon() {
 		gameState = GameStateE.WON;
-		lv.gameWon();
+		if (Level.viewsActive())
+			lv.gameWon();
 	}
 
 	/**
