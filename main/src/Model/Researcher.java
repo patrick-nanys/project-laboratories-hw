@@ -21,7 +21,7 @@ public class Researcher extends Player {
 	 */
 	public int checkStability(IceBlock ib) {
 		if(!inSea) {
-			if(((IceBlock) container).getNeighbours().contains(ib)) {
+			if(((IceBlock) container).getNeighbours().contains(ib) || ((IceBlock)container).equals(ib)) {
 				int cap = ib.getCapacity();
 				if (Level.viewsActive())
 					ib.getIceBlockView().capacityChecked();
