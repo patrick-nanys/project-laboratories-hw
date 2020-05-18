@@ -69,7 +69,8 @@ public class Level {
 			}
 			if(won){
 				levelWon();
-				lv.gameWon();
+				if (Level.viewsActive())
+					lv.gameWon();
 			}
 		}
 	}
