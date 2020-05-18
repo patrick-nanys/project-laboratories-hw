@@ -9,6 +9,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
+/**
+ * Menu osztaly.
+ */
 public class Menu {
     private final ViewController viewController;
     private TexturedLabel startgame;
@@ -19,6 +22,11 @@ public class Menu {
     private final JFrame frame;
     private boolean enabled;
 
+    /**
+     * Konstruktor.
+     * @param _View_controller Megejelenito osztaly.
+     * @param _frame JFrame.
+     */
     public Menu(ViewController _View_controller, JFrame _frame){
         frame = _frame;
         viewController = _View_controller;
@@ -60,6 +68,10 @@ public class Menu {
 
         mouseDragInit();
     }
+
+    /**
+     * Inicializalja a menu egerkezelojet.
+     */
     public void mouseDragInit(){
         startgame.addMouseListener(new MouseListener(){
             private ScaledImage icon = startgame.getScaledImage();
@@ -129,6 +141,10 @@ public class Menu {
             }
         });
     }
+
+    /**
+     * Enable-oli a menut.
+     */
     public void enable(){
         startgame.setVisible(true);
         exitgame.setVisible(true);
@@ -141,6 +157,10 @@ public class Menu {
         frame.setVisible(true);
         enabled = true;
     }
+
+    /**
+     * Disable-oli a menut.
+     */
     public void disable(){
         startgame.setVisible(false);
         exitgame.setVisible(false);
@@ -152,9 +172,12 @@ public class Menu {
         frame.setVisible(true);
         enabled = false;
     }
+
+    /**
+     * Enabled getter.
+     * @return enabled
+     */
     public boolean isEnabled(){
         return enabled;
     }
-
-
 }

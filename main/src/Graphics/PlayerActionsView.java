@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Player akcionokert felelos nezet osztaly.
+ */
 public class PlayerActionsView extends GameElementView {
-
     private List<TexturedLabel> buttons;
     private List<TexturedLabel> selected;
     private List <Action> actions;
@@ -26,6 +28,13 @@ public class PlayerActionsView extends GameElementView {
     private boolean hasPart;
     private int current;
 
+    /**
+     * Konstruktor.
+     * @param _inventory Leltar.
+     * @param _player Jatekos.
+     * @param _frame JFrame.
+     * @param _viewController A grafikat kezelo kontroller.
+     */
     public PlayerActionsView(Inventory _inventory, Player _player, JFrame _frame, ViewController _viewController){
         frame = _frame;
         inventory = _inventory;
@@ -39,11 +48,18 @@ public class PlayerActionsView extends GameElementView {
         addViewToFrame(frame);
     }
 
+    /**
+     * Lathatova vagy lathatatlanna teszi a View-t.
+     * @param val Lathato/Lathatatlan.
+     */
     public void setVisibility(boolean val){
         visible = val;
         update();
     }
 
+    /**
+     * Frissiti a nezetet.
+     */
     public void update(){
         for(TexturedLabel button : buttons){
             button.setVisible(visible);
@@ -53,6 +69,9 @@ public class PlayerActionsView extends GameElementView {
         }
     }
 
+    /**
+     * Bezarja a nezetet.
+     */
     public void close(){
         for(TexturedLabel button : buttons){
             button.setVisible(false);
@@ -64,6 +83,10 @@ public class PlayerActionsView extends GameElementView {
         selected.clear();
     }
 
+    /**
+     * Frissiti a megjelenitendo gombokat.
+     * @param lv Az aktiv szintet kezelo View.
+     */
     public void updateButtons(LevelView lv){
         for(TexturedLabel button : buttons){
             frame.remove(button);
@@ -79,6 +102,11 @@ public class PlayerActionsView extends GameElementView {
         frame.add(lv.getActionsBg());
         update();
     }
+
+    /**
+     * Akkor hivodik meg ha vege van a jateknak es eltunteti a tevekenysegek gombjait.
+     * @param lv Az aktiv szintet kezelo View.
+     */
     public void gameEnded(LevelView lv){
         for(TexturedLabel button : buttons){
             frame.remove(button);
@@ -87,6 +115,10 @@ public class PlayerActionsView extends GameElementView {
         selected.clear();
         actions.clear();
     }
+
+    /**
+     * A gombok inicializalasa.
+     */
     public void setupButtons(){
         hasPart = false;
         buttons = new ArrayList<TexturedLabel>();
@@ -302,9 +334,12 @@ public class PlayerActionsView extends GameElementView {
         catch(NullPointerException npe){
             npe.printStackTrace();
         }
-
     }
 
+    /**
+     * Hozzaadja a nezetet a kapott JFrame-hez.
+     * @param frame JFrame.
+     */
     public void addViewToFrame(JFrame frame){
         this.frame = frame;
         for(TexturedLabel button : buttons){
@@ -312,10 +347,17 @@ public class PlayerActionsView extends GameElementView {
         }
     }
 
+    /**
+     * Player gettter.
+     * @return Player.
+     */
     public Player getPlayer(){
         return player;
     }
 
+    /**
+     * Mouselistener inicializalasa.
+     */
     public void mouseInit(){
         for(int i = 0; i<buttons.size();i++){
             current = i;
