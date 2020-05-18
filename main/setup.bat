@@ -1,4 +1,7 @@
 @echo off
+mkdir out\Model
+mkdir out\Controller
+mkdir out\Graphics
 copy src\*.java out\
 copy src\Model\*.java out\Model\
 copy src\Controller\*.java out\Controller\
