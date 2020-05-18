@@ -71,19 +71,6 @@ public class Level {
 				levelWon();
 			}
 		}
-		/*
-		for (IceBlock ib: iceblocks) {
-			for (Part part : parts) {
-				if (!part.getLocation().equals(ib))
-					break;
-			}
-			for (Player p : getPlayers()) {
-				if (!p.getLocation().equals(ib))
-					break;
-			}
-			levelWon();
-			return;
-		}*/
 	}
 
 	/**
