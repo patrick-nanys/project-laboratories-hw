@@ -18,8 +18,11 @@ public class FragileShovel extends Item {
             IceBlock ib = (IceBlock) player.getLocation();
             ib.modifyLayers(-2);
             durability--;
-            if(durability == 0)
+            if(durability == 0) {
                 player.removeItem(this);
+                player.getInventory().getPlayerActionsView().updateButtons(player.getLevel().getLevelView());
+            }
+
         }
     }
 
