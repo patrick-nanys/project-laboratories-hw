@@ -20,7 +20,7 @@ public class TexturedLabel extends JLabel {
 
     /**
      * Parameterezett konstruktor.
-     * @param s Label szovege.
+     * @param s File Path.
      * @param x Label x koordinataja.
      * @param y Label y koordinataja.
      * @param width Label szelessege.

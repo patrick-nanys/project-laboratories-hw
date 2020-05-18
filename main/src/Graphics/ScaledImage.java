@@ -17,7 +17,7 @@ public class ScaledImage extends JComponent{
 
     /**
      * Konstruktor.
-     * @param s Szoveg.
+     * @param s File Path.
      * @param width Szelesseg.
      * @param height Magassag.
      * @throws IOException
