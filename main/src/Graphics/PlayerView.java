@@ -73,6 +73,8 @@ public class PlayerView extends GameElementView {
         icon.setVisible(true);
         health.setVisible(true);
 
+        mouseInit();
+
     }
 
     public void setTurn(boolean val){

@@ -58,6 +58,20 @@ public class Level {
 	 * szint gameState-jet WON-ra.
 	 */
 	public void checkParts() {
+		String ctype = parts.get(0).getLocation().ToString();
+		if(ctype.equals("IceBlock")){
+			PlayerContainerI current = parts.get(0).getLocation();
+			boolean won = true;
+			for(Part part : parts){
+				if(!part.getLocation().equals(current)){
+					won = false;
+				}
+			}
+			if(won){
+				levelWon();
+			}
+		}
+		/*
 		for (IceBlock ib: iceblocks) {
 			for (Part part : parts) {
 				if (!part.getLocation().equals(ib))
@@ -69,7 +83,7 @@ public class Level {
 			}
 			levelWon();
 			return;
-		}
+		}*/
 	}
 
 	/**

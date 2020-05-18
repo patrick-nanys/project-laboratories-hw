@@ -1,5 +1,6 @@
 package Controller;
 
+import Graphics.PlayerView;
 import Model.Player;
 import Model.Rope;
 
@@ -17,6 +18,6 @@ public class RopeAction extends Action  {
 
     @Override
     public void call(Object o) {
-        viewController.usePlayerItemOnPlayer(new Rope(), (Player) o );
+        viewController.usePlayerItemOnPlayer(new Rope(), ((PlayerView) o).getPlayer() );
     }
 }
