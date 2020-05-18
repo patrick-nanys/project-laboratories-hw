@@ -3,7 +3,7 @@ package Controller;
 import Model.Shovel;
 
 /**
- * Ásóval való hó ásásnak az Acction osztálya.
+ * Asoval valo oh asasnak az Action osztálya.
  */
 public class ShovelAction extends Action  {
     /**
