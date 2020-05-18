@@ -28,64 +28,6 @@ public class LevelView extends GameElementView {
     private IdlePaintThread ipt;
     private JLabel turnlabel;
 
-    /**
-     * Konstruktor.
-     * @param _level A megjelenítendő pálya.
-     */
-    public LevelView(Level _level){
-        actions = new ArrayList<>();
-        playerViews = new ArrayList<>();
-        level = _level;
-        frame = new JFrame("Our Awesome OOF titled eskimo game");
-        List<IceBlock> iceblocks = level.getIceBlocks();
-        List <Player> players = level.getPlayers();
-        List <PolarBear> bears = level.getPolarBears();
-
-
-        turnlabel = new JLabel();
-        turnlabel.setLocation(650,15);
-        turnlabel.setSize(150,20);
-        turnlabel.setBounds(650,15,150,20);
-        turnlabel.setVisible(true);
-        frame.add(turnlabel);
-
-        for(Player player : players){
-            actions.add(new PlayerActionsView(player.getInventory(), player, frame, this.viewController));
-            playerViews.add(player.getPlayerView());
-        }
-        for(PlayerView pv : playerViews){
-            pv.addViewToFrame(frame);
-        }
-        for(IceBlock ib : iceblocks){
-            ib.getIceBlockView().addViewToFrame(frame);
-            if(ib.getItem()!=null){
-                ib.getItem().getItemView().addViewToFrame(frame);
-            }
-            if(ib.getBuilding()!=null){
-                ib.getBuilding().getBuildingView().update();
-            }
-        }
-        for(PolarBear bear : bears){
-            bear.getBearView().addViewToFrame(frame);
-        }
-        for(PlayerActionsView pav : actions){
-            pav.addViewToFrame(frame);
-        }
-
-        try {
-            exitGame = new TexturedLabel("main/PicsRightsizeAndTransp/exitgame.png", 0, 0, 80, 50);
-            exitGame_selected =  new TexturedLabel("main/PicsRightsizeAndTransp/exitgame_selected.png", 0, 0, 80, 50);
-        }
-        catch (IOException ioe){
-            ioe.printStackTrace();
-        }
-        exitGame.setLocation(new Point(0,0));
-        exitGame.setVisible(true);
-        exitGame_selected.setLocation(0,0);
-        exitGame_selected.setVisible(true);
-
-
-    }
 
     /**
      * Konstruktor.
