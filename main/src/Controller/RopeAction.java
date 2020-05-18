@@ -18,6 +18,8 @@ public class RopeAction extends Action  {
 
     @Override
     public void call(Object o) {
-        viewController.usePlayerItemOnPlayer(new Rope(), ((PlayerView) o).getPlayer() );
+        if(o.toString().equals("PlayerView")) {
+            viewController.usePlayerItemOnPlayer(new Rope(), ((PlayerView) o).getPlayer());
+        }
     }
 }

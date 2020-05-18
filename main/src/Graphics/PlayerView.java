@@ -151,4 +151,9 @@ public class PlayerView extends GameElementView {
             }
         });
     }
+
+    @Override
+    public String toString(){
+        return "PlayerView";
+    }
 }

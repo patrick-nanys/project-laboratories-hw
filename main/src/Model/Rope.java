@@ -18,8 +18,9 @@ public class Rope extends Item {
 		if(player.getInSea()){
 			Sea from = (Sea) player.getLocation();
 			IceBlock to = (IceBlock) this.player.getLocation();
-			from.movePlayer(player, to);
 			player.setInSea(false);
+			from.movePlayer(player, to);
+
 		}
 	}
 
