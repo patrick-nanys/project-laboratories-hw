@@ -114,7 +114,8 @@ public class Level {
 	 */
 	public void levelLost() {
 		gameState = GameStateE.LOST;
-		lv.gameLost();
+		if (Level.viewsActive())
+			lv.gameLost();
 	}
 
 	/**

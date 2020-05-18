@@ -34,7 +34,8 @@ public class Sea implements PlayerContainerI {
 	public void movePlayer(Player p, PlayerContainerI pc) {
 		pc.addPlayer(p);
 		this.removePlayer(p);
-		p.getPlayerView().update();
+		if (Level.viewsActive())
+			p.getPlayerView().update();
 	}
 
 	/**

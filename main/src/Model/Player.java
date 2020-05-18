@@ -164,7 +164,8 @@ public abstract class Player implements Steppable {
 				if (success) {
 					ib.removeItem();
 					item.pickedUpBy(this);
-					item.getItemView().close();
+					if (Level.viewsActive())
+						item.getItemView().close();
 				}
 			}
 		}

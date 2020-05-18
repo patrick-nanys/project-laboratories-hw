@@ -20,7 +20,8 @@ public class FragileShovel extends Item {
             durability--;
             if(durability == 0) {
                 player.removeItem(this);
-                player.getInventory().getPlayerActionsView().updateButtons(player.getLevel().getLevelView());
+                if (Level.viewsActive())
+                    player.getInventory().getPlayerActionsView().updateButtons(player.getLevel().getLevelView());
             }
 
         }
