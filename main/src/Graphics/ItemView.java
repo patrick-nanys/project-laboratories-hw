@@ -7,12 +7,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * A különböző tárgyak megjelenítéséért felelős osztály.
+ */
 public class ItemView extends GameElementView {
     private String name;
     private TexturedLabel icon;
     private Item item;
     private final IceBlock ib;
 
+    /**
+     * Konstruktor.
+     * @param _item A megjelenítendő tárgy.
+     * @param _ib Az a jégtábla, amin a tárgy megjelenik.
+     * @param iceBlockView A jégtábla megjelenítő objektuma.
+     */
     public ItemView(Item _item, IceBlock _ib, IceBlockView iceBlockView){
         item = _item;
         name = item.ToString();
@@ -63,14 +72,26 @@ public class ItemView extends GameElementView {
         }
 
     }
+
+    /**
+     * A kirajzolás frissítését végzi.
+     */
     public void update(){
         ib.getIceBlockView().addView(this);
         icon.setLocation(position);
     }
+
+    /**
+     * Eltűnteti a a tárgyat view-t.
+     */
     public void close(){
         icon.setVisible(false);
     }
 
+    /**
+     * Hozzáadja a kirajzoló objektumot a framehez.
+     * @param frame A frame, amihez hozzáadjuk.
+     */
     public void addViewToFrame(JFrame frame){
         frame.add(icon);
     }
