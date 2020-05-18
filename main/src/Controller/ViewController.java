@@ -61,7 +61,6 @@ public class ViewController {
         frame = new JFrame("Our Awesome OOF titled eskimo game");
         frame.setSize(1200, 850);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         menu = new Menu(this, frame);
 
         menu.enable();
@@ -147,7 +146,6 @@ public class ViewController {
         level.setGameState(GameStateE.IN_PROGRESS);
         numberOfStepsLeft = numberOfStepsPerPlayer;
         levelView.updateTurns(numberOfStepsLeft);
-        menu.disable();
         levelView.update();
     }
 
