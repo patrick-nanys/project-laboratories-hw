@@ -126,11 +126,13 @@ public class ViewController {
         currentPlayerId = 0;
         level.setGameState(GameStateE.IN_PROGRESS);
         numberOfStepsLeft = numberOfStepsPerPlayer;
+        levelView.updateTurns(numberOfStepsLeft);
         levelView.update();
     }
 
     public void handlePlayerTurn() {
         numberOfStepsLeft--;
+        levelView.updateTurns(numberOfStepsLeft);
         if (numberOfStepsLeft == 0) {
             skipTurn();
         }
