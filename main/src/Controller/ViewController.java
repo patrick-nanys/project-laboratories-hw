@@ -214,5 +214,6 @@ public class ViewController {
         if (currentPlayerId == 0)
             handleEndOfRound();
         levelView.update();
+        levelView.updateTurns(numberOfStepsLeft);
     }
 }
