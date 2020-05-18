@@ -53,7 +53,7 @@ public class ViewController {
 
     public void startMenu() {
         frame = new JFrame("Our Awesome OOF titled eskimo game");
-        frame.setSize(1200, 800);
+        frame.setSize(1200, 850);
         frame.setResizable(false);
         menu = new Menu(this, frame);
 
