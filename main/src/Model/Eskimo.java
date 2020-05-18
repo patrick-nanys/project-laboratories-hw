@@ -21,15 +21,17 @@ public class Eskimo extends Player {
 	 */
 	public void buildIglu() {
 		if (!getInSea()) {
-			Iglu i = new Iglu();
-			((IceBlock)container).setBuilding(i);
-			i.setIceblock((IceBlock)container);
-			if (Level.viewsActive()) {
-				IceBlock ib = (IceBlock) container;
-				//this is ugly, sorry
-				BuildingView bv = new BuildingView(i,((IceBlock) container).getIceBlockView(),((IceBlock) container).getIceBlockView().getViewController(), ((IceBlock) container).getPlayers().get(0).getLevel().getLevelView().getFreeLabel());
-				i.addBuildingView(bv);
-				i.getBuildingView().update();
+			if (((IceBlock) container).getBuilding() == null) {
+				Iglu i = new Iglu();
+				((IceBlock) container).setBuilding(i);
+				i.setIceblock((IceBlock) container);
+				if (Level.viewsActive()) {
+					IceBlock ib = (IceBlock) container;
+					//this is ugly, sorry
+					BuildingView bv = new BuildingView(i, ((IceBlock) container).getIceBlockView(), ((IceBlock) container).getIceBlockView().getViewController(), ((IceBlock) container).getPlayers().get(0).getLevel().getLevelView().getFreeLabel());
+					i.addBuildingView(bv);
+					i.getBuildingView().update();
+				}
 			}
 		}
 	}
