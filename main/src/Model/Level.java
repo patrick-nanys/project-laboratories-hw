@@ -105,6 +105,7 @@ public class Level {
 	 */
 	public void levelWon() {
 		gameState = GameStateE.WON;
+		lv.gameWon();
 	}
 
 	/**
@@ -113,6 +114,7 @@ public class Level {
 	 */
 	public void levelLost() {
 		gameState = GameStateE.LOST;
+		lv.gameLost();
 	}
 
 	/**

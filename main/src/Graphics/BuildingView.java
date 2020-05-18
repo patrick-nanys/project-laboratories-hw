@@ -53,7 +53,7 @@ public class BuildingView extends GameElementView {
             building.getIceBlock().getPlayers().get(0).getLevel().getLevelView().getFrame().repaint();
         }
     }
-    public void clear(){
+    public void close(){
         icon.setVisible(false);
     }
 
