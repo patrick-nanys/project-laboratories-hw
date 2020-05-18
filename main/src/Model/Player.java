@@ -46,6 +46,9 @@ public abstract class Player implements Steppable {
 	public void step(PlayerContainerI pc) {
 		if (!getInSea()) {
 			container.movePlayer(this, pc);
+			for(PolarBear pb : level.getPolarBears()){
+				pb.kill();
+			}
 		}
 	}
 
@@ -161,6 +164,7 @@ public abstract class Player implements Steppable {
 				if (success) {
 					ib.removeItem();
 					item.pickedUpBy(this);
+					item.getItemView().close();
 				}
 			}
 		}

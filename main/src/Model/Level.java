@@ -58,17 +58,19 @@ public class Level {
 	 * szint gameState-jet WON-ra.
 	 */
 	public void checkParts() {
-		for (IceBlock ib: iceblocks) {
-			for (Part part : parts) {
-				if (!part.getLocation().equals(ib))
-					break;
+		String ctype = parts.get(0).getLocation().ToString();
+		if(ctype.equals("IceBlock")){
+			PlayerContainerI current = parts.get(0).getLocation();
+			boolean won = true;
+			for(Part part : parts){
+				if(!part.getLocation().equals(current)){
+					won = false;
+				}
 			}
-			for (Player p : getPlayers()) {
-				if (!p.getLocation().equals(ib))
-					break;
+			if(won){
+				levelWon();
+				lv.gameWon();
 			}
-			levelWon();
-			return;
 		}
 	}
 
@@ -103,6 +105,7 @@ public class Level {
 	 */
 	public void levelWon() {
 		gameState = GameStateE.WON;
+		lv.gameWon();
 	}
 
 	/**
@@ -111,6 +114,7 @@ public class Level {
 	 */
 	public void levelLost() {
 		gameState = GameStateE.LOST;
+		lv.gameLost();
 	}
 
 	/**

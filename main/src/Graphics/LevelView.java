@@ -23,6 +23,7 @@ public class LevelView extends GameElementView {
     private Menu menu;
     private IceBlockLines ibl;
     private IdlePaintThread ipt;
+    private JLabel turnlabel;
 
 
     public LevelView(Level _level){
@@ -33,6 +34,14 @@ public class LevelView extends GameElementView {
         List<IceBlock> iceblocks = level.getIceBlocks();
         List <Player> players = level.getPlayers();
         List <PolarBear> bears = level.getPolarBears();
+
+
+        turnlabel = new JLabel();
+        turnlabel.setLocation(650,15);
+        turnlabel.setSize(150,20);
+        turnlabel.setBounds(650,15,150,20);
+        turnlabel.setVisible(true);
+        frame.add(turnlabel);
 
         for(Player player : players){
             actions.add(new PlayerActionsView(player.getInventory(), player, frame, this.viewController));
@@ -79,6 +88,13 @@ public class LevelView extends GameElementView {
         frame = _frame;
         menu = _menu;
         viewController = _viewController;
+
+        turnlabel = new JLabel();
+        turnlabel.setLocation(650,15);
+        turnlabel.setSize(150,20);
+        turnlabel.setBounds(650,15,150,20);
+        turnlabel.setVisible(true);
+        frame.add(turnlabel);
 
         List<IceBlock> iceblocks = level.getIceBlocks();
         List <Player> playersm = level.getPlayers();
@@ -204,6 +220,12 @@ public class LevelView extends GameElementView {
         ipt.start();
 
     }
+
+    public void updateTurns(int _n){
+        Integer n = _n;
+        turnlabel.setText("Turns remaining: " + n.toString());
+    }
+
     public TexturedLabel getActionsBg(){
         return actionsbg;
     }
