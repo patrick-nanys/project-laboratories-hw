@@ -12,14 +12,22 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
+/**
+ * Player nezet osztalya.
+ * Az a felelossege, hogy kirajzolja a Playert.
+ */
 public class PlayerView extends GameElementView {
-
     private Player p;
     private String name;
     private boolean turn;
     private TexturedLabel icon;
     private JLabel health;
 
+    /**
+     * Konstruktor.
+     * @param _p A megjelenitendo Player.
+     * @param _viewController A grafikat kezelo kontroller.
+     */
     public PlayerView(Player _p, ViewController _viewController){
         p = _p;
         viewController = _viewController;
@@ -74,14 +82,20 @@ public class PlayerView extends GameElementView {
         health.setVisible(true);
 
         mouseInit();
-
     }
 
+    /**
+     * Beallitja, hogy a Player kore van-e eppen.
+     * @param val Igen/nem.
+     */
     public void setTurn(boolean val){
         turn = val;
         update();
     }
 
+    /**
+     * Frissiti a Player kirajzolasat.
+     */
     public void update(){
         if(!p.getInSea()){
             IceBlock ib = (IceBlock)p.getLocation();
@@ -104,25 +118,43 @@ public class PlayerView extends GameElementView {
         health.setVisible(turn);
 
         icon.setLocation(position);
-
     }
 
+    /**
+     * Bezarja a PlayerView-t.
+     */
     public void close(){
         icon.setVisible(false);
         health.setVisible(false);
     }
 
+    /**
+     * Klikkeles kezelese.
+     */
     public void handleClick() {
         viewController.getCurrentAction().call(this);
     }
 
+    /**
+     * Hozzaadja a kapott JFrame-hez a megjelenitendo dolgokat.
+     * @param frame Kapott JFrame.
+     */
     public void addViewToFrame(JFrame frame){
         frame.add(icon);
         frame.add(health);
     }
+
+    /**
+     * Player getter.
+     * @return Player.
+     */
     public Player getPlayer(){
         return p;
     }
+
+    /**
+     * MouseListener megfelelo beallitasa es hozzaadasa.
+     */
     public void mouseInit(){
         icon.addMouseListener(new MouseListener() {
             @Override
@@ -152,6 +184,10 @@ public class PlayerView extends GameElementView {
         });
     }
 
+    /**
+     * Visszaadja az osztaly nevet stringkent.
+     * @return Az osztaly neve.
+     */
     @Override
     public String toString(){
         return "PlayerView";
