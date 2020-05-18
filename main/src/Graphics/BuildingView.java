@@ -6,12 +6,24 @@ import Model.Building;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * A jétáblán megjelenő épületek (azaz a sátrak és az igluk)
+ * megjelenítéséért felelős osztály.
+ */
 public class BuildingView extends GameElementView {
 
     private Building building;
     private TexturedLabel icon;
     private boolean addedtoframe;
 
+    /**
+     * Konstruktor.
+     * @param _building Az épület, ami megjelenik.
+     * @param iceBlockView Annak a jégtáblának a view objektuma, amin
+     *                     az épület megjelenik.
+     * @param _viewController A kinézet kontrollere.
+     * @param freelabel Egy olyan label, amit még nem használ más objektum.
+     */
     public BuildingView(Building _building, IceBlockView iceBlockView, ViewController _viewController, TexturedLabel freelabel){
         super();
         building = _building;
@@ -43,6 +55,9 @@ public class BuildingView extends GameElementView {
         icon.setLayout(null);
     }
 
+    /**
+     * A megjelenítés frissítéséért felelős függvény.
+     */
     public void update(){
 
         building.getIceBlock().getIceBlockView().addView(this);
@@ -53,6 +68,10 @@ public class BuildingView extends GameElementView {
             building.getIceBlock().getPlayers().get(0).getLevel().getLevelView().getFrame().repaint();
         }
     }
+
+    /**
+     * Leveszi az épületet a képről.
+     */
     public void close(){
         icon.setVisible(false);
     }

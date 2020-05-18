@@ -7,17 +7,37 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+/**
+ * A szomszédos jégtáblák összekötésének megjelenítéséért
+ * felelős osztály.
+ */
 public class IceBlockLines extends JLabel {
     private List<IceBlock> iceblocks;
     private JFrame frame;
 
+    /**
+     * Konstruktor.
+     * @param ibs A jégtáblák tömbje.
+     * @param _frame A frame amiben megjelenik.
+     */
     public IceBlockLines(List<IceBlock> ibs, JFrame _frame){
         iceblocks = ibs;
         frame = _frame;
     }
+
+    /**
+     * Láthatóvá teszi/eltünteti a vonalakat.
+     * @param val Megjeleníteni, vagy eltűntetni
+     *            szeretnénk a vonalakat.
+     */
     public void setVisible(boolean val){
         super.setVisible(val);
     }
+
+    /**
+     * Kirajzolja a vonalakat.
+     * @param g Az a Graphics objektum, ami kirajzolja a vonalakat.
+     */
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
