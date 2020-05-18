@@ -14,6 +14,9 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * A megjelenítés logikáját kezeli.
+ */
 public class ViewController {
     private Level level = null;
     private int currentPlayerId = 0;
@@ -51,6 +54,9 @@ public class ViewController {
         return currentAction;
     }
 
+    /**
+     * Elindítja a start menut.
+     */
     public void startMenu() {
         frame = new JFrame("Our Awesome OOF titled eskimo game");
         frame.setSize(1200, 850);
@@ -61,7 +67,13 @@ public class ViewController {
         frame.setVisible(true);
     }
 
-    private String readViewData(String fileName, Dimension iceBlockDim, Dimension otherDim, ArrayList<Point> iceBlockPositions) {
+    /**
+     * Beolvassa a megjelenítéssel kapcsolatos adatokat a megadott nevű fájlból, a megadott pozíció listába.
+     * @param fileName fájl neve ahonnan olvasunk
+     * @param iceBlockPositions pozíció lista amibe olvassuk az adatokat
+     * @return hibaüzenet, ha volt hiba, különben ""
+     */
+    private String readViewData(String fileName, ArrayList<Point> iceBlockPositions) {
         try (Scanner scanner = new Scanner(new File(fileName))) {
 
             // read data in first row
@@ -85,6 +97,11 @@ public class ViewController {
         return "";
     }
 
+    /**
+     * Betölti a játék adatait megjelenítéshez a megadott nevű fájlból
+     * @param fileName fájl amiből beolvasunk
+     * @throws Exception ha nem sikerült beolvasni, akkor dobja
+     */
     public void loadGame(String fileName) throws Exception {
         // load game
         ConsoleController cc = new ConsoleController();
@@ -94,9 +111,8 @@ public class ViewController {
         level = cc.getLevel();
 
         // read view data
-        Dimension iceBlockDim = new Dimension(), otherDim = new Dimension();
         ArrayList<Point> iceBlockPositions = new ArrayList<>();
-        ret = readViewData(fileName, iceBlockDim, otherDim, iceBlockPositions);
+        ret = readViewData(fileName, iceBlockPositions);
         if (ret.contains("ERROR"))
             throw new Exception(ret);
 
@@ -122,6 +138,9 @@ public class ViewController {
         Level.setViewsActive(true);
     }
 
+    /**
+     * Beállítja az elindított játékhoz a változókat és update-et hív a megjelenítésre.
+     */
     public void startGame() {
         currentPlayerId = 0;
         level.setGameState(GameStateE.IN_PROGRESS);
@@ -130,6 +149,9 @@ public class ViewController {
         levelView.update();
     }
 
+    /**
+     * Lekezeli egy játékos lépését. Minden lépés után ezt kell meghívni.
+     */
     public void handlePlayerTurn() {
         numberOfStepsLeft--;
         levelView.updateTurns(numberOfStepsLeft);
@@ -138,6 +160,9 @@ public class ViewController {
         }
     }
 
+    /**
+     * Lekezeli egy körnek a végét.
+     */
     public void handleEndOfRound() {
         // step bears
         for (PolarBear bear : level.getPolarBears())
@@ -167,21 +192,38 @@ public class ViewController {
 
     }
 
+    /**
+     * Lépteti az aktuális játékost a megadott iceblock-ra.
+     * @param iceBlock amire a játékos lép
+     */
     public void stepPlayer(IceBlock iceBlock) {
         level.getPlayer(currentPlayerId).step(iceBlock);
         handlePlayerTurn();
     }
 
+    /**
+     * Az aktuális játékos megadott eszközét használja.
+     * @param item eszköz amit használ
+     */
     public void usePlayerItem(Item item) {
         level.getPlayer(currentPlayerId).useItem(item);
         handlePlayerTurn();
     }
 
+    /**
+     * Az aktuális játékos a megadott eszközét használja a megadott játékoson.
+     * @param item eszköz amit használ
+     * @param player játékos akin használja
+     */
     public void usePlayerItemOnPlayer(Item item, Player player) {
         level.getPlayer(currentPlayerId).useItemOnPlayer(item, player);
         handlePlayerTurn();
     }
 
+    /**
+     * Használja a játékos képességét.
+     * @param o objektum, ha szüksége van rá egy képesség használatakor
+     */
     public void usePlayerAbility(Object o) {
         Player player = level.getPlayer(currentPlayerId);
         if (player instanceof Eskimo)
@@ -191,11 +233,17 @@ public class ViewController {
         handlePlayerTurn();
     }
 
+    /**
+     * Az aktuális játékos leseper egy réteg havat.
+     */
     public void swipeSnow() {
         level.getPlayer(currentPlayerId).swipeWithHand();
         handlePlayerTurn();
     }
 
+    /**
+     * Az aktuális játékos kiássa a eszközt a jégtáblájából.
+     */
     public void digOutItem() {
         if(!level.getPlayer(currentPlayerId).getInSea()) {
             IceBlock ib = ((IceBlock) level.getPlayer(currentPlayerId).getLocation());
@@ -208,6 +256,9 @@ public class ViewController {
         }
     }
 
+    /**
+     * Az aktuális játékos átadja a kört a következő játékosnak.
+     */
     public void skipTurn() {
         numberOfStepsLeft = numberOfStepsPerPlayer;
         currentPlayerId = (currentPlayerId + 1) % level.getNumberOfPlayers();

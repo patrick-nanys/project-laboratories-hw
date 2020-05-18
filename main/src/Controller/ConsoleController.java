@@ -62,10 +62,18 @@ public class ConsoleController {
         this.functionMap.put("save",             this::save);
     }
 
+    /**
+     * Getter a levelre.
+     * @return pálya
+     */
     public Level getLevel() {
         return level;
     }
 
+    /**
+     * Setter a levelre.
+     * @param level pálya
+     */
     public void setLevel(Level level) {
         this.level = level;
     }
